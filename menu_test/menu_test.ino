@@ -7,20 +7,20 @@
 
     Description: Design and testing of the menu sytem used in the project.
 
-    Credits:
-        - https://github.com/guttih/DisplayMenu/blob/main/examples/Menu/Menu.ino
-
     Libraries used:
         - Adafruit_GFX.h
         - TFT_eSPI.h
         - SPIFFS.h (for file system storage of configuration files)
-        - Preferences.h (for storing states before sleep/reboot)
         - DisplayMenu.h (for creating the menu system)
         - SD.h (for SD card support)
+        - SPI.h (for SPI communication)
+        - XPT2046_Touchscreen.h (for touch screen support)
+        - pgmspace.h (for PROGMEM support)
+        - Arduino.h (for Arduino functions)
 
     Hardware:
         - ESP32
-        - 4.0" ILI9341 TFT touch screen (480x320)
+        - 4.0" ST7796s TFT touch screen (480x320)
         - SD card module (design based on Adafruit MicroSD card breakout board+ https://www.adafruit.com/product/254)
 
     Connections:
@@ -40,9 +40,8 @@
 #include <Adafruit_GFX.h>
 #include <Arduino.h>
 #include <DisplayMenu.h>
-#include <FS.h>           // Filesystem support header
-#include <Preferences.h>  // Used to store states before sleep/reboot
-#include <SD.h>           // SD card support header
+#include <FS.h>  // Filesystem support header
+#include <SD.h>  // SD card support header
 #include <SPI.h>
 #include <SPIFFS.h>    // Filesystem support header
 #include <TFT_eSPI.h>  // The TFT_eSPI library
