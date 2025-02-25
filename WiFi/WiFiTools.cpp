@@ -144,7 +144,7 @@ void WiFiTools::rickRollBeaconSpam() {
                 Serial.printf("%02X ", beaconPacket[j]);
             }
 
-            for (int j = 0; j < 75; j++) {
+            for (int j = 0; j < 100; j++) {
                 // send beacon frame
                 err = esp_wifi_80211_tx(WIFI_IF_AP, beaconPacket, packetSize, false);
                 if (err != ESP_OK) {
@@ -155,9 +155,8 @@ void WiFiTools::rickRollBeaconSpam() {
                 delay(1);
             }
 
-            delay(1);
+            delay(10);
 
-            // change channel
             nextChannel();
         }
     }
