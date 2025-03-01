@@ -2,16 +2,24 @@
 
 #include <WiFi.h>
 
+#include <vector>
+
+#include "esp_event.h"
+#include "esp_event_loop.h"
 #include "esp_log.h"
 #include "esp_system.h"
 #include "esp_wifi.h"
 #include "esp_wifi_types.h"
+#include "freertos/FreeRTOS.h"
+#include "nvs_flash.h"
+
 esp_err_t esp_wifi_set_channel(uint8_t primary, wifi_second_chan_t second);
 esp_err_t esp_wifi_80211_tx(wifi_interface_t ifx, const void* buffer, int len, bool en_sys_seq);
 esp_err_t esp_wifi_set_storage(wifi_storage_t storage);
 esp_err_t esp_wifi_set_mode(wifi_mode_t mode);
 esp_err_t esp_wifi_start();
 esp_err_t esp_wifi_set_promiscuous(bool en);
+esp_err_t esp_wifi_set_promiscuous_rx_cb(wifi_promiscuous_cb_t cb);
 
 // Overwrite the function to prevent the sanity check from returning an error allowing the raw frame to be sent
 extern "C" int ieee80211_raw_frame_sanity_check(int32_t arg, int32_t arg2, int32_t arg3) {
@@ -176,11 +184,15 @@ void WiFiTools::rickRollBeaconSpam() {
 }
 
 void WiFiTools::scanWiFiNetworks() {
+    // Clear the foundWiFiNetworks vector
+    foundWiFiNetworks.clear();
+
     // Get a list of available networks displaying their SSID, MAC address and channel
     int numNetworks = WiFi.scanNetworks();
     Serial.printf("Found %d networks\n", numNetworks);
+
     for (int i = 0; i < numNetworks; i++) {
-        Serial.printf("Network %d: %s, MAC: %s, Channel: %d\n", i, WiFi.SSID(i).c_str(), WiFi.BSSIDstr(i).c_str(), WiFi.channel(i));
+        // Serial.printf("Network %d: %s, MAC: %s, Channel: %d\n", i, WiFi.SSID(i).c_str(), WiFi.BSSIDstr(i).c_str(), WiFi.channel(i));
         wifi_ap_record_t ap;
         ap.rssi = WiFi.RSSI(i);
         ap.authmode = WiFi.encryptionType(i);
@@ -192,7 +204,24 @@ void WiFiTools::scanWiFiNetworks() {
 }
 
 std::vector<wifi_ap_record_t> WiFiTools::getAvailableNetworks() {
+    if (foundWiFiNetworks.size() == 0) {
+        scanWiFiNetworks();
+    }
     return foundWiFiNetworks;
+}
+
+char* WiFiTools::getFoundSSIDandMACs() {
+    if (foundWiFiNetworks.size() == 0) {
+        scanWiFiNetworks();
+    }
+
+    char* ssidAndMACs = new char[54 * foundWiFiNetworks.size()];
+    for (int i = 0; i < foundWiFiNetworks.size(); i++) {
+        char ssidAndMAC[54];
+        sprintf(ssidAndMAC, "%s - %02X:%02X:%02X:%02X:%02X:%02X\n", foundWiFiNetworks[i].ssid, foundWiFiNetworks[i].bssid[0], foundWiFiNetworks[i].bssid[1], foundWiFiNetworks[i].bssid[2], foundWiFiNetworks[i].bssid[3], foundWiFiNetworks[i].bssid[4], foundWiFiNetworks[i].bssid[5]);
+        strcat(ssidAndMACs, ssidAndMAC);
+    }
+    return ssidAndMACs;
 }
 
 void WiFiTools::clearFoundWiFiNetworks() {
@@ -210,10 +239,9 @@ void WiFiTools::sendDeauthPacket(uint8_t* apMac, uint8_t* stMac, uint8_t channel
     memcpy(&deauthPacketToTransmit[16], apMac, 6);
     deauthPacketToTransmit[24] = reasonCode;
 
-    // send the deauth packet
     deauthPacketToTransmit[0] = 0xC0;
 
-    // set channel
+    // Set channel
     esp_err_t err = esp_wifi_set_channel(channel, WIFI_SECOND_CHAN_NONE);
     if (err != ESP_OK) {
         Serial.printf("Failed to set channel: %d\n", err);
@@ -236,6 +264,7 @@ void WiFiTools::sendDeauthPacket(uint8_t* apMac, uint8_t* stMac, uint8_t channel
         return;
     }
 
+    // Send the deauth packet
     err = esp_wifi_80211_tx(WIFI_IF_AP, deauthPacketToTransmit, deauthPacketSize, false);
     if (err != ESP_OK) {
         Serial.printf("Failed to send deauth: %d\n", err);
@@ -292,4 +321,79 @@ void WiFiTools::deauthNetwork(uint8_t* networkSSID = NULL, uint8_t* networkBSSID
     // Stop WiFi
     WiFi.mode(WIFI_OFF);
     Serial.println("WiFi stopped");
+}
+
+esp_err_t event_handler(void* ctx, system_event_t* event) {
+    return ESP_OK;
+}
+
+const char* WiFiTools::wifi_sniffer_packet_type2str(wifi_promiscuous_pkt_type_t type) {
+    switch (type) {
+        case WIFI_PKT_MGMT:
+            return "MGMT";
+        case WIFI_PKT_DATA:
+            return "DATA";
+        default:
+        case WIFI_PKT_MISC:
+            return "MISC";
+    }
+}
+
+void WiFiTools::wifi_sniffer_packet_handler(void* buff, wifi_promiscuous_pkt_type_t type) {
+    if (type != WIFI_PKT_MGMT)
+        return;
+
+    const wifi_promiscuous_pkt_t* ppkt = (wifi_promiscuous_pkt_t*)buff;
+    const wifi_ieee80211_packet_t* ipkt = (wifi_ieee80211_packet_t*)ppkt->payload;
+    const wifi_ieee80211_mac_hdr_t* hdr = &ipkt->hdr;
+
+    printf(
+        "PACKET TYPE=%s, CHAN=%02d, RSSI=%02d,"
+        " ADDR1=%02x:%02x:%02x:%02x:%02x:%02x,"
+        " ADDR2=%02x:%02x:%02x:%02x:%02x:%02x,"
+        " ADDR3=%02x:%02x:%02x:%02x:%02x:%02x\n",
+        wifi_sniffer_packet_type2str(type),
+        ppkt->rx_ctrl.channel,
+        ppkt->rx_ctrl.rssi,
+        /* ADDR1 */
+        hdr->addr1[0], hdr->addr1[1], hdr->addr1[2],
+        hdr->addr1[3], hdr->addr1[4], hdr->addr1[5],
+        /* ADDR2 */
+        hdr->addr2[0], hdr->addr2[1], hdr->addr2[2],
+        hdr->addr2[3], hdr->addr2[4], hdr->addr2[5],
+        /* ADDR3 */
+        hdr->addr3[0], hdr->addr3[1], hdr->addr3[2],
+        hdr->addr3[3], hdr->addr3[4], hdr->addr3[5]);
+}
+
+void WiFiTools::initWiFiSniffer() {
+    nvs_flash_init();
+    tcpip_adapter_init();
+    ESP_ERROR_CHECK(esp_event_loop_init(event_handler, NULL));
+    wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
+    ESP_ERROR_CHECK(esp_wifi_init(&cfg));
+    // ESP_ERROR_CHECK(esp_wifi_set_country(&wifi_country)); /* set country for channel range [1, 13] */
+    ESP_ERROR_CHECK(esp_wifi_set_storage(WIFI_STORAGE_RAM));
+    ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_NULL));
+    ESP_ERROR_CHECK(esp_wifi_start());
+    esp_wifi_set_promiscuous(true);
+    esp_wifi_set_promiscuous_rx_cb(&wifi_sniffer_packet_handler);
+}
+
+void WiFiTools::scanForClients() {
+    // Loop through all channels
+    for (int i = 1; i <= 14; i++) {
+        // Set the channel
+        esp_err_t err = esp_wifi_set_channel(i, WIFI_SECOND_CHAN_NONE);
+        if (err != ESP_OK) {
+            Serial.printf("Failed to set channel: %d\n", err);
+            return;
+        }
+
+        // Delay for a short period to allow the scan to complete
+        delay(100);
+
+        // Call the initWiFiSniffer function
+        initWiFiSniffer();
+    }
 }
