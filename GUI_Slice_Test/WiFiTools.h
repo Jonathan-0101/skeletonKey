@@ -137,7 +137,7 @@ class WiFiTools {
     std::vector<wifi_ap_record_t> getAvailableNetworks();
     void clearFoundWiFiNetworks();
     void deauthNetwork(uint8_t* networkSSID, uint8_t* networkBSSID, uint8_t channel, int availableNetworkIndex, uint8_t* targetMacAddr, int numPackets, int delayMs, uint8_t reasonCode);
-    void scanForClients(uint8_t* networkSSID, uint8_t* networkBSSID, uint8_t channel, int availableNetworkIndex);
+    void scanForClients();
     std::vector<wifi_sta_info_t> getWiFiClients();
 };
 

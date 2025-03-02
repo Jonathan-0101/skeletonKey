@@ -323,15 +323,77 @@ void WiFiTools::deauthNetwork(uint8_t* networkSSID = NULL, uint8_t* networkBSSID
     Serial.println("WiFi stopped");
 }
 
-void WiFiTools::initWiFiSniffer() {
+esp_err_t event_handler(void* ctx, system_event_t* event) {
+    return ESP_OK;
 }
 
-void WiFiTools::scanForClients(uint8_t* networkSSID = NULL, uint8_t* networkBSSID = NULL, uint8_t channel = NULL, int availableNetworkIndex = NULL) {
-    // Check if networkSSID, networkBSSID, and channel are provided
-    if (networkSSID != NULL && networkBSSID != NULL && channel != NULL) {
-    } else if (availableNetworkIndex >= 0 && availableNetworkIndex < foundWiFiNetworks.size()) {
-    } else {
-        Serial.println("Error: Network information not provided");
+const char* WiFiTools::wifi_sniffer_packet_type2str(wifi_promiscuous_pkt_type_t type) {
+    switch (type) {
+        case WIFI_PKT_MGMT:
+            return "MGMT";
+        case WIFI_PKT_DATA:
+            return "DATA";
+        default:
+        case WIFI_PKT_MISC:
+            return "MISC";
+    }
+}
+
+void WiFiTools::wifi_sniffer_packet_handler(void* buff, wifi_promiscuous_pkt_type_t type) {
+    if (type != WIFI_PKT_MGMT)
         return;
+
+    const wifi_promiscuous_pkt_t* ppkt = (wifi_promiscuous_pkt_t*)buff;
+    const wifi_ieee80211_packet_t* ipkt = (wifi_ieee80211_packet_t*)ppkt->payload;
+    const wifi_ieee80211_mac_hdr_t* hdr = &ipkt->hdr;
+
+    printf(
+        "PACKET TYPE=%s, CHAN=%02d, RSSI=%02d,"
+        " ADDR1=%02x:%02x:%02x:%02x:%02x:%02x,"
+        " ADDR2=%02x:%02x:%02x:%02x:%02x:%02x,"
+        " ADDR3=%02x:%02x:%02x:%02x:%02x:%02x\n",
+        wifi_sniffer_packet_type2str(type),
+        ppkt->rx_ctrl.channel,
+        ppkt->rx_ctrl.rssi,
+        /* ADDR1 */
+        hdr->addr1[0], hdr->addr1[1], hdr->addr1[2],
+        hdr->addr1[3], hdr->addr1[4], hdr->addr1[5],
+        /* ADDR2 */
+        hdr->addr2[0], hdr->addr2[1], hdr->addr2[2],
+        hdr->addr2[3], hdr->addr2[4], hdr->addr2[5],
+        /* ADDR3 */
+        hdr->addr3[0], hdr->addr3[1], hdr->addr3[2],
+        hdr->addr3[3], hdr->addr3[4], hdr->addr3[5]);
+}
+
+void WiFiTools::initWiFiSniffer() {
+    nvs_flash_init();
+    tcpip_adapter_init();
+    ESP_ERROR_CHECK(esp_event_loop_init(event_handler, NULL));
+    wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
+    ESP_ERROR_CHECK(esp_wifi_init(&cfg));
+    // ESP_ERROR_CHECK(esp_wifi_set_country(&wifi_country)); /* set country for channel range [1, 13] */
+    ESP_ERROR_CHECK(esp_wifi_set_storage(WIFI_STORAGE_RAM));
+    ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_NULL));
+    ESP_ERROR_CHECK(esp_wifi_start());
+    esp_wifi_set_promiscuous(true);
+    esp_wifi_set_promiscuous_rx_cb(&wifi_sniffer_packet_handler);
+}
+
+void WiFiTools::scanForClients() {
+    // Loop through all channels
+    for (int i = 1; i <= 14; i++) {
+        // Set the channel
+        esp_err_t err = esp_wifi_set_channel(i, WIFI_SECOND_CHAN_NONE);
+        if (err != ESP_OK) {
+            Serial.printf("Failed to set channel: %d\n", err);
+            return;
+        }
+
+        // Delay for a short period to allow the scan to complete
+        delay(100);
+
+        // Call the initWiFiSniffer function
+        initWiFiSniffer();
     }
 }
