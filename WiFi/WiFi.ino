@@ -52,10 +52,10 @@ void setup() {
     wifiTools.scanWiFiNetworks();
 
     // get char array of SSID and MACs
-    char* ssidAndMACs = wifiTools.getFoundSSIDandMACs();
+    // char* ssidAndMACs = wifiTools.getFoundSSIDandMACs();
 
     // print the SSID and MACs
-    Serial.println(ssidAndMACs);
+    // Serial.println(ssidAndMACs);
 }
 
 void loop() {

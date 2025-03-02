@@ -192,7 +192,7 @@ void WiFiTools::scanWiFiNetworks() {
     Serial.printf("Found %d networks\n", numNetworks);
 
     for (int i = 0; i < numNetworks; i++) {
-        // Serial.printf("Network %d: %s, MAC: %s, Channel: %d\n", i, WiFi.SSID(i).c_str(), WiFi.BSSIDstr(i).c_str(), WiFi.channel(i));
+        Serial.printf("Network %d: %s, MAC: %s, Channel: %d\n", i, WiFi.SSID(i).c_str(), WiFi.BSSIDstr(i).c_str(), WiFi.channel(i));
         wifi_ap_record_t ap;
         ap.rssi = WiFi.RSSI(i);
         ap.authmode = WiFi.encryptionType(i);
@@ -208,20 +208,6 @@ std::vector<wifi_ap_record_t> WiFiTools::getAvailableNetworks() {
         scanWiFiNetworks();
     }
     return foundWiFiNetworks;
-}
-
-char* WiFiTools::getFoundSSIDandMACs() {
-    if (foundWiFiNetworks.size() == 0) {
-        scanWiFiNetworks();
-    }
-
-    char* ssidAndMACs = new char[54 * foundWiFiNetworks.size()];
-    for (int i = 0; i < foundWiFiNetworks.size(); i++) {
-        char ssidAndMAC[54];
-        sprintf(ssidAndMAC, "%s - %02X:%02X:%02X:%02X:%02X:%02X\n", foundWiFiNetworks[i].ssid, foundWiFiNetworks[i].bssid[0], foundWiFiNetworks[i].bssid[1], foundWiFiNetworks[i].bssid[2], foundWiFiNetworks[i].bssid[3], foundWiFiNetworks[i].bssid[4], foundWiFiNetworks[i].bssid[5]);
-        strcat(ssidAndMACs, ssidAndMAC);
-    }
-    return ssidAndMACs;
 }
 
 void WiFiTools::clearFoundWiFiNetworks() {
@@ -327,10 +313,13 @@ void WiFiTools::initWiFiSniffer() {
 }
 
 void WiFiTools::scanForClients(uint8_t* networkSSID = NULL, uint8_t* networkBSSID = NULL, uint8_t channel = NULL, int availableNetworkIndex = NULL) {
-    // Check if networkSSID, networkBSSID, and channel are provided
-    if (networkSSID != NULL && networkBSSID != NULL && channel != NULL) {
-    } else if (availableNetworkIndex >= 0 && availableNetworkIndex < foundWiFiNetworks.size()) {
-    } else {
+    // Check if availableNetworkIndex is provided
+    if (availableNetworkIndex >= 0 && availableNetworkIndex < foundWiFiNetworks.size()) {
+        // Set the networkSSID, networkBSSID, and channel
+        networkSSID = foundWiFiNetworks[availableNetworkIndex].ssid;
+        networkBSSID = foundWiFiNetworks[availableNetworkIndex].bssid;
+        channel = foundWiFiNetworks[availableNetworkIndex].primary;
+    } else if (networkSSID == NULL || networkBSSID == NULL || channel == NULL) {
         Serial.println("Error: Network information not provided");
         return;
     }
