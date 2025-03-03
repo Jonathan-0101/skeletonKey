@@ -25,31 +25,33 @@ void setup() {
     // wifiTools.deauthNetwork((uint8_t*)"Jonathan's iPhone", (uint8_t*)"\x4E\x8D\x2E\x26\x5F\x36", 6, -1, NULL, 10000, 1, 2);
 
     // getAvailableNetworks function
-    // std::vector<wifi_ap_record_t> availableNetworks = wifiTools.getAvailableNetworks();
-    // for (int i = 0; i < availableNetworks.size(); i++) {
-    //     Serial.printf("Network %d: %s\n", i, availableNetworks[i].ssid);
-    // }
+    std::vector<wifi_ap_record_t> availableNetworks = wifiTools.getAvailableNetworks();
+    for (int i = 0; i < availableNetworks.size(); i++) {
+        Serial.printf("Network %d: %s\n", i, availableNetworks[i].ssid);
+    }
 
-    // Serial.println("Enter the index of the network to deauth:");
-    // while (Serial.available() == 0) {
-    //     delay(100);
-    // }
+    Serial.println("Enter the index of the network to find devices of:");
+    while (Serial.available() == 0) {
+        delay(100);
+    }
 
-    // int networkIndex = Serial.parseInt();
-    // if (networkIndex != -1) {
-    //     if (networkIndex < 0 || networkIndex >= availableNetworks.size()) {
-    //         Serial.println("Invalid network index");
-    //         return;
-    //     } else {
-    //         wifiTools.deauthNetwork(NULL, NULL, NULL, networkIndex, NULL, 5000, 1, 2);
-    //     }
-    // }
+    int networkIndex = Serial.parseInt();
+    if (networkIndex != -1) {
+        if (networkIndex < 0 || networkIndex >= availableNetworks.size()) {
+            Serial.println("Invalid network index");
+            return;
+        } else {
+            // wifiTools.handshakeCapture(NULL, NULL, networkIndex, 30000);
+            // wifiTools.activeHandshakeCapture(NULL, NULL, networkIndex, 30000);
+            wifiTools.findClients(NULL, NULL, networkIndex, 15000);
+        }
+    }
 
     // // scanForClients function
     // wifiTools.scanForClients();
 
     // scan for available networks
-    wifiTools.scanWiFiNetworks();
+    // wifiTools.scanWiFiNetworks();
 
     // get char array of SSID and MACs
     // char* ssidAndMACs = wifiTools.getFoundSSIDandMACs();
