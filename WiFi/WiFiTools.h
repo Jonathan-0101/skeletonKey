@@ -22,6 +22,38 @@ esp_err_t esp_wifi_set_mode(wifi_mode_t mode);
 esp_err_t esp_wifi_start();
 esp_err_t esp_wifi_set_promiscuous(bool en);
 
+typedef struct {
+    unsigned frame_ctrl : 16;
+    unsigned duration_id : 16;
+    uint8_t addr1[6]; /* receiver address */
+    uint8_t addr2[6]; /* sender address */
+    uint8_t addr3[6]; /* filtering address */
+    unsigned sequence_ctrl : 16;
+    uint8_t addr4[6]; /* optional */
+} wifi_ieee80211_mac_hdr_t;
+
+typedef struct {
+    wifi_ieee80211_mac_hdr_t hdr;
+    uint8_t payload[0]; /* network data ended with 4 bytes csum (CRC32) */
+} wifi_ieee80211_packet_t;
+
+typedef struct {
+    uint8_t ap_mac[6];
+    uint8_t sta_mac[6];
+    uint8_t eapol[256];
+    uint16_t eapol_len;
+    uint8_t keymic[16];
+    uint8_t replay_counter[8];
+    uint8_t essid[64];
+    uint8_t essid_len;
+} HCCAPX;
+
+typedef enum {
+    HANDSHAKE_CAPTURE,
+    CLIENT_DETECTION,
+    NONE
+} wifi_packet_flag;
+
 class WiFiTools {
    private:
     const bool wpa2 = true;
@@ -37,22 +69,20 @@ class WiFiTools {
     uint32_t packetRateTime = 0;
     uint8_t targetBSSID[6];
     uint8_t targetChannel;
+    wifi_packet_flag packetScanFlag;
 
     wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
-    std::vector<uint8_t*> capturedPackets;
     std::vector<uint8_t*> detectedClients;
 
     void beaconSpamSetup();
     void generateRandomMac();
     void sendDeauthPacket(uint8_t* apMac, uint8_t* stMac, uint8_t channel, uint8_t reasonCode);
 
-    bool isHandshakePacket(const uint8_t* data, const uint8_t* networkBSSID);
-    bool isClientPacket(const uint8_t* data, const uint8_t* networkBSSID);
-    uint8_t* extractClientMac(const uint8_t* data);
+    void filterForClients(const wifi_ieee80211_mac_hdr_t* hdr);
+    void filterForHandshakes(void* buf, wifi_promiscuous_pkt_type_t type);
+
     static void promiscuousPacketHandler(void* buf, wifi_promiscuous_pkt_type_t type);
 
-    void saveHandshakeData(const std::vector<uint8_t*>& capturedPackets);
-    void saveClientData(const std::vector<uint8_t*>& detectedClients);
     void processWiFiData(uint8_t* networkBSSID, uint8_t channel, int captureTime, bool captureHandshake, bool detectClients);
 
     std::vector<wifi_ap_record_t> foundWiFiNetworks;
@@ -126,11 +156,16 @@ class WiFiTools {
     void nextChannel();
     void rickRollBeaconSpam();
     void scanWiFiNetworks();
-    std::vector<wifi_ap_record_t> getAvailableNetworks();
+    std::vector<wifi_ap_record_t>
+    getAvailableNetworks();
     void clearFoundWiFiNetworks();
     void deauthNetwork(uint8_t* networkSSID, uint8_t* networkBSSID, uint8_t channel, int availableNetworkIndex, uint8_t* targetMacAddr, int numPackets, int delayMs, uint8_t reasonCode);
     void handshakeCapture(uint8_t* networkBSSID, uint8_t channel, int availableNetworkIndex, int captureTime);
     void activeHandshakeCapture(uint8_t* networkBSSID, uint8_t channel, int availableNetworkIndex, int captureTime);
+    void findClients(uint8_t* networkBSSID, uint8_t channel, int availableNetworkIndex, int captureTime);
 };
+
+// Declare the global instance
+extern WiFiTools* globalWiFiToolsInstance;
 
 #endif  // WIFITOOLS_H

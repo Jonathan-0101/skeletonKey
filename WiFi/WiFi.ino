@@ -14,16 +14,6 @@ void setup() {
     // Call the scanWiFiNetworks function
     // wifiTools.scanWiFiNetworks();
 
-    // Call the deauthNetwork function with the following parameters:
-    // uint8_t* networkSSID = tonyTable
-    // uint8_t* networkBSSID = B8:27:EB:33:A2:4E
-    // uint8_t channel = 6
-    // int numPackets = 10
-    // int delayMs = 100
-    // uint8_t reasonCode = 2
-    // wifiTools.deauthNetwork((uint8_t*)"tonyTable", (uint8_t*)"\xB8\x27\xEB\x33\xA2\x4E", 6, -1, NULL, 1000, 1, 2);
-    // wifiTools.deauthNetwork((uint8_t*)"Jonathan's iPhone", (uint8_t*)"\x4E\x8D\x2E\x26\x5F\x36", 6, -1, NULL, 10000, 1, 2);
-
     // getAvailableNetworks function
     std::vector<wifi_ap_record_t> availableNetworks = wifiTools.getAvailableNetworks();
     for (int i = 0; i < availableNetworks.size(); i++) {
@@ -41,9 +31,9 @@ void setup() {
             Serial.println("Invalid network index");
             return;
         } else {
-            // wifiTools.handshakeCapture(NULL, NULL, networkIndex, 30000);
+            wifiTools.handshakeCapture(NULL, NULL, networkIndex, 30000);
             // wifiTools.activeHandshakeCapture(NULL, NULL, networkIndex, 30000);
-            wifiTools.findClients(NULL, NULL, networkIndex, 15000);
+            // wifiTools.findClients(NULL, NULL, networkIndex, 15000);
         }
     }
 

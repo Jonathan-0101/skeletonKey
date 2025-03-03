@@ -210,20 +210,6 @@ std::vector<wifi_ap_record_t> WiFiTools::getAvailableNetworks() {
     return foundWiFiNetworks;
 }
 
-char* WiFiTools::getFoundSSIDandMACs() {
-    if (foundWiFiNetworks.size() == 0) {
-        scanWiFiNetworks();
-    }
-
-    char* ssidAndMACs = new char[54 * foundWiFiNetworks.size()];
-    for (int i = 0; i < foundWiFiNetworks.size(); i++) {
-        char ssidAndMAC[54];
-        sprintf(ssidAndMAC, "%s - %02X:%02X:%02X:%02X:%02X:%02X\n", foundWiFiNetworks[i].ssid, foundWiFiNetworks[i].bssid[0], foundWiFiNetworks[i].bssid[1], foundWiFiNetworks[i].bssid[2], foundWiFiNetworks[i].bssid[3], foundWiFiNetworks[i].bssid[4], foundWiFiNetworks[i].bssid[5]);
-        strcat(ssidAndMACs, ssidAndMAC);
-    }
-    return ssidAndMACs;
-}
-
 void WiFiTools::clearFoundWiFiNetworks() {
     foundWiFiNetworks.clear();
 }

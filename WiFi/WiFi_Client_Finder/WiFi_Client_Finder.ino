@@ -15,7 +15,7 @@
 #define WIFI_CHANNEL_MAX (13)
 
 // Define the BSSID of the network you want to monitor
-const uint8_t target_bssid[6] = {0x36, 0x48, 0xF6, 0x7A, 0x2D, 0x04};
+const uint8_t target_bssid[6] = {0xBA, 0xF6, 0x4E, 0x3E, 0x2A, 0x89};
 
 uint8_t level = 0, channel = 6;
 
@@ -55,7 +55,7 @@ void wifi_sniffer_init(void) {
     ESP_ERROR_CHECK(esp_event_loop_init(event_handler, NULL));
     wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
     ESP_ERROR_CHECK(esp_wifi_init(&cfg));
-    ESP_ERROR_CHECK(esp_wifi_set_country(&wifi_country)); /* set country for channel range [1, 13] */
+    // ESP_ERROR_CHECK( esp_wifi_set_country(&wifi_country) ); /* set country for channel range [1, 13] */
     ESP_ERROR_CHECK(esp_wifi_set_storage(WIFI_STORAGE_RAM));
     ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_NULL));
     ESP_ERROR_CHECK(esp_wifi_start());

