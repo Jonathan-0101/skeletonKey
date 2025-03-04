@@ -74,15 +74,54 @@ class WiFiTools {
     wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
     std::vector<uint8_t*> detectedClients;
 
+    /**
+     * @brief Setup function for the beacon spam attack
+     *
+     */
     void beaconSpamSetup();
+
+    /**
+     * @brief Function to generate a random MAC address
+     *
+     */
     void generateRandomMac();
+
+    /**
+     * @brief Function to transmit a deatuthentication packet
+     *
+     * @param apMac MAC address of the access point
+     * @param stMac MAC address of the device to deauthenticate
+     * @param channel Chanel to transmit the packet on
+     * @param reasonCode Reason code for the deauthentication
+     */
     void sendDeauthPacket(uint8_t* apMac, uint8_t* stMac, uint8_t channel, uint8_t reasonCode);
 
+    /**
+     * @brief Function to identify clients based on detected packets
+     *
+     * @param hdr Pointer to the MAC header of the packet
+     */
     void filterForClients(const wifi_ieee80211_mac_hdr_t* hdr);
+
     void filterForHandshakes(void* buf, wifi_promiscuous_pkt_type_t type);
 
+    /**
+     * @brief Callback function for promiscuous packet handling
+     *
+     * @param buf Pointer to the packet buffer
+     * @param type Type of the packet
+     */
     static void promiscuousPacketHandler(void* buf, wifi_promiscuous_pkt_type_t type);
 
+    /**
+     * @brief Function to begin capture and processing of Wi-Fi data
+     *
+     * @param networkBSSID MAC address of the target network
+     * @param channel Channel to capture packets on
+     * @param captureTime The duration to capture packets for
+     * @param captureHandshake Flag to capture handshake packets
+     * @param detectClients Flag to identify connected clients
+     */
     void processWiFiData(uint8_t* networkBSSID, uint8_t channel, int captureTime, bool captureHandshake, bool detectClients);
 
     std::vector<wifi_ap_record_t> foundWiFiNetworks;
@@ -141,6 +180,7 @@ class WiFiTools {
                                  /* 103 - 106 */ 0x00, 0x0f, 0xac, 0x02,
                                  /* 107 - 108 */ 0x00, 0x00};
 
+    // Rick Roll SSIDs
     const char* const rickRollSSIDs[8] PROGMEM = {
         "NeverGonnaGiveYouUp",
         "NeverGonnaLetYouDown",
@@ -152,16 +192,85 @@ class WiFiTools {
         "AndHurtYou"};
 
    public:
+    /**
+     * @brief Construct a new Wi Fi Tools object
+     *
+     */
     WiFiTools();
+
+    /**
+     * @brief Function to change the Wi-Fi channel
+     *
+     */
     void nextChannel();
+
+    /**
+     * @brief Function to run a Rick Roll beacon spam attack
+     *
+     */
     void rickRollBeaconSpam();
+
+    /**
+     * @brief Function to scan for available Wi-Fi networks
+     *
+     */
     void scanWiFiNetworks();
-    std::vector<wifi_ap_record_t>
-    getAvailableNetworks();
+
+    /**
+     * @brief Get the Available Networks object
+     *
+     * @return std::vector<wifi_ap_record_t>
+     */
+    std::vector<wifi_ap_record_t> getAvailableNetworks();
+
+    /**
+     * @brief Function to clear the found Wi-Fi networks vector
+     *
+     */
     void clearFoundWiFiNetworks();
+
+    /**
+     * @brief Function to run a deauthentication attack
+     *
+     * @param networkSSID SSID of the target network
+     * @param networkBSSID BSSID of the target network
+     * @param channel Channel of the target network
+     * @param availableNetworkIndex Index of the target network in the foundWiFiNetworks vector
+     * @param targetMacAddr MAC address of the target device
+     * @param numPackets Number of deauthentication packets to send
+     * @param delayMs Delay between sending deauthentication packets
+     * @param reasonCode Reason code for the deauthentication
+     */
     void deauthNetwork(uint8_t* networkSSID, uint8_t* networkBSSID, uint8_t channel, int availableNetworkIndex, uint8_t* targetMacAddr, int numPackets, int delayMs, uint8_t reasonCode);
+
+    /**
+     * @brief Function to initiate a passive handshake capture
+     *
+     * @param networkBSSID BSSID of the target network
+     * @param channel Channel of the target network
+     * @param availableNetworkIndex Index of the target network in the foundWiFiNetworks vector
+     * @param captureTime Duration to capture packets for
+     */
     void handshakeCapture(uint8_t* networkBSSID, uint8_t channel, int availableNetworkIndex, int captureTime);
+
+    /**
+     * @brief Function to initiate an active handshake capture
+     *
+     * @param networkBSSID BSSID of the target network
+     * @param channel Channel of the target network
+     * @param availableNetworkIndex Index of the target network in the foundWiFiNetworks vector
+     * @param captureTime Duration to capture packets for
+     */
     void activeHandshakeCapture(uint8_t* networkBSSID, uint8_t channel, int availableNetworkIndex, int captureTime);
+
+    /**
+     * @brief Function to identify clients connected to a network
+     *
+     * @param networkBSSID BSSID of the target network
+     * @param channel Channel of the target network
+     * @param availableNetworkIndex Index of the target network in the foundWiFiNetworks vector
+     * @param captureTime Duration to scan for clients
+     */
     void findClients(uint8_t* networkBSSID, uint8_t channel, int availableNetworkIndex, int captureTime);
 };
 

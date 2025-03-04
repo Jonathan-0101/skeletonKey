@@ -433,19 +433,6 @@ void WiFiTools::promiscuousPacketHandler(void* buf, wifi_promiscuous_pkt_type_t 
 void WiFiTools::processWiFiData(uint8_t* networkBSSID, uint8_t channel, int captureTime, bool captureHandshake, bool detectClients) {
     // Set the Wi-Fi channel and enable promiscuous mode
     esp_wifi_set_channel(channel, WIFI_SECOND_CHAN_NONE);
-
-    // wifi_promiscuous_filter_t filter;
-
-    // // Set the FILTER_MASK to receive the correct packets
-    // if (captureHandshake) {
-    //     filter.filter_mask = WIFI_PROMIS_FILTER_MASK_MGMT;
-    // } else if (detectClients) {
-    //     filter.filter_mask = WIFI_PROMIS_FILTER_MASK_ALL;
-    // }
-
-    // Set the promiscuous filter
-    // esp_wifi_set_promiscuous_filter(&filter);
-
     esp_wifi_set_promiscuous_rx_cb(promiscuousPacketHandler);
     esp_wifi_set_promiscuous(true);
 
