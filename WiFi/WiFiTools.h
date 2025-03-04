@@ -1,5 +1,17 @@
+// WiFiTools.h
 #ifndef WIFITOOLS_H
 #define WIFITOOLS_H
+
+/**
+ * @file WiFiTools.h
+ * @author Jonathan Woolf
+ * @brief Library for Wi-Fi attack tools
+ * @version 1.0
+ * @date 2025-03-04
+ *
+ * @copyright Copyright (c) 2025
+ *
+ */
 
 #include <WiFi.h>
 
