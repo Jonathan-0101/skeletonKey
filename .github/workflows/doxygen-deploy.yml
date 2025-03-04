@@ -1,0 +1,26 @@
+# doxygen-deploy.yml
+name: doxygen-deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy-documentation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install doxygen
+        run: sudo apt-get install -y doxygen
+
+      - name: Run doxygen
+        working-directory: ${{github.workspace}}
+        run: doxygen
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: gh-pages
+          folder: ${{github.workspace}}/html
