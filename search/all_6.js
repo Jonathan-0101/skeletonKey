@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['nextchannel_0',['nextChannel',['../d6/d69/classWiFiTools.html#a6834bf8cebae5f22ff21b0ccd3360d92',1,'WiFiTools']]]
+  ['handshakecapture_0',['handshakeCapture',['../d6/d69/classWiFiTools.html#a8458c9cbd17f858562382084f33e0f98',1,'WiFiTools']]],
+  ['hccapx_1',['HCCAPX',['../db/d68/structHCCAPX.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wifitools_0',['WiFiTools',['../d6/d69/classWiFiTools.html#a1d8e5877a35094fa55d8b4a3ebab2259',1,'WiFiTools']]]
+  ['rickrollbeaconspam_0',['rickRollBeaconSpam',['../d6/d69/classWiFiTools.html#aad07f39dfa5435f55098e332144f1e91',1,'WiFiTools']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['deauthnetwork_0',['deauthNetwork',['../d6/d69/classWiFiTools.html#ae290535762ebba5331a922e09a82dc50',1,'WiFiTools']]]
+  ['clearfoundwifinetworks_0',['clearFoundWiFiNetworks',['../d6/d69/classWiFiTools.html#a3722aae8c3032c40d6a52fe299b3b4ca',1,'WiFiTools']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['handshakecapture_0',['handshakeCapture',['../d6/d69/classWiFiTools.html#a8458c9cbd17f858562382084f33e0f98',1,'WiFiTools']]],
-  ['hccapx_1',['HCCAPX',['../db/d68/structHCCAPX.html',1,'']]]
+  ['generaterandommac_0',['generateRandomMac',['../d6/d69/classWiFiTools.html#ae689371b5f6cd8d4a600b9aa4f142882',1,'WiFiTools']]],
+  ['getavailablenetworks_1',['getAvailableNetworks',['../d6/d69/classWiFiTools.html#af80713dc94811ab73842d19f0c0c35e7',1,'WiFiTools']]]
 ];
