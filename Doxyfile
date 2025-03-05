@@ -1406,7 +1406,7 @@ HTML_STYLESHEET        =
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
 HTML_EXTRA_STYLESHEET  = Resources/Doxygen/doxygen-awesome.css \
-                            Resources/Doxygen/doxygen-awesome-sidebar-only.css
+                         Resources/Doxygen/doxygen-awesome-sidebar-only.css
 
 # The HTML_EXTRA_FILES tag can be used to specify one or more extra images or
 # other source files which should be copied to the HTML output directory. Note
@@ -1416,7 +1416,12 @@ HTML_EXTRA_STYLESHEET  = Resources/Doxygen/doxygen-awesome.css \
 # files will be copied as-is; there are no commands or markers available.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_FILES       =
+HTML_EXTRA_FILES       = Resources/Doxygen/doxygen-awesome-darkmode-toggle.js \
+                         Resources/Doxygen/doxygen-awesome-fragment-copy-button.js \
+                         Resources/Doxygen/doxygen-awesome-paragraph-link.js \
+                         Resources/Doxygen/doxygen-custom/toggle-alternative-theme.js \
+                         Resources/Doxygen/doxygen-awesome-interactive-toc.js \
+                         Resources/Doxygen/doxygen-awesome-tabs.js
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme.
