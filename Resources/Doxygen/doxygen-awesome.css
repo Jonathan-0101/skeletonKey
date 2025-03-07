@@ -596,7 +596,7 @@ a.anchor {
     background: var(--searchbar-background);
     border-radius: var(--searchbar-border-radius);
     border: 1px solid var(--separator-color);
-    overflow: auto;
+    overflow: hidden;
     width: var(--searchbar-width);
     position: relative;
     box-shadow: none;
@@ -632,7 +632,7 @@ a.anchor {
 }
 
 .tabs #MSearchBox {
-    position: relative;
+    position: absolute;
     right: var(--spacing-medium);
 }
 
