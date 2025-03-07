@@ -1423,7 +1423,7 @@ HTML_EXTRA_STYLESHEET  = Resources/Doxygen/doxygen-awesome.css \
 HTML_EXTRA_FILES       = Resources/Doxygen/doxygen-awesome-darkmode-toggle.js \
                          Resources/Doxygen/doxygen-awesome-fragment-copy-button.js \
                          Resources/Doxygen/doxygen-awesome-paragraph-link.js \
-                         Resources/Doxygen/doxygen-custom/toggle-alternative-theme.js \
+                         Resources/Doxygen/toggle-alternative-theme.js \
                          Resources/Doxygen/doxygen-awesome-interactive-toc.js \
                          Resources/Doxygen/doxygen-awesome-tabs.js
 
