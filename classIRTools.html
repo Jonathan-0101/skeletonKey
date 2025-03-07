@@ -1,0 +1,545 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <meta name="generator" content="Doxygen 1.9.8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- BEGIN opengraph metadata -->
+    <meta property="og:title" content="Pentestingdevice" />
+    <meta property="og:description"
+        content="BEng Dissertation; Penetration-testing device to highlight security system vulnerabilities." />
+    <meta property="og:url" content="https://jonathan-0101.github.io/PenTestingDevice" />
+    <!-- END opengraph metadata -->
+    <title>Skeleton Key: IRTools Class Reference</title>
+    <link href="tabs.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="dynsections.js"></script>
+    <script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+    <script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+    <script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+    <script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+    <script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+    <script type="text/javascript" src="toggle-alternative-theme.js"></script>
+    <script type="text/javascript">
+        DoxygenAwesomeFragmentCopyButton.init()
+        DoxygenAwesomeDarkModeToggle.init()
+        DoxygenAwesomeParagraphLink.init()
+        DoxygenAwesomeInteractiveToc.init()
+        DoxygenAwesomeTabs.init()
+    </script>
+    <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+    <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+    <link href="doxygen.css" rel="stylesheet" type="text/css" />
+    <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom-alternative.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <!-- https://tholman.com/github-corners/ -->
+    <a href="https://github.com/Jonathan-0101/PenTestingDevice" class="github-corner" title="View source on GitHub"
+        target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 250 250" width="40" height="40"
+            style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+            <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+            <path
+                d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+                fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+            <path
+                d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+                fill="currentColor" class="octo-body"></path>
+        </svg></a>
+    <style>
+        .github-corner:hover .octo-arm {
+            animation: octocat-wave 560ms ease-in-out
+        }
+        @keyframes octocat-wave {
+            0%,
+            100% {
+                transform: rotate(0)
+            }
+            20%,
+            60% {
+                transform: rotate(-25deg)
+            }
+            40%,
+            80% {
+                transform: rotate(10deg)
+            }
+        }
+        @media (max-width:500px) {
+            .github-corner:hover .octo-arm {
+                animation: none
+            }
+            .github-corner .octo-arm {
+                animation: octocat-wave 560ms ease-in-out
+            }
+        }
+    </style>
+    <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+        <div id="titlearea">
+            <table cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr style="height: 56px;">
+                        <td id="projectlogo"><img alt="Logo" src="logo.ico" /></td>
+                        <td id="projectalign" style="padding-left: 0.5em;">
+                            <div id="projectname">Skeleton Key
+                            </div>
+                            <div id="projectbrief">BEng Dissertation; Penetration-testing device to highlight security system vulnerabilities</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- end header part --><!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classIRTools.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a>  </div>
+  <div class="headertitle"><div class="title">IRTools Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+Collaboration diagram for IRTools:</div>
+<div class="dyncontent">
+<div class="center"><!-- SVG 0 --></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ad594e21762ffadea48e99e06898b6dc1" id="r_ad594e21762ffadea48e99e06898b6dc1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIRTools.html#ad594e21762ffadea48e99e06898b6dc1">IRTools</a> (fs::SDFS &amp;sdInstance)</td></tr>
+<tr class="memdesc:ad594e21762ffadea48e99e06898b6dc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classIRTools.html">IRTools</a> object.  <br /></td></tr>
+<tr class="separator:ad594e21762ffadea48e99e06898b6dc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf79bbb13c7f549edf20dbb5af2ad5f7" id="r_abf79bbb13c7f549edf20dbb5af2ad5f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIRTools.html#abf79bbb13c7f549edf20dbb5af2ad5f7">sendRawIR</a> (uint16_t *data, uint16_t length, uint16_t frequency)</td></tr>
+<tr class="memdesc:abf79bbb13c7f549edf20dbb5af2ad5f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to send a custom raw IR command.  <br /></td></tr>
+<tr class="separator:abf79bbb13c7f549edf20dbb5af2ad5f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad600de66882a5b9bc95323dea98e9f62" id="r_ad600de66882a5b9bc95323dea98e9f62"><td class="memItemLeft" align="right" valign="top"><a id="ad600de66882a5b9bc95323dea98e9f62" name="ad600de66882a5b9bc95323dea98e9f62"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>getAvaliableDeviceTypes</b> ()</td></tr>
+<tr class="memdesc:ad600de66882a5b9bc95323dea98e9f62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Avaliable Device Types object. <br /></td></tr>
+<tr class="separator:ad600de66882a5b9bc95323dea98e9f62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cbc8ee3ab47c617beb756f56feb281c" id="r_a0cbc8ee3ab47c617beb756f56feb281c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIRTools.html#a0cbc8ee3ab47c617beb756f56feb281c">getDeviceTypes</a> ()</td></tr>
+<tr class="memdesc:a0cbc8ee3ab47c617beb756f56feb281c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Device Types object.  <br /></td></tr>
+<tr class="separator:a0cbc8ee3ab47c617beb756f56feb281c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ef6e640f8ab49898806831f80641f9f" id="r_a9ef6e640f8ab49898806831f80641f9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIRTools.html#a9ef6e640f8ab49898806831f80641f9f">getAvaliableDeviceBrands</a> (int deviceTypeIndex)</td></tr>
+<tr class="memdesc:a9ef6e640f8ab49898806831f80641f9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Avaliable Device Brands object.  <br /></td></tr>
+<tr class="separator:a9ef6e640f8ab49898806831f80641f9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a21fd8fe5ebbdd9a12b6fed0077cd40" id="r_a9a21fd8fe5ebbdd9a12b6fed0077cd40"><td class="memItemLeft" align="right" valign="top">std::vector&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIRTools.html#a9a21fd8fe5ebbdd9a12b6fed0077cd40">getDeviceBrands</a> ()</td></tr>
+<tr class="memdesc:a9a21fd8fe5ebbdd9a12b6fed0077cd40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Device Brands object.  <br /></td></tr>
+<tr class="separator:a9a21fd8fe5ebbdd9a12b6fed0077cd40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada1ab36488fcc025b2003a6bb7081fd6" id="r_ada1ab36488fcc025b2003a6bb7081fd6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIRTools.html#ada1ab36488fcc025b2003a6bb7081fd6">getAvaliableDevices</a> (int deviceBrandIndex)</td></tr>
+<tr class="memdesc:ada1ab36488fcc025b2003a6bb7081fd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Avaliable Devices object.  <br /></td></tr>
+<tr class="separator:ada1ab36488fcc025b2003a6bb7081fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa362f0ddef59adf3fd544f2d0e5eb306" id="r_aa362f0ddef59adf3fd544f2d0e5eb306"><td class="memItemLeft" align="right" valign="top">std::vector&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIRTools.html#aa362f0ddef59adf3fd544f2d0e5eb306">getDevices</a> ()</td></tr>
+<tr class="memdesc:aa362f0ddef59adf3fd544f2d0e5eb306"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Devices object.  <br /></td></tr>
+<tr class="separator:aa362f0ddef59adf3fd544f2d0e5eb306"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c02a9124a3101057a3acf882743d8ae" id="r_a1c02a9124a3101057a3acf882743d8ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIRTools.html#a1c02a9124a3101057a3acf882743d8ae">getAvaliableDeviceCommands</a> (int deviceIndex)</td></tr>
+<tr class="memdesc:a1c02a9124a3101057a3acf882743d8ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Avaliable Device Commands object.  <br /></td></tr>
+<tr class="separator:a1c02a9124a3101057a3acf882743d8ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e6db99af3f1c33c7081546b017f1389" id="r_a8e6db99af3f1c33c7081546b017f1389"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structIRCommand.html">IRCommand</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIRTools.html#a8e6db99af3f1c33c7081546b017f1389">getDeviceCommands</a> ()</td></tr>
+<tr class="memdesc:a8e6db99af3f1c33c7081546b017f1389"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Device Commands object.  <br /></td></tr>
+<tr class="separator:a8e6db99af3f1c33c7081546b017f1389"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f33ba5781572c4845209db65664011e" id="r_a3f33ba5781572c4845209db65664011e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIRTools.html#a3f33ba5781572c4845209db65664011e">sendIRCommand</a> (<a class="el" href="structIRCommand.html">IRCommand</a> irCommand)</td></tr>
+<tr class="memdesc:a3f33ba5781572c4845209db65664011e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to send an IR command.  <br /></td></tr>
+<tr class="separator:a3f33ba5781572c4845209db65664011e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab40750ff9a6f8316ad83f7171b1304c2" id="r_ab40750ff9a6f8316ad83f7171b1304c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIRTools.html#ab40750ff9a6f8316ad83f7171b1304c2">jamIR</a> (int duration)</td></tr>
+<tr class="memdesc:ab40750ff9a6f8316ad83f7171b1304c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to jam IR signals.  <br /></td></tr>
+<tr class="separator:ab40750ff9a6f8316ad83f7171b1304c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:af1aafc67772f2f1e0f3a45c1c2eaa413" id="r_af1aafc67772f2f1e0f3a45c1c2eaa413"><td class="memItemLeft" align="right" valign="top"><a id="af1aafc67772f2f1e0f3a45c1c2eaa413" name="af1aafc67772f2f1e0f3a45c1c2eaa413"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>kIrLed</b> = 20</td></tr>
+<tr class="separator:af1aafc67772f2f1e0f3a45c1c2eaa413"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abae6b9cc87f0b5bd7854972b40dd3257" id="r_abae6b9cc87f0b5bd7854972b40dd3257"><td class="memItemLeft" align="right" valign="top"><a id="abae6b9cc87f0b5bd7854972b40dd3257" name="abae6b9cc87f0b5bd7854972b40dd3257"></a>
+IRsend&#160;</td><td class="memItemRight" valign="bottom"><b>irsend</b></td></tr>
+<tr class="separator:abae6b9cc87f0b5bd7854972b40dd3257"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fdd5e8f7cf0632734649366d8b3879a" id="r_a7fdd5e8f7cf0632734649366d8b3879a"><td class="memItemLeft" align="right" valign="top"><a id="a7fdd5e8f7cf0632734649366d8b3879a" name="a7fdd5e8f7cf0632734649366d8b3879a"></a>
+fs::SDFS *&#160;</td><td class="memItemRight" valign="bottom"><b>sd</b></td></tr>
+<tr class="separator:a7fdd5e8f7cf0632734649366d8b3879a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedac15513b8a854159bdb1265472a019" id="r_aedac15513b8a854159bdb1265472a019"><td class="memItemLeft" align="right" valign="top"><a id="aedac15513b8a854159bdb1265472a019" name="aedac15513b8a854159bdb1265472a019"></a>
+std::vector&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>deviceTypes</b></td></tr>
+<tr class="separator:aedac15513b8a854159bdb1265472a019"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b4d4739fb6849830cea7471892df924" id="r_a3b4d4739fb6849830cea7471892df924"><td class="memItemLeft" align="right" valign="top"><a id="a3b4d4739fb6849830cea7471892df924" name="a3b4d4739fb6849830cea7471892df924"></a>
+std::vector&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>deviceBrands</b></td></tr>
+<tr class="separator:a3b4d4739fb6849830cea7471892df924"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a146e4d25939c8970e27727bb55a2258d" id="r_a146e4d25939c8970e27727bb55a2258d"><td class="memItemLeft" align="right" valign="top"><a id="a146e4d25939c8970e27727bb55a2258d" name="a146e4d25939c8970e27727bb55a2258d"></a>
+std::vector&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>devices</b></td></tr>
+<tr class="separator:a146e4d25939c8970e27727bb55a2258d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f544e11d053844e66c02547b2d3d723" id="r_a5f544e11d053844e66c02547b2d3d723"><td class="memItemLeft" align="right" valign="top"><a id="a5f544e11d053844e66c02547b2d3d723" name="a5f544e11d053844e66c02547b2d3d723"></a>
+std::vector&lt; <a class="el" href="structIRCommand.html">IRCommand</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>deviceCommands</b></td></tr>
+<tr class="separator:a5f544e11d053844e66c02547b2d3d723"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1445785bfd1dfe10526e584566262285" id="r_a1445785bfd1dfe10526e584566262285"><td class="memItemLeft" align="right" valign="top"><a id="a1445785bfd1dfe10526e584566262285" name="a1445785bfd1dfe10526e584566262285"></a>
+String&#160;</td><td class="memItemRight" valign="bottom"><b>deviceType</b></td></tr>
+<tr class="separator:a1445785bfd1dfe10526e584566262285"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a615848620e28ab91ddea313227e139c2" id="r_a615848620e28ab91ddea313227e139c2"><td class="memItemLeft" align="right" valign="top"><a id="a615848620e28ab91ddea313227e139c2" name="a615848620e28ab91ddea313227e139c2"></a>
+String&#160;</td><td class="memItemRight" valign="bottom"><b>deviceBrand</b></td></tr>
+<tr class="separator:a615848620e28ab91ddea313227e139c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a738b29c63dd04f28dab99c4813036c" id="r_a4a738b29c63dd04f28dab99c4813036c"><td class="memItemLeft" align="right" valign="top"><a id="a4a738b29c63dd04f28dab99c4813036c" name="a4a738b29c63dd04f28dab99c4813036c"></a>
+String&#160;</td><td class="memItemRight" valign="bottom"><b>devicePath</b></td></tr>
+<tr class="separator:a4a738b29c63dd04f28dab99c4813036c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a435d78083a8fdb7b2250c64ee91c9984" id="r_a435d78083a8fdb7b2250c64ee91c9984"><td class="memItemLeft" align="right" valign="top"><a id="a435d78083a8fdb7b2250c64ee91c9984" name="a435d78083a8fdb7b2250c64ee91c9984"></a>
+String&#160;</td><td class="memItemRight" valign="bottom"><b>device</b></td></tr>
+<tr class="separator:a435d78083a8fdb7b2250c64ee91c9984"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f14f957099522c9dfd26204b6b7fa1e" id="r_a9f14f957099522c9dfd26204b6b7fa1e"><td class="memItemLeft" align="right" valign="top"><a id="a9f14f957099522c9dfd26204b6b7fa1e" name="a9f14f957099522c9dfd26204b6b7fa1e"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>jamSignal</b> [2] = {65535, 0}</td></tr>
+<tr class="separator:a9f14f957099522c9dfd26204b6b7fa1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad594e21762ffadea48e99e06898b6dc1" name="ad594e21762ffadea48e99e06898b6dc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad594e21762ffadea48e99e06898b6dc1">&#9670;&#160;</a></span>IRTools()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">IRTools::IRTools </td>
+          <td>(</td>
+          <td class="paramtype">fs::SDFS &amp;&#160;</td>
+          <td class="paramname"><em>sdInstance</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="classIRTools.html">IRTools</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sdInstance</td><td>SD instance </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a9ef6e640f8ab49898806831f80641f9f" name="a9ef6e640f8ab49898806831f80641f9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ef6e640f8ab49898806831f80641f9f">&#9670;&#160;</a></span>getAvaliableDeviceBrands()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IRTools::getAvaliableDeviceBrands </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>deviceTypeIndex</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the Avaliable Device Brands object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">deviceTypeIndex</td><td>Index of the device type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1c02a9124a3101057a3acf882743d8ae" name="a1c02a9124a3101057a3acf882743d8ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c02a9124a3101057a3acf882743d8ae">&#9670;&#160;</a></span>getAvaliableDeviceCommands()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IRTools::getAvaliableDeviceCommands </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>deviceIndex</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the Avaliable Device Commands object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">deviceIndex</td><td>Index of the device </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ada1ab36488fcc025b2003a6bb7081fd6" name="ada1ab36488fcc025b2003a6bb7081fd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada1ab36488fcc025b2003a6bb7081fd6">&#9670;&#160;</a></span>getAvaliableDevices()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IRTools::getAvaliableDevices </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>deviceBrandIndex</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the Avaliable Devices object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">deviceBrandIndex</td><td>Index of the device brand </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9a21fd8fe5ebbdd9a12b6fed0077cd40" name="a9a21fd8fe5ebbdd9a12b6fed0077cd40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a21fd8fe5ebbdd9a12b6fed0077cd40">&#9670;&#160;</a></span>getDeviceBrands()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; String &gt; IRTools::getDeviceBrands </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the Device Brands object. </p>
+<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;String&gt; </dd></dl>
+
+</div>
+</div>
+<a id="a8e6db99af3f1c33c7081546b017f1389" name="a8e6db99af3f1c33c7081546b017f1389"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e6db99af3f1c33c7081546b017f1389">&#9670;&#160;</a></span>getDeviceCommands()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="structIRCommand.html">IRCommand</a> &gt; IRTools::getDeviceCommands </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the Device Commands object. </p>
+<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;IRCommand&gt; </dd></dl>
+
+</div>
+</div>
+<a id="aa362f0ddef59adf3fd544f2d0e5eb306" name="aa362f0ddef59adf3fd544f2d0e5eb306"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa362f0ddef59adf3fd544f2d0e5eb306">&#9670;&#160;</a></span>getDevices()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; String &gt; IRTools::getDevices </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the Devices object. </p>
+<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;String&gt; </dd></dl>
+
+</div>
+</div>
+<a id="a0cbc8ee3ab47c617beb756f56feb281c" name="a0cbc8ee3ab47c617beb756f56feb281c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cbc8ee3ab47c617beb756f56feb281c">&#9670;&#160;</a></span>getDeviceTypes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; String &gt; IRTools::getDeviceTypes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the Device Types object. </p>
+<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;String&gt; </dd></dl>
+
+</div>
+</div>
+<a id="ab40750ff9a6f8316ad83f7171b1304c2" name="ab40750ff9a6f8316ad83f7171b1304c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab40750ff9a6f8316ad83f7171b1304c2">&#9670;&#160;</a></span>jamIR()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IRTools::jamIR </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>duration</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to jam IR signals. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">duration</td><td>Duration to jam IR signals </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3f33ba5781572c4845209db65664011e" name="a3f33ba5781572c4845209db65664011e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f33ba5781572c4845209db65664011e">&#9670;&#160;</a></span>sendIRCommand()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IRTools::sendIRCommand </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structIRCommand.html">IRCommand</a>&#160;</td>
+          <td class="paramname"><em>irCommand</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to send an IR command. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">irCommand</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abf79bbb13c7f549edf20dbb5af2ad5f7" name="abf79bbb13c7f549edf20dbb5af2ad5f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf79bbb13c7f549edf20dbb5af2ad5f7">&#9670;&#160;</a></span>sendRawIR()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IRTools::sendRawIR </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>frequency</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to send a custom raw IR command. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Command data </td></tr>
+    <tr><td class="paramname">length</td><td>Command length </td></tr>
+    <tr><td class="paramname">frequency</td><td>Command frequency </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>IR/<a class="el" href="IRTools_8h_source.html">IRTools.h</a></li>
+<li>IR/<b>IRTools.cpp</b></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="classIRTools.html">IRTools</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

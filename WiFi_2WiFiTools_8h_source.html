@@ -1,0 +1,385 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <meta name="generator" content="Doxygen 1.9.8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- BEGIN opengraph metadata -->
+    <meta property="og:title" content="Pentestingdevice" />
+    <meta property="og:description"
+        content="BEng Dissertation; Penetration-testing device to highlight security system vulnerabilities." />
+    <meta property="og:url" content="https://jonathan-0101.github.io/PenTestingDevice" />
+    <!-- END opengraph metadata -->
+    <title>Skeleton Key: WiFi/WiFiTools.h Source File</title>
+    <link href="tabs.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="dynsections.js"></script>
+    <script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+    <script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+    <script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+    <script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+    <script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+    <script type="text/javascript" src="toggle-alternative-theme.js"></script>
+    <script type="text/javascript">
+        DoxygenAwesomeFragmentCopyButton.init()
+        DoxygenAwesomeDarkModeToggle.init()
+        DoxygenAwesomeParagraphLink.init()
+        DoxygenAwesomeInteractiveToc.init()
+        DoxygenAwesomeTabs.init()
+    </script>
+    <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+    <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+    <link href="doxygen.css" rel="stylesheet" type="text/css" />
+    <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom-alternative.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <!-- https://tholman.com/github-corners/ -->
+    <a href="https://github.com/Jonathan-0101/PenTestingDevice" class="github-corner" title="View source on GitHub"
+        target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 250 250" width="40" height="40"
+            style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+            <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+            <path
+                d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+                fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+            <path
+                d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+                fill="currentColor" class="octo-body"></path>
+        </svg></a>
+    <style>
+        .github-corner:hover .octo-arm {
+            animation: octocat-wave 560ms ease-in-out
+        }
+        @keyframes octocat-wave {
+            0%,
+            100% {
+                transform: rotate(0)
+            }
+            20%,
+            60% {
+                transform: rotate(-25deg)
+            }
+            40%,
+            80% {
+                transform: rotate(10deg)
+            }
+        }
+        @media (max-width:500px) {
+            .github-corner:hover .octo-arm {
+                animation: none
+            }
+            .github-corner .octo-arm {
+                animation: octocat-wave 560ms ease-in-out
+            }
+        }
+    </style>
+    <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+        <div id="titlearea">
+            <table cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr style="height: 56px;">
+                        <td id="projectlogo"><img alt="Logo" src="logo.ico" /></td>
+                        <td id="projectalign" style="padding-left: 0.5em;">
+                            <div id="projectname">Skeleton Key
+                            </div>
+                            <div id="projectbrief">BEng Dissertation; Penetration-testing device to highlight security system vulnerabilities</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- end header part --><!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('WiFi_2WiFiTools_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">WiFiTools.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="WiFi_2WiFiTools_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// WiFiTools.h</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#ifndef WIFITOOLS_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#define WIFITOOLS_H</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;WiFi.h&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;esp_event.h&quot;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &quot;esp_event_loop.h&quot;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &quot;esp_log.h&quot;</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#include &quot;esp_system.h&quot;</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;esp_wifi.h&quot;</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;esp_wifi_types.h&quot;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;freertos/FreeRTOS.h&quot;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;nvs_flash.h&quot;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>esp_err_t esp_wifi_set_channel(uint8_t primary, wifi_second_chan_t second);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>esp_err_t esp_wifi_80211_tx(wifi_interface_t ifx, <span class="keyword">const</span> <span class="keywordtype">void</span>* buffer, <span class="keywordtype">int</span> len, <span class="keywordtype">bool</span> en_sys_seq);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>esp_err_t esp_wifi_set_storage(wifi_storage_t storage);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>esp_err_t esp_wifi_set_mode(wifi_mode_t mode);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>esp_err_t esp_wifi_start();</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>esp_err_t esp_wifi_set_promiscuous(<span class="keywordtype">bool</span> en);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">unsigned</span> frame_ctrl : 16;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">unsigned</span> duration_id : 16;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    uint8_t addr1[6]; <span class="comment">/* receiver address */</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    uint8_t addr2[6]; <span class="comment">/* sender address */</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    uint8_t addr3[6]; <span class="comment">/* filtering address */</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">unsigned</span> sequence_ctrl : 16;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    uint8_t addr4[6]; <span class="comment">/* optional */</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>} <a class="code hl_struct" href="structwifi__ieee80211__mac__hdr__t.html">wifi_ieee80211_mac_hdr_t</a>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <a class="code hl_struct" href="structwifi__ieee80211__mac__hdr__t.html">wifi_ieee80211_mac_hdr_t</a> hdr;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    uint8_t payload[0]; <span class="comment">/* network data ended with 4 bytes csum (CRC32) */</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>} <a class="code hl_struct" href="structwifi__ieee80211__packet__t.html">wifi_ieee80211_packet_t</a>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="foldopen" id="foldopen00064" data-start="{" data-end="};">
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="structHCCAPX.html">   64</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    uint8_t ap_mac[6];</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    uint8_t sta_mac[6];</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    uint8_t eapol[256];</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    uint16_t eapol_len;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    uint8_t keymic[16];</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    uint8_t replay_counter[8];</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    uint8_t essid[64];</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    uint8_t essid_len;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>} <a class="code hl_struct" href="structHCCAPX.html">HCCAPX</a>;</div>
+</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="foldopen" id="foldopen00079" data-start="{" data-end="};">
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="WiFi_2WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">   79</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    HANDSHAKE_CAPTURE,</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    CLIENT_DETECTION,</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    NONE</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>} <a class="code hl_enumeration" href="WiFi_2WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">wifi_packet_flag</a>;</div>
+</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="keyword">class </span><a class="code hl_class" href="classWiFiTools.html">WiFiTools</a> {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>   <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keyword">const</span> <span class="keywordtype">bool</span> wpa2 = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordtype">char</span> emptySSID[32];</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    uint8_t channelIndex = 0;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    uint8_t macAddr[6];</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    uint8_t randomMacAddr[6];</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    uint8_t wifiChannel = 1;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    uint32_t currentTime = 0;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    uint32_t packetSize = 0;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    uint32_t packetCounter = 0;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    uint32_t attackTime = 0;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    uint32_t packetRateTime = 0;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    uint8_t targetBSSID[6];</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    uint8_t targetChannel;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <a class="code hl_enumeration" href="WiFi_2WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">wifi_packet_flag</a> packetScanFlag;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    std::vector&lt;uint8_t*&gt; detectedClients;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="classWiFiTools.html#a1bb65b4835a3c0d70dbc8a1aa6320a6b">  109</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#a1bb65b4835a3c0d70dbc8a1aa6320a6b">beaconSpamSetup</a>();</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="classWiFiTools.html#ae689371b5f6cd8d4a600b9aa4f142882">  115</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#ae689371b5f6cd8d4a600b9aa4f142882">generateRandomMac</a>();</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno"><a class="line" href="classWiFiTools.html#a4496beddfc24492abda018e82a581dac">  125</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#a4496beddfc24492abda018e82a581dac">sendDeauthPacket</a>(uint8_t* apMac, uint8_t* stMac, uint8_t channel, uint8_t reasonCode);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#a1995aae91614f4ca74e698fb7dd250e7">filterForClients</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structwifi__ieee80211__mac__hdr__t.html">wifi_ieee80211_mac_hdr_t</a>* hdr);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="keywordtype">void</span> filterForHandshakes(<span class="keywordtype">void</span>* buf, wifi_promiscuous_pkt_type_t type);</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#a21dbe89a44a32b0e97960ae72ffdd523">promiscuousPacketHandler</a>(<span class="keywordtype">void</span>* buf, wifi_promiscuous_pkt_type_t type);</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#ad699a00a0c7ec0ab314ebef10568d700">processWiFiData</a>(uint8_t* networkBSSID, uint8_t channel, <span class="keywordtype">int</span> captureTime, <span class="keywordtype">bool</span> captureHandshake, <span class="keywordtype">bool</span> detectClients);</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    std::vector&lt;wifi_ap_record_t&gt; foundWiFiNetworks;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="comment">// deauth frame definition</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    uint8_t deauthPacket[26] = {</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        <span class="comment">/*  0 - 1  */</span> 0xA0, 0x00,                          <span class="comment">// type, subtype c0: deauth (a0: disassociate)</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        <span class="comment">/*  2 - 3  */</span> 0x3A, 0x01,                          <span class="comment">// duration</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        <span class="comment">/*  4 - 9  */</span> 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,  <span class="comment">// reciever (target)</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <span class="comment">/* 10 - 15 */</span> 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC,  <span class="comment">// source (ap)</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        <span class="comment">/* 16 - 21 */</span> 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC,  <span class="comment">// BSSID (ap)</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        <span class="comment">/* 22 - 23 */</span> 0x00, 0x00,                          <span class="comment">// fragment &amp; squence number</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        <span class="comment">/* 24 - 25 */</span> 0x01, 0x00                           <span class="comment">// reason code (1 = unspecified reason)</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    };</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="comment">// beacon frame definition</span></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    uint8_t beaconPacket[109] = {<span class="comment">/*  0 - 3  */</span> 0x80, 0x00, 0x00, 0x00,              <span class="comment">// Type/Subtype: management beacon frame</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>                                 <span class="comment">/*  4 - 9  */</span> 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,  <span class="comment">// Destination: broadcast</span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>                                 <span class="comment">/* 10 - 15 */</span> 0x01, 0x02, 0x03, 0x04, 0x05, 0x06,  <span class="comment">// Source</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>                                 <span class="comment">/* 16 - 21 */</span> 0x01, 0x02, 0x03, 0x04, 0x05, 0x06,  <span class="comment">// Source</span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>                                 <span class="comment">// Fixed parameters</span></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>                                 <span class="comment">/* 22 - 23 */</span> 0x00, 0x00,                                      <span class="comment">// Fragment &amp; sequence number (will be done by the SDK)</span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>                                 <span class="comment">/* 24 - 31 */</span> 0x83, 0x51, 0xf7, 0x8f, 0x0f, 0x00, 0x00, 0x00,  <span class="comment">// Timestamp</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>                                 <span class="comment">/* 32 - 33 */</span> 0x64, 0x00,                                      <span class="comment">// Interval: 0x64, 0x00 =&gt; every 100ms - 0xe8, 0x03 =&gt; every 1s</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>                                 <span class="comment">/* 34 - 35 */</span> 0x31, 0x00,                                      <span class="comment">// capabilities Information</span></div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>                                 <span class="comment">// Tagged parameters</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>                                 <span class="comment">// SSID parameters</span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>                                 <span class="comment">/* 36 - 37 */</span> 0x00, 0x20,                                                                                                                                                                                      <span class="comment">// Tag: Set SSID length, Tag length: 32</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>                                 <span class="comment">/* 38 - 69 */</span> 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,  <span class="comment">// SSID</span></div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>                                 <span class="comment">// Supported Rates</span></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>                                 <span class="comment">/* 70 - 71 */</span> 0x01, 0x08,  <span class="comment">// Tag: Supported Rates, Tag length: 8</span></div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>                                 <span class="comment">/* 72 */</span> 0x82,             <span class="comment">// 1(B)</span></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>                                 <span class="comment">/* 73 */</span> 0x84,             <span class="comment">// 2(B)</span></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>                                 <span class="comment">/* 74 */</span> 0x8b,             <span class="comment">// 5.5(B)</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>                                 <span class="comment">/* 75 */</span> 0x96,             <span class="comment">// 11(B)</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>                                 <span class="comment">/* 76 */</span> 0x24,             <span class="comment">// 18</span></div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>                                 <span class="comment">/* 77 */</span> 0x30,             <span class="comment">// 24</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>                                 <span class="comment">/* 78 */</span> 0x48,             <span class="comment">// 36</span></div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>                                 <span class="comment">/* 79 */</span> 0x6c,             <span class="comment">// 54</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>                                 <span class="comment">// Current Channel</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>                                 <span class="comment">/* 80 - 81 */</span> 0x03, 0x01,  <span class="comment">// Channel set, length</span></div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>                                 <span class="comment">/* 82 */</span> 0x01,             <span class="comment">// Current Channel</span></div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>                                 <span class="comment">// RSN information</span></div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>                                 <span class="comment">/*  83 -  84 */</span> 0x30, 0x18,</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>                                 <span class="comment">/*  85 -  86 */</span> 0x01, 0x00,</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>                                 <span class="comment">/*  87 -  90 */</span> 0x00, 0x0f, 0xac, 0x02,</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>                                 <span class="comment">/*  91 - 100 */</span> 0x02, 0x00,</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>                                 <span class="comment">/*  93 - 100 */</span> 0x00, 0x0f, 0xac, 0x04, 0x00, 0x0f, 0xac, 0x04, <span class="comment">/*Fix: changed 0x02(TKIP) to 0x04(CCMP) is default. WPA2 with TKIP not supported by many devices*/</span></div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>                                 <span class="comment">/* 101 - 102 */</span> 0x01, 0x00,</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>                                 <span class="comment">/* 103 - 106 */</span> 0x00, 0x0f, 0xac, 0x02,</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>                                 <span class="comment">/* 107 - 108 */</span> 0x00, 0x00};</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="comment">// Rick Roll SSIDs</span></div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> rickRollSSIDs[8] PROGMEM = {</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        <span class="stringliteral">&quot;NeverGonnaGiveYouUp&quot;</span>,</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        <span class="stringliteral">&quot;NeverGonnaLetYouDown&quot;</span>,</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        <span class="stringliteral">&quot;NeverGonnaRunAround&quot;</span>,</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        <span class="stringliteral">&quot;AndDesertYou&quot;</span>,</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        <span class="stringliteral">&quot;NeverGonnaMakeYouCry&quot;</span>,</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        <span class="stringliteral">&quot;NeverGonnaSayGoodbye&quot;</span>,</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        <span class="stringliteral">&quot;NeverGonnaTellALie&quot;</span>,</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        <span class="stringliteral">&quot;AndHurtYou&quot;</span>};</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>   <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno"><a class="line" href="classWiFiTools.html#a1d8e5877a35094fa55d8b4a3ebab2259">  227</a></span>    <a class="code hl_function" href="classWiFiTools.html#a1d8e5877a35094fa55d8b4a3ebab2259">WiFiTools</a>();</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span> </div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno"><a class="line" href="classWiFiTools.html#a6834bf8cebae5f22ff21b0ccd3360d92">  233</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#a6834bf8cebae5f22ff21b0ccd3360d92">nextChannel</a>();</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno"><a class="line" href="classWiFiTools.html#aad07f39dfa5435f55098e332144f1e91">  239</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#aad07f39dfa5435f55098e332144f1e91">rickRollBeaconSpam</a>();</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno"><a class="line" href="classWiFiTools.html#a434b1b80009f52dd46bb9f26c7b17488">  245</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#a434b1b80009f52dd46bb9f26c7b17488">scanWiFiNetworks</a>();</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno"><a class="line" href="classWiFiTools.html#af80713dc94811ab73842d19f0c0c35e7">  252</a></span>    std::vector&lt;wifi_ap_record_t&gt; <a class="code hl_function" href="classWiFiTools.html#af80713dc94811ab73842d19f0c0c35e7">getAvailableNetworks</a>();</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span> </div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno"><a class="line" href="classWiFiTools.html#a3722aae8c3032c40d6a52fe299b3b4ca">  258</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#a3722aae8c3032c40d6a52fe299b3b4ca">clearFoundWiFiNetworks</a>();</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span> </div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno"><a class="line" href="classWiFiTools.html#ae290535762ebba5331a922e09a82dc50">  272</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#ae290535762ebba5331a922e09a82dc50">deauthNetwork</a>(uint8_t* networkSSID, uint8_t* networkBSSID, uint8_t channel, <span class="keywordtype">int</span> availableNetworkIndex, uint8_t* targetMacAddr, <span class="keywordtype">int</span> numPackets, <span class="keywordtype">int</span> delayMs, uint8_t reasonCode);</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span> </div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#a8458c9cbd17f858562382084f33e0f98">handshakeCapture</a>(uint8_t* networkBSSID, uint8_t channel, <span class="keywordtype">int</span> availableNetworkIndex, <span class="keywordtype">int</span> captureTime);</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span> </div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#a2be73c0a4df321522e4b99c96790a3e7">activeHandshakeCapture</a>(uint8_t* networkBSSID, uint8_t channel, <span class="keywordtype">int</span> availableNetworkIndex, <span class="keywordtype">int</span> captureTime);</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span> </div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#ac394356bb88c2da425909c388588982e">findClients</a>(uint8_t* networkBSSID, uint8_t channel, <span class="keywordtype">int</span> availableNetworkIndex, <span class="keywordtype">int</span> captureTime);</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>};</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span> </div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span><span class="comment">// Declare the global instance</span></div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span><span class="keyword">extern</span> <a class="code hl_class" href="classWiFiTools.html">WiFiTools</a>* globalWiFiToolsInstance;</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span> </div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span><span class="preprocessor">#endif  </span><span class="comment">// WIFITOOLS_H</span></div>
+<div class="ttc" id="aWiFi_2WiFiTools_8h_html_a92ab780568552ff29e7ced01cb6f3801"><div class="ttname"><a href="WiFi_2WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">wifi_packet_flag</a></div><div class="ttdeci">wifi_packet_flag</div><div class="ttdoc">Enum to store the type of Wi-Fi packet to capture.</div><div class="ttdef"><b>Definition</b> WiFiTools.h:79</div></div>
+<div class="ttc" id="aclassWiFiTools_html"><div class="ttname"><a href="classWiFiTools.html">WiFiTools</a></div><div class="ttdef"><b>Definition</b> WiFiTools.h:41</div></div>
+<div class="ttc" id="aclassWiFiTools_html_a1995aae91614f4ca74e698fb7dd250e7"><div class="ttname"><a href="classWiFiTools.html#a1995aae91614f4ca74e698fb7dd250e7">WiFiTools::filterForClients</a></div><div class="ttdeci">void filterForClients(const wifi_ieee80211_mac_hdr_t *hdr)</div><div class="ttdoc">Function to identify clients based on detected packets.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:315</div></div>
+<div class="ttc" id="aclassWiFiTools_html_a1bb65b4835a3c0d70dbc8a1aa6320a6b"><div class="ttname"><a href="classWiFiTools.html#a1bb65b4835a3c0d70dbc8a1aa6320a6b">WiFiTools::beaconSpamSetup</a></div><div class="ttdeci">void beaconSpamSetup()</div><div class="ttdoc">Setup function for the beacon spam attack.</div></div>
+<div class="ttc" id="aclassWiFiTools_html_a1d8e5877a35094fa55d8b4a3ebab2259"><div class="ttname"><a href="classWiFiTools.html#a1d8e5877a35094fa55d8b4a3ebab2259">WiFiTools::WiFiTools</a></div><div class="ttdeci">WiFiTools()</div><div class="ttdoc">Construct a new Wi Fi Tools object.</div></div>
+<div class="ttc" id="aclassWiFiTools_html_a21dbe89a44a32b0e97960ae72ffdd523"><div class="ttname"><a href="classWiFiTools.html#a21dbe89a44a32b0e97960ae72ffdd523">WiFiTools::promiscuousPacketHandler</a></div><div class="ttdeci">static void promiscuousPacketHandler(void *buf, wifi_promiscuous_pkt_type_t type)</div><div class="ttdoc">Callback function for promiscuous packet handling.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:394</div></div>
+<div class="ttc" id="aclassWiFiTools_html_a2be73c0a4df321522e4b99c96790a3e7"><div class="ttname"><a href="classWiFiTools.html#a2be73c0a4df321522e4b99c96790a3e7">WiFiTools::activeHandshakeCapture</a></div><div class="ttdeci">void activeHandshakeCapture(uint8_t *networkBSSID, uint8_t channel, int availableNetworkIndex, int captureTime)</div><div class="ttdoc">Function to initiate an active handshake capture.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:494</div></div>
+<div class="ttc" id="aclassWiFiTools_html_a3722aae8c3032c40d6a52fe299b3b4ca"><div class="ttname"><a href="classWiFiTools.html#a3722aae8c3032c40d6a52fe299b3b4ca">WiFiTools::clearFoundWiFiNetworks</a></div><div class="ttdeci">void clearFoundWiFiNetworks()</div><div class="ttdoc">Function to clear the found Wi-Fi networks vector.</div></div>
+<div class="ttc" id="aclassWiFiTools_html_a434b1b80009f52dd46bb9f26c7b17488"><div class="ttname"><a href="classWiFiTools.html#a434b1b80009f52dd46bb9f26c7b17488">WiFiTools::scanWiFiNetworks</a></div><div class="ttdeci">void scanWiFiNetworks()</div><div class="ttdoc">Function to scan for available Wi-Fi networks.</div></div>
+<div class="ttc" id="aclassWiFiTools_html_a4496beddfc24492abda018e82a581dac"><div class="ttname"><a href="classWiFiTools.html#a4496beddfc24492abda018e82a581dac">WiFiTools::sendDeauthPacket</a></div><div class="ttdeci">void sendDeauthPacket(uint8_t *apMac, uint8_t *stMac, uint8_t channel, uint8_t reasonCode)</div><div class="ttdoc">Function to transmit a deatuthentication packet.</div></div>
+<div class="ttc" id="aclassWiFiTools_html_a6834bf8cebae5f22ff21b0ccd3360d92"><div class="ttname"><a href="classWiFiTools.html#a6834bf8cebae5f22ff21b0ccd3360d92">WiFiTools::nextChannel</a></div><div class="ttdeci">void nextChannel()</div><div class="ttdoc">Function to change the Wi-Fi channel.</div></div>
+<div class="ttc" id="aclassWiFiTools_html_a8458c9cbd17f858562382084f33e0f98"><div class="ttname"><a href="classWiFiTools.html#a8458c9cbd17f858562382084f33e0f98">WiFiTools::handshakeCapture</a></div><div class="ttdeci">void handshakeCapture(uint8_t *networkBSSID, uint8_t channel, int availableNetworkIndex, int captureTime)</div><div class="ttdoc">Function to initiate a passive handshake capture.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:464</div></div>
+<div class="ttc" id="aclassWiFiTools_html_aad07f39dfa5435f55098e332144f1e91"><div class="ttname"><a href="classWiFiTools.html#aad07f39dfa5435f55098e332144f1e91">WiFiTools::rickRollBeaconSpam</a></div><div class="ttdeci">void rickRollBeaconSpam()</div><div class="ttdoc">Function to run a Rick Roll beacon spam attack.</div></div>
+<div class="ttc" id="aclassWiFiTools_html_ac394356bb88c2da425909c388588982e"><div class="ttname"><a href="classWiFiTools.html#ac394356bb88c2da425909c388588982e">WiFiTools::findClients</a></div><div class="ttdeci">void findClients(uint8_t *networkBSSID, uint8_t channel, int availableNetworkIndex, int captureTime)</div><div class="ttdoc">Function to identify clients connected to a network.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:527</div></div>
+<div class="ttc" id="aclassWiFiTools_html_ad699a00a0c7ec0ab314ebef10568d700"><div class="ttname"><a href="classWiFiTools.html#ad699a00a0c7ec0ab314ebef10568d700">WiFiTools::processWiFiData</a></div><div class="ttdeci">void processWiFiData(uint8_t *networkBSSID, uint8_t channel, int captureTime, bool captureHandshake, bool detectClients)</div><div class="ttdoc">Function to begin capture and processing of Wi-Fi data.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:433</div></div>
+<div class="ttc" id="aclassWiFiTools_html_ae290535762ebba5331a922e09a82dc50"><div class="ttname"><a href="classWiFiTools.html#ae290535762ebba5331a922e09a82dc50">WiFiTools::deauthNetwork</a></div><div class="ttdeci">void deauthNetwork(uint8_t *networkSSID, uint8_t *networkBSSID, uint8_t channel, int availableNetworkIndex, uint8_t *targetMacAddr, int numPackets, int delayMs, uint8_t reasonCode)</div><div class="ttdoc">Function to run a deauthentication attack.</div></div>
+<div class="ttc" id="aclassWiFiTools_html_ae689371b5f6cd8d4a600b9aa4f142882"><div class="ttname"><a href="classWiFiTools.html#ae689371b5f6cd8d4a600b9aa4f142882">WiFiTools::generateRandomMac</a></div><div class="ttdeci">void generateRandomMac()</div><div class="ttdoc">Function to generate a random MAC address.</div></div>
+<div class="ttc" id="aclassWiFiTools_html_af80713dc94811ab73842d19f0c0c35e7"><div class="ttname"><a href="classWiFiTools.html#af80713dc94811ab73842d19f0c0c35e7">WiFiTools::getAvailableNetworks</a></div><div class="ttdeci">std::vector&lt; wifi_ap_record_t &gt; getAvailableNetworks()</div><div class="ttdoc">Get the Available Networks object.</div></div>
+<div class="ttc" id="astructHCCAPX_html"><div class="ttname"><a href="structHCCAPX.html">HCCAPX</a></div><div class="ttdoc">Struct to store the information of a 4-way handshake.</div><div class="ttdef"><b>Definition</b> WiFiTools.h:64</div></div>
+<div class="ttc" id="astructwifi__ieee80211__mac__hdr__t_html"><div class="ttname"><a href="structwifi__ieee80211__mac__hdr__t.html">wifi_ieee80211_mac_hdr_t</a></div><div class="ttdoc">Struct to store the MAC header of a Wi-Fi packet.</div><div class="ttdef"><b>Definition</b> WiFiTools.h:26</div></div>
+<div class="ttc" id="astructwifi__ieee80211__packet__t_html"><div class="ttname"><a href="structwifi__ieee80211__packet__t.html">wifi_ieee80211_packet_t</a></div><div class="ttdoc">Struct to store the payload of a Wi-Fi packet.</div><div class="ttdef"><b>Definition</b> WiFiTools.h:36</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_bc5954b504bfd14f8d87623437ec003d.html">WiFi</a></li><li class="navelem"><a class="el" href="WiFi_2WiFiTools_8h.html">WiFiTools.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

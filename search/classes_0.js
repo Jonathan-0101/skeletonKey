@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hccapx_0',['HCCAPX',['../db/d68/structHCCAPX.html',1,'']]]
+  ['hccapx_0',['HCCAPX',['../structHCCAPX.html',1,'']]]
 ];

@@ -25,7 +25,9 @@
 var NAVTREE =
 [
   [ "Skeleton Key", "index.html", [
-    [ "IRTools Library development folder", "index.html", null ],
+    [ "IRTools Library development folder", "md_IR_2README.html", null ],
+    [ "PenTestingDevice", "md_README.html", null ],
+    [ "WiFiTools Library development folder", "md_WiFi_2README.html", null ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Structure Index", "classes.html", null ],
@@ -46,7 +48,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"annotated.html"
+"GUI__Slice__Test_2WiFiTools_8h_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
