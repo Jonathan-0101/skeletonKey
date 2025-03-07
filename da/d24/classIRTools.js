@@ -9,6 +9,7 @@ var classIRTools =
     [ "getDeviceCommands", "da/d24/classIRTools.html#a8e6db99af3f1c33c7081546b017f1389", null ],
     [ "getDevices", "da/d24/classIRTools.html#aa362f0ddef59adf3fd544f2d0e5eb306", null ],
     [ "getDeviceTypes", "da/d24/classIRTools.html#a0cbc8ee3ab47c617beb756f56feb281c", null ],
+    [ "jamIR", "da/d24/classIRTools.html#ab40750ff9a6f8316ad83f7171b1304c2", null ],
     [ "sendIRCommand", "da/d24/classIRTools.html#a3f33ba5781572c4845209db65664011e", null ],
     [ "sendRawIR", "da/d24/classIRTools.html#abf79bbb13c7f549edf20dbb5af2ad5f7", null ]
 ];

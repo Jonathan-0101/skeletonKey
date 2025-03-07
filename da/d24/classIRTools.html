@@ -198,6 +198,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>getAvaliableDeviceTyp
 <tr class="memitem:a3f33ba5781572c4845209db65664011e" id="r_a3f33ba5781572c4845209db65664011e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d24/classIRTools.html#a3f33ba5781572c4845209db65664011e">sendIRCommand</a> (<a class="el" href="../../dc/dfd/structIRCommand.html">IRCommand</a> irCommand)</td></tr>
 <tr class="memdesc:a3f33ba5781572c4845209db65664011e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to send an IR command.  <br /></td></tr>
 <tr class="separator:a3f33ba5781572c4845209db65664011e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab40750ff9a6f8316ad83f7171b1304c2" id="r_ab40750ff9a6f8316ad83f7171b1304c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d24/classIRTools.html#ab40750ff9a6f8316ad83f7171b1304c2">jamIR</a> (int duration)</td></tr>
+<tr class="memdesc:ab40750ff9a6f8316ad83f7171b1304c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to jam IR signals.  <br /></td></tr>
+<tr class="separator:ab40750ff9a6f8316ad83f7171b1304c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -234,6 +237,9 @@ String&#160;</td><td class="memItemRight" valign="bottom"><b>devicePath</b></td>
 <tr class="memitem:a435d78083a8fdb7b2250c64ee91c9984" id="r_a435d78083a8fdb7b2250c64ee91c9984"><td class="memItemLeft" align="right" valign="top"><a id="a435d78083a8fdb7b2250c64ee91c9984" name="a435d78083a8fdb7b2250c64ee91c9984"></a>
 String&#160;</td><td class="memItemRight" valign="bottom"><b>device</b></td></tr>
 <tr class="separator:a435d78083a8fdb7b2250c64ee91c9984"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f14f957099522c9dfd26204b6b7fa1e" id="r_a9f14f957099522c9dfd26204b6b7fa1e"><td class="memItemLeft" align="right" valign="top"><a id="a9f14f957099522c9dfd26204b6b7fa1e" name="a9f14f957099522c9dfd26204b6b7fa1e"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>jamSignal</b> [2] = {65535, 0}</td></tr>
+<tr class="separator:a9f14f957099522c9dfd26204b6b7fa1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad594e21762ffadea48e99e06898b6dc1" name="ad594e21762ffadea48e99e06898b6dc1"></a>
@@ -418,6 +424,32 @@ String&#160;</td><td class="memItemRight" valign="bottom"><b>device</b></td></tr
 
 <p>Get the Device Types object. </p>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;String&gt; </dd></dl>
+
+</div>
+</div>
+<a id="ab40750ff9a6f8316ad83f7171b1304c2" name="ab40750ff9a6f8316ad83f7171b1304c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab40750ff9a6f8316ad83f7171b1304c2">&#9670;&#160;</a></span>jamIR()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IRTools::jamIR </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>duration</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to jam IR signals. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">duration</td><td>Duration to jam IR signals </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

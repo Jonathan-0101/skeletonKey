@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['scanwifinetworks_0',['scanWiFiNetworks',['../d6/d69/classWiFiTools.html#a434b1b80009f52dd46bb9f26c7b17488',1,'WiFiTools']]],
-  ['senddeauthpacket_1',['sendDeauthPacket',['../d6/d69/classWiFiTools.html#a4496beddfc24492abda018e82a581dac',1,'WiFiTools']]],
-  ['sendircommand_2',['sendIRCommand',['../da/d24/classIRTools.html#a3f33ba5781572c4845209db65664011e',1,'IRTools']]],
-  ['sendrawir_3',['sendRawIR',['../da/d24/classIRTools.html#abf79bbb13c7f549edf20dbb5af2ad5f7',1,'IRTools']]]
+  ['rickrollbeaconspam_0',['rickRollBeaconSpam',['../d6/d69/classWiFiTools.html#aad07f39dfa5435f55098e332144f1e91',1,'WiFiTools']]]
 ];
