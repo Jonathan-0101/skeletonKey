@@ -78,49 +78,170 @@ std::vector<String> IRTools::getDeviceBrands() {
 }
 
 void IRTools::getAvaliableDevices(int deviceBrandIndex) {
-    // // Clear the deviceCommands vector
-    // devices.clear();
+    // Clear the devices vector
+    devices.clear();
 
-    // // Set the device brand
-    // device = deviceBrands[deviceBrandIndex];
+    // Set the device brand
+    deviceBrand = deviceBrands[deviceBrandIndex];
 
-    // // Search the for all .ir files within the device brand folder
-    // File root = sd->open("/IR/" + deviceType + "/" + deviceBrand);
-    // if (!root) {
-    //     Serial.println("Failed to open directory");
-    //     return;
-    // }
+    // Get a list of all the .ir files that exist in the device brand folder
+    File root = sd->open("/IR/" + deviceType + "/" + deviceBrand);
+    if (!root) {
+        Serial.println("Failed to open directory");
+        return;
+    }
 
-    // // List all of the .ir files in the brand directory and subdirectories
-    // while (File file = root.openNextFile()) {
-    //     if (!file.isDirectory() && file.name().endsWith(".ir")) {
-    //         // DEBUG
-    //         // Serial.printf("Device : %s\n", file.name().c_str());
+    // List all of the files in the brand directory
+    while (File file = root.openNextFile()) {
+        if (!file.isDirectory()) {
+            // DEBUG
+            // Serial.printf("Device : %s\n", file.name().c_str());
 
-    //         // Add the file name to the devices vector
-    //         devices.push_back(file.name());
-    //     }
-    //     file.close();
-    // }
+            // Add the file name to the devices vector
+            devices.push_back(file.name());
+        }
+        file.close();
+    }
 }
 
 std::vector<String> IRTools::getDevices() {
+    if (devices.empty()) {
+        Serial.println("No devices available for this brand");
+    }
     return devices;
 }
 
-void IRTools::getAvaliableDeviceCommands(String device) {
-    // // Clear the deviceCommands vector
-    // deviceCommands.clear();
+void IRTools::getAvaliableDeviceCommands(int deviceIndex) {
+    // Clear the deviceCommands vector
+    deviceCommands.clear();
 
-    // // Set the device path
-    // devicePath = "/IR/" + deviceType + "/" + deviceBrand + "/" + device + ".ir";
+    String device = devices[deviceIndex];
 
-    // // Open the device file
-    // File file = sd->open(devicePath);
-    // if (!file) {
-    //     Serial.println("Failed to open file");
-    //     return;
-    // }
+    // Set the device path
+    devicePath = "/IR/" + deviceType + "/" + deviceBrand + "/" + device;
 
-    // Get each command from the file which is stored on a new line begining with
+    // DEBUG
+    Serial.printf("Device Path : %s\n", devicePath.c_str());
+
+    // Open the device file
+    File file = sd->open(devicePath);
+    if (!file) {
+        Serial.println("Failed to open file");
+        return;
+    }
+
+    // Create the IRDeviceInfo object
+    IRDeviceInfo deviceInfo;
+    deviceInfo.deviceType = deviceType;
+    deviceInfo.deviceBrand = deviceBrand;
+    deviceInfo.deviceName = device;
+    deviceInfo.IRFile = devicePath;
+
+    IRCommand irCommand;
+    String line;
+
+    while (file.available()) {
+        line = file.readStringUntil('\n');
+
+        // Check if the line is a command name
+        if (line.startsWith("name: ")) {
+            irCommand.commandName = line.substring(6);
+        } else if (line.startsWith("type: ")) {
+            if (line.substring(6) == "raw") {
+                irCommand.commandType = raw;
+            } else {
+                irCommand.commandType = parsed;
+            }
+        } else if (line.startsWith("protocol: ")) {
+            irCommand.commandProtocol = line.substring(10);
+        } else if (line.startsWith("address: ")) {
+            irCommand.parsedCommandAddress = line.substring(9).toInt();
+        } else if (line.startsWith("command: ")) {
+            irCommand.parsedCommandData = line.substring(9).toInt();
+
+            // Add the IRCommand to the deviceCommands vector
+            irCommand.deviceInfo = deviceInfo;
+            deviceCommands.push_back(irCommand);
+
+            // Clear the irCommand object
+            irCommand = IRCommand();
+        } else if (line.startsWith("frequency: ")) {
+            irCommand.rawCommandFrequency = line.substring(11).toInt();
+        } else if (line.startsWith("dutyCycle: ")) {
+            irCommand.rawCommandDutyCycle = line.substring(11).toFloat();
+        } else if (line.startsWith("length: ")) {
+            irCommand.rawCommandLength = line.substring(8).toInt();
+        } else if (line.startsWith("data: ")) {
+            // Get the raw command data, each value is separated by a space
+            String data = line.substring(6);
+            int spaceIndex = 0;
+            int prevSpaceIndex = 0;
+            while (spaceIndex != -1) {
+                spaceIndex = data.indexOf(' ', prevSpaceIndex);
+                if (spaceIndex != -1) {
+                    irCommand.rawCommandData.push_back(data.substring(prevSpaceIndex, spaceIndex).toInt());
+                    prevSpaceIndex = spaceIndex + 1;
+                } else {
+                    irCommand.rawCommandData.push_back(data.substring(prevSpaceIndex).toInt());
+                }
+            }
+
+            irCommand.rawCommandLength = irCommand.rawCommandData.size();
+
+            // Add the IRCommand to the deviceCommands vector
+            irCommand.deviceInfo = deviceInfo;
+            deviceCommands.push_back(irCommand);
+
+            // Clear the irCommand object
+            irCommand = IRCommand();
+        } else {
+            // DEBUG
+            // Serial.printf("Unknown Line : %s\n", line.c_str());
+        }
+    }
+}
+
+std::vector<IRCommand> IRTools::getDeviceCommands() {
+    // Check if the deviceCommands vector is empty
+    if (deviceCommands.empty()) {
+        Serial.println("No commands available for this device");
+    }
+    return deviceCommands;
+}
+
+void IRTools::sendIRCommand(IRCommand irCommand) {
+    // Check the command type
+    if (irCommand.commandType == raw) {
+        irsend.sendRaw(irCommand.rawCommandData.data(), irCommand.rawCommandLength, irCommand.rawCommandFrequency);
+    } else if (irCommand.commandType == parsed) {
+        // Check the protocol
+        String protocol = irCommand.commandProtocol;
+        if (protocol == "NEC") {
+            irsend.sendNEC(irCommand.parsedCommandAddress, irCommand.parsedCommandData);
+        } else if (protocol == "NECext") {
+            // Placeholder for the NEC extended protocol
+        } else if (protocol == "NEC42") {
+            // Placeholder for the NEC 42 protocol
+        } else if (protocol == "NEC42ext") {
+            // Placeholder for the NEC 42 extended protocol
+        } else if (protocol == "Samsung32") {
+            irsend.sendSAMSUNG(irCommand.parsedCommandData, 32);
+        } else if (protocol == "RC6") {
+            irsend.sendRC6(irCommand.parsedCommandData);
+        } else if (protocol == "RC5") {
+            irsend.sendRC5(irCommand.parsedCommandData);
+        } else if (protocol == "RC5X") {
+            // Placeholder for the RC5X protocol
+        } else if (protocol == "SIRC") {
+            // Placeholder for the SIRC protocol
+        } else if (protocol == "SIRC15") {
+            // Placeholder for the SIRC 15 protocol
+        } else if (protocol == "SIRC20") {
+            // Placeholder for the SIRC 20 protocol
+        } else if (protocol == "Kaseikyo") {
+            // Placeholder for the Kaseikyo protocol
+        } else if (protocol == "RCA") {
+            // Placeholder for the RCA protocol
+        }
+    }
 }

@@ -10,6 +10,31 @@
 #include <string>
 #include <vector>
 
+typedef enum {
+    raw,
+    parsed
+} IRCommandType;
+
+typedef struct {
+    String deviceType;
+    String deviceBrand;
+    String deviceName;
+    String IRFile;
+} IRDeviceInfo;
+
+typedef struct {
+    IRDeviceInfo deviceInfo;
+    String commandName;
+    IRCommandType commandType;
+    String commandProtocol;
+    uint32_t parsedCommandAddress;
+    uint32_t parsedCommandData;
+    uint32_t rawCommandFrequency;
+    float rawCommandDutyCycle;
+    uint16_t rawCommandLength;
+    std::vector<uint16_t> rawCommandData;
+} IRCommand;
+
 class IRTools {
    private:
     uint16_t kIrLed = 20;
@@ -18,7 +43,7 @@ class IRTools {
     std::vector<String> deviceTypes;
     std::vector<String> deviceBrands;
     std::vector<String> devices;
-    std::vector<String> deviceCommands;
+    std::vector<IRCommand> deviceCommands;
     String deviceType;
     String deviceBrand;
     String devicePath;
@@ -33,8 +58,9 @@ class IRTools {
     std::vector<String> getDeviceBrands();
     void getAvaliableDevices(int deviceBrandIndex);
     std::vector<String> getDevices();
-    void getAvaliableDeviceCommands(String device);
-    std::vector<String> getDeviceCommands();
+    void getAvaliableDeviceCommands(int deviceIndex);
+    std::vector<IRCommand> getDeviceCommands();
+    void sendIRCommand(IRCommand irCommand);
 };
 
 #endif  // IRTOOLS_H
