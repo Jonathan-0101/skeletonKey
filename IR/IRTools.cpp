@@ -217,7 +217,8 @@ void IRTools::sendIRCommand(IRCommand irCommand) {
         // Check the protocol
         String protocol = irCommand.commandProtocol;
         if (protocol == "NEC") {
-            irsend.sendNEC(irCommand.parsedCommandAddress, irCommand.parsedCommandData);
+            uint32_t encodedNEC = irsend.encodeNEC(irCommand.parsedCommandAddress, irCommand.parsedCommandData);
+            irsend.sendNEC(encodedNEC);
         } else if (protocol == "NECext") {
             // Placeholder for the NEC extended protocol
         } else if (protocol == "NEC42") {
@@ -227,11 +228,14 @@ void IRTools::sendIRCommand(IRCommand irCommand) {
         } else if (protocol == "Samsung32") {
             irsend.sendSAMSUNG(irCommand.parsedCommandData, 32);
         } else if (protocol == "RC6") {
-            irsend.sendRC6(irCommand.parsedCommandData);
+            uint64_t encodedRC6 = irsend.encodeRC6(irCommand.parsedCommandAddress, irCommand.parsedCommandData);
+            irsend.sendRC6(encodedRC6);
         } else if (protocol == "RC5") {
-            irsend.sendRC5(irCommand.parsedCommandData);
+            uint16_t encodedRC5 = irsend.encodeRC5(irCommand.parsedCommandAddress, irCommand.parsedCommandData);
+            irsend.sendRC5(encodedRC5);
         } else if (protocol == "RC5X") {
-            // Placeholder for the RC5X protocol
+            uint16_t encodedRC5X = irsend.encodeRC5X(irCommand.parsedCommandAddress, irCommand.parsedCommandData);
+            irsend.sendRC5(encodedRC5X);
         } else if (protocol == "SIRC") {
             // Placeholder for the SIRC protocol
         } else if (protocol == "SIRC15") {

@@ -28,10 +28,27 @@ void setup() {
     irTools = new IRTools(SD);  // Initialize irTools after SD card is ready
 
     irTools->getAvaliableDeviceTypes();
-    irTools->getAvaliableDeviceBrands(44);
-    irTools->getAvaliableDevices(36);
+
+    // std::vector<String> deviceTypes = irTools->getDeviceTypes();
+
+    // for (int i = 0; i < deviceTypes.size(); i++) {
+    //     Serial.printf("%d Device Type : %s\n", i, deviceTypes[i].c_str());
+    // }
+
+    irTools->getAvaliableDeviceBrands(9);
+
+    // std::vector<String> deviceBrands = irTools->getDeviceBrands();
+
+    // for (int i = 0; i < deviceBrands.size(); i++) {
+    //     Serial.printf("%d Device Brand : %s\n", i, deviceBrands[i].c_str());
+    // }
+
+    irTools->getAvaliableDevices(53);
 
     std::vector<String> devices = irTools->getDevices();
+
+    // Print the device name
+    Serial.printf("Device Name : %s\n", devices[0].c_str());
 
     irTools->getAvaliableDeviceCommands(0);
     deviceCommands = irTools->getDeviceCommands();
