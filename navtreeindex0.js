@@ -2,7 +2,6 @@ var NAVTREEINDEX0 =
 {
 "annotated.html":[1,0],
 "classes.html":[1,1],
-"d0/d30/md_README.html":[0],
 "d0/d7e/IRTools_8h.html":[2,0,1,0],
 "d0/d7e/IRTools_8h.html#aa3a28cc7590f34aedf57a47f003b562c":[2,0,1,0,3],
 "d0/d7e/IRTools_8h.html#aa3a28cc7590f34aedf57a47f003b562ca58ee402b69bb1b9fe5f437ab6e82e7d5":[2,0,1,0,3,0],
@@ -58,6 +57,7 @@ var NAVTREEINDEX0 =
 "functions_func.html":[1,2,1],
 "globals.html":[2,1,0],
 "globals_enum.html":[2,1,1],
+"index.html":[0],
 "index.html":[],
 "pages.html":[]
 };
