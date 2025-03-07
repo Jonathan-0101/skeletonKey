@@ -34,6 +34,10 @@ esp_err_t esp_wifi_set_mode(wifi_mode_t mode);
 esp_err_t esp_wifi_start();
 esp_err_t esp_wifi_set_promiscuous(bool en);
 
+/**
+ * @brief Struct to store the MAC header of a Wi-Fi packet
+ *
+ */
 typedef struct {
     unsigned frame_ctrl : 16;
     unsigned duration_id : 16;
@@ -44,11 +48,19 @@ typedef struct {
     uint8_t addr4[6]; /* optional */
 } wifi_ieee80211_mac_hdr_t;
 
+/**
+ * @brief Struct to store the payload of a Wi-Fi packet
+ *
+ */
 typedef struct {
     wifi_ieee80211_mac_hdr_t hdr;
     uint8_t payload[0]; /* network data ended with 4 bytes csum (CRC32) */
 } wifi_ieee80211_packet_t;
 
+/**
+ * @brief Struct to store the information of a 4-way handshake
+ *
+ */
 typedef struct {
     uint8_t ap_mac[6];
     uint8_t sta_mac[6];
@@ -60,6 +72,10 @@ typedef struct {
     uint8_t essid_len;
 } HCCAPX;
 
+/**
+ * @brief Enum to store the type of Wi-Fi packet to capture
+ *
+ */
 typedef enum {
     HANDSHAKE_CAPTURE,
     CLIENT_DETECTION,

@@ -2,6 +2,17 @@
 #ifndef IRTOOLS_H
 #define IRTOOLS_H
 
+/**
+ * @file IRTools.h
+ * @author Jonathan Woolf
+ * @brief Library for IR attack tools
+ * @version 1.0
+ * @date 2025-03-07
+ *
+ * @copyright Copyright (c) 2025
+ *
+ */
+
 #include <Arduino.h>
 #include <IRremoteESP8266.h>
 #include <IRsend.h>
@@ -10,11 +21,19 @@
 #include <string>
 #include <vector>
 
+/**
+ * @brief Enum to store the type of IR command
+ *
+ */
 typedef enum {
     raw,
     parsed
 } IRCommandType;
 
+/**
+ * @brief Struct to store IR device information
+ *
+ */
 typedef struct {
     String deviceType;
     String deviceBrand;
@@ -22,6 +41,10 @@ typedef struct {
     String IRFile;
 } IRDeviceInfo;
 
+/**
+ * @brief Struct to store IR command information
+ *
+ */
 typedef struct {
     IRDeviceInfo deviceInfo;
     String commandName;
@@ -50,16 +73,82 @@ class IRTools {
     String device;
 
    public:
+    /**
+     * @brief Construct a new IRTools object
+     *
+     * @param sdInstance SD instance
+     */
     IRTools(fs::SDFS &sdInstance);
+
+    /**
+     * @brief Function to send a custom raw IR command
+     *
+     * @param data Command data
+     * @param length Command length
+     * @param frequency Command frequency
+     */
     void sendRawIR(uint16_t *data, uint16_t length, uint16_t frequency);
+
+    /**
+     * @brief Get the Avaliable Device Types object
+     *
+     */
     void getAvaliableDeviceTypes();
+
+    /**
+     * @brief Get the Device Types object
+     *
+     * @return std::vector<String>
+     */
     std::vector<String> getDeviceTypes();
+
+    /**
+     * @brief Get the Avaliable Device Brands object
+     *
+     * @param deviceTypeIndex Index of the device type
+     */
     void getAvaliableDeviceBrands(int deviceTypeIndex);
+
+    /**
+     * @brief Get the Device Brands object
+     *
+     * @return std::vector<String>
+     */
     std::vector<String> getDeviceBrands();
+
+    /**
+     * @brief Get the Avaliable Devices object
+     *
+     * @param deviceBrandIndex Index of the device brand
+     */
     void getAvaliableDevices(int deviceBrandIndex);
+
+    /**
+     * @brief Get the Devices object
+     *
+     * @return std::vector<String>
+     */
     std::vector<String> getDevices();
+
+    /**
+     * @brief Get the Avaliable Device Commands object
+     *
+     * @param deviceIndex Index of the device
+     */
     void getAvaliableDeviceCommands(int deviceIndex);
+
+    /**
+     * @brief Get the Device Commands object
+     *
+     * @return std::vector<IRCommand>
+     */
     std::vector<IRCommand> getDeviceCommands();
+
+    /**
+     * @brief Function to send an IR command
+     *
+     * @param irCommand
+     */
     void sendIRCommand(IRCommand irCommand);
 };
 
