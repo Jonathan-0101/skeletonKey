@@ -25,7 +25,9 @@
 var NAVTREE =
 [
   [ "Skeleton Key", "index.html", [
-    [ "IRTools Library development folder", "index.html", null ],
+    [ "IRTools Library development folder", "d2/de1/md_IR_2README.html", null ],
+    [ "PenTestingDevice", "d0/d30/md_README.html", null ],
+    [ "WiFiTools Library development folder", "d8/d36/md_WiFi_2README.html", null ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Structure Index", "classes.html", null ],
