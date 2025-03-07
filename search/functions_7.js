@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['nextchannel_0',['nextChannel',['../d6/d69/classWiFiTools.html#a6834bf8cebae5f22ff21b0ccd3360d92',1,'WiFiTools']]]
+  ['irtools_0',['IRTools',['../da/d24/classIRTools.html#ad594e21762ffadea48e99e06898b6dc1',1,'IRTools']]]
 ];

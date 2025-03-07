@@ -2,9 +2,10 @@ var indexSectionsWithContent =
 {
   0: "abcdfghinprsw",
   1: "hiw",
-  2: "w",
-  3: "abcdfghnprsw",
-  4: "p"
+  2: "iw",
+  3: "abcdfghinprsw",
+  4: "iw",
+  5: "p"
 };
 
 var indexSectionNames =
@@ -13,7 +14,8 @@ var indexSectionNames =
   1: "classes",
   2: "files",
   3: "functions",
-  4: "pages"
+  4: "enums",
+  5: "pages"
 };
 
 var indexSectionLabels =
@@ -22,6 +24,7 @@ var indexSectionLabels =
   1: "Data Structures",
   2: "Files",
   3: "Functions",
-  4: "Pages"
+  4: "Enumerations",
+  5: "Pages"
 };
 
