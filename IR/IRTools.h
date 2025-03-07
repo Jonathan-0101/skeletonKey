@@ -72,6 +72,8 @@ class IRTools {
     String devicePath;
     String device;
 
+    uint16_t jamSignal[2] = {65535, 0};
+
    public:
     /**
      * @brief Construct a new IRTools object
@@ -150,6 +152,13 @@ class IRTools {
      * @param irCommand
      */
     void sendIRCommand(IRCommand irCommand);
+
+    /**
+     * @brief Function to jam IR signals
+     *
+     * @param duration Duration to jam IR signals
+     */
+    void jamIR(int duration);
 };
 
 #endif  // IRTOOLS_H

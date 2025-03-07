@@ -14,7 +14,7 @@ std::vector<IRCommand> deviceCommands;  // Declare deviceCommands globally
 
 void setup() {
     Serial.begin(115200);
-    delay(1000);
+    delay(500);
 
     digitalWrite(42, HIGH);
 
@@ -32,10 +32,6 @@ void setup() {
     irTools->getAvaliableDevices(36);
 
     std::vector<String> devices = irTools->getDevices();
-
-    for (int i = 0; i < devices.size(); i++) {
-        Serial.printf("%d Device : %s\n", i, devices[i].c_str());
-    }
 
     irTools->getAvaliableDeviceCommands(0);
     deviceCommands = irTools->getDeviceCommands();
@@ -61,7 +57,7 @@ void loop() {
         Serial.println("IRTools instance not initialized.");
     }
 
-    delay(5000);
+    delay(100);
 
     // Clear the input
     while (Serial.available() > 0) {

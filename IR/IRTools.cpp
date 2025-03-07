@@ -121,7 +121,7 @@ void IRTools::getAvaliableDeviceCommands(int deviceIndex) {
     devicePath = "/IR/" + deviceType + "/" + deviceBrand + "/" + device;
 
     // DEBUG
-    Serial.printf("Device Path : %s\n", devicePath.c_str());
+    // Serial.printf("Device Path : %s\n", devicePath.c_str());
 
     // Open the device file
     File file = sd->open(devicePath);
@@ -243,5 +243,15 @@ void IRTools::sendIRCommand(IRCommand irCommand) {
         } else if (protocol == "RCA") {
             // Placeholder for the RCA protocol
         }
+    }
+}
+
+void IRTools::jamIR(int duration) {
+    // Get the current time
+    unsigned long startTime = millis();
+
+    while (millis() - startTime < duration * 1000) {
+        irsend.sendRaw(jamSignal, 2, 38);
+        delay(50);
     }
 }
