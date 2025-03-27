@@ -60,7 +60,7 @@ typedef struct {
 
 class IRTools {
    private:
-    uint16_t kIrLed = 20;
+    uint16_t kIrLed = 38;
     IRsend irsend;
     fs::SDFS *sd;
     std::vector<String> deviceTypes;

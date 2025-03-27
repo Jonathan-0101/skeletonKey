@@ -231,8 +231,9 @@ void IRTools::sendIRCommand(IRCommand irCommand) {
             uint64_t encodedRC6 = irsend.encodeRC6(irCommand.parsedCommandAddress, irCommand.parsedCommandData);
             irsend.sendRC6(encodedRC6);
         } else if (protocol == "RC5") {
-            uint16_t encodedRC5 = irsend.encodeRC5(irCommand.parsedCommandAddress, irCommand.parsedCommandData);
-            irsend.sendRC5(encodedRC5);
+            // uint16_t encodedRC5 = irsend.encodeRC5(irCommand.parsedCommandAddress, irCommand.parsedCommandData);
+            // irsend.sendRC5(encodedRC5);
+            irsend.sendRC5(irCommand.parsedCommandAddress, irCommand.parsedCommandData);
         } else if (protocol == "RC5X") {
             uint16_t encodedRC5X = irsend.encodeRC5X(irCommand.parsedCommandAddress, irCommand.parsedCommandData);
             irsend.sendRC5(encodedRC5X);

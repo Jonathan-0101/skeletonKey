@@ -18,6 +18,8 @@ void setup() {
 
     digitalWrite(42, HIGH);
 
+    delay(500);
+
     // Initialize SPI bus and SD card
     SPI.begin(39, 41, 40, 42);
     if (!SD.begin(42)) {
@@ -35,7 +37,7 @@ void setup() {
     //     Serial.printf("%d Device Type : %s\n", i, deviceTypes[i].c_str());
     // }
 
-    irTools->getAvaliableDeviceBrands(9);
+    irTools->getAvaliableDeviceBrands(44);
 
     // std::vector<String> deviceBrands = irTools->getDeviceBrands();
 
@@ -43,7 +45,7 @@ void setup() {
     //     Serial.printf("%d Device Brand : %s\n", i, deviceBrands[i].c_str());
     // }
 
-    irTools->getAvaliableDevices(53);
+    irTools->getAvaliableDevices(36);
 
     std::vector<String> devices = irTools->getDevices();
 

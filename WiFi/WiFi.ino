@@ -9,10 +9,10 @@ void setup() {
     delay(100);
 
     // Call the rickRollBeaconSpam function
-    // wifiTools.rickRollBeaconSpam();
+    wifiTools.rickRollBeaconSpam();
 
     // Call the scanWiFiNetworks function
-    // wifiTools.scanWiFiNetworks();
+    wifiTools.scanWiFiNetworks();
 
     // getAvailableNetworks function
     std::vector<wifi_ap_record_t> availableNetworks = wifiTools.getAvailableNetworks();
@@ -20,22 +20,22 @@ void setup() {
         Serial.printf("Network %d: %s\n", i, availableNetworks[i].ssid);
     }
 
-    Serial.println("Enter the index of the network to find devices of:");
-    while (Serial.available() == 0) {
-        delay(100);
-    }
+    // Serial.println("Enter the index of the network to find devices of:");
+    // while (Serial.available() == 0) {
+    //     delay(100);
+    // }
 
-    int networkIndex = Serial.parseInt();
-    if (networkIndex != -1) {
-        if (networkIndex < 0 || networkIndex >= availableNetworks.size()) {
-            Serial.println("Invalid network index");
-            return;
-        } else {
-            wifiTools.handshakeCapture(NULL, NULL, networkIndex, 30000);
-            // wifiTools.activeHandshakeCapture(NULL, NULL, networkIndex, 30000);
-            // wifiTools.findClients(NULL, NULL, networkIndex, 15000);
-        }
-    }
+    // int networkIndex = Serial.parseInt();
+    // if (networkIndex != -1) {
+    //     if (networkIndex < 0 || networkIndex >= availableNetworks.size()) {
+    //         Serial.println("Invalid network index");
+    //         return;
+    //     } else {
+    //         wifiTools.handshakeCapture(NULL, NULL, networkIndex, 30000);
+    //         // wifiTools.activeHandshakeCapture(NULL, NULL, networkIndex, 30000);
+    //         // wifiTools.findClients(NULL, NULL, networkIndex, 15000);
+    //     }
+    // }
 
     // // scanForClients function
     // wifiTools.scanForClients();
