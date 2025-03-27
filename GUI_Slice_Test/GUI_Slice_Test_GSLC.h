@@ -317,7 +317,7 @@ void InitGUIslice_gen()
 //<InitGUI !End!>
 
 //<Startup !Start!>
-  gslc_GuiRotate(&m_gui, 2);
+  gslc_GuiRotate(&m_gui, 0);
 //<Startup !End!>
 
 }
