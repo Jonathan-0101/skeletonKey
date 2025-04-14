@@ -1,0 +1,291 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <meta name="generator" content="Doxygen 1.9.8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- BEGIN opengraph metadata -->
+    <meta property="og:title" content="Pentestingdevice" />
+    <meta property="og:description"
+        content="BEng Dissertation; Penetration-testing device to highlight security system vulnerabilities." />
+    <meta property="og:url" content="https://jonathan-0101.github.io/PenTestingDevice" />
+    <!-- END opengraph metadata -->
+    <title>Skeleton Key: SubGHzTools Class Reference</title>
+    <link href="tabs.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="dynsections.js"></script>
+    <script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+    <script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+    <script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+    <script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+    <script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+    <script type="text/javascript" src="toggle-alternative-theme.js"></script>
+    <script type="text/javascript">
+        DoxygenAwesomeFragmentCopyButton.init()
+        DoxygenAwesomeDarkModeToggle.init()
+        DoxygenAwesomeParagraphLink.init()
+        DoxygenAwesomeInteractiveToc.init()
+        DoxygenAwesomeTabs.init()
+    </script>
+    <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+    <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+    <link href="doxygen.css" rel="stylesheet" type="text/css" />
+    <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom-alternative.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <!-- https://tholman.com/github-corners/ -->
+    <a href="https://github.com/Jonathan-0101/PenTestingDevice" class="github-corner" title="View source on GitHub"
+        target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 250 250" width="40" height="40"
+            style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+            <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+            <path
+                d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+                fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+            <path
+                d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+                fill="currentColor" class="octo-body"></path>
+        </svg></a>
+    <style>
+        .github-corner:hover .octo-arm {
+            animation: octocat-wave 560ms ease-in-out
+        }
+        @keyframes octocat-wave {
+            0%,
+            100% {
+                transform: rotate(0)
+            }
+            20%,
+            60% {
+                transform: rotate(-25deg)
+            }
+            40%,
+            80% {
+                transform: rotate(10deg)
+            }
+        }
+        @media (max-width:500px) {
+            .github-corner:hover .octo-arm {
+                animation: none
+            }
+            .github-corner .octo-arm {
+                animation: octocat-wave 560ms ease-in-out
+            }
+        }
+    </style>
+    <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+        <div id="titlearea">
+            <table cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr style="height: 56px;">
+                        <td id="projectlogo"><img alt="Logo" src="logo.ico" /></td>
+                        <td id="projectalign" style="padding-left: 0.5em;">
+                            <div id="projectname">Skeleton Key
+                            </div>
+                            <div id="projectbrief">BEng Dissertation; Pen-testing device</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- end header part --><!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classSubGHzTools.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a>  </div>
+  <div class="headertitle"><div class="title">SubGHzTools Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ab3cf817618745499f01236255218675f" id="r_ab3cf817618745499f01236255218675f"><td class="memItemLeft" align="right" valign="top"><a id="ab3cf817618745499f01236255218675f" name="ab3cf817618745499f01236255218675f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> ()</td></tr>
+<tr class="separator:ab3cf817618745499f01236255218675f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cbaa2629d9fd9fcc4e7ab4bd650dbd8" id="r_a9cbaa2629d9fd9fcc4e7ab4bd650dbd8"><td class="memItemLeft" align="right" valign="top"><a id="a9cbaa2629d9fd9fcc4e7ab4bd650dbd8" name="a9cbaa2629d9fd9fcc4e7ab4bd650dbd8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>startJamming</b> ()</td></tr>
+<tr class="separator:a9cbaa2629d9fd9fcc4e7ab4bd650dbd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3e4f4afaeec6bfcd78ede5496c3038a" id="r_ae3e4f4afaeec6bfcd78ede5496c3038a"><td class="memItemLeft" align="right" valign="top"><a id="ae3e4f4afaeec6bfcd78ede5496c3038a" name="ae3e4f4afaeec6bfcd78ede5496c3038a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>stopJamming</b> ()</td></tr>
+<tr class="separator:ae3e4f4afaeec6bfcd78ede5496c3038a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecc3bda6123ddd1f5996a231058c0a2d" id="r_aecc3bda6123ddd1f5996a231058c0a2d"><td class="memItemLeft" align="right" valign="top"><a id="aecc3bda6123ddd1f5996a231058c0a2d" name="aecc3bda6123ddd1f5996a231058c0a2d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>runAction</b> ()</td></tr>
+<tr class="separator:aecc3bda6123ddd1f5996a231058c0a2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae99b05fb1fd856282226fd05d5a433d0" id="r_ae99b05fb1fd856282226fd05d5a433d0"><td class="memItemLeft" align="right" valign="top"><a id="ae99b05fb1fd856282226fd05d5a433d0" name="ae99b05fb1fd856282226fd05d5a433d0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setFrequency</b> (float freq)</td></tr>
+<tr class="separator:ae99b05fb1fd856282226fd05d5a433d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a533c73d8a62c472c58c36ea5f27f9e97" id="r_a533c73d8a62c472c58c36ea5f27f9e97"><td class="memItemLeft" align="right" valign="top"><a id="a533c73d8a62c472c58c36ea5f27f9e97" name="a533c73d8a62c472c58c36ea5f27f9e97"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>captureRaw</b> (int sampleInterval)</td></tr>
+<tr class="separator:a533c73d8a62c472c58c36ea5f27f9e97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a103eb93c5326b395aded3fa8cf686b34" id="r_a103eb93c5326b395aded3fa8cf686b34"><td class="memItemLeft" align="right" valign="top"><a id="a103eb93c5326b395aded3fa8cf686b34" name="a103eb93c5326b395aded3fa8cf686b34"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>transmitRaw</b> (int sampleInterval)</td></tr>
+<tr class="separator:a103eb93c5326b395aded3fa8cf686b34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a69b157106de2c87ec89936b8fd2ab2e0" id="r_a69b157106de2c87ec89936b8fd2ab2e0"><td class="memItemLeft" align="right" valign="top"><a id="a69b157106de2c87ec89936b8fd2ab2e0" name="a69b157106de2c87ec89936b8fd2ab2e0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>jammer</b> ()</td></tr>
+<tr class="separator:a69b157106de2c87ec89936b8fd2ab2e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a365d97f67305f73be6db9730fb5f7e70" id="r_a365d97f67305f73be6db9730fb5f7e70"><td class="memItemLeft" align="right" valign="top"><a id="a365d97f67305f73be6db9730fb5f7e70" name="a365d97f67305f73be6db9730fb5f7e70"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>configureModule</b> ()</td></tr>
+<tr class="separator:a365d97f67305f73be6db9730fb5f7e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ab67f872147a29bb34d1180a4b613da98" id="r_ab67f872147a29bb34d1180a4b613da98"><td class="memItemLeft" align="right" valign="top"><a id="ab67f872147a29bb34d1180a4b613da98" name="ab67f872147a29bb34d1180a4b613da98"></a>
+fs::SDFS *&#160;</td><td class="memItemRight" valign="bottom"><b>sd</b></td></tr>
+<tr class="separator:ab67f872147a29bb34d1180a4b613da98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37e2ddde9b7731b7614ed05512df8f33" id="r_a37e2ddde9b7731b7614ed05512df8f33"><td class="memItemLeft" align="right" valign="top"><a id="a37e2ddde9b7731b7614ed05512df8f33" name="a37e2ddde9b7731b7614ed05512df8f33"></a>
+byte&#160;</td><td class="memItemRight" valign="bottom"><b>CC1101_A_sck</b> = 39</td></tr>
+<tr class="separator:a37e2ddde9b7731b7614ed05512df8f33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32d9a13eb38c420bd8623d26e503307e" id="r_a32d9a13eb38c420bd8623d26e503307e"><td class="memItemLeft" align="right" valign="top"><a id="a32d9a13eb38c420bd8623d26e503307e" name="a32d9a13eb38c420bd8623d26e503307e"></a>
+byte&#160;</td><td class="memItemRight" valign="bottom"><b>CC1101_A_miso</b> = 41</td></tr>
+<tr class="separator:a32d9a13eb38c420bd8623d26e503307e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04a727cd88192f8e417bc1e8d0a6fb60" id="r_a04a727cd88192f8e417bc1e8d0a6fb60"><td class="memItemLeft" align="right" valign="top"><a id="a04a727cd88192f8e417bc1e8d0a6fb60" name="a04a727cd88192f8e417bc1e8d0a6fb60"></a>
+byte&#160;</td><td class="memItemRight" valign="bottom"><b>CC1101_A_mosi</b> = 40</td></tr>
+<tr class="separator:a04a727cd88192f8e417bc1e8d0a6fb60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6eaf46fc29126a0a6148a4cafd4357ad" id="r_a6eaf46fc29126a0a6148a4cafd4357ad"><td class="memItemLeft" align="right" valign="top"><a id="a6eaf46fc29126a0a6148a4cafd4357ad" name="a6eaf46fc29126a0a6148a4cafd4357ad"></a>
+byte&#160;</td><td class="memItemRight" valign="bottom"><b>CC1101_A_ss</b> = 8</td></tr>
+<tr class="separator:a6eaf46fc29126a0a6148a4cafd4357ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a126531abc33e6491e1390e6e0fd8e488" id="r_a126531abc33e6491e1390e6e0fd8e488"><td class="memItemLeft" align="right" valign="top"><a id="a126531abc33e6491e1390e6e0fd8e488" name="a126531abc33e6491e1390e6e0fd8e488"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>CC1101_A_gdo0</b> = 9</td></tr>
+<tr class="separator:a126531abc33e6491e1390e6e0fd8e488"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bb8b386d2c2426f95de3ebc16701f7f" id="r_a9bb8b386d2c2426f95de3ebc16701f7f"><td class="memItemLeft" align="right" valign="top"><a id="a9bb8b386d2c2426f95de3ebc16701f7f" name="a9bb8b386d2c2426f95de3ebc16701f7f"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>CC1101_A_RF_Switch</b> = 10</td></tr>
+<tr class="separator:a9bb8b386d2c2426f95de3ebc16701f7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a090f292904c991d1ad7886e8a6e1f8b4" id="r_a090f292904c991d1ad7886e8a6e1f8b4"><td class="memItemLeft" align="right" valign="top"><a id="a090f292904c991d1ad7886e8a6e1f8b4" name="a090f292904c991d1ad7886e8a6e1f8b4"></a>
+byte&#160;</td><td class="memItemRight" valign="bottom"><b>CC1101_B_sck</b> = 17</td></tr>
+<tr class="separator:a090f292904c991d1ad7886e8a6e1f8b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5eb9ab014813cdf4832e3fce5fb47f10" id="r_a5eb9ab014813cdf4832e3fce5fb47f10"><td class="memItemLeft" align="right" valign="top"><a id="a5eb9ab014813cdf4832e3fce5fb47f10" name="a5eb9ab014813cdf4832e3fce5fb47f10"></a>
+byte&#160;</td><td class="memItemRight" valign="bottom"><b>CC1101_B_miso</b> = 15</td></tr>
+<tr class="separator:a5eb9ab014813cdf4832e3fce5fb47f10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab476c24c97607440c2c3253b38b318fa" id="r_ab476c24c97607440c2c3253b38b318fa"><td class="memItemLeft" align="right" valign="top"><a id="ab476c24c97607440c2c3253b38b318fa" name="ab476c24c97607440c2c3253b38b318fa"></a>
+byte&#160;</td><td class="memItemRight" valign="bottom"><b>CC1101_B_mosi</b> = 16</td></tr>
+<tr class="separator:ab476c24c97607440c2c3253b38b318fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f21009a0d2237085ca46205f261021c" id="r_a8f21009a0d2237085ca46205f261021c"><td class="memItemLeft" align="right" valign="top"><a id="a8f21009a0d2237085ca46205f261021c" name="a8f21009a0d2237085ca46205f261021c"></a>
+byte&#160;</td><td class="memItemRight" valign="bottom"><b>CC1101_B_ss</b> = 3</td></tr>
+<tr class="separator:a8f21009a0d2237085ca46205f261021c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b3a8b09bf6d7e91d5e2ce395a8a21c7" id="r_a9b3a8b09bf6d7e91d5e2ce395a8a21c7"><td class="memItemLeft" align="right" valign="top"><a id="a9b3a8b09bf6d7e91d5e2ce395a8a21c7" name="a9b3a8b09bf6d7e91d5e2ce395a8a21c7"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>CC1101_B_gdo0</b> = 11</td></tr>
+<tr class="separator:a9b3a8b09bf6d7e91d5e2ce395a8a21c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d5ce4b540e9fdfde1aebebc860ce915" id="r_a2d5ce4b540e9fdfde1aebebc860ce915"><td class="memItemLeft" align="right" valign="top"><a id="a2d5ce4b540e9fdfde1aebebc860ce915" name="a2d5ce4b540e9fdfde1aebebc860ce915"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>CC1101_B_RF_Switch</b> = 12</td></tr>
+<tr class="separator:a2d5ce4b540e9fdfde1aebebc860ce915"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b992782f114fc5da99838ae500d6bef" id="r_a5b992782f114fc5da99838ae500d6bef"><td class="memItemLeft" align="right" valign="top"><a id="a5b992782f114fc5da99838ae500d6bef" name="a5b992782f114fc5da99838ae500d6bef"></a>
+byte&#160;</td><td class="memItemRight" valign="bottom"><b>CC1101_A_sendingbuffer</b> [CCBUFFERSIZE] = {0}</td></tr>
+<tr class="separator:a5b992782f114fc5da99838ae500d6bef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a481856b692b12dda6e013e4169d98539" id="r_a481856b692b12dda6e013e4169d98539"><td class="memItemLeft" align="right" valign="top"><a id="a481856b692b12dda6e013e4169d98539" name="a481856b692b12dda6e013e4169d98539"></a>
+byte&#160;</td><td class="memItemRight" valign="bottom"><b>CC1101_B_sendingbuffer</b> [CCBUFFERSIZE] = {0}</td></tr>
+<tr class="separator:a481856b692b12dda6e013e4169d98539"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa905d23616daf49660e9d870d78fae4" id="r_afa905d23616daf49660e9d870d78fae4"><td class="memItemLeft" align="right" valign="top"><a id="afa905d23616daf49660e9d870d78fae4" name="afa905d23616daf49660e9d870d78fae4"></a>
+byte&#160;</td><td class="memItemRight" valign="bottom"><b>CC1101_A_receivingbuffer</b> [CCBUFFERSIZE] = {0}</td></tr>
+<tr class="separator:afa905d23616daf49660e9d870d78fae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a653d97a109fcdaae03238f3b41e57348" id="r_a653d97a109fcdaae03238f3b41e57348"><td class="memItemLeft" align="right" valign="top"><a id="a653d97a109fcdaae03238f3b41e57348" name="a653d97a109fcdaae03238f3b41e57348"></a>
+byte&#160;</td><td class="memItemRight" valign="bottom"><b>CC1101_B_receivingbuffer</b> [CCBUFFERSIZE] = {0}</td></tr>
+<tr class="separator:a653d97a109fcdaae03238f3b41e57348"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9542515852cef5cdaca76763619c91df" id="r_a9542515852cef5cdaca76763619c91df"><td class="memItemLeft" align="right" valign="top"><a id="a9542515852cef5cdaca76763619c91df" name="a9542515852cef5cdaca76763619c91df"></a>
+byte&#160;</td><td class="memItemRight" valign="bottom"><b>CC1101_A_bigrecordingbuffer</b> [RECORDINGBUFFERSIZE] = {0}</td></tr>
+<tr class="separator:a9542515852cef5cdaca76763619c91df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82c82a1a35627ad00b8fbd9a8565fc1d" id="r_a82c82a1a35627ad00b8fbd9a8565fc1d"><td class="memItemLeft" align="right" valign="top"><a id="a82c82a1a35627ad00b8fbd9a8565fc1d" name="a82c82a1a35627ad00b8fbd9a8565fc1d"></a>
+byte&#160;</td><td class="memItemRight" valign="bottom"><b>CC1101_B_bigrecordingbuffer</b> [RECORDINGBUFFERSIZE] = {0}</td></tr>
+<tr class="separator:a82c82a1a35627ad00b8fbd9a8565fc1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51fb8e2541f49b6ff92c70d74551786b" id="r_a51fb8e2541f49b6ff92c70d74551786b"><td class="memItemLeft" align="right" valign="top"><a id="a51fb8e2541f49b6ff92c70d74551786b" name="a51fb8e2541f49b6ff92c70d74551786b"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>jammingMode</b> = 0</td></tr>
+<tr class="separator:a51fb8e2541f49b6ff92c70d74551786b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0451f4afcc5055b3e7fb9a796fbce831" id="r_a0451f4afcc5055b3e7fb9a796fbce831"><td class="memItemLeft" align="right" valign="top"><a id="a0451f4afcc5055b3e7fb9a796fbce831" name="a0451f4afcc5055b3e7fb9a796fbce831"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>defaultFrequency</b> = 433.92</td></tr>
+<tr class="separator:a0451f4afcc5055b3e7fb9a796fbce831"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1a32a0809ba51c10177454ddde11ef3" id="r_af1a32a0809ba51c10177454ddde11ef3"><td class="memItemLeft" align="right" valign="top"><a id="af1a32a0809ba51c10177454ddde11ef3" name="af1a32a0809ba51c10177454ddde11ef3"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>frequency</b> = 433.92</td></tr>
+<tr class="separator:af1a32a0809ba51c10177454ddde11ef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aded7da55bd1ebef2be1a5d2a58b17b11" id="r_aded7da55bd1ebef2be1a5d2a58b17b11"><td class="memItemLeft" align="right" valign="top"><a id="aded7da55bd1ebef2be1a5d2a58b17b11" name="aded7da55bd1ebef2be1a5d2a58b17b11"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>samplingInterval</b> = 1</td></tr>
+<tr class="separator:aded7da55bd1ebef2be1a5d2a58b17b11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92243f213752bafed016ad513e23ef79" id="r_a92243f213752bafed016ad513e23ef79"><td class="memItemLeft" align="right" valign="top"><a id="a92243f213752bafed016ad513e23ef79" name="a92243f213752bafed016ad513e23ef79"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>setting</b></td></tr>
+<tr class="separator:a92243f213752bafed016ad513e23ef79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a853c6f0c99358046310eb2938bf8ed14" id="r_a853c6f0c99358046310eb2938bf8ed14"><td class="memItemLeft" align="right" valign="top"><a id="a853c6f0c99358046310eb2938bf8ed14" name="a853c6f0c99358046310eb2938bf8ed14"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>setting2</b></td></tr>
+<tr class="separator:a853c6f0c99358046310eb2938bf8ed14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>SubGHz/<a class="el" href="SubGHzTools_8h_source.html">SubGHzTools.h</a></li>
+<li>SubGHz/<b>SubGHzTools.cpp</b></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="classSubGHzTools.html">SubGHzTools</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

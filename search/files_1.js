@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wifitools_2eh_0',['WiFiTools.h',['../WiFi_2WiFiTools_8h.html',1,'']]]
+  ['subghztools_2eh_0',['SubGHzTools.h',['../SubGHzTools_8h.html',1,'']]]
 ];
