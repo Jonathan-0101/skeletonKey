@@ -195,10 +195,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>scanForClients</b> ()
 <tr class="memitem:aac6897d659d1b6ec4ecf59a85f582b88" id="r_aac6897d659d1b6ec4ecf59a85f582b88"><td class="memItemLeft" align="right" valign="top"><a id="aac6897d659d1b6ec4ecf59a85f582b88" name="aac6897d659d1b6ec4ecf59a85f582b88"></a>
 std::vector&lt; wifi_sta_info_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getWiFiClients</b> ()</td></tr>
 <tr class="separator:aac6897d659d1b6ec4ecf59a85f582b88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d8e5877a35094fa55d8b4a3ebab2259" id="r_a1d8e5877a35094fa55d8b4a3ebab2259"><td class="memItemLeft" align="right" valign="top"><a id="a1d8e5877a35094fa55d8b4a3ebab2259" name="a1d8e5877a35094fa55d8b4a3ebab2259"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>WiFiTools</b> ()</td></tr>
-<tr class="memdesc:a1d8e5877a35094fa55d8b4a3ebab2259"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Wi Fi Tools object. <br /></td></tr>
-<tr class="separator:a1d8e5877a35094fa55d8b4a3ebab2259"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0aa10461f142211efe14bcfcbe5c85b0" id="r_a0aa10461f142211efe14bcfcbe5c85b0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWiFiTools.html#a0aa10461f142211efe14bcfcbe5c85b0">WiFiTools</a> (fs::SDFS &amp;sdInstance)</td></tr>
+<tr class="memdesc:a0aa10461f142211efe14bcfcbe5c85b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Wi Fi Tools object.  <br /></td></tr>
+<tr class="separator:a0aa10461f142211efe14bcfcbe5c85b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6834bf8cebae5f22ff21b0ccd3360d92" id="r_a6834bf8cebae5f22ff21b0ccd3360d92"><td class="memItemLeft" align="right" valign="top"><a id="a6834bf8cebae5f22ff21b0ccd3360d92" name="a6834bf8cebae5f22ff21b0ccd3360d92"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>nextChannel</b> ()</td></tr>
 <tr class="memdesc:a6834bf8cebae5f22ff21b0ccd3360d92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to change the Wi-Fi channel. <br /></td></tr>
@@ -338,10 +337,40 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>targetChannel</b><
 <tr class="memitem:ac413058a2450f063a2493b5f58fcd9cf" id="r_ac413058a2450f063a2493b5f58fcd9cf"><td class="memItemLeft" align="right" valign="top"><a id="ac413058a2450f063a2493b5f58fcd9cf" name="ac413058a2450f063a2493b5f58fcd9cf"></a>
 <a class="el" href="WiFi_2WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">wifi_packet_flag</a>&#160;</td><td class="memItemRight" valign="bottom"><b>packetScanFlag</b></td></tr>
 <tr class="separator:ac413058a2450f063a2493b5f58fcd9cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f8eec45d24e6dcd2c26177a93d34fa1" id="r_a0f8eec45d24e6dcd2c26177a93d34fa1"><td class="memItemLeft" align="right" valign="top"><a id="a0f8eec45d24e6dcd2c26177a93d34fa1" name="a0f8eec45d24e6dcd2c26177a93d34fa1"></a>
+fs::SDFS *&#160;</td><td class="memItemRight" valign="bottom"><b>sd</b></td></tr>
+<tr class="separator:a0f8eec45d24e6dcd2c26177a93d34fa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c9977f225907d3797eaf7848b5b72d8" id="r_a5c9977f225907d3797eaf7848b5b72d8"><td class="memItemLeft" align="right" valign="top"><a id="a5c9977f225907d3797eaf7848b5b72d8" name="a5c9977f225907d3797eaf7848b5b72d8"></a>
 std::vector&lt; uint8_t * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>detectedClients</b></td></tr>
 <tr class="separator:a5c9977f225907d3797eaf7848b5b72d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a0aa10461f142211efe14bcfcbe5c85b0" name="a0aa10461f142211efe14bcfcbe5c85b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0aa10461f142211efe14bcfcbe5c85b0">&#9670;&#160;</a></span>WiFiTools()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">WiFiTools::WiFiTools </td>
+          <td>(</td>
+          <td class="paramtype">fs::SDFS &amp;&#160;</td>
+          <td class="paramname"><em>sdInstance</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new Wi Fi Tools object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sdInstance</td><td>SD instance </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a2be73c0a4df321522e4b99c96790a3e7" name="a2be73c0a4df321522e4b99c96790a3e7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2be73c0a4df321522e4b99c96790a3e7">&#9670;&#160;</a></span>activeHandshakeCapture()</h2>

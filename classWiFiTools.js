@@ -1,6 +1,6 @@
 var classWiFiTools =
 [
-    [ "WiFiTools", "classWiFiTools.html#a1d8e5877a35094fa55d8b4a3ebab2259", null ],
+    [ "WiFiTools", "classWiFiTools.html#a0aa10461f142211efe14bcfcbe5c85b0", null ],
     [ "activeHandshakeCapture", "classWiFiTools.html#a2be73c0a4df321522e4b99c96790a3e7", null ],
     [ "beaconSpamSetup", "classWiFiTools.html#a1bb65b4835a3c0d70dbc8a1aa6320a6b", null ],
     [ "clearFoundWiFiNetworks", "classWiFiTools.html#a3722aae8c3032c40d6a52fe299b3b4ca", null ],
