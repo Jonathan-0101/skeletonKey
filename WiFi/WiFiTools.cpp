@@ -1,5 +1,6 @@
 #include "WiFiTools.h"
 
+#include <SD.h>
 #include <WiFi.h>
 
 #include <vector>
@@ -13,6 +14,7 @@
 #include "freertos/FreeRTOS.h"
 #include "nvs_flash.h"
 
+// Forward declarations of ESP-IDF functions
 esp_err_t esp_wifi_set_channel(uint8_t primary, wifi_second_chan_t second);
 esp_err_t esp_wifi_80211_tx(wifi_interface_t ifx, const void* buffer, int len, bool en_sys_seq);
 esp_err_t esp_wifi_set_storage(wifi_storage_t storage);
@@ -29,9 +31,10 @@ extern "C" int ieee80211_raw_frame_sanity_check(int32_t arg, int32_t arg2, int32
 }
 
 // Constructor
-WiFiTools::WiFiTools() {
-    // Empty constructor
+WiFiTools::WiFiTools(fs::SDFS& sdInstance) {
+    // Initialize the Wi-Fi configuration
     globalWiFiToolsInstance = this;
+    sd = &sdInstance;
 }
 
 void WiFiTools::beaconSpamSetup() {
