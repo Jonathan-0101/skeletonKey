@@ -13,9 +13,9 @@ SubGHzTools::SubGHzTools() {
 
 void SubGHzTools::configureModule() {
     // Main part to tune CC1101 with proper frequency, modulation and encoding
-    ELECHOUSE_cc1101.Init();                 // must be set to initialize the cc1101!
-    ELECHOUSE_cc1101.setCCMode(1);           // set config for internal transmission mode. value 0 is for RAW recording/replaying
-    ELECHOUSE_cc1101.setModulation(2);       // set modulation mode. 0 = 2-FSK, 1 = GFSK, 2 = ASK/OOK, 3 = 4-FSK, 4 = MSK.
+    ELECHOUSE_cc1101.Init();                 // Must be set to initialize the cc1101!
+    ELECHOUSE_cc1101.setCCMode(1);           // Set config for internal transmission mode. value 0 is for RAW recording/replaying
+    ELECHOUSE_cc1101.setModulation(2);       // Set modulation mode. 0 = 2-FSK, 1 = GFSK, 2 = ASK/OOK, 3 = 4-FSK, 4 = MSK.
     ELECHOUSE_cc1101.setMHZ(433.92);         // Here you can set your basic frequency. The lib calculates the frequency automatically (default = 433.92).The cc1101 can: 300-348 MHZ, 387-464MHZ and 779-928MHZ. Read More info from datasheet.
     ELECHOUSE_cc1101.setDeviation(47.60);    // Set the Frequency deviation in kHz. Value from 1.58 to 380.85. Default is 47.60 kHz.
     ELECHOUSE_cc1101.setChannel(0);          // Set the Channelnumber from 0 to 255. Default is cahnnel 0.
@@ -76,7 +76,7 @@ void SubGHzTools::init() {
     ELECHOUSE_cc1101.setModul(0);
 
     Serial.println("Initialised");
-    if (ELECHOUSE_cc1101.getCC1101()) {  // Check the CC1101 Spi connection.
+    if (ELECHOUSE_cc1101.getCC1101()) {
         Serial.println("cc1101 initialized. Connection OK");
     } else {
         Serial.println("cc1101 connection error! check the wiring.");
@@ -84,17 +84,20 @@ void SubGHzTools::init() {
 }
 
 void SubGHzTools::jammer() {
-    // populate cc1101 sending buffer with random values
+    // Populate cc1101 sending buffer with random values
     for (int i = 0; i < 60; i++) {
         CC1101_A_sendingbuffer[i] = (byte)random(255);
     };
-    // send these data to radio over CC1101
+
+    // Send these data to radio over CC1101
     ELECHOUSE_cc1101.SendData(CC1101_A_sendingbuffer, 60);
 }
 
 void SubGHzTools::startJamming() {
-    // Set jamming mode to 1
+    // Set the required flags for jamming mode
     jammingMode = 1;
+    currentMode = JAMMER;
+
     // Call the jammer function
     jammer();
 }
@@ -102,11 +105,12 @@ void SubGHzTools::startJamming() {
 void SubGHzTools::stopJamming() {
     // Set jamming mode to 0
     jammingMode = 0;
+    currentMode = IDLE;
 }
 
 void SubGHzTools::runAction() {
     // Check if jamming mode is enabled
-    if (jammingMode == 1) {
+    if (currentMode == JAMMER) {
         // Call the jammer function
         jammer();
     }
@@ -118,7 +122,7 @@ void SubGHzTools::setFrequency(float freq) {
         Serial.println("Frequency is valid");
     } else {
         Serial.println("Frequency is invalid, setting to default frequency");
-        freq = defaultFrequency;  // Set to default frequency if invalid
+        freq = defaultFrequency;
     }
 
     // Set the frequency to the specified value
@@ -128,81 +132,71 @@ void SubGHzTools::setFrequency(float freq) {
 }
 
 void SubGHzTools::captureRaw(int sampleInterval = 1) {
-    Serial.println("Capturing RAW data from CC1101 module...");
-
     // Capture raw data from the CC1101 module
     setting = sampleInterval;
 
-    // setup async mode on CC1101 with GDO0 pin processing
+    Serial.println("Capturing RAW data from CC1101 module...");
+
+    // Setup async mode on CC1101 with GDO0 pin processing
     ELECHOUSE_cc1101.setCCMode(0);
     ELECHOUSE_cc1101.setPktFormat(3);
     ELECHOUSE_cc1101.SetRx();
 
-    // start recording to the buffer with bitbanging of GDO0 pin state
+    // Start recording to the buffer with bitbanging of GDO0 pin state
     Serial.println("Waiting for radio signal to start RAW recording...");
     pinMode(CC1101_A_gdo0, INPUT);
-
-    // this is only for ESP32 boards because they are getting some noise on the beginning
     setting2 = digitalRead(CC1101_A_gdo0);
     delayMicroseconds(1000);
 
-    // waiting for some data first or serial port signal
-    // while (!Serial.available() ||  (digitalRead(gdo0) == LOW) );
+    // Waiting for some data first or serial port signal
     while (digitalRead(CC1101_A_gdo0) == LOW);
 
-    // start recording to the buffer with bitbanging of GDO0 pin state
+    // Start recording to the buffer with bitbanging of GDO0 pin state
     Serial.println("Starting RAW recording to the buffer...");
 
     for (int i = 0; i < RECORDINGBUFFERSIZE; i++) {
         byte receivedbyte = 0;
-        for (int j = 7; j > -1; j--)  // 8 bits in a byte
-        {
-            bitWrite(receivedbyte, j, digitalRead(CC1101_A_gdo0));  // Capture GDO0 state into the byte
-            delayMicroseconds(setting);                             // delay for selected sampling interval
+        for (int j = 7; j > -1; j--) {
+            bitWrite(receivedbyte, j, digitalRead(CC1101_A_gdo0));
+            delayMicroseconds(setting);
         };
-        // store the output into recording buffer
+
+        // Store the output into recording buffer
         CC1101_A_bigrecordingbuffer[i] = receivedbyte;
     }
+
     Serial.println("Recording RAW data complete.");
-    // setting normal pkt format again
+
+    // Setting normal pkt format again
     ELECHOUSE_cc1101.setCCMode(1);
     ELECHOUSE_cc1101.setPktFormat(0);
     ELECHOUSE_cc1101.SetRx();
-
-    // DEBUG: print the recorded data to the serial port
-    Serial.println("Recorded RAW data:");
-    for (int i = 0; i < RECORDINGBUFFERSIZE; i++) {
-        Serial.print(CC1101_A_bigrecordingbuffer[i], HEX);  // Print each byte in hexadecimal format
-        Serial.print(" ");
-    }
 }
 
 void SubGHzTools::transmitRaw(int sampleInterval = 1) {
-    Serial.println("Transmitting RAW data from CC1101 module...");
-
     // Transmit raw data from the CC1101 module
     setting = sampleInterval;
 
-    // setup async mode on CC1101 and go into TX mode
-    // with GDO0 pin processing
+    // Setup async mode on CC1101 and go into TX mode with GDO0 pin processing
     ELECHOUSE_cc1101.setCCMode(0);
     ELECHOUSE_cc1101.setPktFormat(3);
     ELECHOUSE_cc1101.SetTx();
-    // start replaying GDO0 bit state from data in the buffer with bitbanging
+
+    // Start replaying GDO0 bit state from data in the buffer with bitbanging
     Serial.println("Replaying RAW data from the buffer...");
     pinMode(CC1101_A_gdo0, OUTPUT);
 
     for (int i = 1; i < RECORDINGBUFFERSIZE; i++) {
         byte receivedbyte = CC1101_A_bigrecordingbuffer[i];
-        for (int j = 7; j > -1; j--)  // 8 bits in a byte
-        {
-            digitalWrite(CC1101_A_gdo0, bitRead(receivedbyte, j));  // Set GDO0 according to recorded byte
-            delayMicroseconds(setting);                             // delay for selected sampling interval
+        for (int j = 7; j > -1; j--) {
+            digitalWrite(CC1101_A_gdo0, bitRead(receivedbyte, j));
+            delayMicroseconds(setting);
         };
     }
 
     Serial.print("Replaying RAW data complete.");
-    // setting normal pkt format again
+
+    // Setting normal pkt format again
     ELECHOUSE_cc1101.setCCMode(1);
     ELECHOUSE_cc1101.setPktFormat(0);
     ELECHOUSE_cc1101.SetTx();

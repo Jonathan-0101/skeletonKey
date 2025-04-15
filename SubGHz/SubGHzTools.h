@@ -21,6 +21,7 @@
 #define CCBUFFERSIZE 64
 
 typedef enum {
+    IDLE,
     CAPTURE_RAW,
     TRANSMIT_RAW,
     JAMMER
@@ -59,12 +60,14 @@ class SubGHzTools {
     float frequency = 433.92;
     int samplingInterval = 1;
     int setting, setting2;
+    SubGHzTools_flag currentMode = IDLE;
 
     /**
      * @brief Function to configure the CC1101 module
      *
      */
-    void configureModule();
+    void
+    configureModule();
 
     /**
      * @brief Jamming function for the CC1101 module
