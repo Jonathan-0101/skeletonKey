@@ -1,4 +1,4 @@
 var SubGHzTools_8h =
 [
-    [ "SubGHzTools", "classSubGHzTools.html", null ]
+    [ "SubGHzTools", "classSubGHzTools.html", "classSubGHzTools" ]
 ];
