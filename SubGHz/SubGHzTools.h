@@ -60,17 +60,68 @@ class SubGHzTools {
     int samplingInterval = 1;
     int setting, setting2;
 
-    void jammer();
+    /**
+     * @brief Function to configure the CC1101 module
+     *
+     */
     void configureModule();
 
+    /**
+     * @brief Jamming function for the CC1101 module
+     *
+     */
+    void jammer();
+
    public:
+    /**
+     * @brief Construct a new SubGHz Tools object
+     *
+     */
     SubGHzTools();
+
+    /**
+     * @brief Initialisation of the SubGHzTools object
+     *
+     */
     void init();
+
+    /**
+     * @brief Enable jamming with the CC1101 module
+     *
+     */
     void startJamming();
+
+    /**
+     * @brief Disable jamming with the CC1101 module
+     *
+     */
     void stopJamming();
+
+    /**
+     * @brief Run the action based on the current mode (jamming, capturing, or transmitting)
+     *
+     */
     void runAction();
+
+    /**
+     * @brief Set the frequency for the CC1101 module
+     *
+     * @param freq Frequency in MHz
+     */
     void setFrequency(float freq);
+
+    /**
+     * @brief Capture raw data from the CC1101 module
+     *
+     * @param sampleInterval Sampling interval in microseconds
+     */
     void captureRaw(int sampleInterval);
+
+    /**
+     * @brief Transmit raw data from the CC1101 module
+     *
+     * @param sampleInterval Sampling interval in microseconds
+     */
     void transmitRaw(int sampleInterval);
 };
 
