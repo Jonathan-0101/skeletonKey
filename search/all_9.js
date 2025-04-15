@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['library_20development_20folder_0',['library development folder',['../md_IR_2README.html',1,'IRTools Library development folder'],['../md_WiFi_2README.html',1,'WiFiTools Library development folder']]]
+  ['nextchannel_0',['nextChannel',['../classWiFiTools.html#a6834bf8cebae5f22ff21b0ccd3360d92',1,'WiFiTools']]]
 ];

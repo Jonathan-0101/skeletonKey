@@ -1,12 +1,4 @@
 var searchData=
 [
-  ['scanwifinetworks_0',['scanWiFiNetworks',['../classWiFiTools.html#a434b1b80009f52dd46bb9f26c7b17488',1,'WiFiTools']]],
-  ['senddeauthpacket_1',['sendDeauthPacket',['../classWiFiTools.html#a4496beddfc24492abda018e82a581dac',1,'WiFiTools']]],
-  ['sendircommand_2',['sendIRCommand',['../classIRTools.html#a3f33ba5781572c4845209db65664011e',1,'IRTools']]],
-  ['sendrawir_3',['sendRawIR',['../classIRTools.html#abf79bbb13c7f549edf20dbb5af2ad5f7',1,'IRTools']]],
-  ['setfrequency_4',['setFrequency',['../classSubGHzTools.html#ae99b05fb1fd856282226fd05d5a433d0',1,'SubGHzTools']]],
-  ['startjamming_5',['startJamming',['../classSubGHzTools.html#a9cbaa2629d9fd9fcc4e7ab4bd650dbd8',1,'SubGHzTools']]],
-  ['stopjamming_6',['stopJamming',['../classSubGHzTools.html#ae3e4f4afaeec6bfcd78ede5496c3038a',1,'SubGHzTools']]],
-  ['subghztools_7',['subghztools',['../classSubGHzTools.html',1,'SubGHzTools'],['../classSubGHzTools.html#a10c40707fb3475aba4a4610651239af5',1,'SubGHzTools::SubGHzTools()']]],
-  ['subghztools_2eh_8',['SubGHzTools.h',['../SubGHzTools_8h.html',1,'']]]
+  ['transmitraw_0',['transmitRaw',['../classSubGHzTools.html#a103eb93c5326b395aded3fa8cf686b34',1,'SubGHzTools']]]
 ];
