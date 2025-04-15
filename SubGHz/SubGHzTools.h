@@ -15,7 +15,6 @@
 
 #include <Arduino.h>
 #include <ELECHOUSE_CC1101_SRC_DRV.h>
-#include <SD.h>
 #include <SPI.h>
 
 #define RECORDINGBUFFERSIZE 4096
@@ -29,10 +28,7 @@ typedef enum {
 
 class SubGHzTools {
    private:
-    // CC1101 module instance
-    fs::SDFS* sd;
-    //  SPIClass* spiInstance;
-    //  ELECHOUSE_CC1101 ELECHOUSE_cc1101;
+    ELECHOUSE_CC1101 ELECHOUSE_cc1101;
     byte CC1101_A_sck = 39;
     byte CC1101_A_miso = 41;
     byte CC1101_A_mosi = 40;
@@ -68,9 +64,7 @@ class SubGHzTools {
     void configureModule();
 
    public:
-    SubGHzTools();  // Constructor
-
-    //  void init(fs::SDFS& sdInstance);
+    SubGHzTools();
     void init();
     void startJamming();
     void stopJamming();
