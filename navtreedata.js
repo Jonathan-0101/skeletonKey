@@ -46,7 +46,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"GUI__Slice__Test_2WiFiTools_8h_source.html"
+"GUI__GSLC_8h_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
