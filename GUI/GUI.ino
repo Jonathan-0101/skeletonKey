@@ -1,0 +1,160 @@
+//<App !Start!>
+// FILE: [GUI.ino]
+// Created by GUIslice Builder version: [0.17.b40]
+//
+// GUIslice Builder Generated File
+//
+// For the latest guides, updates and support view:
+// https://github.com/ImpulseAdventure/GUIslice
+//
+//<App !End!>
+
+// ------------------------------------------------
+// Headers to include
+// ------------------------------------------------
+#include <Arduino.h>
+#include <FS.h>
+#include <SD.h>
+#include <SPI.h>
+
+#include "GUI_GSLC.h"
+#include "TFT_eSPI.h"
+
+// ------------------------------------------------
+// Program Globals
+// ------------------------------------------------
+
+// Save some element references for direct access
+//<Save_References !Start!>
+gslc_tsElemRef* m_pElemOutTxt1    = NULL;
+gslc_tsElemRef* m_pElemOutTxt2    = NULL;
+//<Save_References !End!>
+
+// Define debug message function
+static int16_t DebugOut(char ch) {
+    if (ch == (char)'\n')
+        Serial.println("");
+    else
+        Serial.write(ch);
+    return 0;
+}
+
+// ------------------------------------------------
+// Callback Methods
+// ------------------------------------------------
+// Common Button callback
+bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, int16_t nY) {
+    // Typecast the parameters to match the GUI and element types
+    gslc_tsGui* pGui = (gslc_tsGui*)(pvGui);
+    gslc_tsElemRef* pElemRef = (gslc_tsElemRef*)(pvElemRef);
+    gslc_tsElem* pElem = gslc_GetElemFromRef(pGui, pElemRef);
+
+    if (eTouch == GSLC_TOUCH_UP_IN) {
+        // From the element's ID we can determine which button was pressed.
+        switch (pElem->nId) {
+//<Button Enums !Start!>
+            case E_ELEM_Base_Button_Home:
+                gslc_SetPageCur(&m_gui, E_PG_MAIN);
+                gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "Main Menu");
+                break;
+            case E_ELEM_Base_Button_Settings:
+                gslc_SetPageCur(&m_gui, E_PG_Settings);
+                gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "Settings");
+                break;
+            case E_ELEM_Main_Button_RFID:
+                gslc_SetPageCur(&m_gui, E_PG_RFID);
+                gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "RFID");
+                break;
+            case E_ELEM_Main_Button_SubGHz:
+                gslc_SetPageCur(&m_gui, E_PG_SubGHz);
+                gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "Sub-GHz");
+                break;
+            case E_ELEM_Main_Button_WIFI:
+                gslc_SetPageCur(&m_gui, E_PG_WIFI);
+                gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "WiFi");
+                break;
+            case E_ELEM_Main_Button_USB:
+                gslc_SetPageCur(&m_gui, E_PG_USB);
+                gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "Bad USB");
+                break;
+            case E_ELEM_Main_Button_BLE:
+                gslc_SetPageCur(&m_gui, E_PG_BLE);
+                gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "Bluetooth");
+                break;
+            case E_ELEM_Main_Button_IR:
+                gslc_SetPageCur(&m_gui, E_PG_IR);
+                gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "IR");
+                break;
+//<Button Enums !End!>
+            default:
+                break;
+        }
+    }
+    return true;
+}
+//<Checkbox Callback !Start!>
+//<Checkbox Callback !End!>
+//<Keypad Callback !Start!>
+//<Keypad Callback !End!>
+//<Spinner Callback !Start!>
+//<Spinner Callback !End!>
+//<Listbox Callback !Start!>
+//<Listbox Callback !End!>
+//<Draw Callback !Start!>
+//<Draw Callback !End!>
+//<Slider Callback !Start!>
+//<Slider Callback !End!>
+//<Tick Callback !Start!>
+//<Tick Callback !End!>
+
+void setup() {
+    // ------------------------------------------------
+    // Initialize
+    // ------------------------------------------------
+    delay(250);
+
+    Serial.begin(115200);
+
+    delay(250);
+
+    gslc_InitDebug(&DebugOut);
+
+    delay(250);
+
+    SPI.begin(39, 41, 40, 42);
+    if (!SD.begin(42)) {
+        Serial.println("Card Mount Failed");
+        return;
+    } else {
+        Serial.println("Card Mount Worked");
+    }
+
+    delay(250);
+
+    // ------------------------------------------------
+    // Create graphic elements
+    // ------------------------------------------------
+    InitGUIslice_gen();
+
+    // delay(250);
+
+    // Get the SPI instance used by the TFT_eSPI library
+    // displaySPI = gslc_getSPIinstance();
+}
+
+// -----------------------------------
+// Main event loop
+// -----------------------------------
+void loop() {
+    // ------------------------------------------------
+    // Update GUI Elements
+    // ------------------------------------------------
+
+    // TODO - Add update code for any text, gauges, or sliders
+    // delayMicroseconds(1);
+
+    // ------------------------------------------------
+    // Periodically call GUIslice update function
+    // ------------------------------------------------
+    gslc_Update(&m_gui);
+}

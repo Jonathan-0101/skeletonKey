@@ -7,8 +7,6 @@
 
 #include "IRTools.h"
 
-// MOSI=40 CLK=39 MISO=41
-
 IRTools* irTools = nullptr;             // Declare a pointer for irTools
 std::vector<IRCommand> deviceCommands;  // Declare deviceCommands globally
 
