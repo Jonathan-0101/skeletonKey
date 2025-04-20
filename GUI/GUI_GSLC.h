@@ -20,6 +20,9 @@
 
 // Include any extended elements
 //<Includes !Start!>
+// Include extended elements
+#include "elem/XListbox.h"
+#include "elem/XSlider.h"
 //<Includes !End!>
 
 // ------------------------------------------------
@@ -47,14 +50,15 @@ extern "C" const unsigned short settingsButton[] PROGMEM;
 //<Enum !Start!>
 enum {E_PG_BASE,E_PG_MAIN,E_PG_Settings,E_PG_RFID,E_PG_SubGHz,E_PG_WIFI
       ,E_PG_USB,E_PG_BLE,E_PG_IR};
-enum {E_DRAW_Base_TopBar,E_ELEM_Base_Button_Home
-      ,E_ELEM_Base_Button_Settings,E_ELEM_Base_Text_Bat
-      ,E_ELEM_Base_Text_PageLabel,E_ELEM_Main_Button_BLE
-      ,E_ELEM_Main_Button_IR,E_ELEM_Main_Button_RFID
-      ,E_ELEM_Main_Button_SubGHz,E_ELEM_Main_Button_USB
-      ,E_ELEM_Main_Button_WIFI};
+enum {Base_Button_Home,Base_Button_Settings,Base_Text_Bat
+      ,Base_Text_PageLabel,E_DRAW_Base_TopBar,E_LISTSCROLL1
+      ,Main_Button_BLE,Main_Button_BadUSB,Main_Button_IR
+      ,Main_Button_RFID,Main_Button_SubGHz,Main_Button_WIFI
+      ,WiFi_Button_deauth,WiFi_Button_handshakePassive
+      ,WiFi_Button_rickRollBeacon,WiFi_Button_scanNetworks
+      ,WiFi_LISTBOX_networks};
 // Must use separate enum for fonts with MAX_FONT at end to use gslc_FontSet.
-enum {E_BUILTIN10X16,MAX_FONT};
+enum {E_BUILTIN10X16,E_BUILTIN5X8,MAX_FONT};
 //<Enum !End!>
 
 // ------------------------------------------------
@@ -82,7 +86,7 @@ enum {E_BUILTIN10X16,MAX_FONT};
 #define MAX_ELEM_PG_SubGHz 0 // # Elems total on page
 #define MAX_ELEM_PG_SubGHz_RAM MAX_ELEM_PG_SubGHz // # Elems in RAM
 
-#define MAX_ELEM_PG_WIFI 0 // # Elems total on page
+#define MAX_ELEM_PG_WIFI 7 // # Elems total on page
 #define MAX_ELEM_PG_WIFI_RAM MAX_ELEM_PG_WIFI // # Elems in RAM
 
 #define MAX_ELEM_PG_USB 0 // # Elems total on page
@@ -122,6 +126,10 @@ gslc_tsElem                     m_asPage8Elem[MAX_ELEM_PG_BLE_RAM];
 gslc_tsElemRef                  m_asPage8ElemRef[MAX_ELEM_PG_BLE];
 gslc_tsElem                     m_asPage9Elem[MAX_ELEM_PG_IR_RAM];
 gslc_tsElemRef                  m_asPage9ElemRef[MAX_ELEM_PG_IR];
+gslc_tsXListbox                 m_sListbox1;
+// - Note that XLISTBOX_BUF_OH_R is extra required per item
+char                            m_acListboxBuf1[0 + XLISTBOX_BUF_OH_R];
+gslc_tsXSlider                  m_sListScroll1;
 
 #define MAX_STR                 200
 
@@ -133,8 +141,10 @@ gslc_tsElemRef                  m_asPage9ElemRef[MAX_ELEM_PG_IR];
 
 // Element References for direct access
 //<Extern_References !Start!>
+extern gslc_tsElemRef* m_pElemListbox1;
 extern gslc_tsElemRef* m_pElemOutTxt1;
 extern gslc_tsElemRef* m_pElemOutTxt2;
+extern gslc_tsElemRef* m_pListSlider1;
 //<Extern_References !End!>
 
 // Define debug message function
@@ -167,6 +177,7 @@ void InitGUIslice_gen() {
     // ------------------------------------------------
     //<Load_Fonts !Start!>
     if (!gslc_FontSet(&m_gui,E_BUILTIN10X16,GSLC_FONTREF_PTR,NULL,2)) { return; }
+    if (!gslc_FontSet(&m_gui,E_BUILTIN5X8,GSLC_FONTREF_PTR,NULL,1)) { return; }
     //<Load_Fonts !End!>
 
     //<InitGUI !Start!>
@@ -196,17 +207,17 @@ void InitGUIslice_gen() {
   // PAGE: E_PG_BASE
   
   
-  // Create E_ELEM_Base_Text_PageLabel runtime modifiable text
+  // Create Base_Text_PageLabel runtime modifiable text
   static char m_sDisplayText1[16] = "Main Menu";
-  pElemRef = gslc_ElemCreateTxt(&m_gui,E_ELEM_Base_Text_PageLabel,E_PG_BASE,(gslc_tsRect){70,18,180,16},
+  pElemRef = gslc_ElemCreateTxt(&m_gui,Base_Text_PageLabel,E_PG_BASE,(gslc_tsRect){70,18,180,16},
     (char*)m_sDisplayText1,16,E_BUILTIN10X16);
   gslc_ElemSetTxtAlign(&m_gui,pElemRef,GSLC_ALIGN_MID_MID);
   gslc_ElemSetFillEn(&m_gui,pElemRef,false);
   m_pElemOutTxt1 = pElemRef;
   
-  // Create E_ELEM_Base_Text_Bat runtime modifiable text
+  // Create Base_Text_Bat runtime modifiable text
   static char m_sDisplayText2[6] = "10%";
-  pElemRef = gslc_ElemCreateTxt(&m_gui,E_ELEM_Base_Text_Bat,E_PG_BASE,(gslc_tsRect){243,19,60,16},
+  pElemRef = gslc_ElemCreateTxt(&m_gui,Base_Text_Bat,E_PG_BASE,(gslc_tsRect){243,19,60,16},
     (char*)m_sDisplayText2,6,E_BUILTIN10X16);
   gslc_ElemSetTxtAlign(&m_gui,pElemRef,GSLC_ALIGN_MID_RIGHT);
   gslc_ElemSetFillEn(&m_gui,pElemRef,false);
@@ -216,14 +227,14 @@ void InitGUIslice_gen() {
   pElemRef = gslc_ElemCreateLine(&m_gui,E_DRAW_Base_TopBar,E_PG_BASE,0,49,320,49);
   gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLACK,GSLC_COL_GRAY_LT3,GSLC_COL_GRAY_LT3);
   
-  // Create E_ELEM_Base_Button_Home button with image label
-  pElemRef = gslc_ElemCreateBtnImg(&m_gui,E_ELEM_Base_Button_Home,E_PG_BASE,(gslc_tsRect){8,8,32,32},
+  // Create Base_Button_Home button with image label
+  pElemRef = gslc_ElemCreateBtnImg(&m_gui,Base_Button_Home,E_PG_BASE,(gslc_tsRect){8,8,32,32},
           gslc_GetImageFromProg((const unsigned char*)homeButton,GSLC_IMGREF_FMT_BMP24),
           gslc_GetImageFromProg((const unsigned char*)homeButton,GSLC_IMGREF_FMT_BMP24),
           &CbBtnCommon);
   
-  // Create E_ELEM_Base_Button_Settings button with image label
-  pElemRef = gslc_ElemCreateBtnImg(&m_gui,E_ELEM_Base_Button_Settings,E_PG_BASE,(gslc_tsRect){48,8,32,32},
+  // Create Base_Button_Settings button with image label
+  pElemRef = gslc_ElemCreateBtnImg(&m_gui,Base_Button_Settings,E_PG_BASE,(gslc_tsRect){48,8,32,32},
           gslc_GetImageFromProg((const unsigned char*)settingsButton,GSLC_IMGREF_FMT_BMP24),
           gslc_GetImageFromProg((const unsigned char*)settingsButton,GSLC_IMGREF_FMT_BMP24),
           &CbBtnCommon);
@@ -232,29 +243,35 @@ void InitGUIslice_gen() {
   // PAGE: E_PG_MAIN
   
   
-  // create E_ELEM_Main_Button_RFID button with text label
-  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,E_ELEM_Main_Button_RFID,E_PG_MAIN,
-    (gslc_tsRect){48,80,90,90},(char*)"RFID",0,E_BUILTIN10X16,&CbBtnCommon);
+  // create Main_Button_RFID button with text label
+  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,Main_Button_RFID,E_PG_MAIN,
+    (gslc_tsRect){40,80,96,96},(char*)"RFID",0,E_BUILTIN10X16,&CbBtnCommon);
+  gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
   
-  // create E_ELEM_Main_Button_SubGHz button with text label
-  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,E_ELEM_Main_Button_SubGHz,E_PG_MAIN,
-    (gslc_tsRect){182,79,90,90},(char*)"Sub-GHz",0,E_BUILTIN10X16,&CbBtnCommon);
+  // create Main_Button_SubGHz button with text label
+  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,Main_Button_SubGHz,E_PG_MAIN,
+    (gslc_tsRect){184,80,96,96},(char*)"Sub-GHz",0,E_BUILTIN10X16,&CbBtnCommon);
+  gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
   
-  // create E_ELEM_Main_Button_WIFI button with text label
-  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,E_ELEM_Main_Button_WIFI,E_PG_MAIN,
-    (gslc_tsRect){48,208,90,90},(char*)"WiFi",0,E_BUILTIN10X16,&CbBtnCommon);
+  // create Main_Button_WIFI button with text label
+  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,Main_Button_WIFI,E_PG_MAIN,
+    (gslc_tsRect){40,208,96,96},(char*)"WiFi",0,E_BUILTIN10X16,&CbBtnCommon);
+  gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
   
-  // create E_ELEM_Main_Button_USB button with text label
-  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,E_ELEM_Main_Button_USB,E_PG_MAIN,
-    (gslc_tsRect){48,336,90,90},(char*)"Bad USB",0,E_BUILTIN10X16,&CbBtnCommon);
+  // create Main_Button_BadUSB button with text label
+  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,Main_Button_BadUSB,E_PG_MAIN,
+    (gslc_tsRect){40,336,96,96},(char*)"Bad USB",0,E_BUILTIN10X16,&CbBtnCommon);
+  gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
   
-  // create E_ELEM_Main_Button_BLE button with text label
-  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,E_ELEM_Main_Button_BLE,E_PG_MAIN,
-    (gslc_tsRect){182,208,90,90},(char*)"BLE",0,E_BUILTIN10X16,&CbBtnCommon);
+  // create Main_Button_BLE button with text label
+  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,Main_Button_BLE,E_PG_MAIN,
+    (gslc_tsRect){184,208,96,96},(char*)"BLE",0,E_BUILTIN10X16,&CbBtnCommon);
+  gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
   
-  // create E_ELEM_Main_Button_IR button with text label
-  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,E_ELEM_Main_Button_IR,E_PG_MAIN,
-    (gslc_tsRect){182,336,90,90},(char*)"IR",0,E_BUILTIN10X16,&CbBtnCommon);
+  // create Main_Button_IR button with text label
+  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,Main_Button_IR,E_PG_MAIN,
+    (gslc_tsRect){184,336,96,96},(char*)"IR",0,E_BUILTIN10X16,&CbBtnCommon);
+  gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
 
   // -----------------------------------
   // PAGE: E_PG_Settings
@@ -271,6 +288,51 @@ void InitGUIslice_gen() {
   // -----------------------------------
   // PAGE: E_PG_WIFI
   
+  
+  // create WiFi_Button_rickRollBeacon button with text label
+  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,WiFi_Button_rickRollBeacon,E_PG_WIFI,
+    (gslc_tsRect){40,64,240,32},(char*)"Rick Roll Beacon Spam",0,E_BUILTIN5X8,&CbBtnCommon);
+  gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
+  
+  // create WiFi_Button_scanNetworks button with text label
+  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,WiFi_Button_scanNetworks,E_PG_WIFI,
+    (gslc_tsRect){40,104,240,32},(char*)"Scan WiFi Networks",0,E_BUILTIN5X8,&CbBtnCommon);
+  gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
+  
+  // create WiFi_Button_deauth button with text label
+  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,WiFi_Button_deauth,E_PG_WIFI,
+    (gslc_tsRect){40,144,240,32},(char*)"Deauthenticate",0,E_BUILTIN5X8,&CbBtnCommon);
+  gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
+  
+  // create WiFi_Button_handshakePassive button with text label
+  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,WiFi_Button_handshakePassive,E_PG_WIFI,
+    (gslc_tsRect){40,184,112,32},(char*)"Handshake Capture Passive",0,E_BUILTIN5X8,&CbBtnCommon);
+  gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
+   
+  // Create wrapping box for listbox WiFi_LISTBOX_networks and scrollbar
+  pElemRef = gslc_ElemCreateBox(&m_gui,GSLC_ID_AUTO,E_PG_WIFI,(gslc_tsRect){40,224,240,240});
+  gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE,GSLC_COL_BLACK,GSLC_COL_BLACK);
+  
+  // Create listbox
+  pElemRef = gslc_ElemXListboxCreate(&m_gui,WiFi_LISTBOX_networks,E_PG_WIFI,&m_sListbox1,
+    (gslc_tsRect){40+2,224+4,240-4-20,240-7},E_BUILTIN5X8,
+    (uint8_t*)&m_acListboxBuf1,sizeof(m_acListboxBuf1),0);
+  gslc_ElemXListboxSetSize(&m_gui, pElemRef, 5, 1); // 5 rows, 1 columns
+  gslc_ElemXListboxItemsSetSize(&m_gui, pElemRef, -1, -1);
+  gslc_ElemSetTxtMarginXY(&m_gui, pElemRef, 5, 5);
+  gslc_ElemSetTxtCol(&m_gui,pElemRef,GSLC_COL_WHITE);
+  gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE,GSLC_COL_BLACK,GSLC_COL_BLACK);
+  gslc_ElemXListboxSetSelFunc(&m_gui, pElemRef, &CbListbox);
+  gslc_ElemXListboxItemsSetGap(&m_gui, pElemRef, 5,GSLC_COL_BLACK);
+  gslc_ElemSetFrameEn(&m_gui,pElemRef,true);
+  m_pElemListbox1 = pElemRef;
+
+  // Create vertical scrollbar for listbox
+  pElemRef = gslc_ElemXSliderCreate(&m_gui,E_LISTSCROLL1,E_PG_WIFI,&m_sListScroll1,
+          (gslc_tsRect){40+240-2-20,224+4,20,240-8},0,100,0,5,true);
+  gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE,GSLC_COL_BLACK,GSLC_COL_BLUE);
+  gslc_ElemXSliderSetPosFunc(&m_gui,pElemRef,&CbSlidePos);
+  m_pListSlider1 = pElemRef;
 
   // -----------------------------------
   // PAGE: E_PG_USB
