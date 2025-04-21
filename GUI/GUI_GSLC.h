@@ -40,6 +40,7 @@
 // Defines for resources
 // ------------------------------------------------
 //<Resources !Start!>
+extern "C" const unsigned short bootLogo[] PROGMEM;
 extern "C" const unsigned short homeButton[] PROGMEM;
 extern "C" const unsigned short settingsButton[] PROGMEM;
 //<Resources !End!>
@@ -49,14 +50,18 @@ extern "C" const unsigned short settingsButton[] PROGMEM;
 // ------------------------------------------------
 //<Enum !Start!>
 enum {E_PG_BASE,E_PG_MAIN,E_PG_Settings,E_PG_RFID,E_PG_SubGHz,E_PG_WIFI
-      ,E_PG_USB,E_PG_BLE,E_PG_IR};
-enum {Base_Button_Home,Base_Button_Settings,Base_Text_Bat
-      ,Base_Text_PageLabel,E_DRAW_Base_TopBar,E_LISTSCROLL1
-      ,Main_Button_BLE,Main_Button_BadUSB,Main_Button_IR
-      ,Main_Button_RFID,Main_Button_SubGHz,Main_Button_WIFI
-      ,WiFi_Button_deauth,WiFi_Button_handshakePassive
-      ,WiFi_Button_rickRollBeacon,WiFi_Button_scanNetworks
-      ,WiFi_LISTBOX_networks};
+      ,E_PG_USB,E_PG_BLE,E_PG_IR,E_Popup_Boot,E_Popup_HandshakeCapture};
+enum {Base_Button_home,Base_Button_settings,Base_Line_topBar
+      ,Base_Text_Bat,Base_Text_PageLabel,Boot_Image_logo
+      ,HandshakeCapture_Box_background,HandshakeCapture_Button_active
+      ,HandshakeCapture_Button_exit,HandshakeCapture_Button_passive
+      ,HandshakeCapture_Text_title,Main_Button_BLE,Main_Button_BadUSB
+      ,Main_Button_IR,Main_Button_RFID,Main_Button_SubGHz
+      ,Main_Button_WIFI,Settings_Button_calibrateTouch
+      ,Settings_Button_vibrationToggle,WiFi_Button_deauth
+      ,WiFi_Button_handshake,WiFi_Button_rickRollBeacon
+      ,WiFi_Button_scanNetworks,WiFi_Listbox_networks
+      ,WiFi_Listscroll_networks};
 // Must use separate enum for fonts with MAX_FONT at end to use gslc_FontSet.
 enum {E_BUILTIN10X16,E_BUILTIN5X8,MAX_FONT};
 //<Enum !End!>
@@ -69,7 +74,7 @@ enum {E_BUILTIN10X16,E_BUILTIN5X8,MAX_FONT};
 // Define the maximum number of elements and pages
 // ------------------------------------------------
 //<ElementDefines !Start!>
-#define MAX_PAGE                9
+#define MAX_PAGE                11
 
 #define MAX_ELEM_PG_BASE 5 // # Elems total on page
 #define MAX_ELEM_PG_BASE_RAM MAX_ELEM_PG_BASE // # Elems in RAM
@@ -77,7 +82,7 @@ enum {E_BUILTIN10X16,E_BUILTIN5X8,MAX_FONT};
 #define MAX_ELEM_PG_MAIN 6 // # Elems total on page
 #define MAX_ELEM_PG_MAIN_RAM MAX_ELEM_PG_MAIN // # Elems in RAM
 
-#define MAX_ELEM_PG_Settings 0 // # Elems total on page
+#define MAX_ELEM_PG_Settings 2 // # Elems total on page
 #define MAX_ELEM_PG_Settings_RAM MAX_ELEM_PG_Settings // # Elems in RAM
 
 #define MAX_ELEM_PG_RFID 0 // # Elems total on page
@@ -97,6 +102,12 @@ enum {E_BUILTIN10X16,E_BUILTIN5X8,MAX_FONT};
 
 #define MAX_ELEM_PG_IR 0 // # Elems total on page
 #define MAX_ELEM_PG_IR_RAM MAX_ELEM_PG_IR // # Elems in RAM
+
+#define MAX_ELEM_Popup_Boot 1 // # Elems total on page
+#define MAX_ELEM_Popup_Boot_RAM MAX_ELEM_Popup_Boot // # Elems in RAM
+
+#define MAX_ELEM_Popup_HandshakeCapture 5 // # Elems total on page
+#define MAX_ELEM_Popup_HandshakeCapture_RAM MAX_ELEM_Popup_HandshakeCapture // # Elems in RAM
 //<ElementDefines !End!>
 
 // ------------------------------------------------
@@ -126,9 +137,13 @@ gslc_tsElem                     m_asPage8Elem[MAX_ELEM_PG_BLE_RAM];
 gslc_tsElemRef                  m_asPage8ElemRef[MAX_ELEM_PG_BLE];
 gslc_tsElem                     m_asPage9Elem[MAX_ELEM_PG_IR_RAM];
 gslc_tsElemRef                  m_asPage9ElemRef[MAX_ELEM_PG_IR];
+gslc_tsElem                     m_asPopup1Elem[MAX_ELEM_Popup_Boot_RAM];
+gslc_tsElemRef                  m_asPopup1ElemRef[MAX_ELEM_Popup_Boot];
+gslc_tsElem                     m_asPopup2Elem[MAX_ELEM_Popup_HandshakeCapture_RAM];
+gslc_tsElemRef                  m_asPopup2ElemRef[MAX_ELEM_Popup_HandshakeCapture];
 gslc_tsXListbox                 m_sListbox1;
 // - Note that XLISTBOX_BUF_OH_R is extra required per item
-char                            m_acListboxBuf1[0 + XLISTBOX_BUF_OH_R];
+char                            m_acListboxBuf1[50 + XLISTBOX_BUF_OH_R];
 gslc_tsXSlider                  m_sListScroll1;
 
 #define MAX_STR                 200
@@ -141,10 +156,13 @@ gslc_tsXSlider                  m_sListScroll1;
 
 // Element References for direct access
 //<Extern_References !Start!>
-extern gslc_tsElemRef* m_pElemListbox1;
+extern gslc_tsElemRef* m_pElemBtn10;
+extern gslc_tsElemRef* m_pElemBtn12;
+extern gslc_tsElemRef* m_pElemListbox_WiFi;
 extern gslc_tsElemRef* m_pElemOutTxt1;
 extern gslc_tsElemRef* m_pElemOutTxt2;
-extern gslc_tsElemRef* m_pListSlider1;
+extern gslc_tsElemRef* m_pListSlider_WiFi;
+extern gslc_tsElemRef* m_pWiFiDeauthButtonTxt;
 //<Extern_References !End!>
 
 // Define debug message function
@@ -190,6 +208,8 @@ void InitGUIslice_gen() {
   gslc_PageAdd(&m_gui,E_PG_USB,m_asPage7Elem,MAX_ELEM_PG_USB_RAM,m_asPage7ElemRef,MAX_ELEM_PG_USB);
   gslc_PageAdd(&m_gui,E_PG_BLE,m_asPage8Elem,MAX_ELEM_PG_BLE_RAM,m_asPage8ElemRef,MAX_ELEM_PG_BLE);
   gslc_PageAdd(&m_gui,E_PG_IR,m_asPage9Elem,MAX_ELEM_PG_IR_RAM,m_asPage9ElemRef,MAX_ELEM_PG_IR);
+  gslc_PageAdd(&m_gui,E_Popup_Boot,m_asPopup1Elem,MAX_ELEM_Popup_Boot_RAM,m_asPopup1ElemRef,MAX_ELEM_Popup_Boot);
+  gslc_PageAdd(&m_gui,E_Popup_HandshakeCapture,m_asPopup2Elem,MAX_ELEM_Popup_HandshakeCapture_RAM,m_asPopup2ElemRef,MAX_ELEM_Popup_HandshakeCapture);
 
   // Now mark E_PG_BASE as a "base" page which means that it's elements
   // are always visible. This is useful for common page elements.
@@ -223,18 +243,18 @@ void InitGUIslice_gen() {
   gslc_ElemSetFillEn(&m_gui,pElemRef,false);
   m_pElemOutTxt2 = pElemRef;
 
-  // Create E_DRAW_Base_TopBar line 
-  pElemRef = gslc_ElemCreateLine(&m_gui,E_DRAW_Base_TopBar,E_PG_BASE,0,49,320,49);
+  // Create Base_Line_topBar line 
+  pElemRef = gslc_ElemCreateLine(&m_gui,Base_Line_topBar,E_PG_BASE,0,49,320,49);
   gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLACK,GSLC_COL_GRAY_LT3,GSLC_COL_GRAY_LT3);
   
-  // Create Base_Button_Home button with image label
-  pElemRef = gslc_ElemCreateBtnImg(&m_gui,Base_Button_Home,E_PG_BASE,(gslc_tsRect){8,8,32,32},
+  // Create Base_Button_home button with image label
+  pElemRef = gslc_ElemCreateBtnImg(&m_gui,Base_Button_home,E_PG_BASE,(gslc_tsRect){8,8,32,32},
           gslc_GetImageFromProg((const unsigned char*)homeButton,GSLC_IMGREF_FMT_BMP24),
           gslc_GetImageFromProg((const unsigned char*)homeButton,GSLC_IMGREF_FMT_BMP24),
           &CbBtnCommon);
   
-  // Create Base_Button_Settings button with image label
-  pElemRef = gslc_ElemCreateBtnImg(&m_gui,Base_Button_Settings,E_PG_BASE,(gslc_tsRect){48,8,32,32},
+  // Create Base_Button_settings button with image label
+  pElemRef = gslc_ElemCreateBtnImg(&m_gui,Base_Button_settings,E_PG_BASE,(gslc_tsRect){48,8,32,32},
           gslc_GetImageFromProg((const unsigned char*)settingsButton,GSLC_IMGREF_FMT_BMP24),
           gslc_GetImageFromProg((const unsigned char*)settingsButton,GSLC_IMGREF_FMT_BMP24),
           &CbBtnCommon);
@@ -276,6 +296,19 @@ void InitGUIslice_gen() {
   // -----------------------------------
   // PAGE: E_PG_Settings
   
+  
+  // create Settings_Button_calibrateTouch button with text label
+  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,Settings_Button_calibrateTouch,E_PG_Settings,
+    (gslc_tsRect){40,64,240,32},(char*)"Touch Calibration",0,E_BUILTIN5X8,&CbBtnCommon);
+  gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
+  
+  // Create Settings_Button_vibrationToggle button with modifiable text label
+  static char m_strbtn12[21] = "Vibration Enabled";
+  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,Settings_Button_vibrationToggle,E_PG_Settings,
+    (gslc_tsRect){40,112,240,32},
+    (char*)m_strbtn12,21,E_BUILTIN5X8,&CbBtnCommon);
+  gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
+  m_pElemBtn12 = pElemRef;
 
   // -----------------------------------
   // PAGE: E_PG_RFID
@@ -299,25 +332,33 @@ void InitGUIslice_gen() {
     (gslc_tsRect){40,104,240,32},(char*)"Scan WiFi Networks",0,E_BUILTIN5X8,&CbBtnCommon);
   gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
   
-  // create WiFi_Button_deauth button with text label
+  // Create WiFi_Button_deauth button with modifiable text label
+  static char m_strbtn9[27] = "Deauthentication Dissabled";
   pElemRef = gslc_ElemCreateBtnTxt(&m_gui,WiFi_Button_deauth,E_PG_WIFI,
-    (gslc_tsRect){40,144,240,32},(char*)"Deauthenticate",0,E_BUILTIN5X8,&CbBtnCommon);
+    (gslc_tsRect){40,184,240,32},
+    (char*)m_strbtn9,27,E_BUILTIN5X8,&CbBtnCommon);
+  gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE_DK2,GSLC_COL_RED_DK2,GSLC_COL_BLUE_DK1);
   gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
+  gslc_ElemSetFrameEn(&m_gui,pElemRef,false);
+  m_pWiFiDeauthButtonTxt = pElemRef;
   
-  // create WiFi_Button_handshakePassive button with text label
-  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,WiFi_Button_handshakePassive,E_PG_WIFI,
-    (gslc_tsRect){40,184,112,32},(char*)"Handshake Capture Passive",0,E_BUILTIN5X8,&CbBtnCommon);
+  // Create WiFi_Button_handshake button with modifiable text label
+  static char m_strbtn10[31] = "Handshake Capture";
+  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,WiFi_Button_handshake,E_PG_WIFI,
+    (gslc_tsRect){40,144,240,32},
+    (char*)m_strbtn10,31,E_BUILTIN5X8,&CbBtnCommon);
   gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
+  m_pElemBtn10 = pElemRef;
    
-  // Create wrapping box for listbox WiFi_LISTBOX_networks and scrollbar
-  pElemRef = gslc_ElemCreateBox(&m_gui,GSLC_ID_AUTO,E_PG_WIFI,(gslc_tsRect){40,224,240,240});
+  // Create wrapping box for listbox WiFi_Listbox_networks and scrollbar
+  pElemRef = gslc_ElemCreateBox(&m_gui,GSLC_ID_AUTO,E_PG_WIFI,(gslc_tsRect){40,224,240,247});
   gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE,GSLC_COL_BLACK,GSLC_COL_BLACK);
   
   // Create listbox
-  pElemRef = gslc_ElemXListboxCreate(&m_gui,WiFi_LISTBOX_networks,E_PG_WIFI,&m_sListbox1,
-    (gslc_tsRect){40+2,224+4,240-4-20,240-7},E_BUILTIN5X8,
+  pElemRef = gslc_ElemXListboxCreate(&m_gui,WiFi_Listbox_networks,E_PG_WIFI,&m_sListbox1,
+    (gslc_tsRect){40+2,224+4,240-4-15,247-7},E_BUILTIN5X8,
     (uint8_t*)&m_acListboxBuf1,sizeof(m_acListboxBuf1),0);
-  gslc_ElemXListboxSetSize(&m_gui, pElemRef, 5, 1); // 5 rows, 1 columns
+  gslc_ElemXListboxSetSize(&m_gui, pElemRef, 10, 1); // 10 rows, 1 columns
   gslc_ElemXListboxItemsSetSize(&m_gui, pElemRef, -1, -1);
   gslc_ElemSetTxtMarginXY(&m_gui, pElemRef, 5, 5);
   gslc_ElemSetTxtCol(&m_gui,pElemRef,GSLC_COL_WHITE);
@@ -325,14 +366,14 @@ void InitGUIslice_gen() {
   gslc_ElemXListboxSetSelFunc(&m_gui, pElemRef, &CbListbox);
   gslc_ElemXListboxItemsSetGap(&m_gui, pElemRef, 5,GSLC_COL_BLACK);
   gslc_ElemSetFrameEn(&m_gui,pElemRef,true);
-  m_pElemListbox1 = pElemRef;
+  m_pElemListbox_WiFi = pElemRef;
 
   // Create vertical scrollbar for listbox
-  pElemRef = gslc_ElemXSliderCreate(&m_gui,E_LISTSCROLL1,E_PG_WIFI,&m_sListScroll1,
-          (gslc_tsRect){40+240-2-20,224+4,20,240-8},0,100,0,5,true);
+  pElemRef = gslc_ElemXSliderCreate(&m_gui,WiFi_Listscroll_networks,E_PG_WIFI,&m_sListScroll1,
+          (gslc_tsRect){40+240-2-15,224+4,15,247-8},0,100,0,5,true);
   gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE,GSLC_COL_BLACK,GSLC_COL_BLUE);
   gslc_ElemXSliderSetPosFunc(&m_gui,pElemRef,&CbSlidePos);
-  m_pListSlider1 = pElemRef;
+  m_pListSlider_WiFi = pElemRef;
 
   // -----------------------------------
   // PAGE: E_PG_USB
@@ -345,6 +386,44 @@ void InitGUIslice_gen() {
   // -----------------------------------
   // PAGE: E_PG_IR
   
+
+  // -----------------------------------
+  // PAGE: E_Popup_Boot
+  
+ 
+  // Create Boot_Image_logo using Image 
+  pElemRef = gslc_ElemCreateImg(&m_gui,Boot_Image_logo,E_Popup_Boot,(gslc_tsRect){0,0,320,480},
+    gslc_GetImageFromProg((const unsigned char*)bootLogo,GSLC_IMGREF_FMT_BMP24));
+
+  // -----------------------------------
+  // PAGE: E_Popup_HandshakeCapture
+  
+   
+  // Create HandshakeCapture_Box_background box
+  pElemRef = gslc_ElemCreateBox(&m_gui,HandshakeCapture_Box_background,E_Popup_HandshakeCapture,(gslc_tsRect){32,136,256,264});
+  gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
+  
+  // create HandshakeCapture_Button_passive button with text label
+  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,HandshakeCapture_Button_passive,E_Popup_HandshakeCapture,
+    (gslc_tsRect){40,208,240,32},(char*)"Passive",0,E_BUILTIN5X8,&CbBtnCommon);
+  gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
+  
+  // create HandshakeCapture_Button_active button with text label
+  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,HandshakeCapture_Button_active,E_Popup_HandshakeCapture,
+    (gslc_tsRect){40,248,240,32},(char*)"Active",0,E_BUILTIN5X8,&CbBtnCommon);
+  gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
+  
+  // create HandshakeCapture_Button_exit button with text label
+  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,HandshakeCapture_Button_exit,E_Popup_HandshakeCapture,
+    (gslc_tsRect){40,352,240,32},(char*)"Exit",0,E_BUILTIN5X8,&CbBtnCommon);
+  gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE_DK2,GSLC_COL_RED_DK2,GSLC_COL_BLUE_DK1);
+  gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
+  gslc_ElemSetFrameEn(&m_gui,pElemRef,false);
+  
+  // Create HandshakeCapture_Text_title text label
+  pElemRef = gslc_ElemCreateTxt(&m_gui,HandshakeCapture_Text_title,E_Popup_HandshakeCapture,(gslc_tsRect){72,152,180,8},
+    (char*)"Select Deauthentication Method",0,E_BUILTIN5X8);
+  gslc_ElemSetTxtAlign(&m_gui,pElemRef,GSLC_ALIGN_MID_MID);
     //<InitGUI !End!>
 
     //<Startup !Start!>
