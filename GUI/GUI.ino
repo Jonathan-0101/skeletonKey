@@ -14,10 +14,11 @@
 // ------------------------------------------------
 #include <Arduino.h>
 #include <FS.h>
-#include <SD.h>
 #include <SPI.h>
+#include <TFT_eSPI.h>
 
 #include "GUI_GSLC.h"
+#include "SD.h"
 #include "TFT_eSPI.h"
 
 // ------------------------------------------------
@@ -28,19 +29,17 @@ int deauthStatus = 0;
 long bootScreenDelay = 1500;
 long bootScreenStart;
 
-long crashTimer;
-long crashDelay = 5000;  // 5 seconds
-int crashLoopCount = 0;
+SPIClass& tftSPIInstance = SPI;
 
 // Save some element references for direct access
 //<Save_References !Start!>
-gslc_tsElemRef* m_pElemBtn10      = NULL;
-gslc_tsElemRef* m_pElemBtn12      = NULL;
-gslc_tsElemRef* m_pElemListbox_WiFi= NULL;
-gslc_tsElemRef* m_pElemOutTxt1    = NULL;
-gslc_tsElemRef* m_pElemOutTxt2    = NULL;
-gslc_tsElemRef* m_pListSlider_WiFi= NULL;
-gslc_tsElemRef* m_pWiFiDeauthButtonTxt= NULL;
+gslc_tsElemRef* m_pElemBtn10 = NULL;
+gslc_tsElemRef* m_pElemBtn12 = NULL;
+gslc_tsElemRef* m_pElemListbox_WiFi = NULL;
+gslc_tsElemRef* m_pElemOutTxt1 = NULL;
+gslc_tsElemRef* m_pElemOutTxt2 = NULL;
+gslc_tsElemRef* m_pListSlider_WiFi = NULL;
+gslc_tsElemRef* m_pWiFiDeauthButtonTxt = NULL;
 //<Save_References !End!>
 
 // Define debug message function
@@ -65,7 +64,7 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
     if (eTouch == GSLC_TOUCH_UP_IN) {
         // From the element's ID we can determine which button was pressed.
         switch (pElem->nId) {
-//<Button Enums !Start!>
+                //<Button Enums !Start!>
             case Base_Button_home:
                 gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "Main Menu");
                 gslc_SetPageCur(&m_gui, E_PG_MAIN);
@@ -106,22 +105,22 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
                 break;
             case WiFi_Button_scanNetworks:
                 break;
-      case WiFi_Button_deauth:
-if (deauthStatus == 0) {
-    deauthStatus = 1;
-    // Set the button text to "Deauthentication Enabled"
-    gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt, "Deauthentication Enabled");
-    // Set the button color to green
-    gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_GREEN_DK3, GSLC_COL_BLUE_DK1);
-} else {
-    deauthStatus = 0;
-    // Set the button text to "Deauthentication Disabled"
-    gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt, "Deauthentication Disabled");
-    // Set the button color to red
-    gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_RED_DK2, GSLC_COL_BLUE_DK1);
-}
+            case WiFi_Button_deauth:
+                if (deauthStatus == 0) {
+                    deauthStatus = 1;
+                    // Set the button text to "Deauthentication Enabled"
+                    gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt, "Deauthentication Enabled");
+                    // Set the button color to green
+                    gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_GREEN_DK3, GSLC_COL_BLUE_DK1);
+                } else {
+                    deauthStatus = 0;
+                    // Set the button text to "Deauthentication Disabled"
+                    gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt, "Deauthentication Disabled");
+                    // Set the button color to red
+                    gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_RED_DK2, GSLC_COL_BLUE_DK1);
+                }
 
-        break;
+                break;
             case WiFi_Button_handshake:
                 gslc_PopupShow(&m_gui, E_Popup_HandshakeCapture, true);
                 break;
@@ -134,7 +133,7 @@ if (deauthStatus == 0) {
             case HandshakeCapture_Button_exit:
                 gslc_PopupHide(&m_gui);
                 break;
-//<Button Enums !End!>
+                //<Button Enums !End!>
             default:
                 break;
         }
@@ -159,14 +158,14 @@ bool CbListbox(void* pvGui, void* pvElemRef, int16_t nSelId) {
 
     // From the element's ID we can determine which listbox was active.
     switch (pElem->nId) {
-//<Listbox Enums !Start!>
+            //<Listbox Enums !Start!>
 
         case WiFi_Listbox_networks:
             if (nSelId != XLISTBOX_SEL_NONE) {
                 gslc_ElemXListboxGetItem(&m_gui, pElemRef, nSelId, acTxt, MAX_STR);
             }
             break;
-//<Listbox Enums !End!>
+            //<Listbox Enums !End!>
         default:
             break;
     }
@@ -184,13 +183,13 @@ bool CbSlidePos(void* pvGui, void* pvElemRef, int16_t nPos) {
 
     // From the element's ID we can determine which slider was updated.
     switch (pElem->nId) {
-//<Slider Enums !Start!>
+            //<Slider Enums !Start!>
 
         case WiFi_Listscroll_networks:
             // Fetch the slider position
             nVal = gslc_ElemXSliderGetPos(pGui, m_pListSlider_WiFi);
             break;
-//<Slider Enums !End!>
+            //<Slider Enums !End!>
         default:
             break;
     }
@@ -204,38 +203,42 @@ void setup() {
     // ------------------------------------------------
     // Initialize
     // ------------------------------------------------
-    // delay(375);
+    delay(375);
 
     Serial.begin(115200);
 
-    // delay(125);
+    delay(125);
 
     gslc_InitDebug(&DebugOut);
 
-    // delay(250);
-
-    // SPI.begin(39, 41, 40, 42);
-    // if (!SD.begin(42)) {
-    //     Serial.println("Card Mount Failed");
-    //     return;
-    // } else {
-    //     Serial.println("Card Mount Worked");
-    // }
-
-    // delay(375);
+    delay(375);
 
     // ------------------------------------------------
     // Create graphic elements
     // ------------------------------------------------
     InitGUIslice_gen();
 
+    // Get the SPI instance from the display
+    TFT_eSPI& display = *(TFT_eSPI*)gslc_DrvGetDriverDisp(&m_gui);
+    tftSPIInstance = display.getSPIinstance();
+
+    delay(100);
+
+    pinMode(42, OUTPUT);
+
+    // Initialize the SD card sharing the SPI instance
+    if (!SD.begin(42, tftSPIInstance)) {
+        Serial.println("SD card initialization failed!");
+        return;
+    } else {
+        Serial.println("SD card initialized successfully!");
+    }
+
     // Show popup page for 1.5 seconds
     if (bootScreen) {
         bootScreenStart = millis();
         gslc_PopupShow(&m_gui, E_Popup_Boot, true);
     }
-
-    // crashTimer = millis();
 }
 
 // -----------------------------------
@@ -255,14 +258,6 @@ void loop() {
     }
 
     // TODO - Add update code for any text, gauges, or sliders
-    //   delayMicroseconds(1);
-
-    // Check if the crash timer has elapsed
-    // if (millis() - crashTimer >= crashDelay) {
-    //     Serial.printf("Crash loop count: %d\n", crashLoopCount);
-    //     crashLoopCount++;
-    //     crashTimer = millis();  // Reset the timer
-    // }
 
     // ------------------------------------------------
     // Periodically call GUIslice update function
