@@ -207,6 +207,8 @@ void setup() {
     digitalWrite(1, HIGH);
     digitalWrite(36, HIGH);
 
+    delay(1000);  // NOTE: Some devices require a delay after Serial.begin() before serial port can be used
+
     gslc_InitDebug(&DebugOut);
 
     // ------------------------------------------------

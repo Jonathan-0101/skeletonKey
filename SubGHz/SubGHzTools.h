@@ -43,21 +43,27 @@ class SubGHzTools {
     int CC1101_B_gdo0 = 11;
     int CC1101_B_RF_Switch = 12;
 
+    int CC1101_gdo0 = 11;
+    int CC1101_RF_Switch = 12;
+
+    bool CC1101_A_initialised = false;
+
     // buffer for sending CC1101
-    byte CC1101_A_sendingbuffer[CCBUFFERSIZE] = {0};
-    byte CC1101_B_sendingbuffer[CCBUFFERSIZE] = {0};
+    // byte CC1101_A_sendingbuffer[CCBUFFERSIZE] = {0};
+    byte CC1101_sendingbuffer[CCBUFFERSIZE] = {0};
 
     // buffer for receiving  CC1101
-    byte CC1101_A_receivingbuffer[CCBUFFERSIZE] = {0};
-    byte CC1101_B_receivingbuffer[CCBUFFERSIZE] = {0};
+    // byte CC1101_A_receivingbuffer[CCBUFFERSIZE] = {0};
+    byte CC1101_receivingbuffer[CCBUFFERSIZE] = {0};
 
     // buffer for recording and replaying of many frames
-    byte CC1101_A_bigrecordingbuffer[RECORDINGBUFFERSIZE] = {0};
-    byte CC1101_B_bigrecordingbuffer[RECORDINGBUFFERSIZE] = {0};
+    // byte CC1101_A_bigrecordingbuffer[RECORDINGBUFFERSIZE] = {0};
+    byte CC1101_bigrecordingbuffer[RECORDINGBUFFERSIZE] = {0};
 
     int jammingMode = 0;
     float defaultFrequency = 433.92;
     float frequency = 433.92;
+    int selectedModule = 1;
     int samplingInterval = 1;
     int setting, setting2;
     SubGHzTools_flag currentMode = IDLE;
@@ -126,6 +132,20 @@ class SubGHzTools {
      * @param sampleInterval Sampling interval in microseconds
      */
     void transmitRaw(int sampleInterval);
+
+    /**
+     * @brief Set the module to use (A or B)
+     *
+     * @param module Module number (0 for A, 1 for B)
+     */
+    void setModule(int module);
+
+    /**
+     * @brief Get the Selected Module object
+     *
+     * @return int Selected module (0 for A, 1 for B)
+     */
+    int getSelectedModule();
 };
 
 #endif  // SUBGHTOOLS_H

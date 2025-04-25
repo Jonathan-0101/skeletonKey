@@ -171,7 +171,7 @@ void InitGUIslice_gen()
 
   // NOTE: The current page defaults to the first page added. Here we explicitly
   //       ensure that the main page is the correct page no matter the add order.
-  gslc_SetPageCur(&m_gui,E_PG_MAIN);
+  gslc_SetPageCur(&m_gui,E_PG_WIFI);
   
   // Set Background to a flat color
   gslc_SetBkgndColor(&m_gui,GSLC_COL_BLACK);

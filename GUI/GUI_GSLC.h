@@ -219,6 +219,8 @@ void InitGUIslice_gen() {
         return;
     }
 
+    delay(250);
+
     // ------------------------------------------------
     // Load Fonts
     // ------------------------------------------------
@@ -450,8 +452,6 @@ void InitGUIslice_gen() {
     //<Startup !Start!>
     gslc_GuiRotate(&m_gui, 0);
     //<Startup !End!>
-
-    // Get the SPI instance from the display
 }
 
 #endif  // end _GUISLICE_GEN_H

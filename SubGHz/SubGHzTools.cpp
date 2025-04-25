@@ -56,9 +56,9 @@ void SubGHzTools::init() {
     Serial.println("CC1101_B added");
 
     // Set and configure the first CC1101 module (CC1101_A)
-    ELECHOUSE_cc1101.setModul(0);
-    configureModule();
-    Serial.println("CC1101_A configureModule done");
+    // ELECHOUSE_cc1101.setModul(0);
+    // configureModule();
+    // Serial.println("CC1101_A configureModule done");
 
     // Set and configure the second CC1101 module (CC1101_B)
     ELECHOUSE_cc1101.setModul(1);
@@ -72,8 +72,8 @@ void SubGHzTools::init() {
     digitalWrite(CC1101_B_RF_Switch, LOW);
     Serial.println("RF switch pins set to HIGH");
 
-    // Set CC1101_A as the default module for communication
-    ELECHOUSE_cc1101.setModul(0);
+    // Set CC1101_B as the default module for communication
+    ELECHOUSE_cc1101.setModul(1);
 
     Serial.println("Initialised");
     if (ELECHOUSE_cc1101.getCC1101()) {
@@ -86,11 +86,11 @@ void SubGHzTools::init() {
 void SubGHzTools::jammer() {
     // Populate cc1101 sending buffer with random values
     for (int i = 0; i < 60; i++) {
-        CC1101_A_sendingbuffer[i] = (byte)random(255);
+        CC1101_sendingbuffer[i] = (byte)random(255);
     };
 
     // Send these data to radio over CC1101
-    ELECHOUSE_cc1101.SendData(CC1101_A_sendingbuffer, 60);
+    ELECHOUSE_cc1101.SendData(CC1101_sendingbuffer, 60);
 }
 
 void SubGHzTools::startJamming() {
@@ -144,12 +144,12 @@ void SubGHzTools::captureRaw(int sampleInterval = 1) {
 
     // Start recording to the buffer with bitbanging of GDO0 pin state
     Serial.println("Waiting for radio signal to start RAW recording...");
-    pinMode(CC1101_A_gdo0, INPUT);
-    setting2 = digitalRead(CC1101_A_gdo0);
+    pinMode(CC1101_gdo0, INPUT);
+    setting2 = digitalRead(CC1101_gdo0);
     delayMicroseconds(1000);
 
     // Waiting for some data first or serial port signal
-    while (digitalRead(CC1101_A_gdo0) == LOW);
+    while (digitalRead(CC1101_gdo0) == LOW);
 
     // Start recording to the buffer with bitbanging of GDO0 pin state
     Serial.println("Starting RAW recording to the buffer...");
@@ -157,12 +157,12 @@ void SubGHzTools::captureRaw(int sampleInterval = 1) {
     for (int i = 0; i < RECORDINGBUFFERSIZE; i++) {
         byte receivedbyte = 0;
         for (int j = 7; j > -1; j--) {
-            bitWrite(receivedbyte, j, digitalRead(CC1101_A_gdo0));
+            bitWrite(receivedbyte, j, digitalRead(CC1101_gdo0));
             delayMicroseconds(setting);
         };
 
         // Store the output into recording buffer
-        CC1101_A_bigrecordingbuffer[i] = receivedbyte;
+        CC1101_bigrecordingbuffer[i] = receivedbyte;
     }
 
     Serial.println("Recording RAW data complete.");
@@ -184,12 +184,12 @@ void SubGHzTools::transmitRaw(int sampleInterval = 1) {
 
     // Start replaying GDO0 bit state from data in the buffer with bitbanging
     Serial.println("Replaying RAW data from the buffer...");
-    pinMode(CC1101_A_gdo0, OUTPUT);
+    pinMode(CC1101_gdo0, OUTPUT);
 
     for (int i = 1; i < RECORDINGBUFFERSIZE; i++) {
-        byte receivedbyte = CC1101_A_bigrecordingbuffer[i];
+        byte receivedbyte = CC1101_bigrecordingbuffer[i];
         for (int j = 7; j > -1; j--) {
-            digitalWrite(CC1101_A_gdo0, bitRead(receivedbyte, j));
+            digitalWrite(CC1101_gdo0, bitRead(receivedbyte, j));
             delayMicroseconds(setting);
         };
     }
@@ -200,4 +200,34 @@ void SubGHzTools::transmitRaw(int sampleInterval = 1) {
     ELECHOUSE_cc1101.setCCMode(1);
     ELECHOUSE_cc1101.setPktFormat(0);
     ELECHOUSE_cc1101.SetTx();
+}
+
+void SubGHzTools::setModule(int module) {
+    // Set the selected module to use (0 for A, 1 for B)
+    if (module == 0) {
+        if (CC1101_A_initialised == false) {
+            ELECHOUSE_cc1101.setModul(0);
+            configureModule();
+            CC1101_A_initialised = true;
+        }
+        selectedModule = module;
+        ELECHOUSE_cc1101.setModul(selectedModule);
+        CC1101_gdo0 = CC1101_A_gdo0;
+        CC1101_RF_Switch = CC1101_A_RF_Switch;
+        Serial.printf("Selected module set to: %d\n", selectedModule);
+
+    } else if (module == 1) {
+        selectedModule = module;
+        ELECHOUSE_cc1101.setModul(selectedModule);
+        CC1101_gdo0 = CC1101_B_gdo0;
+        CC1101_RF_Switch = CC1101_B_RF_Switch;
+        Serial.printf("Selected module set to: %d\n", selectedModule);
+    } else {
+        Serial.println("Invalid module selection. Please choose 0 or 1.");
+    }
+}
+
+int SubGHzTools::getSelectedModule() {
+    // Return the selected module (0 for A, 1 for B)
+    return selectedModule;
 }

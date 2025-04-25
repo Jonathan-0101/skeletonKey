@@ -203,15 +203,13 @@ void setup() {
     // ------------------------------------------------
     // Initialize
     // ------------------------------------------------
-    delay(375);
+    delay(2500);
 
     Serial.begin(115200);
 
-    delay(125);
-
     gslc_InitDebug(&DebugOut);
 
-    delay(375);
+    delay(250);
 
     // ------------------------------------------------
     // Create graphic elements
@@ -222,17 +220,17 @@ void setup() {
     TFT_eSPI& display = *(TFT_eSPI*)gslc_DrvGetDriverDisp(&m_gui);
     tftSPIInstance = display.getSPIinstance();
 
-    delay(100);
-
-    pinMode(42, OUTPUT);
 
     // Initialize the SD card sharing the SPI instance
+    pinMode(42, OUTPUT);
     if (!SD.begin(42, tftSPIInstance)) {
         Serial.println("SD card initialization failed!");
         return;
     } else {
         Serial.println("SD card initialized successfully!");
     }
+
+    delay(250);
 
     // Show popup page for 1.5 seconds
     if (bootScreen) {

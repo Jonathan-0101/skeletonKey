@@ -10,6 +10,9 @@ void setup() {
 
     subGHzTools.init();
 
+    // Set the module to use (0 for A, 1 for B)
+    subGHzTools.setModule(1);
+
     // Jam for 10 seconds
     subGHzTools.startJamming();
     Serial.println("Jamming started");
