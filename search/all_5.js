@@ -9,5 +9,6 @@ var searchData=
   ['getdevicebrands_6',['getDeviceBrands',['../classIRTools.html#a9a21fd8fe5ebbdd9a12b6fed0077cd40',1,'IRTools']]],
   ['getdevicecommands_7',['getDeviceCommands',['../classIRTools.html#a8e6db99af3f1c33c7081546b017f1389',1,'IRTools']]],
   ['getdevices_8',['getDevices',['../classIRTools.html#aa362f0ddef59adf3fd544f2d0e5eb306',1,'IRTools']]],
-  ['getdevicetypes_9',['getDeviceTypes',['../classIRTools.html#a0cbc8ee3ab47c617beb756f56feb281c',1,'IRTools']]]
+  ['getdevicetypes_9',['getDeviceTypes',['../classIRTools.html#a0cbc8ee3ab47c617beb756f56feb281c',1,'IRTools']]],
+  ['getselectedmodule_10',['getSelectedModule',['../classSubGHzTools.html#adf94fbcd396aaa39d76943eedf433cd6',1,'SubGHzTools']]]
 ];
