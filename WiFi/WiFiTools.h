@@ -99,10 +99,11 @@ class WiFiTools {
     uint8_t targetBSSID[6];
     uint8_t targetChannel;
     wifi_packet_flag packetScanFlag;
-    fs::SDFS* sd;
+    fs::SDFS* sd = nullptr;
 
     wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
     std::vector<uint8_t*> detectedClients;
+    std::vector<wifi_ap_record_t> foundWiFiNetworks;
 
     /**
      * @brief Setup function for the beacon spam attack
@@ -133,6 +134,12 @@ class WiFiTools {
      */
     void filterForClients(const wifi_ieee80211_mac_hdr_t* hdr);
 
+    /**
+     * @brief Function to filter packets for handshake capture
+     *
+     * @param buf Pointer to the packet buffer
+     * @param type Type of the packet
+     */
     void filterForHandshakes(void* buf, wifi_promiscuous_pkt_type_t type);
 
     /**
@@ -153,8 +160,6 @@ class WiFiTools {
      * @param detectClients Flag to identify connected clients
      */
     void processWiFiData(uint8_t* networkBSSID, uint8_t channel, int captureTime, bool captureHandshake, bool detectClients);
-
-    std::vector<wifi_ap_record_t> foundWiFiNetworks;
 
     // deauth frame definition
     uint8_t deauthPacket[26] = {
@@ -183,7 +188,7 @@ class WiFiTools {
         // Tagged parameters
 
         // SSID parameters
-        /* 36 - 37 */ 0x00 0x20,                                                                                                                                                                                       // Tag: Set SSID length, Tag length: 32
+        /* 36 - 37 */ 0x00, 0x20,                                                                                                                                                                                      // Tag: Set SSID length, Tag length: 32
         /* 38 - 69 */ 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,  // SSID
 
         // Supported Rates
@@ -224,11 +229,17 @@ class WiFiTools {
 
    public:
     /**
-     * @brief Construct a new Wi Fi Tools object
+     * @brief Construct a new Wi-Fi Tools object
      *
-     * @param sdInstance SD instance
      */
-    WiFiTools(fs::SDFS& sdInstance);
+    WiFiTools();
+
+    /**
+     * @brief Initialise the Wi-Fi tools object
+     *
+     * @param sdInstance  Instance of the SD card filesystem
+     */
+    void initWiFiTools(fs::SDFS& sdInstance);
 
     /**
      * @brief Function to change the Wi-Fi channel

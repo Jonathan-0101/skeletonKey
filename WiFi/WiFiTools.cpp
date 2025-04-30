@@ -31,9 +31,12 @@ extern "C" int ieee80211_raw_frame_sanity_check(int32_t arg, int32_t arg2, int32
 }
 
 // Constructor
-WiFiTools::WiFiTools(fs::SDFS& sdInstance) {
+WiFiTools::WiFiTools() {
     // Initialize the Wi-Fi configuration
     globalWiFiToolsInstance = this;
+}
+
+void WiFiTools::initWiFiTools(fs::SDFS& sdInstance) {
     sd = &sdInstance;
 }
 

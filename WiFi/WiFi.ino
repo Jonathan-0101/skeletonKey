@@ -1,5 +1,8 @@
+#include <SPI.h>
+
 #include <vector>
 
+#include "SD.h"
 #include "WiFiTools.h"
 
 WiFiTools wifiTools;
@@ -7,6 +10,17 @@ WiFiTools wifiTools;
 void setup() {
     Serial.begin(115200);
     delay(100);
+
+    // Start the SPI bus and the SD card
+    SPI.begin(39, 41, 40, 42);
+    if (!SD.begin(42)) {
+        Serial.println("Card Mount Failed");
+        return;
+    }
+    Serial.println("SD card initialized successfully");
+
+    // Initialize the WiFiTools object with the SD card instance
+    wifiTools.initWiFiTools(SD);
 
     // Call the rickRollBeaconSpam function
     wifiTools.rickRollBeaconSpam();

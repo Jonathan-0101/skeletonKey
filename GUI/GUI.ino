@@ -220,7 +220,6 @@ void setup() {
     TFT_eSPI& display = *(TFT_eSPI*)gslc_DrvGetDriverDisp(&m_gui);
     tftSPIInstance = display.getSPIinstance();
 
-
     // Initialize the SD card sharing the SPI instance
     pinMode(42, OUTPUT);
     if (!SD.begin(42, tftSPIInstance)) {
