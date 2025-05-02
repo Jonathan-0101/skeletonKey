@@ -17,7 +17,7 @@ void IRTools::sendRawIR(uint16_t* data, uint16_t length, uint16_t frequency) {
     irsend.sendRaw(data, length, frequency);
 }
 
-void IRTools::getAvaliableDeviceTypes() {
+void IRTools::findDeviceTypes() {
     // Clear the deviceTypes and deviceBrands vectors
     deviceTypes.clear();
     deviceBrands.clear();
@@ -46,7 +46,7 @@ std::vector<String> IRTools::getDeviceTypes() {
     return deviceTypes;
 }
 
-void IRTools::getAvaliableDeviceBrands(int deviceTypeIndex) {
+void IRTools::findDeviceBrands(int deviceTypeIndex) {
     // Clear the deviceBrands vector
     deviceBrands.clear();
 
@@ -77,7 +77,7 @@ std::vector<String> IRTools::getDeviceBrands() {
     return deviceBrands;
 }
 
-void IRTools::getAvaliableDevices(int deviceBrandIndex) {
+void IRTools::findDevices(int deviceBrandIndex) {
     // Clear the devices vector
     devices.clear();
 
@@ -111,7 +111,7 @@ std::vector<String> IRTools::getDevices() {
     return devices;
 }
 
-void IRTools::getAvaliableDeviceCommands(int deviceIndex) {
+void IRTools::findDeviceCommands(int deviceIndex) {
     // Clear the deviceCommands vector
     deviceCommands.clear();
 
@@ -231,8 +231,8 @@ void IRTools::sendIRCommand(IRCommand irCommand) {
             uint64_t encodedRC6 = irsend.encodeRC6(irCommand.parsedCommandAddress, irCommand.parsedCommandData);
             irsend.sendRC6(encodedRC6);
         } else if (protocol == "RC5") {
-            // uint16_t encodedRC5 = irsend.encodeRC5(irCommand.parsedCommandAddress, irCommand.parsedCommandData);
-            // irsend.sendRC5(encodedRC5);
+            uint16_t encodedRC5 = irsend.encodeRC5(irCommand.parsedCommandAddress, irCommand.parsedCommandData);
+            irsend.sendRC5(encodedRC5);
             irsend.sendRC5(irCommand.parsedCommandAddress, irCommand.parsedCommandData);
         } else if (protocol == "RC5X") {
             uint16_t encodedRC5X = irsend.encodeRC5X(irCommand.parsedCommandAddress, irCommand.parsedCommandData);

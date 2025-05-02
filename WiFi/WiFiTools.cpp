@@ -44,7 +44,6 @@ void WiFiTools::beaconSpamSetup() {
     // Initialize esp_wifi
     esp_err_t err = esp_wifi_init(&cfg);
     if (err != ESP_OK) {
-        Serial.printf("Failed to initialize esp_wifi: %d\n", err);
         Serial.printf("Error: %s\n", esp_err_to_name(err));
         return;
     }
@@ -52,7 +51,6 @@ void WiFiTools::beaconSpamSetup() {
     // Set WiFi storage to RAM
     err = esp_wifi_set_storage(WIFI_STORAGE_RAM);
     if (err != ESP_OK) {
-        Serial.printf("Failed to set WiFi storage: %d\n", err);
         Serial.printf("Error: %s\n", esp_err_to_name(err));
         return;
     }
@@ -60,7 +58,6 @@ void WiFiTools::beaconSpamSetup() {
     // Set WiFi mode to STA
     err = esp_wifi_set_mode(WIFI_MODE_STA);
     if (err != ESP_OK) {
-        Serial.printf("Failed to set WiFi mode: %d\n", err);
         Serial.printf("Error: %s\n", esp_err_to_name(err));
         return;
     }
@@ -68,7 +65,6 @@ void WiFiTools::beaconSpamSetup() {
     // Start WiFi
     err = esp_wifi_start();
     if (err != ESP_OK) {
-        Serial.printf("Failed to start WiFi: %d\n", err);
         Serial.printf("Error: %s\n", esp_err_to_name(err));
         return;
     }
@@ -76,12 +72,9 @@ void WiFiTools::beaconSpamSetup() {
     // Set WiFi to promiscuous mode
     err = esp_wifi_set_promiscuous(true);
     if (err != ESP_OK) {
-        Serial.printf("Failed to set WiFi to promiscuous mode: %d\n", err);
         Serial.printf("Error: %s\n", esp_err_to_name(err));
         return;
     }
-
-    Serial.println("WiFi initialized successfully");
 }
 
 void WiFiTools::nextChannel() {
@@ -101,10 +94,8 @@ void WiFiTools::generateRandomMac() {
     }
 }
 
-void WiFiTools::rickRollBeaconSpam() {
+void WiFiTools::rickRollBeaconSpam(int duration = 15000) {
     beaconSpamSetup();
-
-    Serial.println("Starting rickRollBeaconSpam");
 
     // Stop current WiFi connection and transition to AP mode
     WiFi.disconnect();
@@ -125,26 +116,21 @@ void WiFiTools::rickRollBeaconSpam() {
 
     // change WiFi mode to AP mode
     WiFi.mode(WIFI_AP);
-    Serial.println("WiFi mode set to AP");
 
     // set channel
     esp_err_t err = esp_wifi_set_channel(1, WIFI_SECOND_CHAN_NONE);
     if (err != ESP_OK) {
-        Serial.printf("Failed to set channel: %d\n", err);
+        Serial.printf("Error: %s\n", esp_err_to_name(err));
         return;
     }
-    Serial.println("Channel set to 1");
 
     delay(1000);
-    for (int k = 0; k < 10; k++) {
+    long startTime = millis();
+    while (millis() - startTime < duration) {
         // loop through all SSIDs
         for (int i = 0; i < 8; i++) {
             // generate random MAC address
             generateRandomMac();
-
-            // debug
-            Serial.printf("SSID: %s\n", rickRollSSIDs[i]);
-            Serial.printf("MAC: %02X:%02X:%02X:%02X:%02X:%02X\n", randomMacAddr[0], randomMacAddr[1], randomMacAddr[2], randomMacAddr[3], randomMacAddr[4], randomMacAddr[5]);
 
             // set MAC address in beacon packet
             memcpy(&beaconPacket[10], randomMacAddr, 6);
@@ -161,20 +147,12 @@ void WiFiTools::rickRollBeaconSpam() {
 
             // set channel for beacon frame
             beaconPacket[82] = channelIndex;
-            Serial.printf("Beacon Packet Channel: %d\n", channelIndex);
-
-            // print the beacon frame
-            for (int j = 0; j < packetSize; j++) {
-                Serial.printf("%02X ", beaconPacket[j]);
-            }
 
             for (int j = 0; j < 100; j++) {
                 // send beacon frame
                 err = esp_wifi_80211_tx(WIFI_IF_AP, beaconPacket, packetSize, false);
                 if (err != ESP_OK) {
                     Serial.printf("Failed to send beacon: %d\n", err);
-                } else {
-                    Serial.println("Beacon sent successfully");
                 }
                 delay(1);
             }
@@ -455,11 +433,6 @@ void WiFiTools::processWiFiData(uint8_t* networkBSSID, uint8_t channel, int capt
 
     // Disable promiscuous mode
     esp_wifi_set_promiscuous(false);
-
-    // DEBUG
-    Serial.println("Promiscuous mode disabled");
-    // Serial.printf("Captured %d packets\n", capturedPackets.size());
-    Serial.printf("Detected %d clients\n", detectedClients.size());
 
     // Set the packet scan flag to NONE, and captureHandshake and detectClients to false
     packetScanFlag = NONE;

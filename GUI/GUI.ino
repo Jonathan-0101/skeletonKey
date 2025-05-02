@@ -16,6 +16,7 @@
 #include <FS.h>
 #include <SPI.h>
 #include <TFT_eSPI.h>
+#include <VibrationMotor.h>
 
 #include "GUI_GSLC.h"
 #include "SD.h"
@@ -25,21 +26,29 @@
 // Program Globals
 // ------------------------------------------------
 bool bootScreen = true;
+bool vibrationEnabled = true;
 int deauthStatus = 0;
 long bootScreenDelay = 1500;
 long bootScreenStart;
+
+const int motorPin = 18;
+VibrationMotor vibro(motorPin);
 
 SPIClass& tftSPIInstance = SPI;
 
 // Save some element references for direct access
 //<Save_References !Start!>
-gslc_tsElemRef* m_pElemBtn10 = NULL;
-gslc_tsElemRef* m_pElemBtn12 = NULL;
-gslc_tsElemRef* m_pElemListbox_WiFi = NULL;
-gslc_tsElemRef* m_pElemOutTxt1 = NULL;
-gslc_tsElemRef* m_pElemOutTxt2 = NULL;
-gslc_tsElemRef* m_pListSlider_WiFi = NULL;
-gslc_tsElemRef* m_pWiFiDeauthButtonTxt = NULL;
+gslc_tsElemRef* m_pElemBtn10      = NULL;
+gslc_tsElemRef* m_pElemBtn12      = NULL;
+gslc_tsElemRef* m_pElemListbox_SubGHz= NULL;
+gslc_tsElemRef* m_pElemListbox_WiFi= NULL;
+gslc_tsElemRef* m_pElemOutTxt1    = NULL;
+gslc_tsElemRef* m_pElemOutTxt2    = NULL;
+gslc_tsElemRef* m_pListSlider_SubGHz= NULL;
+gslc_tsElemRef* m_pListSlider_WiFi= NULL;
+gslc_tsElemRef* m_pWiFiDeauthButtonTxt= NULL;
+gslc_tsElemRef* m_pWiFiDeauthButtonTxt16= NULL;
+gslc_tsElemRef* m_pWiFiDeauthButtonTxt16_18= NULL;
 //<Save_References !End!>
 
 // Define debug message function
@@ -64,7 +73,7 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
     if (eTouch == GSLC_TOUCH_UP_IN) {
         // From the element's ID we can determine which button was pressed.
         switch (pElem->nId) {
-                //<Button Enums !Start!>
+//<Button Enums !Start!>
             case Base_Button_home:
                 gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "Main Menu");
                 gslc_SetPageCur(&m_gui, E_PG_MAIN);
@@ -101,6 +110,42 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
                 break;
             case Settings_Button_vibrationToggle:
                 break;
+      case SubGHz_Button_jaming:
+if (deauthStatus == 0) {
+    deauthStatus = 1;
+    // Set the button text to "Deauthentication Enabled"
+    gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt, "Deauthentication Enabled");
+    // Set the button color to green
+    gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_GREEN_DK3, GSLC_COL_BLUE_DK1);
+} else {
+    deauthStatus = 0;
+    // Set the button text to "Deauthentication Disabled"
+    gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt, "Deauthentication Disabled");
+    // Set the button color to red
+    gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_RED_DK2, GSLC_COL_BLUE_DK1);
+}
+
+        break;
+      case SubGHz_Button_capture:
+        break;
+      case SubGHz_Button_frequency:
+if (deauthStatus == 0) {
+    deauthStatus = 1;
+    // Set the button text to "Deauthentication Enabled"
+    gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt, "Deauthentication Enabled");
+    // Set the button color to green
+    gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_GREEN_DK3, GSLC_COL_BLUE_DK1);
+} else {
+    deauthStatus = 0;
+    // Set the button text to "Deauthentication Disabled"
+    gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt, "Deauthentication Disabled");
+    // Set the button color to red
+    gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_RED_DK2, GSLC_COL_BLUE_DK1);
+}
+
+        break;
+      case SubGHz_Button_transmit:
+        break;
             case WiFi_Button_rickRollBeacon:
                 break;
             case WiFi_Button_scanNetworks:
@@ -119,7 +164,6 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
                     // Set the button color to red
                     gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_RED_DK2, GSLC_COL_BLUE_DK1);
                 }
-
                 break;
             case WiFi_Button_handshake:
                 gslc_PopupShow(&m_gui, E_Popup_HandshakeCapture, true);
@@ -133,7 +177,7 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
             case HandshakeCapture_Button_exit:
                 gslc_PopupHide(&m_gui);
                 break;
-                //<Button Enums !End!>
+//<Button Enums !End!>
             default:
                 break;
         }
@@ -158,14 +202,19 @@ bool CbListbox(void* pvGui, void* pvElemRef, int16_t nSelId) {
 
     // From the element's ID we can determine which listbox was active.
     switch (pElem->nId) {
-            //<Listbox Enums !Start!>
+//<Listbox Enums !Start!>
 
         case WiFi_Listbox_networks:
             if (nSelId != XLISTBOX_SEL_NONE) {
                 gslc_ElemXListboxGetItem(&m_gui, pElemRef, nSelId, acTxt, MAX_STR);
             }
             break;
-            //<Listbox Enums !End!>
+    case SubGHz_Listbox_signals:
+      if (nSelId != XLISTBOX_SEL_NONE) {
+        gslc_ElemXListboxGetItem(&m_gui, pElemRef, nSelId, acTxt, MAX_STR);
+      }
+      break;
+//<Listbox Enums !End!>
         default:
             break;
     }
@@ -183,13 +232,17 @@ bool CbSlidePos(void* pvGui, void* pvElemRef, int16_t nPos) {
 
     // From the element's ID we can determine which slider was updated.
     switch (pElem->nId) {
-            //<Slider Enums !Start!>
+//<Slider Enums !Start!>
 
         case WiFi_Listscroll_networks:
             // Fetch the slider position
             nVal = gslc_ElemXSliderGetPos(pGui, m_pListSlider_WiFi);
             break;
-            //<Slider Enums !End!>
+    case SubGHz_Listscroll_signals:
+      // Fetch the slider position
+      nVal = gslc_ElemXSliderGetPos(pGui,m_pListSlider_SubGHz);
+      break;
+//<Slider Enums !End!>
         default:
             break;
     }
@@ -199,11 +252,26 @@ bool CbSlidePos(void* pvGui, void* pvElemRef, int16_t nPos) {
 //<Tick Callback !Start!>
 //<Tick Callback !End!>
 
+void successVibration() {
+  if (vibrationEnabled) {
+    vibro.pulseFor(75);
+    delay(25);
+    vibro.pulse(2);
+  }
+}
+void failureVibration() {
+  if (vibrationEnabled) {
+    vibro.pulseFor(100);
+    delay(250);
+    vibro.pulseFor(100);
+  }
+}
+
 void setup() {
     // ------------------------------------------------
     // Initialize
     // ------------------------------------------------
-    delay(2500);
+    delay(100);
 
     Serial.begin(115200);
 
@@ -216,12 +284,15 @@ void setup() {
     // ------------------------------------------------
     InitGUIslice_gen();
 
+    delay(100);
+
     // Get the SPI instance from the display
     TFT_eSPI& display = *(TFT_eSPI*)gslc_DrvGetDriverDisp(&m_gui);
     tftSPIInstance = display.getSPIinstance();
 
     // Initialize the SD card sharing the SPI instance
     pinMode(42, OUTPUT);
+    digitalWrite(42, HIGH);
     if (!SD.begin(42, tftSPIInstance)) {
         Serial.println("SD card initialization failed!");
         return;
@@ -236,6 +307,8 @@ void setup() {
         bootScreenStart = millis();
         gslc_PopupShow(&m_gui, E_Popup_Boot, true);
     }
+
+    successVibration();
 }
 
 // -----------------------------------

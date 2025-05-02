@@ -250,8 +250,9 @@ class WiFiTools {
     /**
      * @brief Function to run a Rick Roll beacon spam attack
      *
+     * @param duration Duration of the attack in milliseconds, defaults to 15 seconds
      */
-    void rickRollBeaconSpam();
+    void rickRollBeaconSpam(int duration);
 
     /**
      * @brief Function to scan for available Wi-Fi networks

@@ -92,10 +92,10 @@ class IRTools {
     void sendRawIR(uint16_t *data, uint16_t length, uint16_t frequency);
 
     /**
-     * @brief Get the Avaliable Device Types object
+     * @brief Find the Avaliable Device Types
      *
      */
-    void getAvaliableDeviceTypes();
+    void findDeviceTypes();
 
     /**
      * @brief Get the Device Types object
@@ -105,11 +105,11 @@ class IRTools {
     std::vector<String> getDeviceTypes();
 
     /**
-     * @brief Get the Avaliable Device Brands object
+     * @brief Find the Avaliable Device Brands
      *
      * @param deviceTypeIndex Index of the device type
      */
-    void getAvaliableDeviceBrands(int deviceTypeIndex);
+    void findDeviceBrands(int deviceTypeIndex);
 
     /**
      * @brief Get the Device Brands object
@@ -119,11 +119,11 @@ class IRTools {
     std::vector<String> getDeviceBrands();
 
     /**
-     * @brief Get the Avaliable Devices object
+     * @brief Find the Avaliable Devices
      *
      * @param deviceBrandIndex Index of the device brand
      */
-    void getAvaliableDevices(int deviceBrandIndex);
+    void findDevices(int deviceBrandIndex);
 
     /**
      * @brief Get the Devices object
@@ -137,7 +137,7 @@ class IRTools {
      *
      * @param deviceIndex Index of the device
      */
-    void getAvaliableDeviceCommands(int deviceIndex);
+    void findDeviceCommands(int deviceIndex);
 
     /**
      * @brief Get the Device Commands object
