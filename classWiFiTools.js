@@ -15,7 +15,7 @@ var classWiFiTools =
     [ "nextChannel", "classWiFiTools.html#a6834bf8cebae5f22ff21b0ccd3360d92", null ],
     [ "processWiFiData", "classWiFiTools.html#ad699a00a0c7ec0ab314ebef10568d700", null ],
     [ "promiscuousPacketHandler", "classWiFiTools.html#a21dbe89a44a32b0e97960ae72ffdd523", null ],
-    [ "rickRollBeaconSpam", "classWiFiTools.html#aad07f39dfa5435f55098e332144f1e91", null ],
+    [ "rickRollBeaconSpam", "classWiFiTools.html#ae88636e7bdc162a4ffca01c949b24e32", null ],
     [ "scanWiFiNetworks", "classWiFiTools.html#a434b1b80009f52dd46bb9f26c7b17488", null ],
     [ "sendDeauthPacket", "classWiFiTools.html#a4496beddfc24492abda018e82a581dac", null ]
 ];

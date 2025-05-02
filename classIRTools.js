@@ -1,10 +1,10 @@
 var classIRTools =
 [
     [ "IRTools", "classIRTools.html#ad594e21762ffadea48e99e06898b6dc1", null ],
-    [ "getAvaliableDeviceBrands", "classIRTools.html#a9ef6e640f8ab49898806831f80641f9f", null ],
-    [ "getAvaliableDeviceCommands", "classIRTools.html#a1c02a9124a3101057a3acf882743d8ae", null ],
-    [ "getAvaliableDevices", "classIRTools.html#ada1ab36488fcc025b2003a6bb7081fd6", null ],
-    [ "getAvaliableDeviceTypes", "classIRTools.html#ad600de66882a5b9bc95323dea98e9f62", null ],
+    [ "findDeviceBrands", "classIRTools.html#aa7a4df1bfcd5cc065f0b5a49b086fe6e", null ],
+    [ "findDeviceCommands", "classIRTools.html#a3f3a3609a5252d6ba735aca5d3d19726", null ],
+    [ "findDevices", "classIRTools.html#aa48fb5d19fb0c215f8f6b64b4d5ba115", null ],
+    [ "findDeviceTypes", "classIRTools.html#a25a27d91cc5d09fb43361302fe7275d2", null ],
     [ "getDeviceBrands", "classIRTools.html#a9a21fd8fe5ebbdd9a12b6fed0077cd40", null ],
     [ "getDeviceCommands", "classIRTools.html#a8e6db99af3f1c33c7081546b017f1389", null ],
     [ "getDevices", "classIRTools.html#aa362f0ddef59adf3fd544f2d0e5eb306", null ],
