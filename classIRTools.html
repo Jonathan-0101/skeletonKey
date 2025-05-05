@@ -169,9 +169,13 @@ Collaboration diagram for IRTools:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad594e21762ffadea48e99e06898b6dc1" id="r_ad594e21762ffadea48e99e06898b6dc1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIRTools.html#ad594e21762ffadea48e99e06898b6dc1">IRTools</a> (fs::SDFS &amp;sdInstance)</td></tr>
-<tr class="memdesc:ad594e21762ffadea48e99e06898b6dc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classIRTools.html">IRTools</a> object.  <br /></td></tr>
-<tr class="separator:ad594e21762ffadea48e99e06898b6dc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa38207b9c60417eee7417120b1cdb8c2" id="r_aa38207b9c60417eee7417120b1cdb8c2"><td class="memItemLeft" align="right" valign="top"><a id="aa38207b9c60417eee7417120b1cdb8c2" name="aa38207b9c60417eee7417120b1cdb8c2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>IRTools</b> ()</td></tr>
+<tr class="memdesc:aa38207b9c60417eee7417120b1cdb8c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classIRTools.html">IRTools</a> object. <br /></td></tr>
+<tr class="separator:aa38207b9c60417eee7417120b1cdb8c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abde361acdc74baad97e122417ffc6e2f" id="r_abde361acdc74baad97e122417ffc6e2f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIRTools.html#abde361acdc74baad97e122417ffc6e2f">init</a> (fs::SDFS &amp;sdInstance)</td></tr>
+<tr class="memdesc:abde361acdc74baad97e122417ffc6e2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classIRTools.html">IRTools</a> object.  <br /></td></tr>
+<tr class="separator:abde361acdc74baad97e122417ffc6e2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf79bbb13c7f549edf20dbb5af2ad5f7" id="r_abf79bbb13c7f549edf20dbb5af2ad5f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIRTools.html#abf79bbb13c7f549edf20dbb5af2ad5f7">sendRawIR</a> (uint16_t *data, uint16_t length, uint16_t frequency)</td></tr>
 <tr class="memdesc:abf79bbb13c7f549edf20dbb5af2ad5f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to send a custom raw IR command.  <br /></td></tr>
 <tr class="separator:abf79bbb13c7f549edf20dbb5af2ad5f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -215,9 +219,9 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>kIrLed</b> = 38</
 <tr class="memitem:abae6b9cc87f0b5bd7854972b40dd3257" id="r_abae6b9cc87f0b5bd7854972b40dd3257"><td class="memItemLeft" align="right" valign="top"><a id="abae6b9cc87f0b5bd7854972b40dd3257" name="abae6b9cc87f0b5bd7854972b40dd3257"></a>
 IRsend&#160;</td><td class="memItemRight" valign="bottom"><b>irsend</b></td></tr>
 <tr class="separator:abae6b9cc87f0b5bd7854972b40dd3257"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fdd5e8f7cf0632734649366d8b3879a" id="r_a7fdd5e8f7cf0632734649366d8b3879a"><td class="memItemLeft" align="right" valign="top"><a id="a7fdd5e8f7cf0632734649366d8b3879a" name="a7fdd5e8f7cf0632734649366d8b3879a"></a>
-fs::SDFS *&#160;</td><td class="memItemRight" valign="bottom"><b>sd</b></td></tr>
-<tr class="separator:a7fdd5e8f7cf0632734649366d8b3879a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6eaf429153003f796483eca1b1c7835f" id="r_a6eaf429153003f796483eca1b1c7835f"><td class="memItemLeft" align="right" valign="top"><a id="a6eaf429153003f796483eca1b1c7835f" name="a6eaf429153003f796483eca1b1c7835f"></a>
+fs::SDFS *&#160;</td><td class="memItemRight" valign="bottom"><b>_sd</b></td></tr>
+<tr class="separator:a6eaf429153003f796483eca1b1c7835f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aedac15513b8a854159bdb1265472a019" id="r_aedac15513b8a854159bdb1265472a019"><td class="memItemLeft" align="right" valign="top"><a id="aedac15513b8a854159bdb1265472a019" name="aedac15513b8a854159bdb1265472a019"></a>
 std::vector&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>deviceTypes</b></td></tr>
 <tr class="separator:aedac15513b8a854159bdb1265472a019"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -246,33 +250,6 @@ String&#160;</td><td class="memItemRight" valign="bottom"><b>device</b></td></tr
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>jamSignal</b> [2] = {65535, 0}</td></tr>
 <tr class="separator:a9f14f957099522c9dfd26204b6b7fa1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ad594e21762ffadea48e99e06898b6dc1" name="ad594e21762ffadea48e99e06898b6dc1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad594e21762ffadea48e99e06898b6dc1">&#9670;&#160;</a></span>IRTools()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">IRTools::IRTools </td>
-          <td>(</td>
-          <td class="paramtype">fs::SDFS &amp;&#160;</td>
-          <td class="paramname"><em>sdInstance</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Construct a new <a class="el" href="classIRTools.html">IRTools</a> object. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">sdInstance</td><td>SD instance </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="aa7a4df1bfcd5cc065f0b5a49b086fe6e" name="aa7a4df1bfcd5cc065f0b5a49b086fe6e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa7a4df1bfcd5cc065f0b5a49b086fe6e">&#9670;&#160;</a></span>findDeviceBrands()</h2>
@@ -429,6 +406,34 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>jamSignal</b> [2]
 
 <p>Get the Device Types object. </p>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;String&gt; </dd></dl>
+
+<p class="reference">References <a class="el" href="classIRTools.html#a25a27d91cc5d09fb43361302fe7275d2">findDeviceTypes()</a>.</p>
+
+</div>
+</div>
+<a id="abde361acdc74baad97e122417ffc6e2f" name="abde361acdc74baad97e122417ffc6e2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abde361acdc74baad97e122417ffc6e2f">&#9670;&#160;</a></span>init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IRTools::init </td>
+          <td>(</td>
+          <td class="paramtype">fs::SDFS &amp;&#160;</td>
+          <td class="paramname"><em>sdInstance</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="classIRTools.html">IRTools</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sdInstance</td><td>SDFS instance </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

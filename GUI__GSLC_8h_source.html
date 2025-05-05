@@ -329,14 +329,14 @@ $(document).ready(function(){initNavTree('GUI__GSLC_8h_source.html',''); initRes
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="comment">// Element References for direct access</span></div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="comment">//&lt;Extern_References !Start!&gt;</span></div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><span class="keyword">extern</span> gslc_tsElemRef* m_pElemBtn10;</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="keyword">extern</span> gslc_tsElemRef* m_pElemBtn12;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><span class="keyword">extern</span> gslc_tsElemRef* batteryChrgTxt;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="keyword">extern</span> gslc_tsElemRef* m_pElemBtn10;</div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="keyword">extern</span> gslc_tsElemRef* m_pElemListbox_SubGHz;</div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="keyword">extern</span> gslc_tsElemRef* m_pElemListbox_WiFi;</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="keyword">extern</span> gslc_tsElemRef* m_pElemOutTxt1;</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="keyword">extern</span> gslc_tsElemRef* m_pElemOutTxt2;</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="keyword">extern</span> gslc_tsElemRef* m_pListSlider_SubGHz;</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="keyword">extern</span> gslc_tsElemRef* m_pListSlider_WiFi;</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="keyword">extern</span> gslc_tsElemRef* m_pListSlider_SubGHz;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="keyword">extern</span> gslc_tsElemRef* m_pListSlider_WiFi;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="keyword">extern</span> gslc_tsElemRef* m_pSettingsVibroButtonTxt;</div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="keyword">extern</span> gslc_tsElemRef* m_pWiFiDeauthButtonTxt;</div>
 <div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="keyword">extern</span> gslc_tsElemRef* m_pWiFiDeauthButtonTxt16;</div>
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="keyword">extern</span> gslc_tsElemRef* m_pWiFiDeauthButtonTxt16_18;</div>
@@ -416,12 +416,12 @@ $(document).ready(function(){initNavTree('GUI__GSLC_8h_source.html',''); initRes
 <div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>  m_pElemOutTxt1 = pElemRef;</div>
 <div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>  </div>
 <div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>  <span class="comment">// Create Base_Text_Bat runtime modifiable text</span></div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>  <span class="keyword">static</span> <span class="keywordtype">char</span> m_sDisplayText2[6] = <span class="stringliteral">&quot;100%&quot;</span>;</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>  pElemRef = gslc_ElemCreateTxt(&amp;m_gui,Base_Text_Bat,E_PG_BASE,(gslc_tsRect){243,19,60,16},</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    (<span class="keywordtype">char</span>*)m_sDisplayText2,6,E_BUILTIN10X16);</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>  <span class="keyword">static</span> <span class="keywordtype">char</span> m_sDisplayText2[7] = <span class="stringliteral">&quot;100%&quot;</span>;</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>  pElemRef = gslc_ElemCreateTxt(&amp;m_gui,Base_Text_Bat,E_PG_BASE,(gslc_tsRect){243,19,72,16},</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    (<span class="keywordtype">char</span>*)m_sDisplayText2,7,E_BUILTIN10X16);</div>
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>  gslc_ElemSetTxtAlign(&amp;m_gui,pElemRef,GSLC_ALIGN_MID_RIGHT);</div>
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>  gslc_ElemSetFillEn(&amp;m_gui,pElemRef,<span class="keyword">false</span>);</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>  m_pElemOutTxt2 = pElemRef;</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>  batteryChrgTxt = pElemRef;</div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span> </div>
 <div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>  <span class="comment">// Create Base_Line_topBar line </span></div>
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>  pElemRef = gslc_ElemCreateLine(&amp;m_gui,Base_Line_topBar,E_PG_BASE,0,49,320,49);</div>
@@ -483,14 +483,14 @@ $(document).ready(function(){initNavTree('GUI__GSLC_8h_source.html',''); initRes
 <div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>  gslc_ElemSetRoundEn(&amp;m_gui, pElemRef, <span class="keyword">true</span>);</div>
 <div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>  </div>
 <div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>  <span class="comment">// Create Settings_Button_vibrationToggle button with modifiable text label</span></div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>  <span class="keyword">static</span> <span class="keywordtype">char</span> m_strbtn12[21] = <span class="stringliteral">&quot;Vibration Enabled&quot;</span>;</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>  <span class="keyword">static</span> <span class="keywordtype">char</span> m_strbtn12[21] = <span class="stringliteral">&quot;Vibration Disabled&quot;</span>;</div>
 <div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>  pElemRef = gslc_ElemCreateBtnTxt(&amp;m_gui,Settings_Button_vibrationToggle,E_PG_Settings,</div>
 <div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    (gslc_tsRect){40,112,240,32},</div>
 <div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    (<span class="keywordtype">char</span>*)m_strbtn12,21,E_BUILTIN5X8,&amp;CbBtnCommon);</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>  gslc_ElemSetCol(&amp;m_gui,pElemRef,GSLC_COL_BLUE_DK2,GSLC_COL_GREEN_DK2,GSLC_COL_BLUE_DK1);</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>  gslc_ElemSetCol(&amp;m_gui,pElemRef,GSLC_COL_BLUE_DK2,GSLC_COL_RED_DK2,GSLC_COL_BLUE_DK1);</div>
 <div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>  gslc_ElemSetRoundEn(&amp;m_gui, pElemRef, <span class="keyword">true</span>);</div>
 <div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>  gslc_ElemSetFrameEn(&amp;m_gui,pElemRef,<span class="keyword">false</span>);</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>  m_pElemBtn12 = pElemRef;</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>  m_pSettingsVibroButtonTxt = pElemRef;</div>
 <div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span> </div>
 <div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>  <span class="comment">// -----------------------------------</span></div>
 <div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>  <span class="comment">// PAGE: E_PG_RFID</span></div>

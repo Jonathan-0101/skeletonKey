@@ -168,104 +168,110 @@ $(document).ready(function(){initNavTree('IRTools_8h_source.html',''); initResiz
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#define IRTOOLS_H</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;Arduino.h&gt;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;IRremoteESP8266.h&gt;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;IRsend.h&gt;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &lt;SD.h&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;FS.h&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;IRremoteESP8266.h&gt;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &lt;IRsend.h&gt;</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="foldopen" id="foldopen00028" data-start="{" data-end="};">
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="IRTools_8h.html#aa3a28cc7590f34aedf57a47f003b562c">   28</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    raw,</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    parsed</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>} <a class="code hl_enumeration" href="IRTools_8h.html#aa3a28cc7590f34aedf57a47f003b562c">IRCommandType</a>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#include &quot;SD.h&quot;</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="foldopen" id="foldopen00030" data-start="{" data-end="};">
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="IRTools_8h.html#aa3a28cc7590f34aedf57a47f003b562c">   30</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    raw,</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    parsed</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>} <a class="code hl_enumeration" href="IRTools_8h.html#aa3a28cc7590f34aedf57a47f003b562c">IRCommandType</a>;</div>
 </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="foldopen" id="foldopen00037" data-start="{" data-end="};">
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="structIRDeviceInfo.html">   37</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    String deviceType;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    String deviceBrand;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    String deviceName;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    String IRFile;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>} <a class="code hl_struct" href="structIRDeviceInfo.html">IRDeviceInfo</a>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="foldopen" id="foldopen00039" data-start="{" data-end="};">
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="structIRDeviceInfo.html">   39</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    String deviceType;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    String deviceBrand;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    String deviceName;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    String IRFile;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>} <a class="code hl_struct" href="structIRDeviceInfo.html">IRDeviceInfo</a>;</div>
 </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="foldopen" id="foldopen00048" data-start="{" data-end="};">
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="structIRCommand.html">   48</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_struct" href="structIRDeviceInfo.html">IRDeviceInfo</a> deviceInfo;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    String commandName;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <a class="code hl_enumeration" href="IRTools_8h.html#aa3a28cc7590f34aedf57a47f003b562c">IRCommandType</a> commandType;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    String commandProtocol;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    uint32_t parsedCommandAddress;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    uint32_t parsedCommandData;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    uint32_t rawCommandFrequency;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordtype">float</span> rawCommandDutyCycle;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    uint16_t rawCommandLength;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    std::vector&lt;uint16_t&gt; rawCommandData;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>} <a class="code hl_struct" href="structIRCommand.html">IRCommand</a>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="foldopen" id="foldopen00050" data-start="{" data-end="};">
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="structIRCommand.html">   50</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <a class="code hl_struct" href="structIRDeviceInfo.html">IRDeviceInfo</a> deviceInfo;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    String commandName;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <a class="code hl_enumeration" href="IRTools_8h.html#aa3a28cc7590f34aedf57a47f003b562c">IRCommandType</a> commandType;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    String commandProtocol;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    uint32_t parsedCommandAddress;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    uint32_t parsedCommandData;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    uint32_t rawCommandFrequency;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordtype">float</span> rawCommandDutyCycle;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    uint16_t rawCommandLength;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    std::vector&lt;uint16_t&gt; rawCommandData;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>} <a class="code hl_struct" href="structIRCommand.html">IRCommand</a>;</div>
 </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="foldopen" id="foldopen00061" data-start="{" data-end="};">
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="classIRTools.html">   61</a></span><span class="keyword">class </span><a class="code hl_class" href="classIRTools.html">IRTools</a> {</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>   <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    uint16_t kIrLed = 38;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    IRsend irsend;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    fs::SDFS *sd;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    std::vector&lt;String&gt; deviceTypes;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    std::vector&lt;String&gt; deviceBrands;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    std::vector&lt;String&gt; devices;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    std::vector&lt;IRCommand&gt; deviceCommands;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    String deviceType;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    String deviceBrand;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    String devicePath;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    String device;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    uint16_t jamSignal[2] = {65535, 0};</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="foldopen" id="foldopen00063" data-start="{" data-end="};">
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="classIRTools.html">   63</a></span><span class="keyword">class </span><a class="code hl_class" href="classIRTools.html">IRTools</a> {</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>   <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    uint16_t kIrLed = 38;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    IRsend irsend;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    fs::SDFS *_sd;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    std::vector&lt;String&gt; deviceTypes;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    std::vector&lt;String&gt; deviceBrands;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    std::vector&lt;String&gt; devices;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    std::vector&lt;IRCommand&gt; deviceCommands;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    String deviceType;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    String deviceBrand;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    String devicePath;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    String device;</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>   <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <a class="code hl_class" href="classIRTools.html">IRTools</a>(fs::SDFS &amp;sdInstance);</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classIRTools.html#abf79bbb13c7f549edf20dbb5af2ad5f7">sendRawIR</a>(uint16_t *data, uint16_t length, uint16_t frequency);</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classIRTools.html#a25a27d91cc5d09fb43361302fe7275d2">findDeviceTypes</a>();</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    std::vector&lt;String&gt; <a class="code hl_function" href="classIRTools.html#a0cbc8ee3ab47c617beb756f56feb281c">getDeviceTypes</a>();</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classIRTools.html#aa7a4df1bfcd5cc065f0b5a49b086fe6e">findDeviceBrands</a>(<span class="keywordtype">int</span> deviceTypeIndex);</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    std::vector&lt;String&gt; <a class="code hl_function" href="classIRTools.html#a9a21fd8fe5ebbdd9a12b6fed0077cd40">getDeviceBrands</a>();</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classIRTools.html#aa48fb5d19fb0c215f8f6b64b4d5ba115">findDevices</a>(<span class="keywordtype">int</span> deviceBrandIndex);</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    std::vector&lt;String&gt; <a class="code hl_function" href="classIRTools.html#aa362f0ddef59adf3fd544f2d0e5eb306">getDevices</a>();</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classIRTools.html#a3f3a3609a5252d6ba735aca5d3d19726">findDeviceCommands</a>(<span class="keywordtype">int</span> deviceIndex);</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    std::vector&lt;IRCommand&gt; <a class="code hl_function" href="classIRTools.html#a8e6db99af3f1c33c7081546b017f1389">getDeviceCommands</a>();</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classIRTools.html#a3f33ba5781572c4845209db65664011e">sendIRCommand</a>(<a class="code hl_struct" href="structIRCommand.html">IRCommand</a> irCommand);</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classIRTools.html#ab40750ff9a6f8316ad83f7171b1304c2">jamIR</a>(<span class="keywordtype">int</span> duration);</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>};</div>
-</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    uint16_t jamSignal[2] = {65535, 0};</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>   <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <a class="code hl_function" href="classIRTools.html#aa38207b9c60417eee7417120b1cdb8c2">IRTools</a>();</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classIRTools.html#abde361acdc74baad97e122417ffc6e2f">init</a>(fs::SDFS &amp;sdInstance);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classIRTools.html#abf79bbb13c7f549edf20dbb5af2ad5f7">sendRawIR</a>(uint16_t *data, uint16_t length, uint16_t frequency);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classIRTools.html#a25a27d91cc5d09fb43361302fe7275d2">findDeviceTypes</a>();</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    std::vector&lt;String&gt; <a class="code hl_function" href="classIRTools.html#a0cbc8ee3ab47c617beb756f56feb281c">getDeviceTypes</a>();</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classIRTools.html#aa7a4df1bfcd5cc065f0b5a49b086fe6e">findDeviceBrands</a>(<span class="keywordtype">int</span> deviceTypeIndex);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    std::vector&lt;String&gt; <a class="code hl_function" href="classIRTools.html#a9a21fd8fe5ebbdd9a12b6fed0077cd40">getDeviceBrands</a>();</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classIRTools.html#aa48fb5d19fb0c215f8f6b64b4d5ba115">findDevices</a>(<span class="keywordtype">int</span> deviceBrandIndex);</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    std::vector&lt;String&gt; <a class="code hl_function" href="classIRTools.html#aa362f0ddef59adf3fd544f2d0e5eb306">getDevices</a>();</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classIRTools.html#a3f3a3609a5252d6ba735aca5d3d19726">findDeviceCommands</a>(<span class="keywordtype">int</span> deviceIndex);</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    std::vector&lt;IRCommand&gt; <a class="code hl_function" href="classIRTools.html#a8e6db99af3f1c33c7081546b017f1389">getDeviceCommands</a>();</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classIRTools.html#a3f33ba5781572c4845209db65664011e">sendIRCommand</a>(<a class="code hl_struct" href="structIRCommand.html">IRCommand</a> irCommand);</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="preprocessor">#endif  </span><span class="comment">// IRTOOLS_H</span></div>
-<div class="ttc" id="aIRTools_8h_html_aa3a28cc7590f34aedf57a47f003b562c"><div class="ttname"><a href="IRTools_8h.html#aa3a28cc7590f34aedf57a47f003b562c">IRCommandType</a></div><div class="ttdeci">IRCommandType</div><div class="ttdoc">Enum to store the type of IR command.</div><div class="ttdef"><b>Definition</b> IRTools.h:28</div></div>
-<div class="ttc" id="aclassIRTools_html"><div class="ttname"><a href="classIRTools.html">IRTools</a></div><div class="ttdef"><b>Definition</b> IRTools.h:61</div></div>
-<div class="ttc" id="aclassIRTools_html_a0cbc8ee3ab47c617beb756f56feb281c"><div class="ttname"><a href="classIRTools.html#a0cbc8ee3ab47c617beb756f56feb281c">IRTools::getDeviceTypes</a></div><div class="ttdeci">std::vector&lt; String &gt; getDeviceTypes()</div><div class="ttdoc">Get the Device Types object.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:45</div></div>
-<div class="ttc" id="aclassIRTools_html_a25a27d91cc5d09fb43361302fe7275d2"><div class="ttname"><a href="classIRTools.html#a25a27d91cc5d09fb43361302fe7275d2">IRTools::findDeviceTypes</a></div><div class="ttdeci">void findDeviceTypes()</div><div class="ttdoc">Find the Avaliable Device Types.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:20</div></div>
-<div class="ttc" id="aclassIRTools_html_a3f33ba5781572c4845209db65664011e"><div class="ttname"><a href="classIRTools.html#a3f33ba5781572c4845209db65664011e">IRTools::sendIRCommand</a></div><div class="ttdeci">void sendIRCommand(IRCommand irCommand)</div><div class="ttdoc">Function to send an IR command.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:212</div></div>
-<div class="ttc" id="aclassIRTools_html_a3f3a3609a5252d6ba735aca5d3d19726"><div class="ttname"><a href="classIRTools.html#a3f3a3609a5252d6ba735aca5d3d19726">IRTools::findDeviceCommands</a></div><div class="ttdeci">void findDeviceCommands(int deviceIndex)</div><div class="ttdoc">Get the Avaliable Device Commands object.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:114</div></div>
-<div class="ttc" id="aclassIRTools_html_a8e6db99af3f1c33c7081546b017f1389"><div class="ttname"><a href="classIRTools.html#a8e6db99af3f1c33c7081546b017f1389">IRTools::getDeviceCommands</a></div><div class="ttdeci">std::vector&lt; IRCommand &gt; getDeviceCommands()</div><div class="ttdoc">Get the Device Commands object.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:204</div></div>
-<div class="ttc" id="aclassIRTools_html_a9a21fd8fe5ebbdd9a12b6fed0077cd40"><div class="ttname"><a href="classIRTools.html#a9a21fd8fe5ebbdd9a12b6fed0077cd40">IRTools::getDeviceBrands</a></div><div class="ttdeci">std::vector&lt; String &gt; getDeviceBrands()</div><div class="ttdoc">Get the Device Brands object.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:76</div></div>
-<div class="ttc" id="aclassIRTools_html_aa362f0ddef59adf3fd544f2d0e5eb306"><div class="ttname"><a href="classIRTools.html#aa362f0ddef59adf3fd544f2d0e5eb306">IRTools::getDevices</a></div><div class="ttdeci">std::vector&lt; String &gt; getDevices()</div><div class="ttdoc">Get the Devices object.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:107</div></div>
-<div class="ttc" id="aclassIRTools_html_aa48fb5d19fb0c215f8f6b64b4d5ba115"><div class="ttname"><a href="classIRTools.html#aa48fb5d19fb0c215f8f6b64b4d5ba115">IRTools::findDevices</a></div><div class="ttdeci">void findDevices(int deviceBrandIndex)</div><div class="ttdoc">Find the Avaliable Devices.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:80</div></div>
-<div class="ttc" id="aclassIRTools_html_aa7a4df1bfcd5cc065f0b5a49b086fe6e"><div class="ttname"><a href="classIRTools.html#aa7a4df1bfcd5cc065f0b5a49b086fe6e">IRTools::findDeviceBrands</a></div><div class="ttdeci">void findDeviceBrands(int deviceTypeIndex)</div><div class="ttdoc">Find the Avaliable Device Brands.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:49</div></div>
-<div class="ttc" id="aclassIRTools_html_ab40750ff9a6f8316ad83f7171b1304c2"><div class="ttname"><a href="classIRTools.html#ab40750ff9a6f8316ad83f7171b1304c2">IRTools::jamIR</a></div><div class="ttdeci">void jamIR(int duration)</div><div class="ttdoc">Function to jam IR signals.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:254</div></div>
-<div class="ttc" id="aclassIRTools_html_abf79bbb13c7f549edf20dbb5af2ad5f7"><div class="ttname"><a href="classIRTools.html#abf79bbb13c7f549edf20dbb5af2ad5f7">IRTools::sendRawIR</a></div><div class="ttdeci">void sendRawIR(uint16_t *data, uint16_t length, uint16_t frequency)</div><div class="ttdoc">Function to send a custom raw IR command.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:16</div></div>
-<div class="ttc" id="astructIRCommand_html"><div class="ttname"><a href="structIRCommand.html">IRCommand</a></div><div class="ttdoc">Struct to store IR command information.</div><div class="ttdef"><b>Definition</b> IRTools.h:48</div></div>
-<div class="ttc" id="astructIRDeviceInfo_html"><div class="ttname"><a href="structIRDeviceInfo.html">IRDeviceInfo</a></div><div class="ttdoc">Struct to store IR device information.</div><div class="ttdef"><b>Definition</b> IRTools.h:37</div></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classIRTools.html#ab40750ff9a6f8316ad83f7171b1304c2">jamIR</a>(<span class="keywordtype">int</span> duration);</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>};</div>
+</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="preprocessor">#endif  </span><span class="comment">// IRTOOLS_H</span></div>
+<div class="ttc" id="aIRTools_8h_html_aa3a28cc7590f34aedf57a47f003b562c"><div class="ttname"><a href="IRTools_8h.html#aa3a28cc7590f34aedf57a47f003b562c">IRCommandType</a></div><div class="ttdeci">IRCommandType</div><div class="ttdoc">Enum to store the type of IR command.</div><div class="ttdef"><b>Definition</b> IRTools.h:30</div></div>
+<div class="ttc" id="aclassIRTools_html"><div class="ttname"><a href="classIRTools.html">IRTools</a></div><div class="ttdef"><b>Definition</b> IRTools.h:63</div></div>
+<div class="ttc" id="aclassIRTools_html_a0cbc8ee3ab47c617beb756f56feb281c"><div class="ttname"><a href="classIRTools.html#a0cbc8ee3ab47c617beb756f56feb281c">IRTools::getDeviceTypes</a></div><div class="ttdeci">std::vector&lt; String &gt; getDeviceTypes()</div><div class="ttdoc">Get the Device Types object.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:50</div></div>
+<div class="ttc" id="aclassIRTools_html_a25a27d91cc5d09fb43361302fe7275d2"><div class="ttname"><a href="classIRTools.html#a25a27d91cc5d09fb43361302fe7275d2">IRTools::findDeviceTypes</a></div><div class="ttdeci">void findDeviceTypes()</div><div class="ttdoc">Find the Avaliable Device Types.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:25</div></div>
+<div class="ttc" id="aclassIRTools_html_a3f33ba5781572c4845209db65664011e"><div class="ttname"><a href="classIRTools.html#a3f33ba5781572c4845209db65664011e">IRTools::sendIRCommand</a></div><div class="ttdeci">void sendIRCommand(IRCommand irCommand)</div><div class="ttdoc">Function to send an IR command.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:220</div></div>
+<div class="ttc" id="aclassIRTools_html_a3f3a3609a5252d6ba735aca5d3d19726"><div class="ttname"><a href="classIRTools.html#a3f3a3609a5252d6ba735aca5d3d19726">IRTools::findDeviceCommands</a></div><div class="ttdeci">void findDeviceCommands(int deviceIndex)</div><div class="ttdoc">Get the Avaliable Device Commands object.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:122</div></div>
+<div class="ttc" id="aclassIRTools_html_a8e6db99af3f1c33c7081546b017f1389"><div class="ttname"><a href="classIRTools.html#a8e6db99af3f1c33c7081546b017f1389">IRTools::getDeviceCommands</a></div><div class="ttdeci">std::vector&lt; IRCommand &gt; getDeviceCommands()</div><div class="ttdoc">Get the Device Commands object.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:212</div></div>
+<div class="ttc" id="aclassIRTools_html_a9a21fd8fe5ebbdd9a12b6fed0077cd40"><div class="ttname"><a href="classIRTools.html#a9a21fd8fe5ebbdd9a12b6fed0077cd40">IRTools::getDeviceBrands</a></div><div class="ttdeci">std::vector&lt; String &gt; getDeviceBrands()</div><div class="ttdoc">Get the Device Brands object.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:84</div></div>
+<div class="ttc" id="aclassIRTools_html_aa362f0ddef59adf3fd544f2d0e5eb306"><div class="ttname"><a href="classIRTools.html#aa362f0ddef59adf3fd544f2d0e5eb306">IRTools::getDevices</a></div><div class="ttdeci">std::vector&lt; String &gt; getDevices()</div><div class="ttdoc">Get the Devices object.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:115</div></div>
+<div class="ttc" id="aclassIRTools_html_aa38207b9c60417eee7417120b1cdb8c2"><div class="ttname"><a href="classIRTools.html#aa38207b9c60417eee7417120b1cdb8c2">IRTools::IRTools</a></div><div class="ttdeci">IRTools()</div><div class="ttdoc">Construct a new IRTools object.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:13</div></div>
+<div class="ttc" id="aclassIRTools_html_aa48fb5d19fb0c215f8f6b64b4d5ba115"><div class="ttname"><a href="classIRTools.html#aa48fb5d19fb0c215f8f6b64b4d5ba115">IRTools::findDevices</a></div><div class="ttdeci">void findDevices(int deviceBrandIndex)</div><div class="ttdoc">Find the Avaliable Devices.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:88</div></div>
+<div class="ttc" id="aclassIRTools_html_aa7a4df1bfcd5cc065f0b5a49b086fe6e"><div class="ttname"><a href="classIRTools.html#aa7a4df1bfcd5cc065f0b5a49b086fe6e">IRTools::findDeviceBrands</a></div><div class="ttdeci">void findDeviceBrands(int deviceTypeIndex)</div><div class="ttdoc">Find the Avaliable Device Brands.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:57</div></div>
+<div class="ttc" id="aclassIRTools_html_ab40750ff9a6f8316ad83f7171b1304c2"><div class="ttname"><a href="classIRTools.html#ab40750ff9a6f8316ad83f7171b1304c2">IRTools::jamIR</a></div><div class="ttdeci">void jamIR(int duration)</div><div class="ttdoc">Function to jam IR signals.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:262</div></div>
+<div class="ttc" id="aclassIRTools_html_abde361acdc74baad97e122417ffc6e2f"><div class="ttname"><a href="classIRTools.html#abde361acdc74baad97e122417ffc6e2f">IRTools::init</a></div><div class="ttdeci">void init(fs::SDFS &amp;sdInstance)</div><div class="ttdoc">Construct a new IRTools object.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:17</div></div>
+<div class="ttc" id="aclassIRTools_html_abf79bbb13c7f549edf20dbb5af2ad5f7"><div class="ttname"><a href="classIRTools.html#abf79bbb13c7f549edf20dbb5af2ad5f7">IRTools::sendRawIR</a></div><div class="ttdeci">void sendRawIR(uint16_t *data, uint16_t length, uint16_t frequency)</div><div class="ttdoc">Function to send a custom raw IR command.</div><div class="ttdef"><b>Definition</b> IRTools.cpp:21</div></div>
+<div class="ttc" id="astructIRCommand_html"><div class="ttname"><a href="structIRCommand.html">IRCommand</a></div><div class="ttdoc">Struct to store IR command information.</div><div class="ttdef"><b>Definition</b> IRTools.h:50</div></div>
+<div class="ttc" id="astructIRDeviceInfo_html"><div class="ttname"><a href="structIRDeviceInfo.html">IRDeviceInfo</a></div><div class="ttdoc">Struct to store IR device information.</div><div class="ttdef"><b>Definition</b> IRTools.h:39</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
