@@ -3,7 +3,8 @@
 #include <Arduino.h>
 #include <ELECHOUSE_CC1101_SRC_DRV.h>
 #include <HardwareSerial.h>
-#include <SPI.h>
+
+#include "SPI.h"
 
 // Constructor
 SubGHzTools::SubGHzTools() {
@@ -13,7 +14,7 @@ SubGHzTools::SubGHzTools() {
 
 void SubGHzTools::configureModule() {
     // Main part to tune CC1101 with proper frequency, modulation and encoding
-    ELECHOUSE_cc1101.Init();                 // Must be set to initialize the cc1101!
+    // ELECHOUSE_cc1101.Init();                 // Must be set to initialize the cc1101!
     ELECHOUSE_cc1101.setCCMode(1);           // Set config for internal transmission mode. value 0 is for RAW recording/replaying
     ELECHOUSE_cc1101.setModulation(2);       // Set modulation mode. 0 = 2-FSK, 1 = GFSK, 2 = ASK/OOK, 3 = 4-FSK, 4 = MSK.
     ELECHOUSE_cc1101.setMHZ(433.92);         // Here you can set your basic frequency. The lib calculates the frequency automatically (default = 433.92).The cc1101 can: 300-348 MHZ, 387-464MHZ and 779-928MHZ. Read More info from datasheet.
@@ -56,9 +57,10 @@ void SubGHzTools::init() {
     Serial.println("CC1101_B added");
 
     // Set and configure the first CC1101 module (CC1101_A)
-    // ELECHOUSE_cc1101.setModul(0);
-    // configureModule();
-    // Serial.println("CC1101_A configureModule done");
+    ELECHOUSE_cc1101.setModul(0);
+    ELECHOUSE_cc1101.Init();
+    configureModule();
+    Serial.println("CC1101_A configureModule done");
 
     // Set and configure the second CC1101 module (CC1101_B)
     ELECHOUSE_cc1101.setModul(1);
@@ -73,7 +75,7 @@ void SubGHzTools::init() {
     Serial.println("RF switch pins set to HIGH");
 
     // Set CC1101_B as the default module for communication
-    ELECHOUSE_cc1101.setModul(1);
+    ELECHOUSE_cc1101.setModul(0);
 
     Serial.println("Initialised");
     if (ELECHOUSE_cc1101.getCC1101()) {
@@ -98,6 +100,9 @@ void SubGHzTools::startJamming() {
     jammingMode = 1;
     currentMode = JAMMER;
 
+    // Set the power output to maximum
+    ELECHOUSE_cc1101.setPA(12);  // Set TxPower to maximum
+
     // Call the jammer function
     jammer();
 }
@@ -109,10 +114,14 @@ void SubGHzTools::stopJamming() {
 }
 
 void SubGHzTools::runAction() {
-    // Check if jamming mode is enabled
-    if (currentMode == JAMMER) {
-        // Call the jammer function
+    if (currentMode == IDLE) {
+        // Do nothing
+    } else if (currentMode == JAMMER) {
         jammer();
+    } else if (currentMode == CAPTURE_RAW) {
+        captureRaw(samplingInterval);
+    } else if (currentMode == TRANSMIT_RAW) {
+        transmitRaw(samplingInterval);
     }
 }
 

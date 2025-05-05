@@ -164,14 +164,14 @@ gslc_tsXSlider                  m_sListScroll1;
 
 // Element References for direct access
 //<Extern_References !Start!>
+extern gslc_tsElemRef* batteryChrgTxt;
 extern gslc_tsElemRef* m_pElemBtn10;
-extern gslc_tsElemRef* m_pElemBtn12;
 extern gslc_tsElemRef* m_pElemListbox_SubGHz;
 extern gslc_tsElemRef* m_pElemListbox_WiFi;
 extern gslc_tsElemRef* m_pElemOutTxt1;
-extern gslc_tsElemRef* m_pElemOutTxt2;
 extern gslc_tsElemRef* m_pListSlider_SubGHz;
 extern gslc_tsElemRef* m_pListSlider_WiFi;
+extern gslc_tsElemRef* m_pSettingsVibroButtonTxt;
 extern gslc_tsElemRef* m_pWiFiDeauthButtonTxt;
 extern gslc_tsElemRef* m_pWiFiDeauthButtonTxt16;
 extern gslc_tsElemRef* m_pWiFiDeauthButtonTxt16_18;
@@ -251,12 +251,12 @@ void InitGUIslice_gen() {
   m_pElemOutTxt1 = pElemRef;
   
   // Create Base_Text_Bat runtime modifiable text
-  static char m_sDisplayText2[6] = "100%";
-  pElemRef = gslc_ElemCreateTxt(&m_gui,Base_Text_Bat,E_PG_BASE,(gslc_tsRect){243,19,60,16},
-    (char*)m_sDisplayText2,6,E_BUILTIN10X16);
+  static char m_sDisplayText2[7] = "100%";
+  pElemRef = gslc_ElemCreateTxt(&m_gui,Base_Text_Bat,E_PG_BASE,(gslc_tsRect){243,19,72,16},
+    (char*)m_sDisplayText2,7,E_BUILTIN10X16);
   gslc_ElemSetTxtAlign(&m_gui,pElemRef,GSLC_ALIGN_MID_RIGHT);
   gslc_ElemSetFillEn(&m_gui,pElemRef,false);
-  m_pElemOutTxt2 = pElemRef;
+  batteryChrgTxt = pElemRef;
 
   // Create Base_Line_topBar line 
   pElemRef = gslc_ElemCreateLine(&m_gui,Base_Line_topBar,E_PG_BASE,0,49,320,49);
@@ -318,14 +318,14 @@ void InitGUIslice_gen() {
   gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
   
   // Create Settings_Button_vibrationToggle button with modifiable text label
-  static char m_strbtn12[21] = "Vibration Enabled";
+  static char m_strbtn12[21] = "Vibration Disabled";
   pElemRef = gslc_ElemCreateBtnTxt(&m_gui,Settings_Button_vibrationToggle,E_PG_Settings,
     (gslc_tsRect){40,112,240,32},
     (char*)m_strbtn12,21,E_BUILTIN5X8,&CbBtnCommon);
-  gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE_DK2,GSLC_COL_GREEN_DK2,GSLC_COL_BLUE_DK1);
+  gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE_DK2,GSLC_COL_RED_DK2,GSLC_COL_BLUE_DK1);
   gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
   gslc_ElemSetFrameEn(&m_gui,pElemRef,false);
-  m_pElemBtn12 = pElemRef;
+  m_pSettingsVibroButtonTxt = pElemRef;
 
   // -----------------------------------
   // PAGE: E_PG_RFID

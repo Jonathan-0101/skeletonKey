@@ -14,12 +14,14 @@
  */
 
 #include <Arduino.h>
+#include <FS.h>
 #include <IRremoteESP8266.h>
 #include <IRsend.h>
-#include <SD.h>
 
 #include <string>
 #include <vector>
+
+#include "SD.h"
 
 /**
  * @brief Enum to store the type of IR command
@@ -62,7 +64,7 @@ class IRTools {
    private:
     uint16_t kIrLed = 38;
     IRsend irsend;
-    fs::SDFS *sd;
+    fs::SDFS *_sd;
     std::vector<String> deviceTypes;
     std::vector<String> deviceBrands;
     std::vector<String> devices;
@@ -78,9 +80,15 @@ class IRTools {
     /**
      * @brief Construct a new IRTools object
      *
-     * @param sdInstance SD instance
      */
-    IRTools(fs::SDFS &sdInstance);
+    IRTools();
+
+    /**
+     * @brief Construct a new IRTools object
+     *
+     * @param sdInstance SDFS instance
+     */
+    void init(fs::SDFS &sdInstance);
 
     /**
      * @brief Function to send a custom raw IR command

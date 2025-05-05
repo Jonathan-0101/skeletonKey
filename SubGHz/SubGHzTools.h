@@ -15,7 +15,8 @@
 
 #include <Arduino.h>
 #include <ELECHOUSE_CC1101_SRC_DRV.h>
-#include <SPI.h>
+
+#include "SPI.h"
 
 #define RECORDINGBUFFERSIZE 4096
 #define CCBUFFERSIZE 64

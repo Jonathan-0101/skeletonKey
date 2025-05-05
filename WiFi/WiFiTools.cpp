@@ -152,12 +152,12 @@ void WiFiTools::rickRollBeaconSpam(int duration = 15000) {
                 // send beacon frame
                 err = esp_wifi_80211_tx(WIFI_IF_AP, beaconPacket, packetSize, false);
                 if (err != ESP_OK) {
-                    Serial.printf("Failed to send beacon: %d\n", err);
+                    // Serial.printf("Failed to send beacon: %s\n", esp_err_to_name(err));
                 }
                 delay(1);
             }
 
-            delay(10);
+            delay(1);
 
             nextChannel();
         }

@@ -1,16 +1,21 @@
 #include "IRTools.h"
 
 #include <Arduino.h>
+#include <FS.h>
 #include <IRremoteESP8266.h>
 #include <IRsend.h>
-#include <SD.h>
 
 #include <string>
 #include <vector>
 
-IRTools::IRTools(fs::SDFS& sdInstance) : irsend(kIrLed) {
+#include "SD.h"
+
+IRTools::IRTools() : irsend(kIrLed) {
     irsend.begin();
-    sd = &sdInstance;
+}
+
+void IRTools::init(fs::SDFS& sdInstance) {
+    _sd = &sdInstance;
 }
 
 void IRTools::sendRawIR(uint16_t* data, uint16_t length, uint16_t frequency) {
@@ -23,7 +28,7 @@ void IRTools::findDeviceTypes() {
     deviceBrands.clear();
 
     // Get a list of all the device types available which are stored as folders in the SD card in the IR folder
-    File root = sd->open("/IR");
+    File root = _sd->open("/IR");
     if (!root) {
         Serial.println("Failed to open directory");
         return;
@@ -43,6 +48,9 @@ void IRTools::findDeviceTypes() {
 }
 
 std::vector<String> IRTools::getDeviceTypes() {
+    if (deviceTypes.empty()) {
+        findDeviceTypes();
+    }
     return deviceTypes;
 }
 
@@ -54,7 +62,7 @@ void IRTools::findDeviceBrands(int deviceTypeIndex) {
     deviceType = deviceTypes[deviceTypeIndex];
 
     // Get a list of all the device brands available which are stored as folders in the SD card in the IR folder
-    File root = sd->open("/IR/" + deviceType);
+    File root = _sd->open("/IR/" + deviceType);
     if (!root) {
         Serial.println("Failed to open directory");
         return;
@@ -85,7 +93,7 @@ void IRTools::findDevices(int deviceBrandIndex) {
     deviceBrand = deviceBrands[deviceBrandIndex];
 
     // Get a list of all the .ir files that exist in the device brand folder
-    File root = sd->open("/IR/" + deviceType + "/" + deviceBrand);
+    File root = _sd->open("/IR/" + deviceType + "/" + deviceBrand);
     if (!root) {
         Serial.println("Failed to open directory");
         return;
@@ -124,7 +132,7 @@ void IRTools::findDeviceCommands(int deviceIndex) {
     // Serial.printf("Device Path : %s\n", devicePath.c_str());
 
     // Open the device file
-    File file = sd->open(devicePath);
+    File file = _sd->open(devicePath);
     if (!file) {
         Serial.println("Failed to open file");
         return;

@@ -15,15 +15,15 @@ void setup() {
     SPI.begin(39, 41, 40, 42);
     if (!SD.begin(42)) {
         Serial.println("Card Mount Failed");
-        return;
     }
     Serial.println("SD card initialized successfully");
 
     // Initialize the WiFiTools object with the SD card instance
     wifiTools.initWiFiTools(SD);
 
+    Serial.println("Starting beacon spam");
     // Call the rickRollBeaconSpam function
-    wifiTools.rickRollBeaconSpam();
+    wifiTools.rickRollBeaconSpam(15000);
 
     // Call the scanWiFiNetworks function
     wifiTools.scanWiFiNetworks();

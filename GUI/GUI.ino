@@ -26,29 +26,35 @@
 // Program Globals
 // ------------------------------------------------
 bool bootScreen = true;
-bool vibrationEnabled = true;
+bool vibrationEnabled;
+bool batteryConnected = true;
 int deauthStatus = 0;
 long bootScreenDelay = 1500;
 long bootScreenStart;
 
 const int motorPin = 18;
+const int batteryPin = 4;
+int batteryVoltageADC = 0;
+float batteryVoltage = 0;
+float batteryPercent = 0;
+
 VibrationMotor vibro(motorPin);
 
 SPIClass& tftSPIInstance = SPI;
 
 // Save some element references for direct access
 //<Save_References !Start!>
-gslc_tsElemRef* m_pElemBtn10      = NULL;
-gslc_tsElemRef* m_pElemBtn12      = NULL;
-gslc_tsElemRef* m_pElemListbox_SubGHz= NULL;
-gslc_tsElemRef* m_pElemListbox_WiFi= NULL;
-gslc_tsElemRef* m_pElemOutTxt1    = NULL;
-gslc_tsElemRef* m_pElemOutTxt2    = NULL;
-gslc_tsElemRef* m_pListSlider_SubGHz= NULL;
-gslc_tsElemRef* m_pListSlider_WiFi= NULL;
-gslc_tsElemRef* m_pWiFiDeauthButtonTxt= NULL;
-gslc_tsElemRef* m_pWiFiDeauthButtonTxt16= NULL;
-gslc_tsElemRef* m_pWiFiDeauthButtonTxt16_18= NULL;
+gslc_tsElemRef* batteryChrgTxt = NULL;
+gslc_tsElemRef* m_pElemBtn10 = NULL;
+gslc_tsElemRef* m_pElemListbox_SubGHz = NULL;
+gslc_tsElemRef* m_pElemListbox_WiFi = NULL;
+gslc_tsElemRef* m_pElemOutTxt1 = NULL;
+gslc_tsElemRef* m_pListSlider_SubGHz = NULL;
+gslc_tsElemRef* m_pListSlider_WiFi = NULL;
+gslc_tsElemRef* m_pSettingsVibroButtonTxt = NULL;
+gslc_tsElemRef* m_pWiFiDeauthButtonTxt = NULL;
+gslc_tsElemRef* m_pWiFiDeauthButtonTxt16 = NULL;
+gslc_tsElemRef* m_pWiFiDeauthButtonTxt16_18 = NULL;
 //<Save_References !End!>
 
 // Define debug message function
@@ -73,7 +79,7 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
     if (eTouch == GSLC_TOUCH_UP_IN) {
         // From the element's ID we can determine which button was pressed.
         switch (pElem->nId) {
-//<Button Enums !Start!>
+                //<Button Enums !Start!>
             case Base_Button_home:
                 gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "Main Menu");
                 gslc_SetPageCur(&m_gui, E_PG_MAIN);
@@ -109,43 +115,49 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
             case Settings_Button_calibrateTouch:
                 break;
             case Settings_Button_vibrationToggle:
+                if (vibrationEnabled == 0) {
+                    vibrationEnabled = 1;
+                    // Set the button text to "Vibration Enabled"
+                    gslc_ElemSetTxtStr(&m_gui, m_pSettingsVibroButtonTxt, "Vibration Enabled");
+                    // Set the button color to green
+                    gslc_ElemSetCol(&m_gui, m_pSettingsVibroButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_GREEN_DK3, GSLC_COL_BLUE_DK1);
+
+                    // Write to the SD card to enable vibration replacing the contents of the first line
+                    File settingsFile = SD.open("/settings.txt", FILE_WRITE);
+                    if (settingsFile) {
+                        settingsFile.println("vibration:enabled");
+                        settingsFile.close();
+                        Serial.println("Vibration enabled in settings file.");
+                    } else {
+                        Serial.println("Failed to open settings file for writing!");
+                    }
+                } else {
+                    vibrationEnabled = 0;
+                    // Set the button text to "Vibration Disabled"
+                    gslc_ElemSetTxtStr(&m_gui, m_pSettingsVibroButtonTxt, "Vibration Disabled");
+                    // Set the button color to red
+                    gslc_ElemSetCol(&m_gui, m_pSettingsVibroButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_RED_DK2, GSLC_COL_BLUE_DK1);
+
+                    // Write to the SD card to disable vibration replacing the contents of the first line
+                    File settingsFile = SD.open("/settings.txt", FILE_WRITE);
+                    if (settingsFile) {
+                        settingsFile.println("vibration:disabled");
+                        settingsFile.close();
+                        Serial.println("Vibration disabled in settings file.");
+                    } else {
+                        Serial.println("Failed to open settings file for writing!");
+                    }
+                }
+
                 break;
-      case SubGHz_Button_jaming:
-if (deauthStatus == 0) {
-    deauthStatus = 1;
-    // Set the button text to "Deauthentication Enabled"
-    gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt, "Deauthentication Enabled");
-    // Set the button color to green
-    gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_GREEN_DK3, GSLC_COL_BLUE_DK1);
-} else {
-    deauthStatus = 0;
-    // Set the button text to "Deauthentication Disabled"
-    gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt, "Deauthentication Disabled");
-    // Set the button color to red
-    gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_RED_DK2, GSLC_COL_BLUE_DK1);
-}
-
-        break;
-      case SubGHz_Button_capture:
-        break;
-      case SubGHz_Button_frequency:
-if (deauthStatus == 0) {
-    deauthStatus = 1;
-    // Set the button text to "Deauthentication Enabled"
-    gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt, "Deauthentication Enabled");
-    // Set the button color to green
-    gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_GREEN_DK3, GSLC_COL_BLUE_DK1);
-} else {
-    deauthStatus = 0;
-    // Set the button text to "Deauthentication Disabled"
-    gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt, "Deauthentication Disabled");
-    // Set the button color to red
-    gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_RED_DK2, GSLC_COL_BLUE_DK1);
-}
-
-        break;
-      case SubGHz_Button_transmit:
-        break;
+            case SubGHz_Button_jaming:
+                break;
+            case SubGHz_Button_capture:
+                break;
+            case SubGHz_Button_frequency:
+                break;
+            case SubGHz_Button_transmit:
+                break;
             case WiFi_Button_rickRollBeacon:
                 break;
             case WiFi_Button_scanNetworks:
@@ -164,6 +176,7 @@ if (deauthStatus == 0) {
                     // Set the button color to red
                     gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_RED_DK2, GSLC_COL_BLUE_DK1);
                 }
+
                 break;
             case WiFi_Button_handshake:
                 gslc_PopupShow(&m_gui, E_Popup_HandshakeCapture, true);
@@ -177,7 +190,7 @@ if (deauthStatus == 0) {
             case HandshakeCapture_Button_exit:
                 gslc_PopupHide(&m_gui);
                 break;
-//<Button Enums !End!>
+                //<Button Enums !End!>
             default:
                 break;
         }
@@ -202,19 +215,19 @@ bool CbListbox(void* pvGui, void* pvElemRef, int16_t nSelId) {
 
     // From the element's ID we can determine which listbox was active.
     switch (pElem->nId) {
-//<Listbox Enums !Start!>
+            //<Listbox Enums !Start!>
 
         case WiFi_Listbox_networks:
             if (nSelId != XLISTBOX_SEL_NONE) {
                 gslc_ElemXListboxGetItem(&m_gui, pElemRef, nSelId, acTxt, MAX_STR);
             }
             break;
-    case SubGHz_Listbox_signals:
-      if (nSelId != XLISTBOX_SEL_NONE) {
-        gslc_ElemXListboxGetItem(&m_gui, pElemRef, nSelId, acTxt, MAX_STR);
-      }
-      break;
-//<Listbox Enums !End!>
+        case SubGHz_Listbox_signals:
+            if (nSelId != XLISTBOX_SEL_NONE) {
+                gslc_ElemXListboxGetItem(&m_gui, pElemRef, nSelId, acTxt, MAX_STR);
+            }
+            break;
+            //<Listbox Enums !End!>
         default:
             break;
     }
@@ -232,17 +245,17 @@ bool CbSlidePos(void* pvGui, void* pvElemRef, int16_t nPos) {
 
     // From the element's ID we can determine which slider was updated.
     switch (pElem->nId) {
-//<Slider Enums !Start!>
+            //<Slider Enums !Start!>
 
         case WiFi_Listscroll_networks:
             // Fetch the slider position
             nVal = gslc_ElemXSliderGetPos(pGui, m_pListSlider_WiFi);
             break;
-    case SubGHz_Listscroll_signals:
-      // Fetch the slider position
-      nVal = gslc_ElemXSliderGetPos(pGui,m_pListSlider_SubGHz);
-      break;
-//<Slider Enums !End!>
+        case SubGHz_Listscroll_signals:
+            // Fetch the slider position
+            nVal = gslc_ElemXSliderGetPos(pGui, m_pListSlider_SubGHz);
+            break;
+            //<Slider Enums !End!>
         default:
             break;
     }
@@ -253,18 +266,30 @@ bool CbSlidePos(void* pvGui, void* pvElemRef, int16_t nPos) {
 //<Tick Callback !End!>
 
 void successVibration() {
-  if (vibrationEnabled) {
-    vibro.pulseFor(75);
-    delay(25);
-    vibro.pulse(2);
-  }
+    if (vibrationEnabled) {
+        vibro.pulseFor(75);
+        delay(25);
+        vibro.pulse(2);
+    }
 }
 void failureVibration() {
-  if (vibrationEnabled) {
-    vibro.pulseFor(100);
-    delay(250);
-    vibro.pulseFor(100);
-  }
+    if (vibrationEnabled) {
+        vibro.pulseFor(100);
+        delay(250);
+        vibro.pulseFor(100);
+    }
+}
+
+void calculateBatteryCharge() {
+    if (batteryConnected) {
+        batteryVoltageADC = analogRead(batteryPin);
+        batteryVoltage = batteryVoltageADC * (11.0 / 6825.0);
+        batteryPercent = ((batteryVoltage - 3.0) / 1.2) * 100.0;
+
+        // Set the value of batteryChrgTxt to the battery percentage
+        String batteryText = String(batteryPercent, 0) + "%";
+        gslc_ElemSetTxtStr(&m_gui, batteryChrgTxt, batteryText.c_str());
+    }
 }
 
 void setup() {
@@ -284,11 +309,28 @@ void setup() {
     // ------------------------------------------------
     InitGUIslice_gen();
 
+    // Show popup page for 1.5 seconds
+    if (bootScreen) {
+        bootScreenStart = millis();
+        gslc_PopupShow(&m_gui, E_Popup_Boot, true);
+    }
+
     delay(100);
 
     // Get the SPI instance from the display
     TFT_eSPI& display = *(TFT_eSPI*)gslc_DrvGetDriverDisp(&m_gui);
     tftSPIInstance = display.getSPIinstance();
+
+    // Calculate battery charge 5 times and if the voltage is less than 3.0 set the batteryConnected to false
+    for (int i = 0; i < 5; i++) {
+        calculateBatteryCharge();
+        if (batteryVoltage < 3.0) {
+            batteryConnected = false;
+            // Set the lable to "XX%"
+            gslc_ElemSetTxtStr(&m_gui, batteryChrgTxt, "XX%");
+            break;
+        }
+    }
 
     // Initialize the SD card sharing the SPI instance
     pinMode(42, OUTPUT);
@@ -298,17 +340,35 @@ void setup() {
         return;
     } else {
         Serial.println("SD card initialized successfully!");
+
+        // Open the file "/settings.txt" for reading
+        File settingsFile = SD.open("/settings.txt", FILE_READ);
+
+        // Check if the file is available and get the contents of the first line
+        if (settingsFile) {
+            String line = settingsFile.readStringUntil('\n');
+            Serial.println("Settings file contents: " + line);
+
+            // Check if the first line contains "vibration=on"
+            if (line.indexOf("vibration:enabled") != -1) {
+                vibrationEnabled = true;
+                Serial.println("Vibration is enabled.");
+                // Set the button text to "Vibration Enabled"
+                gslc_ElemSetTxtStr(&m_gui, m_pSettingsVibroButtonTxt, "Vibration Enabled");
+                gslc_ElemSetCol(&m_gui, m_pSettingsVibroButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_GREEN_DK3, GSLC_COL_BLUE_DK1);
+            } else {
+                vibrationEnabled = false;
+                Serial.println("Vibration is disabled.");
+                // Set the button text to "Vibration Disabled"
+                gslc_ElemSetTxtStr(&m_gui, m_pSettingsVibroButtonTxt, "Vibration Disabled");
+                gslc_ElemSetCol(&m_gui, m_pSettingsVibroButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_RED_DK2, GSLC_COL_BLUE_DK1);
+            }
+            // Close the file
+            settingsFile.close();
+        } else {
+            Serial.println("Failed to open settings file!");
+        }
     }
-
-    delay(250);
-
-    // Show popup page for 1.5 seconds
-    if (bootScreen) {
-        bootScreenStart = millis();
-        gslc_PopupShow(&m_gui, E_Popup_Boot, true);
-    }
-
-    successVibration();
 }
 
 // -----------------------------------
