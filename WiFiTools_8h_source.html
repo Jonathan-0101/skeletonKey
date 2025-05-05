@@ -134,7 +134,7 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('WiFi_2WiFiTools_8h_source.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('WiFiTools_8h_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -163,7 +163,7 @@ $(document).ready(function(){initNavTree('WiFi_2WiFiTools_8h_source.html',''); i
   <div class="headertitle"><div class="title">WiFiTools.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="WiFi_2WiFiTools_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// WiFiTools.h</span></div>
+<a href="WiFiTools_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// WiFiTools.h</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#ifndef WIFITOOLS_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#define WIFITOOLS_H</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
@@ -189,7 +189,8 @@ $(document).ready(function(){initNavTree('WiFi_2WiFiTools_8h_source.html',''); i
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>esp_err_t esp_wifi_start();</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>esp_err_t esp_wifi_set_promiscuous(<span class="keywordtype">bool</span> en);</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="foldopen" id="foldopen00042" data-start="{" data-end="};">
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="structwifi__ieee80211__mac__hdr__t.html">   42</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">unsigned</span> frame_ctrl : 16;    <span class="comment">/* frame control field      */</span></div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">unsigned</span> duration_id : 16;   <span class="comment">/* duration/ID field        */</span></div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    uint8_t addr1[6];            <span class="comment">/* receiver address         */</span></div>
@@ -198,11 +199,14 @@ $(document).ready(function(){initNavTree('WiFi_2WiFiTools_8h_source.html',''); i
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">unsigned</span> sequence_ctrl : 16; <span class="comment">/* sequence control field   */</span></div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    uint8_t addr4[6];            <span class="comment">/* optional                 */</span></div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>} <a class="code hl_struct" href="structwifi__ieee80211__mac__hdr__t.html">wifi_ieee80211_mac_hdr_t</a>;</div>
+</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="foldopen" id="foldopen00056" data-start="{" data-end="};">
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="structwifi__ieee80211__packet__t.html">   56</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <a class="code hl_struct" href="structwifi__ieee80211__mac__hdr__t.html">wifi_ieee80211_mac_hdr_t</a> hdr;</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    uint8_t payload[0]; <span class="comment">/* network data ended with 4 bytes csum (CRC32) */</span></div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>} <a class="code hl_struct" href="structwifi__ieee80211__packet__t.html">wifi_ieee80211_packet_t</a>;</div>
+</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
 <div class="foldopen" id="foldopen00065" data-start="{" data-end="};">
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="structHCCAPX.html">   65</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
@@ -218,14 +222,15 @@ $(document).ready(function(){initNavTree('WiFi_2WiFiTools_8h_source.html',''); i
 </div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
 <div class="foldopen" id="foldopen00080" data-start="{" data-end="};">
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="WiFi_2WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">   80</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">   80</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    HANDSHAKE_CAPTURE,</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    CLIENT_DETECTION,</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    NONE</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>} <a class="code hl_enumeration" href="WiFi_2WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">wifi_packet_flag</a>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>} <a class="code hl_enumeration" href="WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">wifi_packet_flag</a>;</div>
 </div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="keyword">class </span><a class="code hl_class" href="classWiFiTools.html">WiFiTools</a> {</div>
+<div class="foldopen" id="foldopen00086" data-start="{" data-end="};">
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="classWiFiTools.html">   86</a></span><span class="keyword">class </span><a class="code hl_class" href="classWiFiTools.html">WiFiTools</a> {</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>   <span class="keyword">private</span>:</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keyword">const</span> <span class="keywordtype">bool</span> wpa2 = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordtype">char</span> emptySSID[32];</div>
@@ -240,18 +245,18 @@ $(document).ready(function(){initNavTree('WiFi_2WiFiTools_8h_source.html',''); i
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    uint32_t packetRateTime = 0;</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    uint8_t targetBSSID[6];</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    uint8_t targetChannel;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <a class="code hl_enumeration" href="WiFi_2WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">wifi_packet_flag</a> packetScanFlag;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <a class="code hl_enumeration" href="WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">wifi_packet_flag</a> packetScanFlag;</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    fs::SDFS* sd = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    std::vector&lt;uint8_t*&gt; detectedClients;</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    std::vector&lt;wifi_ap_record_t&gt; foundWiFiNetworks;</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="classWiFiTools.html#a1bb65b4835a3c0d70dbc8a1aa6320a6b">  112</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#a1bb65b4835a3c0d70dbc8a1aa6320a6b">beaconSpamSetup</a>();</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#a1bb65b4835a3c0d70dbc8a1aa6320a6b">beaconSpamSetup</a>();</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="classWiFiTools.html#ae689371b5f6cd8d4a600b9aa4f142882">  118</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#ae689371b5f6cd8d4a600b9aa4f142882">generateRandomMac</a>();</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#ae689371b5f6cd8d4a600b9aa4f142882">generateRandomMac</a>();</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno"><a class="line" href="classWiFiTools.html#a4496beddfc24492abda018e82a581dac">  128</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#a4496beddfc24492abda018e82a581dac">sendDeauthPacket</a>(uint8_t* apMac, uint8_t* stMac, uint8_t channel, uint8_t reasonCode);</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#a4496beddfc24492abda018e82a581dac">sendDeauthPacket</a>(uint8_t* apMac, uint8_t* stMac, uint8_t channel, uint8_t reasonCode);</div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#a1995aae91614f4ca74e698fb7dd250e7">filterForClients</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structwifi__ieee80211__mac__hdr__t.html">wifi_ieee80211_mac_hdr_t</a>* hdr);</div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
@@ -328,21 +333,21 @@ $(document).ready(function(){initNavTree('WiFi_2WiFiTools_8h_source.html',''); i
 <div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        <span class="stringliteral">&quot;AndHurtYou&quot;</span>};</div>
 <div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span> </div>
 <div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>   <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno"><a class="line" href="classWiFiTools.html#a1d8e5877a35094fa55d8b4a3ebab2259">  235</a></span>    <a class="code hl_function" href="classWiFiTools.html#a1d8e5877a35094fa55d8b4a3ebab2259">WiFiTools</a>();</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    <a class="code hl_function" href="classWiFiTools.html#a1d8e5877a35094fa55d8b4a3ebab2259">WiFiTools</a>();</div>
 <div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span> </div>
 <div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#a560dca93ef6b03cea1138ce946ad402a">initWiFiTools</a>(fs::SDFS&amp; sdInstance);</div>
 <div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span> </div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno"><a class="line" href="classWiFiTools.html#a6834bf8cebae5f22ff21b0ccd3360d92">  248</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#a6834bf8cebae5f22ff21b0ccd3360d92">nextChannel</a>();</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#a6834bf8cebae5f22ff21b0ccd3360d92">nextChannel</a>();</div>
 <div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    <span class="keywordtype">void</span> rickRollBeaconSpam(<span class="keywordtype">int</span> duration);</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#ae88636e7bdc162a4ffca01c949b24e32">rickRollBeaconSpam</a>(<span class="keywordtype">int</span> duration);</div>
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno"><a class="line" href="classWiFiTools.html#a434b1b80009f52dd46bb9f26c7b17488">  261</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#a434b1b80009f52dd46bb9f26c7b17488">scanWiFiNetworks</a>();</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#a434b1b80009f52dd46bb9f26c7b17488">scanWiFiNetworks</a>();</div>
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span> </div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno"><a class="line" href="classWiFiTools.html#af80713dc94811ab73842d19f0c0c35e7">  268</a></span>    std::vector&lt;wifi_ap_record_t&gt; <a class="code hl_function" href="classWiFiTools.html#af80713dc94811ab73842d19f0c0c35e7">getAvailableNetworks</a>();</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    std::vector&lt;wifi_ap_record_t&gt; <a class="code hl_function" href="classWiFiTools.html#af80713dc94811ab73842d19f0c0c35e7">getAvailableNetworks</a>();</div>
 <div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span> </div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno"><a class="line" href="classWiFiTools.html#a3722aae8c3032c40d6a52fe299b3b4ca">  274</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#a3722aae8c3032c40d6a52fe299b3b4ca">clearFoundWiFiNetworks</a>();</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#a3722aae8c3032c40d6a52fe299b3b4ca">clearFoundWiFiNetworks</a>();</div>
 <div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno"><a class="line" href="classWiFiTools.html#ae290535762ebba5331a922e09a82dc50">  288</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#ae290535762ebba5331a922e09a82dc50">deauthNetwork</a>(uint8_t* networkSSID, uint8_t* networkBSSID, uint8_t channel, <span class="keywordtype">int</span> availableNetworkIndex, uint8_t* targetMacAddr, <span class="keywordtype">int</span> numPackets, <span class="keywordtype">int</span> delayMs, uint8_t reasonCode);</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#ae290535762ebba5331a922e09a82dc50">deauthNetwork</a>(uint8_t* networkSSID, uint8_t* networkBSSID, uint8_t channel, <span class="keywordtype">int</span> availableNetworkIndex, uint8_t* targetMacAddr, <span class="keywordtype">int</span> numPackets, <span class="keywordtype">int</span> delayMs, uint8_t reasonCode);</div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
 <div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#a8458c9cbd17f858562382084f33e0f98">handshakeCapture</a>(uint8_t* networkBSSID, uint8_t channel, <span class="keywordtype">int</span> availableNetworkIndex, <span class="keywordtype">int</span> captureTime);</div>
 <div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span> </div>
@@ -350,39 +355,41 @@ $(document).ready(function(){initNavTree('WiFi_2WiFiTools_8h_source.html',''); i
 <div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span> </div>
 <div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classWiFiTools.html#ac394356bb88c2da425909c388588982e">findClients</a>(uint8_t* networkBSSID, uint8_t channel, <span class="keywordtype">int</span> availableNetworkIndex, <span class="keywordtype">int</span> captureTime);</div>
 <div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>};</div>
+</div>
 <div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span> </div>
 <div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span><span class="comment">// Declare the global instance</span></div>
 <div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span><span class="keyword">extern</span> <a class="code hl_class" href="classWiFiTools.html">WiFiTools</a>* globalWiFiToolsInstance;</div>
 <div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span> </div>
 <div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span><span class="preprocessor">#endif  </span><span class="comment">// WIFITOOLS_H</span></div>
-<div class="ttc" id="aWiFi_2WiFiTools_8h_html_a92ab780568552ff29e7ced01cb6f3801"><div class="ttname"><a href="WiFi_2WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">wifi_packet_flag</a></div><div class="ttdeci">wifi_packet_flag</div><div class="ttdoc">Enum to store the type of Wi-Fi packet to capture.</div><div class="ttdef"><b>Definition</b> WiFiTools.h:80</div></div>
-<div class="ttc" id="aclassWiFiTools_html"><div class="ttname"><a href="classWiFiTools.html">WiFiTools</a></div><div class="ttdef"><b>Definition</b> WiFiTools.h:41</div></div>
+<div class="ttc" id="aWiFiTools_8h_html_a92ab780568552ff29e7ced01cb6f3801"><div class="ttname"><a href="WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">wifi_packet_flag</a></div><div class="ttdeci">wifi_packet_flag</div><div class="ttdoc">Enum to store the type of Wi-Fi packet to capture.</div><div class="ttdef"><b>Definition</b> WiFiTools.h:80</div></div>
+<div class="ttc" id="aclassWiFiTools_html"><div class="ttname"><a href="classWiFiTools.html">WiFiTools</a></div><div class="ttdef"><b>Definition</b> WiFiTools.h:86</div></div>
 <div class="ttc" id="aclassWiFiTools_html_a1995aae91614f4ca74e698fb7dd250e7"><div class="ttname"><a href="classWiFiTools.html#a1995aae91614f4ca74e698fb7dd250e7">WiFiTools::filterForClients</a></div><div class="ttdeci">void filterForClients(const wifi_ieee80211_mac_hdr_t *hdr)</div><div class="ttdoc">Function to identify clients based on detected packets.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:299</div></div>
-<div class="ttc" id="aclassWiFiTools_html_a1bb65b4835a3c0d70dbc8a1aa6320a6b"><div class="ttname"><a href="classWiFiTools.html#a1bb65b4835a3c0d70dbc8a1aa6320a6b">WiFiTools::beaconSpamSetup</a></div><div class="ttdeci">void beaconSpamSetup()</div><div class="ttdoc">Setup function for the beacon spam attack.</div></div>
-<div class="ttc" id="aclassWiFiTools_html_a1d8e5877a35094fa55d8b4a3ebab2259"><div class="ttname"><a href="classWiFiTools.html#a1d8e5877a35094fa55d8b4a3ebab2259">WiFiTools::WiFiTools</a></div><div class="ttdeci">WiFiTools()</div><div class="ttdoc">Construct a new Wi-Fi Tools object.</div></div>
+<div class="ttc" id="aclassWiFiTools_html_a1bb65b4835a3c0d70dbc8a1aa6320a6b"><div class="ttname"><a href="classWiFiTools.html#a1bb65b4835a3c0d70dbc8a1aa6320a6b">WiFiTools::beaconSpamSetup</a></div><div class="ttdeci">void beaconSpamSetup()</div><div class="ttdoc">Setup function for the beacon spam attack.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:43</div></div>
+<div class="ttc" id="aclassWiFiTools_html_a1d8e5877a35094fa55d8b4a3ebab2259"><div class="ttname"><a href="classWiFiTools.html#a1d8e5877a35094fa55d8b4a3ebab2259">WiFiTools::WiFiTools</a></div><div class="ttdeci">WiFiTools()</div><div class="ttdoc">Construct a new Wi-Fi Tools object.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:34</div></div>
 <div class="ttc" id="aclassWiFiTools_html_a21dbe89a44a32b0e97960ae72ffdd523"><div class="ttname"><a href="classWiFiTools.html#a21dbe89a44a32b0e97960ae72ffdd523">WiFiTools::promiscuousPacketHandler</a></div><div class="ttdeci">static void promiscuousPacketHandler(void *buf, wifi_promiscuous_pkt_type_t type)</div><div class="ttdoc">Callback function for promiscuous packet handling.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:378</div></div>
 <div class="ttc" id="aclassWiFiTools_html_a2be73c0a4df321522e4b99c96790a3e7"><div class="ttname"><a href="classWiFiTools.html#a2be73c0a4df321522e4b99c96790a3e7">WiFiTools::activeHandshakeCapture</a></div><div class="ttdeci">void activeHandshakeCapture(uint8_t *networkBSSID, uint8_t channel, int availableNetworkIndex, int captureTime)</div><div class="ttdoc">Function to initiate an active handshake capture.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:473</div></div>
-<div class="ttc" id="aclassWiFiTools_html_a3722aae8c3032c40d6a52fe299b3b4ca"><div class="ttname"><a href="classWiFiTools.html#a3722aae8c3032c40d6a52fe299b3b4ca">WiFiTools::clearFoundWiFiNetworks</a></div><div class="ttdeci">void clearFoundWiFiNetworks()</div><div class="ttdoc">Function to clear the found Wi-Fi networks vector.</div></div>
-<div class="ttc" id="aclassWiFiTools_html_a434b1b80009f52dd46bb9f26c7b17488"><div class="ttname"><a href="classWiFiTools.html#a434b1b80009f52dd46bb9f26c7b17488">WiFiTools::scanWiFiNetworks</a></div><div class="ttdeci">void scanWiFiNetworks()</div><div class="ttdoc">Function to scan for available Wi-Fi networks.</div></div>
-<div class="ttc" id="aclassWiFiTools_html_a4496beddfc24492abda018e82a581dac"><div class="ttname"><a href="classWiFiTools.html#a4496beddfc24492abda018e82a581dac">WiFiTools::sendDeauthPacket</a></div><div class="ttdeci">void sendDeauthPacket(uint8_t *apMac, uint8_t *stMac, uint8_t channel, uint8_t reasonCode)</div><div class="ttdoc">Function to transmit a deatuthentication packet.</div></div>
+<div class="ttc" id="aclassWiFiTools_html_a3722aae8c3032c40d6a52fe299b3b4ca"><div class="ttname"><a href="classWiFiTools.html#a3722aae8c3032c40d6a52fe299b3b4ca">WiFiTools::clearFoundWiFiNetworks</a></div><div class="ttdeci">void clearFoundWiFiNetworks()</div><div class="ttdoc">Function to clear the found Wi-Fi networks vector.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:200</div></div>
+<div class="ttc" id="aclassWiFiTools_html_a434b1b80009f52dd46bb9f26c7b17488"><div class="ttname"><a href="classWiFiTools.html#a434b1b80009f52dd46bb9f26c7b17488">WiFiTools::scanWiFiNetworks</a></div><div class="ttdeci">void scanWiFiNetworks()</div><div class="ttdoc">Function to scan for available Wi-Fi networks.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:173</div></div>
+<div class="ttc" id="aclassWiFiTools_html_a4496beddfc24492abda018e82a581dac"><div class="ttname"><a href="classWiFiTools.html#a4496beddfc24492abda018e82a581dac">WiFiTools::sendDeauthPacket</a></div><div class="ttdeci">void sendDeauthPacket(uint8_t *apMac, uint8_t *stMac, uint8_t channel, uint8_t reasonCode)</div><div class="ttdoc">Function to transmit a deatuthentication packet.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:204</div></div>
 <div class="ttc" id="aclassWiFiTools_html_a50aa0bf5c4f9cad559fc785995b41786"><div class="ttname"><a href="classWiFiTools.html#a50aa0bf5c4f9cad559fc785995b41786">WiFiTools::filterForHandshakes</a></div><div class="ttdeci">void filterForHandshakes(void *buf, wifi_promiscuous_pkt_type_t type)</div><div class="ttdoc">Function to filter packets for handshake capture.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:319</div></div>
 <div class="ttc" id="aclassWiFiTools_html_a560dca93ef6b03cea1138ce946ad402a"><div class="ttname"><a href="classWiFiTools.html#a560dca93ef6b03cea1138ce946ad402a">WiFiTools::initWiFiTools</a></div><div class="ttdeci">void initWiFiTools(fs::SDFS &amp;sdInstance)</div><div class="ttdoc">Initialise the Wi-Fi tools object.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:39</div></div>
-<div class="ttc" id="aclassWiFiTools_html_a6834bf8cebae5f22ff21b0ccd3360d92"><div class="ttname"><a href="classWiFiTools.html#a6834bf8cebae5f22ff21b0ccd3360d92">WiFiTools::nextChannel</a></div><div class="ttdeci">void nextChannel()</div><div class="ttdoc">Function to change the Wi-Fi channel.</div></div>
+<div class="ttc" id="aclassWiFiTools_html_a6834bf8cebae5f22ff21b0ccd3360d92"><div class="ttname"><a href="classWiFiTools.html#a6834bf8cebae5f22ff21b0ccd3360d92">WiFiTools::nextChannel</a></div><div class="ttdeci">void nextChannel()</div><div class="ttdoc">Function to change the Wi-Fi channel.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:80</div></div>
 <div class="ttc" id="aclassWiFiTools_html_a8458c9cbd17f858562382084f33e0f98"><div class="ttname"><a href="classWiFiTools.html#a8458c9cbd17f858562382084f33e0f98">WiFiTools::handshakeCapture</a></div><div class="ttdeci">void handshakeCapture(uint8_t *networkBSSID, uint8_t channel, int availableNetworkIndex, int captureTime)</div><div class="ttdoc">Function to initiate a passive handshake capture.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:443</div></div>
 <div class="ttc" id="aclassWiFiTools_html_ac394356bb88c2da425909c388588982e"><div class="ttname"><a href="classWiFiTools.html#ac394356bb88c2da425909c388588982e">WiFiTools::findClients</a></div><div class="ttdeci">void findClients(uint8_t *networkBSSID, uint8_t channel, int availableNetworkIndex, int captureTime)</div><div class="ttdoc">Function to identify clients connected to a network.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:506</div></div>
 <div class="ttc" id="aclassWiFiTools_html_ad699a00a0c7ec0ab314ebef10568d700"><div class="ttname"><a href="classWiFiTools.html#ad699a00a0c7ec0ab314ebef10568d700">WiFiTools::processWiFiData</a></div><div class="ttdeci">void processWiFiData(uint8_t *networkBSSID, uint8_t channel, int captureTime, bool captureHandshake, bool detectClients)</div><div class="ttdoc">Function to begin capture and processing of Wi-Fi data.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:417</div></div>
-<div class="ttc" id="aclassWiFiTools_html_ae290535762ebba5331a922e09a82dc50"><div class="ttname"><a href="classWiFiTools.html#ae290535762ebba5331a922e09a82dc50">WiFiTools::deauthNetwork</a></div><div class="ttdeci">void deauthNetwork(uint8_t *networkSSID, uint8_t *networkBSSID, uint8_t channel, int availableNetworkIndex, uint8_t *targetMacAddr, int numPackets, int delayMs, uint8_t reasonCode)</div><div class="ttdoc">Function to run a deauthentication attack.</div></div>
-<div class="ttc" id="aclassWiFiTools_html_ae689371b5f6cd8d4a600b9aa4f142882"><div class="ttname"><a href="classWiFiTools.html#ae689371b5f6cd8d4a600b9aa4f142882">WiFiTools::generateRandomMac</a></div><div class="ttdeci">void generateRandomMac()</div><div class="ttdoc">Function to generate a random MAC address.</div></div>
-<div class="ttc" id="aclassWiFiTools_html_af80713dc94811ab73842d19f0c0c35e7"><div class="ttname"><a href="classWiFiTools.html#af80713dc94811ab73842d19f0c0c35e7">WiFiTools::getAvailableNetworks</a></div><div class="ttdeci">std::vector&lt; wifi_ap_record_t &gt; getAvailableNetworks()</div><div class="ttdoc">Get the Available Networks object.</div></div>
+<div class="ttc" id="aclassWiFiTools_html_ae290535762ebba5331a922e09a82dc50"><div class="ttname"><a href="classWiFiTools.html#ae290535762ebba5331a922e09a82dc50">WiFiTools::deauthNetwork</a></div><div class="ttdeci">void deauthNetwork(uint8_t *networkSSID, uint8_t *networkBSSID, uint8_t channel, int availableNetworkIndex, uint8_t *targetMacAddr, int numPackets, int delayMs, uint8_t reasonCode)</div><div class="ttdoc">Function to run a deauthentication attack.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:250</div></div>
+<div class="ttc" id="aclassWiFiTools_html_ae689371b5f6cd8d4a600b9aa4f142882"><div class="ttname"><a href="classWiFiTools.html#ae689371b5f6cd8d4a600b9aa4f142882">WiFiTools::generateRandomMac</a></div><div class="ttdeci">void generateRandomMac()</div><div class="ttdoc">Function to generate a random MAC address.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:90</div></div>
+<div class="ttc" id="aclassWiFiTools_html_ae88636e7bdc162a4ffca01c949b24e32"><div class="ttname"><a href="classWiFiTools.html#ae88636e7bdc162a4ffca01c949b24e32">WiFiTools::rickRollBeaconSpam</a></div><div class="ttdeci">void rickRollBeaconSpam(int duration)</div><div class="ttdoc">Function to run a Rick Roll beacon spam attack.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:97</div></div>
+<div class="ttc" id="aclassWiFiTools_html_af80713dc94811ab73842d19f0c0c35e7"><div class="ttname"><a href="classWiFiTools.html#af80713dc94811ab73842d19f0c0c35e7">WiFiTools::getAvailableNetworks</a></div><div class="ttdeci">std::vector&lt; wifi_ap_record_t &gt; getAvailableNetworks()</div><div class="ttdoc">Get the Available Networks object.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:193</div></div>
 <div class="ttc" id="astructHCCAPX_html"><div class="ttname"><a href="structHCCAPX.html">HCCAPX</a></div><div class="ttdoc">Struct to store the information of a 4-way handshake.</div><div class="ttdef"><b>Definition</b> WiFiTools.h:65</div></div>
-<div class="ttc" id="astructwifi__ieee80211__mac__hdr__t_html"><div class="ttname"><a href="structwifi__ieee80211__mac__hdr__t.html">wifi_ieee80211_mac_hdr_t</a></div><div class="ttdoc">Struct to store the MAC header of a Wi-Fi packet.</div><div class="ttdef"><b>Definition</b> WiFiTools.h:26</div></div>
-<div class="ttc" id="astructwifi__ieee80211__packet__t_html"><div class="ttname"><a href="structwifi__ieee80211__packet__t.html">wifi_ieee80211_packet_t</a></div><div class="ttdoc">Struct to store the payload of a Wi-Fi packet.</div><div class="ttdef"><b>Definition</b> WiFiTools.h:36</div></div>
+<div class="ttc" id="astructwifi__ieee80211__mac__hdr__t_html"><div class="ttname"><a href="structwifi__ieee80211__mac__hdr__t.html">wifi_ieee80211_mac_hdr_t</a></div><div class="ttdoc">Struct to store the MAC header of a Wi-Fi packet.</div><div class="ttdef"><b>Definition</b> WiFiTools.h:42</div></div>
+<div class="ttc" id="astructwifi__ieee80211__packet__t_html"><div class="ttname"><a href="structwifi__ieee80211__packet__t.html">wifi_ieee80211_packet_t</a></div><div class="ttdoc">Struct to store the payload of a Wi-Fi packet.</div><div class="ttdef"><b>Definition</b> WiFiTools.h:56</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_bc5954b504bfd14f8d87623437ec003d.html">WiFi</a></li><li class="navelem"><a class="el" href="WiFi_2WiFiTools_8h.html">WiFiTools.h</a></li>
+    <li class="navelem"><a class="el" href="dir_bc5954b504bfd14f8d87623437ec003d.html">WiFi</a></li><li class="navelem"><a class="el" href="WiFiTools_8h.html">WiFiTools.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
