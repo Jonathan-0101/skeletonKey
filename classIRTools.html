@@ -210,15 +210,24 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>findDeviceTypes</b> (
 <tr class="memitem:ab40750ff9a6f8316ad83f7171b1304c2" id="r_ab40750ff9a6f8316ad83f7171b1304c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIRTools.html#ab40750ff9a6f8316ad83f7171b1304c2">jamIR</a> (int duration)</td></tr>
 <tr class="memdesc:ab40750ff9a6f8316ad83f7171b1304c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to jam IR signals.  <br /></td></tr>
 <tr class="separator:ab40750ff9a6f8316ad83f7171b1304c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c0d1956d916ab92678bf6a3c38a06e6" id="r_a2c0d1956d916ab92678bf6a3c38a06e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIRTools.html#a2c0d1956d916ab92678bf6a3c38a06e6">captureIR</a> (int duration)</td></tr>
+<tr class="memdesc:a2c0d1956d916ab92678bf6a3c38a06e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to capture IR signals.  <br /></td></tr>
+<tr class="separator:a2c0d1956d916ab92678bf6a3c38a06e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:af1aafc67772f2f1e0f3a45c1c2eaa413" id="r_af1aafc67772f2f1e0f3a45c1c2eaa413"><td class="memItemLeft" align="right" valign="top"><a id="af1aafc67772f2f1e0f3a45c1c2eaa413" name="af1aafc67772f2f1e0f3a45c1c2eaa413"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>kIrLed</b> = 38</td></tr>
 <tr class="separator:af1aafc67772f2f1e0f3a45c1c2eaa413"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab98b5a60105aa7708dd9f8937cb6bd2a" id="r_ab98b5a60105aa7708dd9f8937cb6bd2a"><td class="memItemLeft" align="right" valign="top"><a id="ab98b5a60105aa7708dd9f8937cb6bd2a" name="ab98b5a60105aa7708dd9f8937cb6bd2a"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>kRecvPin</b> = 37</td></tr>
+<tr class="separator:ab98b5a60105aa7708dd9f8937cb6bd2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abae6b9cc87f0b5bd7854972b40dd3257" id="r_abae6b9cc87f0b5bd7854972b40dd3257"><td class="memItemLeft" align="right" valign="top"><a id="abae6b9cc87f0b5bd7854972b40dd3257" name="abae6b9cc87f0b5bd7854972b40dd3257"></a>
 IRsend&#160;</td><td class="memItemRight" valign="bottom"><b>irsend</b></td></tr>
 <tr class="separator:abae6b9cc87f0b5bd7854972b40dd3257"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a251c13e67594e50f43cee30c8566c1e5" id="r_a251c13e67594e50f43cee30c8566c1e5"><td class="memItemLeft" align="right" valign="top"><a id="a251c13e67594e50f43cee30c8566c1e5" name="a251c13e67594e50f43cee30c8566c1e5"></a>
+IRrecv&#160;</td><td class="memItemRight" valign="bottom"><b>irrecv</b></td></tr>
+<tr class="separator:a251c13e67594e50f43cee30c8566c1e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6eaf429153003f796483eca1b1c7835f" id="r_a6eaf429153003f796483eca1b1c7835f"><td class="memItemLeft" align="right" valign="top"><a id="a6eaf429153003f796483eca1b1c7835f" name="a6eaf429153003f796483eca1b1c7835f"></a>
 fs::SDFS *&#160;</td><td class="memItemRight" valign="bottom"><b>_sd</b></td></tr>
 <tr class="separator:a6eaf429153003f796483eca1b1c7835f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -246,11 +255,40 @@ String&#160;</td><td class="memItemRight" valign="bottom"><b>devicePath</b></td>
 <tr class="memitem:a435d78083a8fdb7b2250c64ee91c9984" id="r_a435d78083a8fdb7b2250c64ee91c9984"><td class="memItemLeft" align="right" valign="top"><a id="a435d78083a8fdb7b2250c64ee91c9984" name="a435d78083a8fdb7b2250c64ee91c9984"></a>
 String&#160;</td><td class="memItemRight" valign="bottom"><b>device</b></td></tr>
 <tr class="separator:a435d78083a8fdb7b2250c64ee91c9984"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e85b6ed729296b1b6ca62592e7a35a5" id="r_a7e85b6ed729296b1b6ca62592e7a35a5"><td class="memItemLeft" align="right" valign="top"><a id="a7e85b6ed729296b1b6ca62592e7a35a5" name="a7e85b6ed729296b1b6ca62592e7a35a5"></a>
+decode_results&#160;</td><td class="memItemRight" valign="bottom"><b>results</b></td></tr>
+<tr class="separator:a7e85b6ed729296b1b6ca62592e7a35a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f14f957099522c9dfd26204b6b7fa1e" id="r_a9f14f957099522c9dfd26204b6b7fa1e"><td class="memItemLeft" align="right" valign="top"><a id="a9f14f957099522c9dfd26204b6b7fa1e" name="a9f14f957099522c9dfd26204b6b7fa1e"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>jamSignal</b> [2] = {65535, 0}</td></tr>
 <tr class="separator:a9f14f957099522c9dfd26204b6b7fa1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2c0d1956d916ab92678bf6a3c38a06e6" name="a2c0d1956d916ab92678bf6a3c38a06e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c0d1956d916ab92678bf6a3c38a06e6">&#9670;&#160;</a></span>captureIR()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IRTools::captureIR </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>duration</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to capture IR signals. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">duration</td><td>Duration to capture IR signals </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aa7a4df1bfcd5cc065f0b5a49b086fe6e" name="aa7a4df1bfcd5cc065f0b5a49b086fe6e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa7a4df1bfcd5cc065f0b5a49b086fe6e">&#9670;&#160;</a></span>findDeviceBrands()</h2>
 

@@ -208,9 +208,66 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>clearFoundWiFiNetwork
 <tr class="memitem:ac394356bb88c2da425909c388588982e" id="r_ac394356bb88c2da425909c388588982e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWiFiTools.html#ac394356bb88c2da425909c388588982e">findClients</a> (uint8_t *networkBSSID, uint8_t channel, int availableNetworkIndex, int captureTime)</td></tr>
 <tr class="memdesc:ac394356bb88c2da425909c388588982e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to identify clients connected to a network.  <br /></td></tr>
 <tr class="separator:ac394356bb88c2da425909c388588982e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d8e5877a35094fa55d8b4a3ebab2259" id="r_a1d8e5877a35094fa55d8b4a3ebab2259"><td class="memItemLeft" align="right" valign="top"><a id="a1d8e5877a35094fa55d8b4a3ebab2259" name="a1d8e5877a35094fa55d8b4a3ebab2259"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>WiFiTools</b> ()</td></tr>
+<tr class="memdesc:a1d8e5877a35094fa55d8b4a3ebab2259"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Wi-Fi Tools object. <br /></td></tr>
+<tr class="separator:a1d8e5877a35094fa55d8b4a3ebab2259"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a560dca93ef6b03cea1138ce946ad402a" id="r_a560dca93ef6b03cea1138ce946ad402a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWiFiTools.html#a560dca93ef6b03cea1138ce946ad402a">initWiFiTools</a> (fs::SDFS &amp;sdInstance)</td></tr>
+<tr class="memdesc:a560dca93ef6b03cea1138ce946ad402a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise the Wi-Fi tools object.  <br /></td></tr>
+<tr class="separator:a560dca93ef6b03cea1138ce946ad402a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6834bf8cebae5f22ff21b0ccd3360d92" id="r_a6834bf8cebae5f22ff21b0ccd3360d92"><td class="memItemLeft" align="right" valign="top"><a id="a6834bf8cebae5f22ff21b0ccd3360d92" name="a6834bf8cebae5f22ff21b0ccd3360d92"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>nextChannel</b> ()</td></tr>
+<tr class="memdesc:a6834bf8cebae5f22ff21b0ccd3360d92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to change the Wi-Fi channel. <br /></td></tr>
+<tr class="separator:a6834bf8cebae5f22ff21b0ccd3360d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae88636e7bdc162a4ffca01c949b24e32" id="r_ae88636e7bdc162a4ffca01c949b24e32"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWiFiTools.html#ae88636e7bdc162a4ffca01c949b24e32">rickRollBeaconSpam</a> (int duration)</td></tr>
+<tr class="memdesc:ae88636e7bdc162a4ffca01c949b24e32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to run a Rick Roll beacon spam attack.  <br /></td></tr>
+<tr class="separator:ae88636e7bdc162a4ffca01c949b24e32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a434b1b80009f52dd46bb9f26c7b17488" id="r_a434b1b80009f52dd46bb9f26c7b17488"><td class="memItemLeft" align="right" valign="top"><a id="a434b1b80009f52dd46bb9f26c7b17488" name="a434b1b80009f52dd46bb9f26c7b17488"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>scanWiFiNetworks</b> ()</td></tr>
+<tr class="memdesc:a434b1b80009f52dd46bb9f26c7b17488"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to scan for available Wi-Fi networks. <br /></td></tr>
+<tr class="separator:a434b1b80009f52dd46bb9f26c7b17488"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af80713dc94811ab73842d19f0c0c35e7" id="r_af80713dc94811ab73842d19f0c0c35e7"><td class="memItemLeft" align="right" valign="top">std::vector&lt; wifi_ap_record_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWiFiTools.html#af80713dc94811ab73842d19f0c0c35e7">getAvailableNetworks</a> ()</td></tr>
+<tr class="memdesc:af80713dc94811ab73842d19f0c0c35e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Available Networks object.  <br /></td></tr>
+<tr class="separator:af80713dc94811ab73842d19f0c0c35e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3722aae8c3032c40d6a52fe299b3b4ca" id="r_a3722aae8c3032c40d6a52fe299b3b4ca"><td class="memItemLeft" align="right" valign="top"><a id="a3722aae8c3032c40d6a52fe299b3b4ca" name="a3722aae8c3032c40d6a52fe299b3b4ca"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>clearFoundWiFiNetworks</b> ()</td></tr>
+<tr class="memdesc:a3722aae8c3032c40d6a52fe299b3b4ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to clear the found Wi-Fi networks vector. <br /></td></tr>
+<tr class="separator:a3722aae8c3032c40d6a52fe299b3b4ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae290535762ebba5331a922e09a82dc50" id="r_ae290535762ebba5331a922e09a82dc50"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWiFiTools.html#ae290535762ebba5331a922e09a82dc50">deauthNetwork</a> (uint8_t *networkSSID, uint8_t *networkBSSID, uint8_t channel, int availableNetworkIndex, uint8_t *targetMacAddr, int numPackets, int delayMs, uint8_t reasonCode)</td></tr>
+<tr class="memdesc:ae290535762ebba5331a922e09a82dc50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to run a deauthentication attack.  <br /></td></tr>
+<tr class="separator:ae290535762ebba5331a922e09a82dc50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8458c9cbd17f858562382084f33e0f98" id="r_a8458c9cbd17f858562382084f33e0f98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWiFiTools.html#a8458c9cbd17f858562382084f33e0f98">handshakeCapture</a> (uint8_t *networkBSSID, uint8_t channel, int availableNetworkIndex, int captureTime)</td></tr>
+<tr class="memdesc:a8458c9cbd17f858562382084f33e0f98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to initiate a passive handshake capture.  <br /></td></tr>
+<tr class="separator:a8458c9cbd17f858562382084f33e0f98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2be73c0a4df321522e4b99c96790a3e7" id="r_a2be73c0a4df321522e4b99c96790a3e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWiFiTools.html#a2be73c0a4df321522e4b99c96790a3e7">activeHandshakeCapture</a> (uint8_t *networkBSSID, uint8_t channel, int availableNetworkIndex, int captureTime)</td></tr>
+<tr class="memdesc:a2be73c0a4df321522e4b99c96790a3e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to initiate an active handshake capture.  <br /></td></tr>
+<tr class="separator:a2be73c0a4df321522e4b99c96790a3e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac394356bb88c2da425909c388588982e" id="r_ac394356bb88c2da425909c388588982e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWiFiTools.html#ac394356bb88c2da425909c388588982e">findClients</a> (uint8_t *networkBSSID, uint8_t channel, int availableNetworkIndex, int captureTime)</td></tr>
+<tr class="memdesc:ac394356bb88c2da425909c388588982e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to identify clients connected to a network.  <br /></td></tr>
+<tr class="separator:ac394356bb88c2da425909c388588982e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
+<tr class="memitem:a1bb65b4835a3c0d70dbc8a1aa6320a6b" id="r_a1bb65b4835a3c0d70dbc8a1aa6320a6b"><td class="memItemLeft" align="right" valign="top"><a id="a1bb65b4835a3c0d70dbc8a1aa6320a6b" name="a1bb65b4835a3c0d70dbc8a1aa6320a6b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>beaconSpamSetup</b> ()</td></tr>
+<tr class="memdesc:a1bb65b4835a3c0d70dbc8a1aa6320a6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup function for the beacon spam attack. <br /></td></tr>
+<tr class="separator:a1bb65b4835a3c0d70dbc8a1aa6320a6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae689371b5f6cd8d4a600b9aa4f142882" id="r_ae689371b5f6cd8d4a600b9aa4f142882"><td class="memItemLeft" align="right" valign="top"><a id="ae689371b5f6cd8d4a600b9aa4f142882" name="ae689371b5f6cd8d4a600b9aa4f142882"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>generateRandomMac</b> ()</td></tr>
+<tr class="memdesc:ae689371b5f6cd8d4a600b9aa4f142882"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to generate a random MAC address. <br /></td></tr>
+<tr class="separator:ae689371b5f6cd8d4a600b9aa4f142882"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4496beddfc24492abda018e82a581dac" id="r_a4496beddfc24492abda018e82a581dac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWiFiTools.html#a4496beddfc24492abda018e82a581dac">sendDeauthPacket</a> (uint8_t *apMac, uint8_t *stMac, uint8_t channel, uint8_t reasonCode)</td></tr>
+<tr class="memdesc:a4496beddfc24492abda018e82a581dac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to transmit a deatuthentication packet.  <br /></td></tr>
+<tr class="separator:a4496beddfc24492abda018e82a581dac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1995aae91614f4ca74e698fb7dd250e7" id="r_a1995aae91614f4ca74e698fb7dd250e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWiFiTools.html#a1995aae91614f4ca74e698fb7dd250e7">filterForClients</a> (const <a class="el" href="structwifi__ieee80211__mac__hdr__t.html">wifi_ieee80211_mac_hdr_t</a> *hdr)</td></tr>
+<tr class="memdesc:a1995aae91614f4ca74e698fb7dd250e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to identify clients based on detected packets.  <br /></td></tr>
+<tr class="separator:a1995aae91614f4ca74e698fb7dd250e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50aa0bf5c4f9cad559fc785995b41786" id="r_a50aa0bf5c4f9cad559fc785995b41786"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWiFiTools.html#a50aa0bf5c4f9cad559fc785995b41786">filterForHandshakes</a> (void *buf, wifi_promiscuous_pkt_type_t type)</td></tr>
+<tr class="memdesc:a50aa0bf5c4f9cad559fc785995b41786"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to filter packets for handshake capture.  <br /></td></tr>
+<tr class="separator:a50aa0bf5c4f9cad559fc785995b41786"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad699a00a0c7ec0ab314ebef10568d700" id="r_ad699a00a0c7ec0ab314ebef10568d700"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWiFiTools.html#ad699a00a0c7ec0ab314ebef10568d700">processWiFiData</a> (uint8_t *networkBSSID, uint8_t channel, int captureTime, bool captureHandshake, bool detectClients)</td></tr>
+<tr class="memdesc:ad699a00a0c7ec0ab314ebef10568d700"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to begin capture and processing of Wi-Fi data.  <br /></td></tr>
+<tr class="separator:ad699a00a0c7ec0ab314ebef10568d700"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1bb65b4835a3c0d70dbc8a1aa6320a6b" id="r_a1bb65b4835a3c0d70dbc8a1aa6320a6b"><td class="memItemLeft" align="right" valign="top"><a id="a1bb65b4835a3c0d70dbc8a1aa6320a6b" name="a1bb65b4835a3c0d70dbc8a1aa6320a6b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>beaconSpamSetup</b> ()</td></tr>
 <tr class="memdesc:a1bb65b4835a3c0d70dbc8a1aa6320a6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup function for the beacon spam attack. <br /></td></tr>
@@ -237,24 +294,27 @@ Static Private Member Functions</h2></td></tr>
 <tr class="memitem:a21dbe89a44a32b0e97960ae72ffdd523" id="r_a21dbe89a44a32b0e97960ae72ffdd523"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWiFiTools.html#a21dbe89a44a32b0e97960ae72ffdd523">promiscuousPacketHandler</a> (void *buf, wifi_promiscuous_pkt_type_t type)</td></tr>
 <tr class="memdesc:a21dbe89a44a32b0e97960ae72ffdd523"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function for promiscuous packet handling.  <br /></td></tr>
 <tr class="separator:a21dbe89a44a32b0e97960ae72ffdd523"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64da33825cefab83d9480fef356b9b33" id="r_a64da33825cefab83d9480fef356b9b33"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWiFiTools.html#a64da33825cefab83d9480fef356b9b33">promiscuousPacketHandler</a> (void *buf, wifi_promiscuous_pkt_type_t type)</td></tr>
+<tr class="memdesc:a64da33825cefab83d9480fef356b9b33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function for promiscuous packet handling.  <br /></td></tr>
+<tr class="separator:a64da33825cefab83d9480fef356b9b33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a4da7ed3d48f5f01f5ac205476af723fb" id="r_a4da7ed3d48f5f01f5ac205476af723fb"><td class="memItemLeft" align="right" valign="top"><a id="a4da7ed3d48f5f01f5ac205476af723fb" name="a4da7ed3d48f5f01f5ac205476af723fb"></a>
 const bool&#160;</td><td class="memItemRight" valign="bottom"><b>wpa2</b> = true</td></tr>
 <tr class="separator:a4da7ed3d48f5f01f5ac205476af723fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac225f83ca9da0657a9ccdc82ed87454b" id="r_ac225f83ca9da0657a9ccdc82ed87454b"><td class="memItemLeft" align="right" valign="top"><a id="ac225f83ca9da0657a9ccdc82ed87454b" name="ac225f83ca9da0657a9ccdc82ed87454b"></a>
+<tr class="memitem:ab3b525d0148320b22c965a63be03c846" id="r_ab3b525d0148320b22c965a63be03c846"><td class="memItemLeft" align="right" valign="top"><a id="ab3b525d0148320b22c965a63be03c846" name="ab3b525d0148320b22c965a63be03c846"></a>
 char&#160;</td><td class="memItemRight" valign="bottom"><b>emptySSID</b> [32]</td></tr>
-<tr class="separator:ac225f83ca9da0657a9ccdc82ed87454b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:ab3b525d0148320b22c965a63be03c846"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9398d16556a8c35f7a3df0740f8c4692" id="r_a9398d16556a8c35f7a3df0740f8c4692"><td class="memItemLeft" align="right" valign="top"><a id="a9398d16556a8c35f7a3df0740f8c4692" name="a9398d16556a8c35f7a3df0740f8c4692"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>channelIndex</b> = 0</td></tr>
 <tr class="separator:a9398d16556a8c35f7a3df0740f8c4692"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91ac24df08829d0cd925abbab9e1bd1f" id="r_a91ac24df08829d0cd925abbab9e1bd1f"><td class="memItemLeft" align="right" valign="top"><a id="a91ac24df08829d0cd925abbab9e1bd1f" name="a91ac24df08829d0cd925abbab9e1bd1f"></a>
+<tr class="memitem:a0f635300cc871f037158bd932402633c" id="r_a0f635300cc871f037158bd932402633c"><td class="memItemLeft" align="right" valign="top"><a id="a0f635300cc871f037158bd932402633c" name="a0f635300cc871f037158bd932402633c"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>macAddr</b> [6]</td></tr>
-<tr class="separator:a91ac24df08829d0cd925abbab9e1bd1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae64b9a278ed4c83d32ae1cb8e49ab9ec" id="r_ae64b9a278ed4c83d32ae1cb8e49ab9ec"><td class="memItemLeft" align="right" valign="top"><a id="ae64b9a278ed4c83d32ae1cb8e49ab9ec" name="ae64b9a278ed4c83d32ae1cb8e49ab9ec"></a>
+<tr class="separator:a0f635300cc871f037158bd932402633c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a654a644f0566399b3f98e38c69d185e6" id="r_a654a644f0566399b3f98e38c69d185e6"><td class="memItemLeft" align="right" valign="top"><a id="a654a644f0566399b3f98e38c69d185e6" name="a654a644f0566399b3f98e38c69d185e6"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>randomMacAddr</b> [6]</td></tr>
-<tr class="separator:ae64b9a278ed4c83d32ae1cb8e49ab9ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a654a644f0566399b3f98e38c69d185e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab993d394bf8bc3e2da38651e79a71c41" id="r_ab993d394bf8bc3e2da38651e79a71c41"><td class="memItemLeft" align="right" valign="top"><a id="ab993d394bf8bc3e2da38651e79a71c41" name="ab993d394bf8bc3e2da38651e79a71c41"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>wifiChannel</b> = 1</td></tr>
 <tr class="separator:ab993d394bf8bc3e2da38651e79a71c41"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -273,38 +333,41 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>attackTime</b> = 
 <tr class="memitem:a6831e8694846b515143b3011afcf7351" id="r_a6831e8694846b515143b3011afcf7351"><td class="memItemLeft" align="right" valign="top"><a id="a6831e8694846b515143b3011afcf7351" name="a6831e8694846b515143b3011afcf7351"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>packetRateTime</b> = 0</td></tr>
 <tr class="separator:a6831e8694846b515143b3011afcf7351"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a307492011657185053b23f8bd9f1663f" id="r_a307492011657185053b23f8bd9f1663f"><td class="memItemLeft" align="right" valign="top"><a id="a307492011657185053b23f8bd9f1663f" name="a307492011657185053b23f8bd9f1663f"></a>
+<tr class="memitem:a9abad1bfa036c0803b26ad8c5295df7b" id="r_a9abad1bfa036c0803b26ad8c5295df7b"><td class="memItemLeft" align="right" valign="top"><a id="a9abad1bfa036c0803b26ad8c5295df7b" name="a9abad1bfa036c0803b26ad8c5295df7b"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>targetBSSID</b> [6]</td></tr>
-<tr class="separator:a307492011657185053b23f8bd9f1663f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a9abad1bfa036c0803b26ad8c5295df7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02e85aea10bf634e834776f7ef1adfcd" id="r_a02e85aea10bf634e834776f7ef1adfcd"><td class="memItemLeft" align="right" valign="top"><a id="a02e85aea10bf634e834776f7ef1adfcd" name="a02e85aea10bf634e834776f7ef1adfcd"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>targetChannel</b></td></tr>
 <tr class="separator:a02e85aea10bf634e834776f7ef1adfcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac413058a2450f063a2493b5f58fcd9cf" id="r_ac413058a2450f063a2493b5f58fcd9cf"><td class="memItemLeft" align="right" valign="top"><a id="ac413058a2450f063a2493b5f58fcd9cf" name="ac413058a2450f063a2493b5f58fcd9cf"></a>
-<a class="el" href="WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">wifi_packet_flag</a>&#160;</td><td class="memItemRight" valign="bottom"><b>packetScanFlag</b></td></tr>
+<a class="el" href="WiFi_2WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">wifi_packet_flag</a>&#160;</td><td class="memItemRight" valign="bottom"><b>packetScanFlag</b></td></tr>
 <tr class="separator:ac413058a2450f063a2493b5f58fcd9cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f8eec45d24e6dcd2c26177a93d34fa1" id="r_a0f8eec45d24e6dcd2c26177a93d34fa1"><td class="memItemLeft" align="right" valign="top"><a id="a0f8eec45d24e6dcd2c26177a93d34fa1" name="a0f8eec45d24e6dcd2c26177a93d34fa1"></a>
+<tr class="memitem:a97891e8b0f25e9c2d33644fbd803adc6" id="r_a97891e8b0f25e9c2d33644fbd803adc6"><td class="memItemLeft" align="right" valign="top"><a id="a97891e8b0f25e9c2d33644fbd803adc6" name="a97891e8b0f25e9c2d33644fbd803adc6"></a>
 fs::SDFS *&#160;</td><td class="memItemRight" valign="bottom"><b>sd</b> = nullptr</td></tr>
-<tr class="separator:a0f8eec45d24e6dcd2c26177a93d34fa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a97891e8b0f25e9c2d33644fbd803adc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2edb2556058df5c3e37fd8d9d510da1" id="r_ae2edb2556058df5c3e37fd8d9d510da1"><td class="memItemLeft" align="right" valign="top"><a id="ae2edb2556058df5c3e37fd8d9d510da1" name="ae2edb2556058df5c3e37fd8d9d510da1"></a>
 wifi_init_config_t&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b> = WIFI_INIT_CONFIG_DEFAULT()</td></tr>
 <tr class="separator:ae2edb2556058df5c3e37fd8d9d510da1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c9977f225907d3797eaf7848b5b72d8" id="r_a5c9977f225907d3797eaf7848b5b72d8"><td class="memItemLeft" align="right" valign="top"><a id="a5c9977f225907d3797eaf7848b5b72d8" name="a5c9977f225907d3797eaf7848b5b72d8"></a>
+<tr class="memitem:a2918df9ebcb0ed1995e697de438b6f6b" id="r_a2918df9ebcb0ed1995e697de438b6f6b"><td class="memItemLeft" align="right" valign="top"><a id="a2918df9ebcb0ed1995e697de438b6f6b" name="a2918df9ebcb0ed1995e697de438b6f6b"></a>
 std::vector&lt; uint8_t * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>detectedClients</b></td></tr>
-<tr class="separator:a5c9977f225907d3797eaf7848b5b72d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab52759a2f92d4946069b3467ff8a4329" id="r_ab52759a2f92d4946069b3467ff8a4329"><td class="memItemLeft" align="right" valign="top"><a id="ab52759a2f92d4946069b3467ff8a4329" name="ab52759a2f92d4946069b3467ff8a4329"></a>
+<tr class="separator:a2918df9ebcb0ed1995e697de438b6f6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4890c0292722fad5be4b604e4095eb81" id="r_a4890c0292722fad5be4b604e4095eb81"><td class="memItemLeft" align="right" valign="top"><a id="a4890c0292722fad5be4b604e4095eb81" name="a4890c0292722fad5be4b604e4095eb81"></a>
 std::vector&lt; wifi_ap_record_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>foundWiFiNetworks</b></td></tr>
-<tr class="separator:ab52759a2f92d4946069b3467ff8a4329"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a920d2ed54035f599b1cf65d6362011b0" id="r_a920d2ed54035f599b1cf65d6362011b0"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWiFiTools.html#a920d2ed54035f599b1cf65d6362011b0">deauthPacket</a> [26]</td></tr>
-<tr class="separator:a920d2ed54035f599b1cf65d6362011b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac525225711027f896686dccdf2ed71b5" id="r_ac525225711027f896686dccdf2ed71b5"><td class="memItemLeft" align="right" valign="top"><a id="ac525225711027f896686dccdf2ed71b5" name="ac525225711027f896686dccdf2ed71b5"></a>
+<tr class="separator:a4890c0292722fad5be4b604e4095eb81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa51a9f5d2d5cc025914f43023564b17" id="r_aaa51a9f5d2d5cc025914f43023564b17"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWiFiTools.html#aaa51a9f5d2d5cc025914f43023564b17">deauthPacket</a> [26]</td></tr>
+<tr class="separator:aaa51a9f5d2d5cc025914f43023564b17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61ff3f9d015e9270978208520d64de3a" id="r_a61ff3f9d015e9270978208520d64de3a"><td class="memItemLeft" align="right" valign="top"><a id="a61ff3f9d015e9270978208520d64de3a" name="a61ff3f9d015e9270978208520d64de3a"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>beaconPacket</b> [109]</td></tr>
-<tr class="separator:ac525225711027f896686dccdf2ed71b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a61ff3f9d015e9270978208520d64de3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a742012a854a7a2c0df654c99c78c9258" id="r_a742012a854a7a2c0df654c99c78c9258"><td class="memItemLeft" align="right" valign="top">const char *const rickRollSSIDs[8]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWiFiTools.html#a742012a854a7a2c0df654c99c78c9258">PROGMEM</a></td></tr>
 <tr class="separator:a742012a854a7a2c0df654c99c78c9258"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acffc1e77726c7e95f6e87a7191ccde9f" id="r_acffc1e77726c7e95f6e87a7191ccde9f"><td class="memItemLeft" align="right" valign="top"><a id="acffc1e77726c7e95f6e87a7191ccde9f" name="acffc1e77726c7e95f6e87a7191ccde9f"></a>
+std::vector&lt; uint8_t * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>capturedPackets</b></td></tr>
+<tr class="separator:acffc1e77726c7e95f6e87a7191ccde9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a2be73c0a4df321522e4b99c96790a3e7" name="a2be73c0a4df321522e4b99c96790a3e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2be73c0a4df321522e4b99c96790a3e7">&#9670;&#160;</a></span>activeHandshakeCapture()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2be73c0a4df321522e4b99c96790a3e7">&#9670;&#160;</a></span>activeHandshakeCapture() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -356,8 +419,59 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>beaconPacket</b> [
 
 </div>
 </div>
+<a id="a2be73c0a4df321522e4b99c96790a3e7" name="a2be73c0a4df321522e4b99c96790a3e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2be73c0a4df321522e4b99c96790a3e7">&#9670;&#160;</a></span>activeHandshakeCapture() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WiFiTools::activeHandshakeCapture </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>networkBSSID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>channel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>availableNetworkIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>captureTime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to initiate an active handshake capture. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">networkBSSID</td><td>BSSID of the target network </td></tr>
+    <tr><td class="paramname">channel</td><td>Channel of the target network </td></tr>
+    <tr><td class="paramname">availableNetworkIndex</td><td>Index of the target network in the foundWiFiNetworks vector </td></tr>
+    <tr><td class="paramname">captureTime</td><td>Duration to capture packets for </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ae290535762ebba5331a922e09a82dc50" name="ae290535762ebba5331a922e09a82dc50"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae290535762ebba5331a922e09a82dc50">&#9670;&#160;</a></span>deauthNetwork()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae290535762ebba5331a922e09a82dc50">&#9670;&#160;</a></span>deauthNetwork() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -439,8 +553,87 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>beaconPacket</b> [
 
 </div>
 </div>
+<a id="ae290535762ebba5331a922e09a82dc50" name="ae290535762ebba5331a922e09a82dc50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae290535762ebba5331a922e09a82dc50">&#9670;&#160;</a></span>deauthNetwork() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WiFiTools::deauthNetwork </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>networkSSID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>networkBSSID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>channel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>availableNetworkIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>targetMacAddr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>numPackets</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>delayMs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>reasonCode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to run a deauthentication attack. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">networkSSID</td><td>SSID of the target network </td></tr>
+    <tr><td class="paramname">networkBSSID</td><td>BSSID of the target network </td></tr>
+    <tr><td class="paramname">channel</td><td>Channel of the target network </td></tr>
+    <tr><td class="paramname">availableNetworkIndex</td><td>Index of the target network in the foundWiFiNetworks vector </td></tr>
+    <tr><td class="paramname">targetMacAddr</td><td>MAC address of the target device </td></tr>
+    <tr><td class="paramname">numPackets</td><td>Number of deauthentication packets to send </td></tr>
+    <tr><td class="paramname">delayMs</td><td>Delay between sending deauthentication packets </td></tr>
+    <tr><td class="paramname">reasonCode</td><td>Reason code for the deauthentication </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a1995aae91614f4ca74e698fb7dd250e7" name="a1995aae91614f4ca74e698fb7dd250e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1995aae91614f4ca74e698fb7dd250e7">&#9670;&#160;</a></span>filterForClients()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1995aae91614f4ca74e698fb7dd250e7">&#9670;&#160;</a></span>filterForClients() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -475,8 +668,42 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>beaconPacket</b> [
 
 </div>
 </div>
+<a id="a1995aae91614f4ca74e698fb7dd250e7" name="a1995aae91614f4ca74e698fb7dd250e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1995aae91614f4ca74e698fb7dd250e7">&#9670;&#160;</a></span>filterForClients() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WiFiTools::filterForClients </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structwifi__ieee80211__mac__hdr__t.html">wifi_ieee80211_mac_hdr_t</a> *&#160;</td>
+          <td class="paramname"><em>hdr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function to identify clients based on detected packets. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hdr</td><td>Pointer to the MAC header of the packet </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a50aa0bf5c4f9cad559fc785995b41786" name="a50aa0bf5c4f9cad559fc785995b41786"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50aa0bf5c4f9cad559fc785995b41786">&#9670;&#160;</a></span>filterForHandshakes()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a50aa0bf5c4f9cad559fc785995b41786">&#9670;&#160;</a></span>filterForHandshakes() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -522,8 +749,53 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>beaconPacket</b> [
 
 </div>
 </div>
+<a id="a50aa0bf5c4f9cad559fc785995b41786" name="a50aa0bf5c4f9cad559fc785995b41786"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50aa0bf5c4f9cad559fc785995b41786">&#9670;&#160;</a></span>filterForHandshakes() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WiFiTools::filterForHandshakes </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">wifi_promiscuous_pkt_type_t&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function to filter packets for handshake capture. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buf</td><td>Pointer to the packet buffer </td></tr>
+    <tr><td class="paramname">type</td><td>Type of the packet </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ac394356bb88c2da425909c388588982e" name="ac394356bb88c2da425909c388588982e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac394356bb88c2da425909c388588982e">&#9670;&#160;</a></span>findClients()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac394356bb88c2da425909c388588982e">&#9670;&#160;</a></span>findClients() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -575,8 +847,59 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>beaconPacket</b> [
 
 </div>
 </div>
+<a id="ac394356bb88c2da425909c388588982e" name="ac394356bb88c2da425909c388588982e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac394356bb88c2da425909c388588982e">&#9670;&#160;</a></span>findClients() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WiFiTools::findClients </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>networkBSSID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>channel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>availableNetworkIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>captureTime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to identify clients connected to a network. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">networkBSSID</td><td>BSSID of the target network </td></tr>
+    <tr><td class="paramname">channel</td><td>Channel of the target network </td></tr>
+    <tr><td class="paramname">availableNetworkIndex</td><td>Index of the target network in the foundWiFiNetworks vector </td></tr>
+    <tr><td class="paramname">captureTime</td><td>Duration to scan for clients </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="af80713dc94811ab73842d19f0c0c35e7" name="af80713dc94811ab73842d19f0c0c35e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af80713dc94811ab73842d19f0c0c35e7">&#9670;&#160;</a></span>getAvailableNetworks()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af80713dc94811ab73842d19f0c0c35e7">&#9670;&#160;</a></span>getAvailableNetworks() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -597,8 +920,28 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>beaconPacket</b> [
 
 </div>
 </div>
+<a id="af80713dc94811ab73842d19f0c0c35e7" name="af80713dc94811ab73842d19f0c0c35e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af80713dc94811ab73842d19f0c0c35e7">&#9670;&#160;</a></span>getAvailableNetworks() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; wifi_ap_record_t &gt; WiFiTools::getAvailableNetworks </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the Available Networks object. </p>
+<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;wifi_ap_record_t&gt; </dd></dl>
+
+</div>
+</div>
 <a id="a8458c9cbd17f858562382084f33e0f98" name="a8458c9cbd17f858562382084f33e0f98"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8458c9cbd17f858562382084f33e0f98">&#9670;&#160;</a></span>handshakeCapture()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8458c9cbd17f858562382084f33e0f98">&#9670;&#160;</a></span>handshakeCapture() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -650,8 +993,85 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>beaconPacket</b> [
 
 </div>
 </div>
+<a id="a8458c9cbd17f858562382084f33e0f98" name="a8458c9cbd17f858562382084f33e0f98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8458c9cbd17f858562382084f33e0f98">&#9670;&#160;</a></span>handshakeCapture() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WiFiTools::handshakeCapture </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>networkBSSID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>channel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>availableNetworkIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>captureTime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to initiate a passive handshake capture. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">networkBSSID</td><td>BSSID of the target network </td></tr>
+    <tr><td class="paramname">channel</td><td>Channel of the target network </td></tr>
+    <tr><td class="paramname">availableNetworkIndex</td><td>Index of the target network in the foundWiFiNetworks vector </td></tr>
+    <tr><td class="paramname">captureTime</td><td>Duration to capture packets for </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a560dca93ef6b03cea1138ce946ad402a" name="a560dca93ef6b03cea1138ce946ad402a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a560dca93ef6b03cea1138ce946ad402a">&#9670;&#160;</a></span>initWiFiTools()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a560dca93ef6b03cea1138ce946ad402a">&#9670;&#160;</a></span>initWiFiTools() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WiFiTools::initWiFiTools </td>
+          <td>(</td>
+          <td class="paramtype">fs::SDFS &amp;&#160;</td>
+          <td class="paramname"><em>sdInstance</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialise the Wi-Fi tools object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sdInstance</td><td>Instance of the SD card filesystem </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a560dca93ef6b03cea1138ce946ad402a" name="a560dca93ef6b03cea1138ce946ad402a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a560dca93ef6b03cea1138ce946ad402a">&#9670;&#160;</a></span>initWiFiTools() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -677,7 +1097,7 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>beaconPacket</b> [
 </div>
 </div>
 <a id="ad699a00a0c7ec0ab314ebef10568d700" name="ad699a00a0c7ec0ab314ebef10568d700"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad699a00a0c7ec0ab314ebef10568d700">&#9670;&#160;</a></span>processWiFiData()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad699a00a0c7ec0ab314ebef10568d700">&#9670;&#160;</a></span>processWiFiData() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -746,8 +1166,74 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>beaconPacket</b> [
 
 </div>
 </div>
+<a id="ad699a00a0c7ec0ab314ebef10568d700" name="ad699a00a0c7ec0ab314ebef10568d700"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad699a00a0c7ec0ab314ebef10568d700">&#9670;&#160;</a></span>processWiFiData() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WiFiTools::processWiFiData </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>networkBSSID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>channel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>captureTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>captureHandshake</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>detectClients</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function to begin capture and processing of Wi-Fi data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">networkBSSID</td><td>MAC address of the target network </td></tr>
+    <tr><td class="paramname">channel</td><td>Channel to capture packets on </td></tr>
+    <tr><td class="paramname">captureTime</td><td>The duration to capture packets for </td></tr>
+    <tr><td class="paramname">captureHandshake</td><td>Flag to capture handshake packets </td></tr>
+    <tr><td class="paramname">detectClients</td><td>Flag to identify connected clients </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a21dbe89a44a32b0e97960ae72ffdd523" name="a21dbe89a44a32b0e97960ae72ffdd523"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21dbe89a44a32b0e97960ae72ffdd523">&#9670;&#160;</a></span>promiscuousPacketHandler()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a21dbe89a44a32b0e97960ae72ffdd523">&#9670;&#160;</a></span>promiscuousPacketHandler() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -795,8 +1281,53 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>beaconPacket</b> [
 
 </div>
 </div>
+<a id="a64da33825cefab83d9480fef356b9b33" name="a64da33825cefab83d9480fef356b9b33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64da33825cefab83d9480fef356b9b33">&#9670;&#160;</a></span>promiscuousPacketHandler() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void WiFiTools::promiscuousPacketHandler </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">wifi_promiscuous_pkt_type_t&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Callback function for promiscuous packet handling. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buf</td><td>Pointer to the packet buffer </td></tr>
+    <tr><td class="paramname">type</td><td>Type of the packet </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ae88636e7bdc162a4ffca01c949b24e32" name="ae88636e7bdc162a4ffca01c949b24e32"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae88636e7bdc162a4ffca01c949b24e32">&#9670;&#160;</a></span>rickRollBeaconSpam()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae88636e7bdc162a4ffca01c949b24e32">&#9670;&#160;</a></span>rickRollBeaconSpam() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -823,8 +1354,34 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>beaconPacket</b> [
 
 </div>
 </div>
+<a id="ae88636e7bdc162a4ffca01c949b24e32" name="ae88636e7bdc162a4ffca01c949b24e32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae88636e7bdc162a4ffca01c949b24e32">&#9670;&#160;</a></span>rickRollBeaconSpam() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WiFiTools::rickRollBeaconSpam </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>duration</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to run a Rick Roll beacon spam attack. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">duration</td><td>Duration of the attack in milliseconds, defaults to 15 seconds </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a4496beddfc24492abda018e82a581dac" name="a4496beddfc24492abda018e82a581dac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4496beddfc24492abda018e82a581dac">&#9670;&#160;</a></span>sendDeauthPacket()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4496beddfc24492abda018e82a581dac">&#9670;&#160;</a></span>sendDeauthPacket() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -884,9 +1441,8 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>beaconPacket</b> [
 
 </div>
 </div>
-<h2 class="groupheader">Field Documentation</h2>
-<a id="a920d2ed54035f599b1cf65d6362011b0" name="a920d2ed54035f599b1cf65d6362011b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a920d2ed54035f599b1cf65d6362011b0">&#9670;&#160;</a></span>deauthPacket</h2>
+<a id="a4496beddfc24492abda018e82a581dac" name="a4496beddfc24492abda018e82a581dac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4496beddfc24492abda018e82a581dac">&#9670;&#160;</a></span>sendDeauthPacket() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -895,7 +1451,67 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>beaconPacket</b> [
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t WiFiTools::deauthPacket[26]</td>
+          <td class="memname">void WiFiTools::sendDeauthPacket </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>apMac</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>stMac</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>channel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>reasonCode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function to transmit a deatuthentication packet. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">apMac</td><td>MAC address of the access point </td></tr>
+    <tr><td class="paramname">stMac</td><td>MAC address of the device to deauthenticate </td></tr>
+    <tr><td class="paramname">channel</td><td>Chanel to transmit the packet on </td></tr>
+    <tr><td class="paramname">reasonCode</td><td>Reason code for the deauthentication </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Field Documentation</h2>
+<a id="aaa51a9f5d2d5cc025914f43023564b17" name="aaa51a9f5d2d5cc025914f43023564b17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa51a9f5d2d5cc025914f43023564b17">&#9670;&#160;</a></span>deauthPacket</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t WiFiTools::deauthPacket</td>
         </tr>
       </table>
   </td>
@@ -948,7 +1564,9 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>beaconPacket</b> [
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>WiFi/<a class="el" href="WiFiTools_8h_source.html">WiFiTools.h</a></li>
+<li>GUI/<a class="el" href="GUI_2WiFiTools_8h_source.html">WiFiTools.h</a></li>
+<li>WiFi/<a class="el" href="WiFi_2WiFiTools_8h_source.html">WiFiTools.h</a></li>
+<li>GUI/<b>WiFiTools.cpp</b></li>
 <li>WiFi/<b>WiFiTools.cpp</b></li>
 </ul>
 </div><!-- contents -->

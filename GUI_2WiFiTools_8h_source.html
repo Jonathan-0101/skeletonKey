@@ -12,7 +12,7 @@
         content="BEng Dissertation; Penetration-testing device to highlight security system vulnerabilities." />
     <meta property="og:url" content="https://jonathan-0101.github.io/PenTestingDevice" />
     <!-- END opengraph metadata -->
-    <title>Skeleton Key: WiFi/WiFiTools.h Source File</title>
+    <title>Skeleton Key: GUI/WiFiTools.h Source File</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -134,7 +134,7 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('WiFiTools_8h_source.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('GUI_2WiFiTools_8h_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -163,7 +163,7 @@ $(document).ready(function(){initNavTree('WiFiTools_8h_source.html',''); initRes
   <div class="headertitle"><div class="title">WiFiTools.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="WiFiTools_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// WiFiTools.h</span></div>
+<a href="GUI_2WiFiTools_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// WiFiTools.h</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#ifndef WIFITOOLS_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#define WIFITOOLS_H</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
@@ -222,11 +222,11 @@ $(document).ready(function(){initNavTree('WiFiTools_8h_source.html',''); initRes
 </div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
 <div class="foldopen" id="foldopen00080" data-start="{" data-end="};">
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">   80</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="GUI_2WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">   80</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    HANDSHAKE_CAPTURE,</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    CLIENT_DETECTION,</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    NONE</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>} <a class="code hl_enumeration" href="WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">wifi_packet_flag</a>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>} <a class="code hl_enumeration" href="GUI_2WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">wifi_packet_flag</a>;</div>
 </div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
 <div class="foldopen" id="foldopen00086" data-start="{" data-end="};">
@@ -245,7 +245,7 @@ $(document).ready(function(){initNavTree('WiFiTools_8h_source.html',''); initRes
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    uint32_t packetRateTime = 0;</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    uint8_t targetBSSID[6];</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    uint8_t targetChannel;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <a class="code hl_enumeration" href="WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">wifi_packet_flag</a> packetScanFlag;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <a class="code hl_enumeration" href="WiFi_2WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">wifi_packet_flag</a> packetScanFlag;</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    fs::SDFS* sd = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();</div>
@@ -361,7 +361,8 @@ $(document).ready(function(){initNavTree('WiFiTools_8h_source.html',''); initRes
 <div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span><span class="keyword">extern</span> <a class="code hl_class" href="classWiFiTools.html">WiFiTools</a>* globalWiFiToolsInstance;</div>
 <div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span> </div>
 <div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span><span class="preprocessor">#endif  </span><span class="comment">// WIFITOOLS_H</span></div>
-<div class="ttc" id="aWiFiTools_8h_html_a92ab780568552ff29e7ced01cb6f3801"><div class="ttname"><a href="WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">wifi_packet_flag</a></div><div class="ttdeci">wifi_packet_flag</div><div class="ttdoc">Enum to store the type of Wi-Fi packet to capture.</div><div class="ttdef"><b>Definition</b> WiFiTools.h:80</div></div>
+<div class="ttc" id="aGUI_2WiFiTools_8h_html_a92ab780568552ff29e7ced01cb6f3801"><div class="ttname"><a href="GUI_2WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">wifi_packet_flag</a></div><div class="ttdeci">wifi_packet_flag</div><div class="ttdoc">Enum to store the type of Wi-Fi packet to capture.</div><div class="ttdef"><b>Definition</b> WiFiTools.h:80</div></div>
+<div class="ttc" id="aWiFi_2WiFiTools_8h_html_a92ab780568552ff29e7ced01cb6f3801"><div class="ttname"><a href="WiFi_2WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">wifi_packet_flag</a></div><div class="ttdeci">wifi_packet_flag</div><div class="ttdoc">Enum to store the type of Wi-Fi packet to capture.</div><div class="ttdef"><b>Definition</b> WiFiTools.h:80</div></div>
 <div class="ttc" id="aclassWiFiTools_html"><div class="ttname"><a href="classWiFiTools.html">WiFiTools</a></div><div class="ttdef"><b>Definition</b> WiFiTools.h:86</div></div>
 <div class="ttc" id="aclassWiFiTools_html_a1995aae91614f4ca74e698fb7dd250e7"><div class="ttname"><a href="classWiFiTools.html#a1995aae91614f4ca74e698fb7dd250e7">WiFiTools::filterForClients</a></div><div class="ttdeci">void filterForClients(const wifi_ieee80211_mac_hdr_t *hdr)</div><div class="ttdoc">Function to identify clients based on detected packets.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:299</div></div>
 <div class="ttc" id="aclassWiFiTools_html_a1bb65b4835a3c0d70dbc8a1aa6320a6b"><div class="ttname"><a href="classWiFiTools.html#a1bb65b4835a3c0d70dbc8a1aa6320a6b">WiFiTools::beaconSpamSetup</a></div><div class="ttdeci">void beaconSpamSetup()</div><div class="ttdoc">Setup function for the beacon spam attack.</div><div class="ttdef"><b>Definition</b> WiFiTools.cpp:43</div></div>
@@ -389,7 +390,7 @@ $(document).ready(function(){initNavTree('WiFiTools_8h_source.html',''); initRes
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_bc5954b504bfd14f8d87623437ec003d.html">WiFi</a></li><li class="navelem"><a class="el" href="WiFiTools_8h.html">WiFiTools.h</a></li>
+    <li class="navelem"><a class="el" href="dir_171b764decf33d63a7df2fab4f4bc6d8.html">GUI</a></li><li class="navelem"><a class="el" href="GUI_2WiFiTools_8h.html">WiFiTools.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

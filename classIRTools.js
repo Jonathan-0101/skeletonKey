@@ -1,6 +1,7 @@
 var classIRTools =
 [
     [ "IRTools", "classIRTools.html#aa38207b9c60417eee7417120b1cdb8c2", null ],
+    [ "captureIR", "classIRTools.html#a2c0d1956d916ab92678bf6a3c38a06e6", null ],
     [ "findDeviceBrands", "classIRTools.html#aa7a4df1bfcd5cc065f0b5a49b086fe6e", null ],
     [ "findDeviceCommands", "classIRTools.html#a3f3a3609a5252d6ba735aca5d3d19726", null ],
     [ "findDevices", "classIRTools.html#aa48fb5d19fb0c215f8f6b64b4d5ba115", null ],

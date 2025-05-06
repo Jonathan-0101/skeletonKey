@@ -1,7 +1,7 @@
 var searchData=
 [
   ['init_0',['init',['../classIRTools.html#abde361acdc74baad97e122417ffc6e2f',1,'IRTools::init()'],['../classSubGHzTools.html#ab3cf817618745499f01236255218675f',1,'SubGHzTools::init()']]],
-  ['initwifitools_1',['initWiFiTools',['../classWiFiTools.html#a560dca93ef6b03cea1138ce946ad402a',1,'WiFiTools']]],
+  ['initwifitools_1',['initwifitools',['../classWiFiTools.html#a560dca93ef6b03cea1138ce946ad402a',1,'WiFiTools::initWiFiTools(fs::SDFS &amp;sdInstance)'],['../classWiFiTools.html#a560dca93ef6b03cea1138ce946ad402a',1,'WiFiTools::initWiFiTools(fs::SDFS &amp;sdInstance)']]],
   ['ircommand_2',['IRCommand',['../structIRCommand.html',1,'']]],
   ['ircommandtype_3',['IRCommandType',['../IRTools_8h.html#aa3a28cc7590f34aedf57a47f003b562c',1,'IRTools.h']]],
   ['irdeviceinfo_4',['IRDeviceInfo',['../structIRDeviceInfo.html',1,'']]],

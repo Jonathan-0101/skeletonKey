@@ -12,7 +12,7 @@
         content="BEng Dissertation; Penetration-testing device to highlight security system vulnerabilities." />
     <meta property="og:url" content="https://jonathan-0101.github.io/PenTestingDevice" />
     <!-- END opengraph metadata -->
-    <title>Skeleton Key: IR/IRTools.h File Reference</title>
+    <title>Skeleton Key: WiFi/WiFiTools.h File Reference</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -129,7 +129,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('IRTools_8h.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('WiFi_2WiFiTools_8h.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -157,61 +157,97 @@ $(document).ready(function(){initNavTree('IRTools_8h.html',''); initResizable();
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
-  <div class="headertitle"><div class="title">IRTools.h File Reference</div></div>
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">WiFiTools.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Library for IR attack tools.  
+<p>Library for Wi-Fi attack tools.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;Arduino.h&gt;</code><br />
-<code>#include &lt;FS.h&gt;</code><br />
-<code>#include &lt;IRrecv.h&gt;</code><br />
-<code>#include &lt;IRremoteESP8266.h&gt;</code><br />
-<code>#include &lt;IRsend.h&gt;</code><br />
-<code>#include &lt;IRutils.h&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
+<div class="textblock"><code>#include &lt;SD.h&gt;</code><br />
+<code>#include &lt;WiFi.h&gt;</code><br />
+<code>#include &lt;array&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
-<code>#include &quot;SD.h&quot;</code><br />
+<code>#include &quot;esp_event.h&quot;</code><br />
+<code>#include &quot;esp_event_loop.h&quot;</code><br />
+<code>#include &quot;esp_log.h&quot;</code><br />
+<code>#include &quot;esp_system.h&quot;</code><br />
+<code>#include &quot;esp_wifi.h&quot;</code><br />
+<code>#include &quot;esp_wifi_types.h&quot;</code><br />
+<code>#include &quot;freertos/FreeRTOS.h&quot;</code><br />
+<code>#include &quot;nvs_flash.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for IRTools.h:</div>
+Include dependency graph for WiFiTools.h:</div>
 <div class="dyncontent">
 <div class="center"><!-- SVG 0 --></div>
 </div>
 </div>
-<p><a href="IRTools_8h_source.html">Go to the source code of this file.</a></p>
+<p><a href="WiFi_2WiFiTools_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structIRDeviceInfo.html">IRDeviceInfo</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct to store IR device information.  <a href="structIRDeviceInfo.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwifi__ieee80211__mac__hdr__t.html">wifi_ieee80211_mac_hdr_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct to store the MAC header of a Wi-Fi packet.  <a href="structwifi__ieee80211__mac__hdr__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structIRCommand.html">IRCommand</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct to store IR command information.  <a href="structIRCommand.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwifi__ieee80211__packet__t.html">wifi_ieee80211_packet_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct to store the payload of a Wi-Fi packet.  <a href="structwifi__ieee80211__packet__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIRTools.html">IRTools</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structHCCAPX.html">HCCAPX</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct to store the information of a 4-way handshake.  <a href="structHCCAPX.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWiFiTools.html">WiFiTools</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:aa3a28cc7590f34aedf57a47f003b562c" id="r_aa3a28cc7590f34aedf57a47f003b562c"><td class="memItemLeft" align="right" valign="top"><a id="aa3a28cc7590f34aedf57a47f003b562c" name="aa3a28cc7590f34aedf57a47f003b562c"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="IRTools_8h.html#aa3a28cc7590f34aedf57a47f003b562c">IRCommandType</a> { <b>raw</b>
-, <b>parsed</b>
+<tr class="memitem:a92ab780568552ff29e7ced01cb6f3801" id="r_a92ab780568552ff29e7ced01cb6f3801"><td class="memItemLeft" align="right" valign="top"><a id="a92ab780568552ff29e7ced01cb6f3801" name="a92ab780568552ff29e7ced01cb6f3801"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="WiFi_2WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801">wifi_packet_flag</a> { <b>HANDSHAKE_CAPTURE</b>
+, <b>CLIENT_DETECTION</b>
+, <b>NONE</b>
  }</td></tr>
-<tr class="memdesc:aa3a28cc7590f34aedf57a47f003b562c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum to store the type of IR command. <br /></td></tr>
-<tr class="separator:aa3a28cc7590f34aedf57a47f003b562c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a92ab780568552ff29e7ced01cb6f3801"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum to store the type of Wi-Fi packet to capture. <br /></td></tr>
+<tr class="separator:a92ab780568552ff29e7ced01cb6f3801"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a8ca5ce9af573c4fd959b2066cce9fcd5" id="r_a8ca5ce9af573c4fd959b2066cce9fcd5"><td class="memItemLeft" align="right" valign="top"><a id="a8ca5ce9af573c4fd959b2066cce9fcd5" name="a8ca5ce9af573c4fd959b2066cce9fcd5"></a>
+esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>esp_wifi_set_channel</b> (uint8_t primary, wifi_second_chan_t second)</td></tr>
+<tr class="separator:a8ca5ce9af573c4fd959b2066cce9fcd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb6d7a726e1e8d22f3c3688da8d558a7" id="r_adb6d7a726e1e8d22f3c3688da8d558a7"><td class="memItemLeft" align="right" valign="top"><a id="adb6d7a726e1e8d22f3c3688da8d558a7" name="adb6d7a726e1e8d22f3c3688da8d558a7"></a>
+esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>esp_wifi_80211_tx</b> (wifi_interface_t ifx, const void *buffer, int len, bool en_sys_seq)</td></tr>
+<tr class="separator:adb6d7a726e1e8d22f3c3688da8d558a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23b10556e149c670d09de277b97f4947" id="r_a23b10556e149c670d09de277b97f4947"><td class="memItemLeft" align="right" valign="top"><a id="a23b10556e149c670d09de277b97f4947" name="a23b10556e149c670d09de277b97f4947"></a>
+esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>esp_wifi_set_storage</b> (wifi_storage_t storage)</td></tr>
+<tr class="separator:a23b10556e149c670d09de277b97f4947"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0b828976a972b93e66b3b10f9cf25ca" id="r_af0b828976a972b93e66b3b10f9cf25ca"><td class="memItemLeft" align="right" valign="top"><a id="af0b828976a972b93e66b3b10f9cf25ca" name="af0b828976a972b93e66b3b10f9cf25ca"></a>
+esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>esp_wifi_set_mode</b> (wifi_mode_t mode)</td></tr>
+<tr class="separator:af0b828976a972b93e66b3b10f9cf25ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a817ba6743b9ba4854eae4a7bff164332" id="r_a817ba6743b9ba4854eae4a7bff164332"><td class="memItemLeft" align="right" valign="top"><a id="a817ba6743b9ba4854eae4a7bff164332" name="a817ba6743b9ba4854eae4a7bff164332"></a>
+esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>esp_wifi_start</b> ()</td></tr>
+<tr class="separator:a817ba6743b9ba4854eae4a7bff164332"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a904d764d5771899c392f953d9badb620" id="r_a904d764d5771899c392f953d9badb620"><td class="memItemLeft" align="right" valign="top"><a id="a904d764d5771899c392f953d9badb620" name="a904d764d5771899c392f953d9badb620"></a>
+esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>esp_wifi_set_promiscuous</b> (bool en)</td></tr>
+<tr class="separator:a904d764d5771899c392f953d9badb620"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aa323d71550cfb4e7547600f014b559ee" id="r_aa323d71550cfb4e7547600f014b559ee"><td class="memItemLeft" align="right" valign="top"><a id="aa323d71550cfb4e7547600f014b559ee" name="aa323d71550cfb4e7547600f014b559ee"></a>
+<a class="el" href="classWiFiTools.html">WiFiTools</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>globalWiFiToolsInstance</b></td></tr>
+<tr class="separator:aa323d71550cfb4e7547600f014b559ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Library for IR attack tools. </p>
+<div class="textblock"><p>Library for Wi-Fi attack tools. </p>
 <dl class="section author"><dt>Author</dt><dd>Jonathan Woolf </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2025-03-07</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2025-03-04</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2025 </dd></dl>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_4fcce5ae218c3b396f6c6e2ee0beb025.html">IR</a></li><li class="navelem"><a class="el" href="IRTools_8h.html">IRTools.h</a></li>
+    <li class="navelem"><a class="el" href="dir_bc5954b504bfd14f8d87623437ec003d.html">WiFi</a></li><li class="navelem"><a class="el" href="WiFi_2WiFiTools_8h.html">WiFiTools.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
