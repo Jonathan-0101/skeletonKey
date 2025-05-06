@@ -15,8 +15,10 @@
 
 #include <Arduino.h>
 #include <FS.h>
+#include <IRrecv.h>
 #include <IRremoteESP8266.h>
 #include <IRsend.h>
+#include <IRutils.h>
 
 #include <string>
 #include <vector>
@@ -63,7 +65,9 @@ typedef struct {
 class IRTools {
    private:
     uint16_t kIrLed = 38;
+    uint16_t kRecvPin = 37;
     IRsend irsend;
+    IRrecv irrecv;
     fs::SDFS *_sd;
     std::vector<String> deviceTypes;
     std::vector<String> deviceBrands;
@@ -73,6 +77,7 @@ class IRTools {
     String deviceBrand;
     String devicePath;
     String device;
+    decode_results results;
 
     uint16_t jamSignal[2] = {65535, 0};
 
@@ -167,6 +172,13 @@ class IRTools {
      * @param duration Duration to jam IR signals
      */
     void jamIR(int duration);
+
+    /**
+     * @brief Function to capture IR signals
+     *
+     * @param duration Duration to capture IR signals
+     */
+    void captureIR(int duration);
 };
 
 #endif  // IRTOOLS_H

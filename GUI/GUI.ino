@@ -18,9 +18,13 @@
 #include <TFT_eSPI.h>
 #include <VibrationMotor.h>
 
+#include <array>
+#include <vector>
+
 #include "GUI_GSLC.h"
 #include "SD.h"
 #include "TFT_eSPI.h"
+#include "WiFiTools.h"
 
 // ------------------------------------------------
 // Program Globals
@@ -39,8 +43,11 @@ float batteryVoltage = 0;
 float batteryPercent = 0;
 
 VibrationMotor vibro(motorPin);
+WiFiTools wifiTools;
 
 SPIClass& tftSPIInstance = SPI;
+
+std::vector<wifi_ap_record_t> foundWiFiNetworks;
 
 // Save some element references for direct access
 //<Save_References !Start!>
@@ -121,7 +128,6 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
                     gslc_ElemSetTxtStr(&m_gui, m_pSettingsVibroButtonTxt, "Vibration Enabled");
                     // Set the button color to green
                     gslc_ElemSetCol(&m_gui, m_pSettingsVibroButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_GREEN_DK3, GSLC_COL_BLUE_DK1);
-
                     // Write to the SD card to enable vibration replacing the contents of the first line
                     File settingsFile = SD.open("/settings.txt", FILE_WRITE);
                     if (settingsFile) {
@@ -148,7 +154,6 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
                         Serial.println("Failed to open settings file for writing!");
                     }
                 }
-
                 break;
             case SubGHz_Button_jaming:
                 break;
@@ -159,16 +164,50 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
             case SubGHz_Button_transmit:
                 break;
             case WiFi_Button_rickRollBeacon:
+                // Start the Rick Roll beacon attack
+                wifiTools.rickRollBeaconSpam(15000);  // 15 seconds duration
                 break;
             case WiFi_Button_scanNetworks:
+                // Start the WiFi network scan
+                // wifiTools.scanWiFiNetworks();
+                // // Get the available networks and update the listbox
+                // gslc_ElemXListboxReset(&m_gui, m_pElemListbox_WiFi);
+                // foundWiFiNetworks = wifiTools.getAvailableNetworks();
+                // int numberOfNetworks = foundWiFiNetworks.size();
+                // for (int i = 0; i < numberOfNetworks; i++) {
+                //     // get the SSID and add it to the listbox
+                //     char ssid[34];  // Increase size to 65 to accommodate longer SSIDs
+                //     strncpy(ssid, (const char*)foundWiFiNetworks[i].ssid, 33);
+                //     ssid[33] = '\0';  // Ensure null termination
+                //     // add the SSID to the listbox
+                //     gslc_ElemXListboxAddItem(&m_gui, m_pElemListbox_WiFi, ssid);
+                //     Serial.printf("SSID: %s\n", ssid);
+                //     // clear the ssid buffer
+                //     memset(ssid, 0, sizeof(ssid));
+                // }
                 break;
             case WiFi_Button_deauth:
                 if (deauthStatus == 0) {
+                    // Check if the WiFi network is selected
+                    if (gslc_ElemXListboxGetSel(&m_gui, m_pElemListbox_WiFi) == XLISTBOX_SEL_NONE) {
+                        Serial.println("No WiFi network selected for deauthentication.");
+                        return false;
+                    }
                     deauthStatus = 1;
                     // Set the button text to "Deauthentication Enabled"
                     gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt, "Deauthentication Enabled");
                     // Set the button color to green
                     gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_GREEN_DK3, GSLC_COL_BLUE_DK1);
+
+                    // // get the selected item from the listbox
+                    // int16_t nSelId = gslc_ElemXListboxGetSel(&m_gui, m_pElemListbox_WiFi);
+                    // // foundWiFiNetworks = wifiTools.getAvailableNetworks();
+                    // char ssid[34];  // Increase size to 65 to accommodate longer SSIDs
+                    // strncpy(ssid, (const char*)foundWiFiNetworks[nSelId].ssid, 33);
+                    // Serial.printf("Selected SSID: %s\n", ssid);
+                    // // convet nSelId to an int
+                    // int networkIndex = nSelId;
+                    // wifiTools.deauthNetwork(NULL, NULL, NULL, networkIndex, NULL, 5000, 1, 2);
                 } else {
                     deauthStatus = 0;
                     // Set the button text to "Deauthentication Disabled"
@@ -176,7 +215,6 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
                     // Set the button color to red
                     gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_RED_DK2, GSLC_COL_BLUE_DK1);
                 }
-
                 break;
             case WiFi_Button_handshake:
                 gslc_PopupShow(&m_gui, E_Popup_HandshakeCapture, true);
@@ -321,10 +359,10 @@ void setup() {
     TFT_eSPI& display = *(TFT_eSPI*)gslc_DrvGetDriverDisp(&m_gui);
     tftSPIInstance = display.getSPIinstance();
 
-    // Calculate battery charge 5 times and if the voltage is less than 3.0 set the batteryConnected to false
+    // Calculate battery charge 5 times and if the voltage is less than 3.2 set the batteryConnected to false
     for (int i = 0; i < 5; i++) {
         calculateBatteryCharge();
-        if (batteryVoltage < 3.0) {
+        if (batteryVoltage < 3.2) {
             batteryConnected = false;
             // Set the lable to "XX%"
             gslc_ElemSetTxtStr(&m_gui, batteryChrgTxt, "XX%");
@@ -369,6 +407,8 @@ void setup() {
             Serial.println("Failed to open settings file!");
         }
     }
+
+    wifiTools.initWiFiTools(SD);
 }
 
 // -----------------------------------

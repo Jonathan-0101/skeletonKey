@@ -19,25 +19,26 @@ void setup() {
   // Jam for 10 seconds
   subGHzTools.startJamming();
   Serial.println("Jamming started");
-  unsigned long startTime = millis();
-  while (millis() - startTime < 10000) {
-    subGHzTools.runAction();
-  }
-  subGHzTools.stopJamming();
-  Serial.println("Jamming stopped");
+  // unsigned long startTime = millis();
+  // while (millis() - startTime < 10000) {
+    // subGHzTools.runAction();
+  // }
+  // subGHzTools.stopJamming();
+  // Serial.println("Jamming stopped");
 
-  delay(5000);
+  // delay(5000);
 
   // Listen until raw data is received
-  subGHzTools.captureRaw(1);
-  Serial.println("Done");
+  // subGHzTools.captureRaw(1);
+  // Serial.println("Done");
 
-  delay(5000);
+  // delay(5000);
 
-  // Transmit the recorded raw data
-  subGHzTools.transmitRaw(1);
+  // // Transmit the recorded raw data
+  // subGHzTools.transmitRaw(1);
 }
 
 void loop() {
+  subGHzTools.runAction();
   // Nothing to do here
 }

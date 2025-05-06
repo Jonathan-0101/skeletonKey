@@ -103,7 +103,6 @@ class WiFiTools {
 
     wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
     std::vector<uint8_t*> detectedClients;
-    std::vector<uint8_t*> capturedPackets;
     std::vector<wifi_ap_record_t> foundWiFiNetworks;
 
     /**

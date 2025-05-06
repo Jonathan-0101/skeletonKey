@@ -365,7 +365,7 @@ void WiFiTools::filterForHandshakes(void* buf, wifi_promiscuous_pkt_type_t type)
         memcpy(hccapx.keymic, payload + 81, sizeof(hccapx.keymic));
 
         // Add the HCCAPX structure to the captured packets vector
-        capturedPackets.push_back((uint8_t*)&hccapx);
+        // capturedPackets.push_back((uint8_t*)&hccapx);
 
         // DEBUG
         Serial.printf("AP MAC: %02X:%02X:%02X:%02X:%02X:%02X\n", hccapx.ap_mac[0], hccapx.ap_mac[1], hccapx.ap_mac[2], hccapx.ap_mac[3], hccapx.ap_mac[4], hccapx.ap_mac[5]);

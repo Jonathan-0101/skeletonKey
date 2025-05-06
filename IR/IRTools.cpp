@@ -2,15 +2,17 @@
 
 #include <Arduino.h>
 #include <FS.h>
+#include <IRrecv.h>
 #include <IRremoteESP8266.h>
 #include <IRsend.h>
+#include <IRutils.h>
 
 #include <string>
 #include <vector>
 
 #include "SD.h"
 
-IRTools::IRTools() : irsend(kIrLed) {
+IRTools::IRTools() : irsend(kIrLed), irrecv(kRecvPin) {
     irsend.begin();
 }
 
@@ -266,5 +268,30 @@ void IRTools::jamIR(int duration) {
     while (millis() - startTime < duration * 1000) {
         irsend.sendRaw(jamSignal, 2, 38);
         delay(50);
+    }
+}
+
+void IRTools::captureIR(int duration) {
+    irrecv.enableIRIn();
+    // Get the current time
+    unsigned long startTime = millis();
+
+    while (millis() - startTime < duration * 1000) {
+        if (irrecv.decode(&results)) {
+            // print() & println() can't handle printing long longs. (uint64_t)
+            serialPrintUint64(results.value, HEX);
+            Serial.println("");
+            irrecv.resume();  // Receive the next value
+        }
+    }
+
+    Serial.println("IR capture complete");
+    irrecv.disableIRIn();
+
+    // Print the captured data to the serial monitor
+    Serial.println("Captured IR data:");
+    for (size_t i = 0; i < results.rawlen; i++) {
+        serialPrintUint64(results.rawbuf[i], HEX);
+        Serial.print(" ");
     }
 }
