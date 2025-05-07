@@ -365,7 +365,7 @@ void WiFiTools::filterForHandshakes(void* buf, wifi_promiscuous_pkt_type_t type)
         memcpy(hccapx.keymic, payload + 81, sizeof(hccapx.keymic));
 
         // Add the HCCAPX structure to the captured packets vector
-        // capturedPackets.push_back((uint8_t*)&hccapx);
+        capturedPackets.push_back((uint8_t*)&hccapx);
 
         // DEBUG
         Serial.printf("AP MAC: %02X:%02X:%02X:%02X:%02X:%02X\n", hccapx.ap_mac[0], hccapx.ap_mac[1], hccapx.ap_mac[2], hccapx.ap_mac[3], hccapx.ap_mac[4], hccapx.ap_mac[5]);
@@ -468,6 +468,24 @@ void WiFiTools::handshakeCapture(uint8_t* networkBSSID = NULL, uint8_t channel =
     processWiFiData(targetBSSID, targetChannel, captureTime, true, false);
 
     Serial.println("Handshake capture complete");
+
+    // Save captured packets to SD card
+    if (sd != nullptr) {
+        File file = sd->open("/wifi/handshake_capture.pcap", FILE_WRITE);
+        if (file) {
+            for (auto packet : capturedPackets) {
+                file.write(packet, sizeof(HCCAPX));
+            }
+            file.close();
+            Serial.println("Captured packets saved to SD card");
+        } else {
+            Serial.println("Failed to open file for writing");
+        }
+    } else {
+        Serial.println("SD card not initialized");
+    }
+    // Clear captured packets
+    capturedPackets.clear();
 }
 
 void WiFiTools::activeHandshakeCapture(uint8_t* networkBSSID = NULL, uint8_t channel = NULL, int availableNetworkIndex = NULL, int captureTime = 10000) {
