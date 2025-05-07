@@ -70,6 +70,17 @@ enum {Base_Button_home,Base_Button_settings,Base_Line_topBar
 enum {E_BUILTIN10X16,E_BUILTIN5X8,MAX_FONT};
 //<Enum !End!>
 
+typedef enum {
+    mainMenu,
+    settingsMenu,
+    rfidMenu,
+    subGHzMenu,
+    wifiMenu,
+    bleMenu,
+    usbMenu,
+    irMenu
+} pageOptions;
+
 // ------------------------------------------------
 // Instantiate the GUI
 // ------------------------------------------------
@@ -172,8 +183,8 @@ extern gslc_tsElemRef* m_pElemOutTxt1;
 extern gslc_tsElemRef* m_pListSlider_SubGHz;
 extern gslc_tsElemRef* m_pListSlider_WiFi;
 extern gslc_tsElemRef* m_pSettingsVibroButtonTxt;
+extern gslc_tsElemRef* m_pSubGHzJammingButton;
 extern gslc_tsElemRef* m_pWiFiDeauthButtonTxt;
-extern gslc_tsElemRef* m_pWiFiDeauthButtonTxt16;
 extern gslc_tsElemRef* m_pWiFiDeauthButtonTxt16_18;
 //<Extern_References !End!>
 
@@ -343,7 +354,7 @@ void InitGUIslice_gen() {
   gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE_DK2,GSLC_COL_RED_DK2,GSLC_COL_BLUE_DK1);
   gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
   gslc_ElemSetFrameEn(&m_gui,pElemRef,false);
-  m_pWiFiDeauthButtonTxt16 = pElemRef;
+  m_pSubGHzJammingButton = pElemRef;
   
   // create SubGHz_Button_capture button with text label
   pElemRef = gslc_ElemCreateBtnTxt(&m_gui,SubGHz_Button_capture,E_PG_SubGHz,
@@ -385,7 +396,7 @@ void InitGUIslice_gen() {
   
   // create SubGHz_Button_transmit button with text label
   pElemRef = gslc_ElemCreateBtnTxt(&m_gui,SubGHz_Button_transmit,E_PG_SubGHz,
-    (gslc_tsRect){40,184,240,32},(char*)"Transmit Selected Signal",0,E_BUILTIN5X8,&CbBtnCommon);
+    (gslc_tsRect){40,184,240,32},(char*)"Transmit Captured Signal",0,E_BUILTIN5X8,&CbBtnCommon);
   gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
 
   // -----------------------------------
