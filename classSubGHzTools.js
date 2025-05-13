@@ -10,6 +10,8 @@ var classSubGHzTools =
     [ "getSelectedModule", "classSubGHzTools.html#adf94fbcd396aaa39d76943eedf433cd6", null ],
     [ "init", "classSubGHzTools.html#ab3cf817618745499f01236255218675f", null ],
     [ "init", "classSubGHzTools.html#ab3cf817618745499f01236255218675f", null ],
+    [ "isInitialised", "classSubGHzTools.html#a519d895ddf085cba8943bed46cd3e49d", null ],
+    [ "isInitialised", "classSubGHzTools.html#a519d895ddf085cba8943bed46cd3e49d", null ],
     [ "jammer", "classSubGHzTools.html#a69b157106de2c87ec89936b8fd2ab2e0", null ],
     [ "jammer", "classSubGHzTools.html#a69b157106de2c87ec89936b8fd2ab2e0", null ],
     [ "runAction", "classSubGHzTools.html#aecc3bda6123ddd1f5996a231058c0a2d", null ],

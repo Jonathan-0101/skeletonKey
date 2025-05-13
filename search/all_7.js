@@ -6,5 +6,6 @@ var searchData=
   ['ircommandtype_3',['IRCommandType',['../IRTools_8h.html#aa3a28cc7590f34aedf57a47f003b562c',1,'IRTools.h']]],
   ['irdeviceinfo_4',['IRDeviceInfo',['../structIRDeviceInfo.html',1,'']]],
   ['irtools_5',['irtools',['../classIRTools.html',1,'IRTools'],['../classIRTools.html#aa38207b9c60417eee7417120b1cdb8c2',1,'IRTools::IRTools()']]],
-  ['irtools_2eh_6',['IRTools.h',['../IRTools_8h.html',1,'']]]
+  ['irtools_2eh_6',['IRTools.h',['../IRTools_8h.html',1,'']]],
+  ['isinitialised_7',['isinitialised',['../classSubGHzTools.html#a519d895ddf085cba8943bed46cd3e49d',1,'SubGHzTools::isInitialised()'],['../classSubGHzTools.html#a519d895ddf085cba8943bed46cd3e49d',1,'SubGHzTools::isInitialised()']]]
 ];
