@@ -287,11 +287,4 @@ void IRTools::captureIR(int duration) {
 
     Serial.println("IR capture complete");
     irrecv.disableIRIn();
-
-    // Print the captured data to the serial monitor
-    Serial.println("Captured IR data:");
-    for (size_t i = 0; i < results.rawlen; i++) {
-        serialPrintUint64(results.rawbuf[i], HEX);
-        Serial.print(" ");
-    }
 }

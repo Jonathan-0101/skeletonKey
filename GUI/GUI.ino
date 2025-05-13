@@ -56,6 +56,10 @@ SubGHzTools subGHzTools;
 
 SubGHzTools_flag currentSubGHzAppMode = IDLE;
 
+#define DEBUG true  // set to true for debug output, false for no debug output
+#define DEBUG_SERIAL \
+    if (DEBUG) Serial
+
 // Save some element references for direct access
 //<Save_References !Start!>
 gslc_tsElemRef* batteryChrgTxt = NULL;
@@ -110,11 +114,10 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
                 currentPage = rfidMenu;
                 break;
             case Main_Button_SubGHz:
-                gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "Sub GHz");
+                gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "Sub-GHz");
                 gslc_SetPageCur(&m_gui, E_PG_SubGHz);
                 currentPage = subGHzMenu;
                 subGHzTools.init();
-                subGHzTools.setModule(0);  // Set to module A by default
                 break;
             case Main_Button_WIFI:
                 gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "WiFi");
@@ -151,9 +154,9 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
                     if (settingsFile) {
                         settingsFile.println("vibration:enabled");
                         settingsFile.close();
-                        Serial.println("Vibration enabled in settings file.");
+                        DEBUG_SERIAL.println("Vibration enabled in settings file.");
                     } else {
-                        Serial.println("Failed to open settings file for writing!");
+                        DEBUG_SERIAL.println("Failed to open settings file for writing!");
                     }
                 } else {
                     vibrationEnabled = 0;
@@ -166,9 +169,9 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
                     if (settingsFile) {
                         settingsFile.println("vibration:disabled");
                         settingsFile.close();
-                        Serial.println("Vibration disabled in settings file.");
+                        DEBUG_SERIAL.println("Vibration disabled in settings file.");
                     } else {
-                        Serial.println("Failed to open settings file for writing!");
+                        DEBUG_SERIAL.println("Failed to open settings file for writing!");
                     }
                 }
                 break;
@@ -231,7 +234,7 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
                     int16_t nSelId = gslc_ElemXListboxGetSel(&m_gui, m_pElemListbox_WiFi);
                     char ssid[34];  // Increase size to 65 to accommodate longer SSIDs
                     strncpy(ssid, (const char*)foundWiFiNetworks[nSelId].ssid, 33);
-                    Serial.printf("Selected SSID: %s\n", ssid);
+                    DEBUG_SERIAL.printf("Selected SSID: %s\n", ssid);
                     // // convet nSelId to an int
                     int networkIndex = nSelId;
                     wifiTools.deauthNetwork(NULL, NULL, NULL, networkIndex, NULL, 5000, 1, 2);
@@ -380,63 +383,107 @@ void setup() {
         gslc_PopupShow(&m_gui, E_Popup_Boot, true);
     }
 
-    delay(100);
+    gslc_Update(&m_gui);
+
+    delay(50);
 
     // Get the SPI instance from the display
     TFT_eSPI& display = *(TFT_eSPI*)gslc_DrvGetDriverDisp(&m_gui);
     tftSPIInstance = display.getSPIinstance();
 
+    float bootBattVoltage[5];
+
     // Calculate battery charge 5 times and if the voltage is less than 3.0 set the batteryConnected to false
     for (int i = 0; i < 5; i++) {
         calculateBatteryCharge();
-        if (batteryVoltage < 3.0) {
+        // DEBUG_SERIAL.printf("Bat value: %d = %f", i, batteryVoltage);
+        bootBattVoltage[i] = batteryVoltage;
+        if (batteryVoltage < 3.0 || batteryVoltage > 4.2) {
             batteryConnected = false;
             // Set the lable to "XX%"
             gslc_ElemSetTxtStr(&m_gui, batteryChrgTxt, "XX%");
             break;
         }
-        delay(10);
+        delay(5);
+    }
+
+    // Find the range of the battery voltage
+    if (batteryConnected) {
+        float minVoltage = bootBattVoltage[0];
+        float maxVoltage = bootBattVoltage[0];
+        for (int i = 1; i < 5; i++) {
+            if (bootBattVoltage[i] < minVoltage) {
+                minVoltage = bootBattVoltage[i];
+            }
+            if (bootBattVoltage[i] > maxVoltage) {
+                maxVoltage = bootBattVoltage[i];
+            }
+        }
+
+        float range = maxVoltage - minVoltage;
+        // DEBUG_SERIAL.printf("Battery voltage range: %f\n", range);
+
+        if (range > 0.25) {
+            // Set the batteryConnected to false
+            batteryConnected = false;
+            // Set the lable to "XX%"
+            gslc_ElemSetTxtStr(&m_gui, batteryChrgTxt, "XX%");
+        }
     }
 
     // Initialize the SD card sharing the SPI instance
     pinMode(42, OUTPUT);
     digitalWrite(42, HIGH);
-    if (!SD.begin(42, tftSPIInstance)) {
-        Serial.println("SD card initialization failed!");
-    } else {
-        Serial.println("SD card initialized successfully!");
 
-        // Open the file "/settings.txt" for reading
-        File settingsFile = SD.open("/settings.txt", FILE_READ);
+    int sdInitAttempts = 0;
+    const int maxSdInitAttempts = 5;
+    bool sdInitialized = false;
 
-        // Check if the file is available and get the contents of the first line
-        if (settingsFile) {
-            String line = settingsFile.readStringUntil('\n');
-            Serial.println("Settings file contents: " + line);
+    while (sdInitAttempts < maxSdInitAttempts && !sdInitialized) {
+        if (SD.begin(42, tftSPIInstance)) {
+            sdInitialized = true;
+            DEBUG_SERIAL.println("SD card initialized successfully!");
 
-            // Check if the first line contains "vibration=on"
-            if (line.indexOf("vibration:enabled") != -1) {
-                vibrationEnabled = true;
-                Serial.println("Vibration is enabled.");
-                // Set the button text to "Vibration Enabled"
-                gslc_ElemSetTxtStr(&m_gui, m_pSettingsVibroButtonTxt, "Vibration Enabled");
-                gslc_ElemSetCol(&m_gui, m_pSettingsVibroButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_GREEN_DK3, GSLC_COL_BLUE_DK1);
+            // Open the file "/settings.txt" for reading
+            File settingsFile = SD.open("/settings.txt", FILE_READ);
+
+            // Check if the file is available and get the contents of the first line
+            if (settingsFile) {
+                String line = settingsFile.readStringUntil('\n');
+                DEBUG_SERIAL.println("Settings file contents: " + line);
+
+                // Check if the first line contains "vibration=on"
+                if (line.indexOf("vibration:enabled") != -1) {
+                    vibrationEnabled = true;
+                    DEBUG_SERIAL.println("Vibration is enabled.");
+                    // Set the button text to "Vibration Enabled"
+                    gslc_ElemSetTxtStr(&m_gui, m_pSettingsVibroButtonTxt, "Vibration Enabled");
+                    gslc_ElemSetCol(&m_gui, m_pSettingsVibroButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_GREEN_DK3, GSLC_COL_BLUE_DK1);
+                } else {
+                    vibrationEnabled = false;
+                    DEBUG_SERIAL.println("Vibration is disabled.");
+                    // Set the button text to "Vibration Disabled"
+                    gslc_ElemSetTxtStr(&m_gui, m_pSettingsVibroButtonTxt, "Vibration Disabled");
+                    gslc_ElemSetCol(&m_gui, m_pSettingsVibroButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_RED_DK2, GSLC_COL_BLUE_DK1);
+                }
+                // Close the file
+                settingsFile.close();
+
+                successVibration();
             } else {
-                vibrationEnabled = false;
-                Serial.println("Vibration is disabled.");
-                // Set the button text to "Vibration Disabled"
-                gslc_ElemSetTxtStr(&m_gui, m_pSettingsVibroButtonTxt, "Vibration Disabled");
-                gslc_ElemSetCol(&m_gui, m_pSettingsVibroButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_RED_DK2, GSLC_COL_BLUE_DK1);
+                DEBUG_SERIAL.println("Failed to open settings file!");
             }
-            // Close the file
-            settingsFile.close();
         } else {
-            Serial.println("Failed to open settings file!");
+            sdInitAttempts++;
+            DEBUG_SERIAL.printf("SD card initialization failed! Attempt %d of %d\n", sdInitAttempts, maxSdInitAttempts);
+            delay(25);  // Wait before retrying
         }
     }
 
-    // subGHzTools.init();
-    // wifiTools.initWiFiTools(SD);
+    if (!sdInitialized) {
+        DEBUG_SERIAL.println("SD card initialization failed after maximum attempts!");
+        failureVibration();
+    }
 }
 
 // -----------------------------------

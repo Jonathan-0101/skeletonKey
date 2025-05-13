@@ -158,11 +158,11 @@ gslc_tsElem                     m_asPopup2Elem[MAX_ELEM_Popup_HandshakeCapture_R
 gslc_tsElemRef                  m_asPopup2ElemRef[MAX_ELEM_Popup_HandshakeCapture];
 gslc_tsXListbox                 m_sListbox2;
 // - Note that XLISTBOX_BUF_OH_R is extra required per item
-char                            m_acListboxBuf2[50 + XLISTBOX_BUF_OH_R];
+char                            m_acListboxBuf2[500 + XLISTBOX_BUF_OH_R];
 gslc_tsXSlider                  m_sListScroll2;
 gslc_tsXListbox                 m_sListbox1;
 // - Note that XLISTBOX_BUF_OH_R is extra required per item
-char                            m_acListboxBuf1[50 + XLISTBOX_BUF_OH_R];
+char                            m_acListboxBuf1[500 + XLISTBOX_BUF_OH_R];
 gslc_tsXSlider                  m_sListScroll1;
 
 #define MAX_STR                 200

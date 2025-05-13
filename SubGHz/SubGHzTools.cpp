@@ -82,7 +82,25 @@ void SubGHzTools::init() {
         Serial.println("cc1101 initialized. Connection OK");
     } else {
         Serial.println("cc1101 connection error! check the wiring.");
-    };
+
+        ELECHOUSE_cc1101.setModul(1);
+
+        if (ELECHOUSE_cc1101.getCC1101()) {
+            Serial.println("cc1101 initialized. Connection OK");
+        } else {
+            // Delete the CC1101 object
+            ELECHOUSE_cc1101.~ELECHOUSE_CC1101();
+            Serial.println("cc1101 deleted");
+
+            delay(10);
+
+            // Reinitialize the CC1101 object
+            ELECHOUSE_cc1101 = ELECHOUSE_CC1101();
+
+            // Call the init function again
+            init();
+        }
+    }
 }
 
 void SubGHzTools::jammer() {
@@ -239,4 +257,9 @@ void SubGHzTools::setModule(int module) {
 int SubGHzTools::getSelectedModule() {
     // Return the selected module (0 for A, 1 for B)
     return selectedModule;
+}
+
+bool SubGHzTools::isInitialised() {
+    // Check if the CC1101 module is initialised
+    return ELECHOUSE_cc1101.getCC1101();
 }

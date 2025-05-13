@@ -147,6 +147,14 @@ class SubGHzTools {
      * @return int Selected module (0 for A, 1 for B)
      */
     int getSelectedModule();
+
+    /**
+     * @brief Check if the CC1101 module is initialised
+     *
+     * @return true
+     * @return false
+     */
+    bool isInitialised();
 };
 
 #endif  // SUBGHTOOLS_H
