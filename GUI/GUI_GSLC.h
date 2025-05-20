@@ -52,20 +52,22 @@ extern "C" const unsigned short settingsButton[] PROGMEM;
 //<Enum !Start!>
 enum {E_PG_BASE,E_PG_MAIN,E_PG_Settings,E_PG_RFID,E_PG_SubGHz,E_PG_WIFI
       ,E_PG_USB,E_PG_BLE,E_PG_IR,E_Popup_Boot,E_Popup_HandshakeCapture};
-enum {Base_Button_home,Base_Button_settings,Base_Line_topBar
-      ,Base_Text_Bat,Base_Text_PageLabel,Boot_Image_logo
-      ,HandshakeCapture_Box_background,HandshakeCapture_Button_active
-      ,HandshakeCapture_Button_exit,HandshakeCapture_Button_passive
-      ,HandshakeCapture_Text_title,Main_Button_BLE,Main_Button_BadUSB
-      ,Main_Button_IR,Main_Button_RFID,Main_Button_SubGHz
-      ,Main_Button_WIFI,Settings_Button_calibrateTouch
-      ,Settings_Button_vibrationToggle,SubGHz_Button_capture
-      ,SubGHz_Button_frequency,SubGHz_Button_jaming
-      ,SubGHz_Button_transmit,SubGHz_Listbox_signals
-      ,SubGHz_Listscroll_signals,WiFi_Button_deauth
-      ,WiFi_Button_handshake,WiFi_Button_rickRollBeacon
-      ,WiFi_Button_scanNetworks,WiFi_Listbox_networks
-      ,WiFi_Listscroll_networks};
+enum {BLE_Button_Send,Base_Button_home,Base_Button_settings
+      ,Base_Line_topBar,Base_Text_Bat,Base_Text_PageLabel
+      ,Boot_Image_logo,HandshakeCapture_Box_background
+      ,HandshakeCapture_Button_active,HandshakeCapture_Button_exit
+      ,HandshakeCapture_Button_passive,HandshakeCapture_Text_title
+      ,IR_Button_Back,IR_Button_Capture,IR_Button_Jam,IR_Button_Select
+      ,IR_Listbox_stored,IR_Listscroll_stored,Main_Button_BLE
+      ,Main_Button_BadUSB,Main_Button_IR,Main_Button_RFID
+      ,Main_Button_SubGHz,Main_Button_WIFI
+      ,Settings_Button_calibrateTouch,Settings_Button_vibrationToggle
+      ,SubGHz_Button_capture,SubGHz_Button_frequency
+      ,SubGHz_Button_jaming,SubGHz_Button_transmit
+      ,SubGHz_Listbox_signals,SubGHz_Listscroll_signals
+      ,WiFi_Button_deauth,WiFi_Button_handshake
+      ,WiFi_Button_rickRollBeacon,WiFi_Button_scanNetworks
+      ,WiFi_Listbox_networks,WiFi_Listscroll_networks};
 // Must use separate enum for fonts with MAX_FONT at end to use gslc_FontSet.
 enum {E_BUILTIN10X16,E_BUILTIN5X8,MAX_FONT};
 //<Enum !End!>
@@ -80,6 +82,13 @@ typedef enum {
     usbMenu,
     irMenu
 } pageOptions;
+
+typedef enum {
+    irDeviceTypesList,
+    irDeviceBrandsList,
+    irDevicesList,
+    irDeviceCommandsList
+} irMenuLevels;
 
 // ------------------------------------------------
 // Instantiate the GUI
@@ -112,10 +121,10 @@ typedef enum {
 #define MAX_ELEM_PG_USB 0 // # Elems total on page
 #define MAX_ELEM_PG_USB_RAM MAX_ELEM_PG_USB // # Elems in RAM
 
-#define MAX_ELEM_PG_BLE 0 // # Elems total on page
+#define MAX_ELEM_PG_BLE 1 // # Elems total on page
 #define MAX_ELEM_PG_BLE_RAM MAX_ELEM_PG_BLE // # Elems in RAM
 
-#define MAX_ELEM_PG_IR 0 // # Elems total on page
+#define MAX_ELEM_PG_IR 7 // # Elems total on page
 #define MAX_ELEM_PG_IR_RAM MAX_ELEM_PG_IR // # Elems in RAM
 
 #define MAX_ELEM_Popup_Boot 1 // # Elems total on page
@@ -158,12 +167,16 @@ gslc_tsElem                     m_asPopup2Elem[MAX_ELEM_Popup_HandshakeCapture_R
 gslc_tsElemRef                  m_asPopup2ElemRef[MAX_ELEM_Popup_HandshakeCapture];
 gslc_tsXListbox                 m_sListbox2;
 // - Note that XLISTBOX_BUF_OH_R is extra required per item
-char                            m_acListboxBuf2[500 + XLISTBOX_BUF_OH_R];
+char                            m_acListboxBuf2[50 + XLISTBOX_BUF_OH_R];
 gslc_tsXSlider                  m_sListScroll2;
 gslc_tsXListbox                 m_sListbox1;
 // - Note that XLISTBOX_BUF_OH_R is extra required per item
-char                            m_acListboxBuf1[500 + XLISTBOX_BUF_OH_R];
+char                            m_acListboxBuf1[50 + XLISTBOX_BUF_OH_R];
 gslc_tsXSlider                  m_sListScroll1;
+gslc_tsXListbox                 m_sListbox3;
+// - Note that XLISTBOX_BUF_OH_R is extra required per item
+char                            m_acListboxBuf3[250 + XLISTBOX_BUF_OH_R];
+gslc_tsXSlider                  m_sListScroll3;
 
 #define MAX_STR                 200
 
@@ -176,10 +189,14 @@ gslc_tsXSlider                  m_sListScroll1;
 // Element References for direct access
 //<Extern_References !Start!>
 extern gslc_tsElemRef* batteryChrgTxt;
+extern gslc_tsElemRef* m_pBLEselectButtonTxt;
 extern gslc_tsElemRef* m_pElemBtn10;
+extern gslc_tsElemRef* m_pElemListbox_IR;
 extern gslc_tsElemRef* m_pElemListbox_SubGHz;
 extern gslc_tsElemRef* m_pElemListbox_WiFi;
 extern gslc_tsElemRef* m_pElemOutTxt1;
+extern gslc_tsElemRef* m_pIRselectButtonTxt;
+extern gslc_tsElemRef* m_pListSlider_IR;
 extern gslc_tsElemRef* m_pListSlider_SubGHz;
 extern gslc_tsElemRef* m_pListSlider_WiFi;
 extern gslc_tsElemRef* m_pSettingsVibroButtonTxt;
@@ -371,7 +388,7 @@ void InitGUIslice_gen() {
    
   // Create wrapping box for listbox SubGHz_Listbox_signals and scrollbar
   pElemRef = gslc_ElemCreateBox(&m_gui,GSLC_ID_AUTO,E_PG_SubGHz,(gslc_tsRect){40,224,240,247});
-  gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE,GSLC_COL_BLACK,GSLC_COL_BLACK);
+  gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE,GSLC_COL_BLACK,GSLC_COL_GRAY_LT2);
   
   // Create listbox
   pElemRef = gslc_ElemXListboxCreate(&m_gui,SubGHz_Listbox_signals,E_PG_SubGHz,&m_sListbox2,
@@ -380,8 +397,8 @@ void InitGUIslice_gen() {
   gslc_ElemXListboxSetSize(&m_gui, pElemRef, 10, 1); // 10 rows, 1 columns
   gslc_ElemXListboxItemsSetSize(&m_gui, pElemRef, -1, -1);
   gslc_ElemSetTxtMarginXY(&m_gui, pElemRef, 5, 5);
-  gslc_ElemSetTxtCol(&m_gui,pElemRef,GSLC_COL_WHITE);
-  gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE,GSLC_COL_BLACK,GSLC_COL_BLACK);
+  gslc_ElemSetTxtCol(&m_gui,pElemRef,GSLC_COL_YELLOW);
+  gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE,GSLC_COL_BLACK,GSLC_COL_GRAY_LT2);
   gslc_ElemXListboxSetSelFunc(&m_gui, pElemRef, &CbListbox);
   gslc_ElemXListboxItemsSetGap(&m_gui, pElemRef, 5,GSLC_COL_BLACK);
   gslc_ElemSetFrameEn(&m_gui,pElemRef,true);
@@ -433,7 +450,7 @@ void InitGUIslice_gen() {
    
   // Create wrapping box for listbox WiFi_Listbox_networks and scrollbar
   pElemRef = gslc_ElemCreateBox(&m_gui,GSLC_ID_AUTO,E_PG_WIFI,(gslc_tsRect){40,224,240,247});
-  gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE,GSLC_COL_BLACK,GSLC_COL_BLACK);
+  gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE,GSLC_COL_BLACK,GSLC_COL_GRAY_LT2);
   
   // Create listbox
   pElemRef = gslc_ElemXListboxCreate(&m_gui,WiFi_Listbox_networks,E_PG_WIFI,&m_sListbox1,
@@ -442,8 +459,8 @@ void InitGUIslice_gen() {
   gslc_ElemXListboxSetSize(&m_gui, pElemRef, 10, 1); // 10 rows, 1 columns
   gslc_ElemXListboxItemsSetSize(&m_gui, pElemRef, -1, -1);
   gslc_ElemSetTxtMarginXY(&m_gui, pElemRef, 5, 5);
-  gslc_ElemSetTxtCol(&m_gui,pElemRef,GSLC_COL_WHITE);
-  gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE,GSLC_COL_BLACK,GSLC_COL_BLACK);
+  gslc_ElemSetTxtCol(&m_gui,pElemRef,GSLC_COL_YELLOW);
+  gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE,GSLC_COL_BLACK,GSLC_COL_GRAY_LT2);
   gslc_ElemXListboxSetSelFunc(&m_gui, pElemRef, &CbListbox);
   gslc_ElemXListboxItemsSetGap(&m_gui, pElemRef, 5,GSLC_COL_BLACK);
   gslc_ElemSetFrameEn(&m_gui,pElemRef,true);
@@ -463,10 +480,64 @@ void InitGUIslice_gen() {
   // -----------------------------------
   // PAGE: E_PG_BLE
   
+  
+  // create BLE_Button_Send button with text label
+  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,BLE_Button_Send,E_PG_BLE,
+    (gslc_tsRect){40,64,240,32},(char*)"Never gonna what?",0,E_BUILTIN5X8,&CbBtnCommon);
+  gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE_DK2,GSLC_COL_RED,GSLC_COL_BLUE_DK1);
+  gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
+  gslc_ElemSetFrameEn(&m_gui,pElemRef,false);
+  m_pBLEselectButtonTxt = pElemRef;
 
   // -----------------------------------
   // PAGE: E_PG_IR
   
+   
+  // Create wrapping box for listbox IR_Listbox_stored and scrollbar
+  pElemRef = gslc_ElemCreateBox(&m_gui,GSLC_ID_AUTO,E_PG_IR,(gslc_tsRect){40,104,240,247});
+  gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE,GSLC_COL_BLACK,GSLC_COL_GRAY_LT2);
+  
+  // Create listbox
+  pElemRef = gslc_ElemXListboxCreate(&m_gui,IR_Listbox_stored,E_PG_IR,&m_sListbox3,
+    (gslc_tsRect){40+2,104+4,240-4-15,247-7},E_BUILTIN5X8,
+    (uint8_t*)&m_acListboxBuf3,sizeof(m_acListboxBuf3),0);
+  gslc_ElemXListboxSetSize(&m_gui, pElemRef, 10, 1); // 10 rows, 1 columns
+  gslc_ElemXListboxItemsSetSize(&m_gui, pElemRef, -1, -1);
+  gslc_ElemSetTxtMarginXY(&m_gui, pElemRef, 5, 5);
+  gslc_ElemSetTxtCol(&m_gui,pElemRef,GSLC_COL_YELLOW);
+  gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE,GSLC_COL_BLACK,GSLC_COL_GRAY_LT2);
+  gslc_ElemXListboxSetSelFunc(&m_gui, pElemRef, &CbListbox);
+  gslc_ElemXListboxItemsSetGap(&m_gui, pElemRef, 5,GSLC_COL_BLACK);
+  gslc_ElemSetFrameEn(&m_gui,pElemRef,true);
+  m_pElemListbox_IR = pElemRef;
+
+  // Create vertical scrollbar for listbox
+  pElemRef = gslc_ElemXSliderCreate(&m_gui,IR_Listscroll_stored,E_PG_IR,&m_sListScroll3,
+          (gslc_tsRect){40+240-2-15,104+4,15,247-8},0,100,0,5,true);
+  gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE,GSLC_COL_BLACK,GSLC_COL_BLUE);
+  gslc_ElemXSliderSetPosFunc(&m_gui,pElemRef,&CbSlidePos);
+  m_pListSlider_IR = pElemRef;
+  
+  // create IR_Button_Select button with text label
+  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,IR_Button_Select,E_PG_IR,
+    (gslc_tsRect){40,64,240,32},(char*)"Select",0,E_BUILTIN5X8,&CbBtnCommon);
+  gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
+  m_pIRselectButtonTxt = pElemRef;
+  
+  // create IR_Button_Back button with text label
+  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,IR_Button_Back,E_PG_IR,
+    (gslc_tsRect){40,360,240,32},(char*)"Back",0,E_BUILTIN5X8,&CbBtnCommon);
+  gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
+  
+  // create IR_Button_Capture button with text label
+  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,IR_Button_Capture,E_PG_IR,
+    (gslc_tsRect){40,400,240,32},(char*)"Capture IR",0,E_BUILTIN5X8,&CbBtnCommon);
+  gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
+  
+  // create IR_Button_Jam button with text label
+  pElemRef = gslc_ElemCreateBtnTxt(&m_gui,IR_Button_Jam,E_PG_IR,
+    (gslc_tsRect){40,440,240,32},(char*)"Jamming Disabled",0,E_BUILTIN5X8,&CbBtnCommon);
+  gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
 
   // -----------------------------------
   // PAGE: E_Popup_Boot

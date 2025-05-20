@@ -13,15 +13,19 @@
 // Headers to include
 // ------------------------------------------------
 #include <Arduino.h>
+#include <BleKeyboard.h>
 #include <FS.h>
 #include <SPI.h>
 #include <TFT_eSPI.h>
 #include <VibrationMotor.h>
+#define USE_NIMBLE
 
 #include <array>
+#include <string>
 #include <vector>
 
 #include "GUI_GSLC.h"
+#include "IRTools.h"
 #include "SD.h"
 #include "SubGHzTools.h"
 #include "TFT_eSPI.h"
@@ -41,8 +45,10 @@ const int batteryPin = 4;
 int batteryVoltageADC = 0;
 float batteryVoltage = 0;
 float batteryPercent = 0;
+int IRselectedIndex = 0;
 
 pageOptions currentPage = mainMenu;
+irMenuLevels currentIRMenuLevel = irDeviceTypesList;
 
 VibrationMotor vibro(motorPin);
 WiFiTools wifiTools;
@@ -54,7 +60,25 @@ int numberOfNetworks = 0;
 
 SubGHzTools subGHzTools;
 
-SubGHzTools_flag currentSubGHzAppMode = IDLE;
+SubGHzTools_flag currentSubGHzAppMode = SubGHz_IDLE;
+
+IRTools* irTools = new IRTools();
+
+std::vector<String> irDeviceTypes;
+std::vector<String> irDeviceBrands;
+std::vector<String> irDevices;
+std::vector<IRCommand> irDeviceCommands;
+int numberOfIRDeviceTypes = 0;
+int numberOfIRDeviceBrands = 0;
+int numberOfIRDevices = 0;
+int numberOfIRDeviceCommands = 0;
+
+BleKeyboard bleKeyboard("Logitech", "Logitech", 100);
+
+bool bleKeyboardConnected = false;
+bool bleMenuUpdated = false;
+
+void resetToMainMenu();
 
 #define DEBUG true  // set to true for debug output, false for no debug output
 #define DEBUG_SERIAL \
@@ -62,17 +86,21 @@ SubGHzTools_flag currentSubGHzAppMode = IDLE;
 
 // Save some element references for direct access
 //<Save_References !Start!>
-gslc_tsElemRef* batteryChrgTxt = NULL;
-gslc_tsElemRef* m_pElemBtn10 = NULL;
-gslc_tsElemRef* m_pElemListbox_SubGHz = NULL;
-gslc_tsElemRef* m_pElemListbox_WiFi = NULL;
-gslc_tsElemRef* m_pElemOutTxt1 = NULL;
-gslc_tsElemRef* m_pListSlider_SubGHz = NULL;
-gslc_tsElemRef* m_pListSlider_WiFi = NULL;
-gslc_tsElemRef* m_pSettingsVibroButtonTxt = NULL;
-gslc_tsElemRef* m_pSubGHzJammingButton = NULL;
-gslc_tsElemRef* m_pWiFiDeauthButtonTxt = NULL;
-gslc_tsElemRef* m_pWiFiDeauthButtonTxt16_18 = NULL;
+gslc_tsElemRef* batteryChrgTxt    = NULL;
+gslc_tsElemRef* m_pBLEselectButtonTxt= NULL;
+gslc_tsElemRef* m_pElemBtn10      = NULL;
+gslc_tsElemRef* m_pElemListbox_IR = NULL;
+gslc_tsElemRef* m_pElemListbox_SubGHz= NULL;
+gslc_tsElemRef* m_pElemListbox_WiFi= NULL;
+gslc_tsElemRef* m_pElemOutTxt1    = NULL;
+gslc_tsElemRef* m_pIRselectButtonTxt= NULL;
+gslc_tsElemRef* m_pListSlider_IR  = NULL;
+gslc_tsElemRef* m_pListSlider_SubGHz= NULL;
+gslc_tsElemRef* m_pListSlider_WiFi= NULL;
+gslc_tsElemRef* m_pSettingsVibroButtonTxt= NULL;
+gslc_tsElemRef* m_pSubGHzJammingButton= NULL;
+gslc_tsElemRef* m_pWiFiDeauthButtonTxt= NULL;
+gslc_tsElemRef* m_pWiFiDeauthButtonTxt16_18= NULL;
 //<Save_References !End!>
 
 // Define debug message function
@@ -97,11 +125,12 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
     if (eTouch == GSLC_TOUCH_UP_IN) {
         // From the element's ID we can determine which button was pressed.
         switch (pElem->nId) {
-                //<Button Enums !Start!>
+//<Button Enums !Start!>
             case Base_Button_home:
                 gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "Main Menu");
                 gslc_SetPageCur(&m_gui, E_PG_MAIN);
                 currentPage = mainMenu;
+                resetToMainMenu();
                 break;
             case Base_Button_settings:
                 gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "Settings");
@@ -134,11 +163,26 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
                 gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "Bluetooth");
                 gslc_SetPageCur(&m_gui, E_PG_BLE);
                 currentPage = bleMenu;
+                bleKeyboard.begin();
+                bleKeyboard.setDelay(5);
+                bleMenuUpdated = false;
                 break;
             case Main_Button_IR:
                 gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "IR");
                 gslc_SetPageCur(&m_gui, E_PG_IR);
                 currentPage = irMenu;
+                irTools->init(SD);
+                // Get the device types and update the listbox
+                gslc_ElemXListboxReset(&m_gui, m_pElemListbox_IR);
+                irDeviceTypes = irTools->getDeviceTypes();
+                numberOfIRDeviceTypes = irDeviceTypes.size();
+                for (int i = 0; i < numberOfIRDeviceTypes; i++) {
+                    char irDeviceType[34];  // Increase size to 65 to accommodate longer SSIDs
+                    strncpy(irDeviceType, (const char*)irDeviceTypes[i].c_str(), 33);
+                    irDeviceType[33] = '\0';  // Ensure null termination
+                    gslc_ElemXListboxAddItem(&m_gui, m_pElemListbox_IR, irDeviceType);
+                    memset(irDeviceType, 0, sizeof(irDeviceType));
+                }
                 break;
             case Settings_Button_calibrateTouch:
                 break;
@@ -176,7 +220,7 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
                 }
                 break;
             case SubGHz_Button_jaming:
-                if (currentSubGHzAppMode == IDLE) {
+                if (currentSubGHzAppMode == SubGHz_IDLE) {
                     // Set the button text to "Jamming Enabled"
                     gslc_ElemSetTxtStr(&m_gui, m_pSubGHzJammingButton, "Jamming Enabled");
                     // Set the button color to green
@@ -193,7 +237,7 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
                     // Stop the jamming attack
                     subGHzTools.stopJamming();
                     // Set the current mode to idle
-                    currentSubGHzAppMode = IDLE;
+                    currentSubGHzAppMode = SubGHz_IDLE;
                 }
                 break;
             case SubGHz_Button_capture:
@@ -230,24 +274,43 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
                     gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt, "Deauthentication Enabled");
                     // Set the button color to green
                     gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_GREEN_DK3, GSLC_COL_BLUE_DK1);
-                    // // get the selected item from the listbox
-                    int16_t nSelId = gslc_ElemXListboxGetSel(&m_gui, m_pElemListbox_WiFi);
-                    char ssid[34];  // Increase size to 65 to accommodate longer SSIDs
-                    strncpy(ssid, (const char*)foundWiFiNetworks[nSelId].ssid, 33);
-                    DEBUG_SERIAL.printf("Selected SSID: %s\n", ssid);
-                    // // convet nSelId to an int
-                    int networkIndex = nSelId;
-                    wifiTools.deauthNetwork(NULL, NULL, NULL, networkIndex, NULL, 5000, 1, 2);
+                    // Get the selected network from the listbox
+                    int selectedNetworkIndex = gslc_ElemXListboxGetSel(&m_gui, m_pElemListbox_WiFi);
+                    // Check if a network is selected
+                    if (selectedNetworkIndex != XLISTBOX_SEL_NONE) {
+                        // Perform the deauthentication attack on the selected network index
+                        wifiTools.startNetworkDeauth(NULL, NULL, NULL, selectedNetworkIndex, NULL, 5, 2);
+                    }
                 } else {
                     deauthStatus = 0;
                     // Set the button text to "Deauthentication Disabled"
                     gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt, "Deauthentication Disabled");
                     // Set the button color to red
                     gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_RED_DK2, GSLC_COL_BLUE_DK1);
+                    // Stop the deauthentication attack
+                    wifiTools.stopNetworkDeauth();
                 }
                 break;
             case WiFi_Button_handshake:
                 gslc_PopupShow(&m_gui, E_Popup_HandshakeCapture, true);
+                break;
+            case BLE_Button_Send:
+                if (bleKeyboard.isConnected()) {
+                    bleKeyboard.press(KEY_LEFT_GUI);
+                    bleKeyboard.press('r');
+                    delay(100);
+                    bleKeyboard.releaseAll();
+                    delay(100);
+                    bleKeyboard.println("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+                }
+                break;
+            case IR_Button_Select:
+                break;
+            case IR_Button_Back:
+                break;
+            case IR_Button_Capture:
+                break;
+            case IR_Button_Jam:
                 break;
             case HandshakeCapture_Button_passive:
                 gslc_PopupHide(&m_gui);
@@ -258,7 +321,7 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
             case HandshakeCapture_Button_exit:
                 gslc_PopupHide(&m_gui);
                 break;
-                //<Button Enums !End!>
+//<Button Enums !End!>
             default:
                 break;
         }
@@ -283,7 +346,7 @@ bool CbListbox(void* pvGui, void* pvElemRef, int16_t nSelId) {
 
     // From the element's ID we can determine which listbox was active.
     switch (pElem->nId) {
-            //<Listbox Enums !Start!>
+//<Listbox Enums !Start!>
 
         case WiFi_Listbox_networks:
             if (nSelId != XLISTBOX_SEL_NONE) {
@@ -295,7 +358,12 @@ bool CbListbox(void* pvGui, void* pvElemRef, int16_t nSelId) {
                 gslc_ElemXListboxGetItem(&m_gui, pElemRef, nSelId, acTxt, MAX_STR);
             }
             break;
-            //<Listbox Enums !End!>
+        case IR_Listbox_stored:
+            if (nSelId != XLISTBOX_SEL_NONE) {
+                gslc_ElemXListboxGetItem(&m_gui, pElemRef, nSelId, acTxt, MAX_STR);
+            }
+            break;
+//<Listbox Enums !End!>
         default:
             break;
     }
@@ -313,7 +381,7 @@ bool CbSlidePos(void* pvGui, void* pvElemRef, int16_t nPos) {
 
     // From the element's ID we can determine which slider was updated.
     switch (pElem->nId) {
-            //<Slider Enums !Start!>
+//<Slider Enums !Start!>
 
         case WiFi_Listscroll_networks:
             // Fetch the slider position
@@ -323,7 +391,11 @@ bool CbSlidePos(void* pvGui, void* pvElemRef, int16_t nPos) {
             // Fetch the slider position
             nVal = gslc_ElemXSliderGetPos(pGui, m_pListSlider_SubGHz);
             break;
-            //<Slider Enums !End!>
+        case IR_Listscroll_stored:
+            // Fetch the slider position
+            nVal = gslc_ElemXSliderGetPos(pGui, m_pListSlider_IR);
+            break;
+//<Slider Enums !End!>
         default:
             break;
     }
@@ -357,6 +429,14 @@ void calculateBatteryCharge() {
         // Set the value of batteryChrgTxt to the battery percentage
         String batteryText = String(batteryPercent, 0) + "%";
         gslc_ElemSetTxtStr(&m_gui, batteryChrgTxt, batteryText.c_str());
+    }
+}
+
+void resetToMainMenu() {
+    if (currentPage == bleMenu) {
+        bleKeyboard.end();
+        bleKeyboardConnected = false;
+        bleMenuUpdated = false;
     }
 }
 
@@ -515,13 +595,19 @@ void loop() {
         subGHzTools.runAction();
     } else if (currentPage == wifiMenu) {
         // Update the WiFi menu page
+        wifiTools.runAction();
 
     } else if (currentPage == usbMenu) {
         // Update the USB menu page
 
     } else if (currentPage == bleMenu) {
         // Update the BLE menu page
-
+        if (!bleMenuUpdated && bleKeyboard.isConnected()) {
+            // Set the button color to green
+            gslc_ElemSetCol(&m_gui, m_pBLEselectButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_GREEN_DK3, GSLC_COL_BLUE_DK1);
+            bleMenuUpdated = true;
+            bleKeyboardConnected = true;
+        }
     } else if (currentPage == irMenu) {
         // Update the IR menu page
     }

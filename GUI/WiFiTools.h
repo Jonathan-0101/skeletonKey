@@ -73,6 +73,14 @@ typedef struct {
     uint8_t essid_len;
 } HCCAPX;
 
+typedef struct {
+    uint8_t apMac[6];
+    uint8_t staMac[6];
+    uint8_t channel;
+    uint8_t reasonCode;
+    int deauthDelayMs;
+} deauthPacket_t;
+
 /**
  * @brief Enum to store the type of Wi-Fi packet to capture
  *
@@ -82,6 +90,16 @@ typedef enum {
     CLIENT_DETECTION,
     NONE
 } wifi_packet_flag;
+
+/**
+ * @brief Enum to store the type of Wi-Fi attack mode
+ *
+ */
+typedef enum {
+    DEAUTH,
+    BEACON_SPAM,
+    WiFi_IDLE
+} wifi_attack_mode;
 
 class WiFiTools {
    private:
@@ -100,6 +118,10 @@ class WiFiTools {
     uint8_t targetChannel;
     wifi_packet_flag packetScanFlag;
     fs::SDFS* sd = nullptr;
+    wifi_attack_mode attackMode = WiFi_IDLE;
+    deauthPacket_t setDeauthPacket;
+    long lastDeauthTime = 0;
+    int lastBeconIndex = 0;
 
     wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
     std::vector<uint8_t*> detectedClients;
@@ -273,6 +295,31 @@ class WiFiTools {
      *
      */
     void clearFoundWiFiNetworks();
+
+    /**
+     * @brief Function to call from external code to run the action
+     *
+     */
+    void runAction();
+
+    /**
+     * @brief Function to end the network deathentication attack
+     *
+     */
+    void stopNetworkDeauth();
+
+    /**
+     * @brief Function to start a deauthentication attack
+     *
+     * @param networkSSID SSID of the target network
+     * @param networkBSSID BSSID of the target network
+     * @param channel Channel of the target network
+     * @param availableNetworkIndex Index of the target network in the foundWiFiNetworks vector
+     * @param targetMacAddr MAC address of the target device
+     * @param delayMs Delay between sending deauthentication packets
+     * @param reasonCode Reason code for the deauthentication
+     */
+    void startNetworkDeauth(uint8_t* networkSSID, uint8_t* networkBSSID, uint8_t channel, int availableNetworkIndex, uint8_t* targetMacAddr, int delayMs, uint8_t reasonCode);
 
     /**
      * @brief Function to run a deauthentication attack

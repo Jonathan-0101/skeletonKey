@@ -22,7 +22,7 @@
 #define CCBUFFERSIZE 64
 
 typedef enum {
-    IDLE,
+    SubGHz_IDLE,
     CAPTURE_RAW,
     TRANSMIT_RAW,
     JAMMER
@@ -67,7 +67,7 @@ class SubGHzTools {
     int selectedModule = 1;
     int samplingInterval = 1;
     int setting, setting2;
-    SubGHzTools_flag currentMode = IDLE;
+    SubGHzTools_flag currentMode = SubGHz_IDLE;
 
     /**
      * @brief Function to configure the CC1101 module
