@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['skeletonkey_0',['skeletonKey',['../index.html',1,'']]]
+  ['key_0',['Skeleton Key',['../index.html',1,'']]]
 ];
