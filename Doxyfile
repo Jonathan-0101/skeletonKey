@@ -1425,7 +1425,8 @@ HTML_EXTRA_FILES       = Resources/Doxygen/doxygen-awesome-darkmode-toggle.js \
                          Resources/Doxygen/doxygen-awesome-paragraph-link.js \
                          Resources/Doxygen/toggle-alternative-theme.js \
                          Resources/Doxygen/doxygen-awesome-interactive-toc.js \
-                         Resources/Doxygen/doxygen-awesome-tabs.js
+                         Resources/Doxygen/doxygen-awesome-tabs.js \
+                         Resources/Images/logo.ico
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme.
