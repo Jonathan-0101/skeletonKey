@@ -177,7 +177,7 @@ $(document).ready(function(){initNavTree('GUI_2SubGHzTools_8h_source.html',''); 
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#define CCBUFFERSIZE 64</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    IDLE,</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    SubGHz_IDLE,</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    CAPTURE_RAW,</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    TRANSMIT_RAW,</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    JAMMER</div>
@@ -223,7 +223,7 @@ $(document).ready(function(){initNavTree('GUI_2SubGHzTools_8h_source.html',''); 
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">int</span> selectedModule = 1;</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordtype">int</span> samplingInterval = 1;</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordtype">int</span> setting, setting2;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    SubGHzTools_flag currentMode = IDLE;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    SubGHzTools_flag currentMode = SubGHz_IDLE;</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordtype">void</span></div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <a class="code hl_function" href="classSubGHzTools.html#a365d97f67305f73be6db9730fb5f7e70">configureModule</a>();</div>

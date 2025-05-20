@@ -32,8 +32,14 @@ var classWiFiTools =
     [ "promiscuousPacketHandler", "classWiFiTools.html#a64da33825cefab83d9480fef356b9b33", null ],
     [ "rickRollBeaconSpam", "classWiFiTools.html#ae88636e7bdc162a4ffca01c949b24e32", null ],
     [ "rickRollBeaconSpam", "classWiFiTools.html#ae88636e7bdc162a4ffca01c949b24e32", null ],
+    [ "runAction", "classWiFiTools.html#af801cc7f0aa2befb11f24b256770f291", null ],
+    [ "runAction", "classWiFiTools.html#af801cc7f0aa2befb11f24b256770f291", null ],
     [ "scanWiFiNetworks", "classWiFiTools.html#a434b1b80009f52dd46bb9f26c7b17488", null ],
     [ "scanWiFiNetworks", "classWiFiTools.html#a434b1b80009f52dd46bb9f26c7b17488", null ],
     [ "sendDeauthPacket", "classWiFiTools.html#a4496beddfc24492abda018e82a581dac", null ],
-    [ "sendDeauthPacket", "classWiFiTools.html#a4496beddfc24492abda018e82a581dac", null ]
+    [ "sendDeauthPacket", "classWiFiTools.html#a4496beddfc24492abda018e82a581dac", null ],
+    [ "startNetworkDeauth", "classWiFiTools.html#ad15e5367f821426c5ada363545eb3543", null ],
+    [ "startNetworkDeauth", "classWiFiTools.html#ad15e5367f821426c5ada363545eb3543", null ],
+    [ "stopNetworkDeauth", "classWiFiTools.html#a2071261ff843af8aab39b620aa49550d", null ],
+    [ "stopNetworkDeauth", "classWiFiTools.html#a2071261ff843af8aab39b620aa49550d", null ]
 ];

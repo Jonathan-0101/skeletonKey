@@ -12,7 +12,7 @@
         content="BEng Dissertation; Penetration-testing device to highlight security system vulnerabilities." />
     <meta property="og:url" content="https://jonathan-0101.github.io/PenTestingDevice" />
     <!-- END opengraph metadata -->
-    <title>skeletonKey: Data Structures</title>
+    <title>skeletonKey: deauthPacket_t Struct Reference</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -130,7 +130,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('annotated.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('structdeauthPacket__t.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -156,27 +156,40 @@ $(document).ready(function(){initNavTree('annotated.html',''); initResizable(); 
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">Data Structures</div></div>
+  <div class="summary">
+<a href="#pub-attribs">Data Fields</a>  </div>
+  <div class="headertitle"><div class="title">deauthPacket_t Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock">Here are the data structures with brief descriptions:</div><div class="directory">
-<table class="directory">
-<tr id="row_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structdeauthPacket__t.html" target="_self">deauthPacket_t</a></td><td class="desc"></td></tr>
-<tr id="row_1_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structHCCAPX.html" target="_self">HCCAPX</a></td><td class="desc">Struct to store the information of a 4-way handshake </td></tr>
-<tr id="row_2_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structIRCommand.html" target="_self">IRCommand</a></td><td class="desc">Struct to store IR command information </td></tr>
-<tr id="row_3_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structIRDeviceInfo.html" target="_self">IRDeviceInfo</a></td><td class="desc">Struct to store IR device information </td></tr>
-<tr id="row_4_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="classIRTools.html" target="_self">IRTools</a></td><td class="desc"></td></tr>
-<tr id="row_5_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="classSubGHzTools.html" target="_self">SubGHzTools</a></td><td class="desc"></td></tr>
-<tr id="row_6_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structwifi__ieee80211__mac__hdr__t.html" target="_self">wifi_ieee80211_mac_hdr_t</a></td><td class="desc">Struct to store the MAC header of a Wi-Fi packet </td></tr>
-<tr id="row_7_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structwifi__ieee80211__packet__t.html" target="_self">wifi_ieee80211_packet_t</a></td><td class="desc">Struct to store the payload of a Wi-Fi packet </td></tr>
-<tr id="row_8_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="classWiFiTools.html" target="_self">WiFiTools</a></td><td class="desc"></td></tr>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Data Fields</h2></td></tr>
+<tr class="memitem:a5abcf5382abb62f11db82e49eda329ed" id="r_a5abcf5382abb62f11db82e49eda329ed"><td class="memItemLeft" align="right" valign="top"><a id="a5abcf5382abb62f11db82e49eda329ed" name="a5abcf5382abb62f11db82e49eda329ed"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>apMac</b> [6]</td></tr>
+<tr class="separator:a5abcf5382abb62f11db82e49eda329ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12febfe9da41b3c3fd5ede485b42f175" id="r_a12febfe9da41b3c3fd5ede485b42f175"><td class="memItemLeft" align="right" valign="top"><a id="a12febfe9da41b3c3fd5ede485b42f175" name="a12febfe9da41b3c3fd5ede485b42f175"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>staMac</b> [6]</td></tr>
+<tr class="separator:a12febfe9da41b3c3fd5ede485b42f175"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bf085fd6cc28939dec9176bc30945a3" id="r_a4bf085fd6cc28939dec9176bc30945a3"><td class="memItemLeft" align="right" valign="top"><a id="a4bf085fd6cc28939dec9176bc30945a3" name="a4bf085fd6cc28939dec9176bc30945a3"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>channel</b></td></tr>
+<tr class="separator:a4bf085fd6cc28939dec9176bc30945a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa148380238d48499228f9215fcc49520" id="r_aa148380238d48499228f9215fcc49520"><td class="memItemLeft" align="right" valign="top"><a id="aa148380238d48499228f9215fcc49520" name="aa148380238d48499228f9215fcc49520"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>reasonCode</b></td></tr>
+<tr class="separator:aa148380238d48499228f9215fcc49520"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbd0c8de996d1eb2838a2a5bfc5bdb28" id="r_adbd0c8de996d1eb2838a2a5bfc5bdb28"><td class="memItemLeft" align="right" valign="top"><a id="adbd0c8de996d1eb2838a2a5bfc5bdb28" name="adbd0c8de996d1eb2838a2a5bfc5bdb28"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>deauthDelayMs</b></td></tr>
+<tr class="separator:adbd0c8de996d1eb2838a2a5bfc5bdb28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- directory -->
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>GUI/<a class="el" href="GUI_2WiFiTools_8h_source.html">WiFiTools.h</a></li>
+<li>WiFi/<a class="el" href="WiFi_2WiFiTools_8h_source.html">WiFiTools.h</a></li>
+</ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a class="el" href="structdeauthPacket__t.html">deauthPacket_t</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

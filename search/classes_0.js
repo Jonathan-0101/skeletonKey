@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hccapx_0',['HCCAPX',['../structHCCAPX.html',1,'']]]
+  ['deauthpacket_5ft_0',['deauthPacket_t',['../structdeauthPacket__t.html',1,'']]]
 ];

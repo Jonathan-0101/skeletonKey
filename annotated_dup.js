@@ -1,5 +1,6 @@
 var annotated_dup =
 [
+    [ "deauthPacket_t", "structdeauthPacket__t.html", null ],
     [ "HCCAPX", "structHCCAPX.html", null ],
     [ "IRCommand", "structIRCommand.html", null ],
     [ "IRDeviceInfo", "structIRDeviceInfo.html", null ],

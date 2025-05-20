@@ -45,7 +45,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"GUI_2SubGHzTools_8h.html"
+"GUI_2IRTools_8h.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
