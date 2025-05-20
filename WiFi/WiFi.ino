@@ -1,3 +1,16 @@
+// WiFi.ino
+
+/**
+ * @file WiFi.ino
+ * @author Jonathan Woolf
+ * @brief Test program for Wi-Fi attack tools
+ * @version 1.0
+ * @date 2025-02-25
+ *
+ * @copyright Copyright (c) 2025
+ *
+ */
+
 #include <SPI.h>
 
 #include <vector>
@@ -21,9 +34,9 @@ void setup() {
     // Initialize the WiFiTools object with the SD card instance
     wifiTools.initWiFiTools(SD);
 
-    // Serial.println("Starting beacon spam");
     // Call the rickRollBeaconSpam function
-    // wifiTools.rickRollBeaconSpam(15000);
+    Serial.println("Starting beacon spam");
+    wifiTools.rickRollBeaconSpam(15000);
 
     // Call the scanWiFiNetworks function
     wifiTools.scanWiFiNetworks();
@@ -33,50 +46,6 @@ void setup() {
     for (int i = 0; i < availableNetworks.size(); i++) {
         Serial.printf("Network %d: %s\n", i, availableNetworks[i].ssid);
     }
-
-    // Serial.println("Enter the index of the network to deauth:");
-    // while (Serial.available() == 0) {
-    //     delay(100);
-    // }
-
-    // int networkIndex = Serial.parseInt();
-    // if (networkIndex != -1) {
-    //     if (networkIndex < 0 || networkIndex >= availableNetworks.size()) {
-    //         Serial.println("Invalid network index");
-    //         return;
-    //     } else {
-    //         wifiTools.deauthNetwork(NULL, NULL, NULL, networkIndex, NULL, 5000, 1, 2);
-    //     }
-    // }
-
-    Serial.println("Enter the index of the network to find devices of:");
-    while (Serial.available() == 0) {
-        delay(100);
-    }
-
-    int networkIndex = Serial.parseInt();
-    if (networkIndex != -1) {
-        if (networkIndex < 0 || networkIndex >= availableNetworks.size()) {
-            Serial.println("Invalid network index");
-            return;
-        } else {
-            wifiTools.handshakeCapture(NULL, NULL, networkIndex, 30000);
-            // wifiTools.activeHandshakeCapture(NULL, NULL, networkIndex, 30000);
-            // wifiTools.findClients(NULL, NULL, networkIndex, 15000);
-        }
-    }
-
-    // // scanForClients function
-    // wifiTools.scanForClients();
-
-    // scan for available networks
-    // wifiTools.scanWiFiNetworks();
-
-    // get char array of SSID and MACs
-    // char* ssidAndMACs = wifiTools.getFoundSSIDandMACs();
-
-    // print the SSID and MACs
-    // Serial.println(ssidAndMACs);
 }
 
 void loop() {

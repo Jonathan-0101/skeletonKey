@@ -1,3 +1,15 @@
+// SubGHz.ino
+
+/**
+ * @file SubGHz.ino
+ * @author Jonathan Woolf
+ * @brief Test program for Sub-GHz attack tools
+ * @version 1.0
+ * @date 2025-04-14
+ *
+ * @copyright Copyright (c) 2025
+ *
+ */
 #include "SPI.h"
 #include "SubGHzTools.h"
 
@@ -12,9 +24,6 @@ void setup() {
     delay(250);
 
     subGHzTools.init();
-
-    // Set the module to use (0 for A, 1 for B)
-    // subGHzTools.setModule(0);
 
     // Jam for 10 seconds
     subGHzTools.startJamming();

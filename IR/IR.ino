@@ -1,3 +1,16 @@
+// IR.ino
+
+/**
+ * @file IR.ino
+ * @author Jonathan Woolf
+ * @brief Test program for IR attack tools
+ * @version 1.0
+ * @date 2025-03-05
+ *
+ * @copyright Copyright (c) 2025
+ *
+ */
+
 #include <FS.h>
 
 #include <string>
