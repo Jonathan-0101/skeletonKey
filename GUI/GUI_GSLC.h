@@ -1,3 +1,14 @@
+/**
+ * @file GUI_GSLC.h
+ * @author Jonathan Woolf
+ * @brief GUIslice generated GUI framework header file
+ * @version 1.0
+ * @date 2025-04-19
+ *
+ * @copyright Copyright (c) 2025
+ *
+ */
+
 //<File !Start!>
 // FILE: [GUI_GSLC.h]
 // Created by GUIslice Builder version: [0.17.b40]
