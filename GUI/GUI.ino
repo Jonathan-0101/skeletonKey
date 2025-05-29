@@ -72,6 +72,7 @@ int numberOfIRDeviceTypes = 0;
 int numberOfIRDeviceBrands = 0;
 int numberOfIRDevices = 0;
 int numberOfIRDeviceCommands = 0;
+IRCommand selectedCommand;
 
 BleKeyboard bleKeyboard("Logitech", "Logitech", 100);
 
@@ -86,21 +87,21 @@ void resetToMainMenu();
 
 // Save some element references for direct access
 //<Save_References !Start!>
-gslc_tsElemRef* batteryChrgTxt    = NULL;
-gslc_tsElemRef* m_pBLEselectButtonTxt= NULL;
-gslc_tsElemRef* m_pElemBtn10      = NULL;
+gslc_tsElemRef* batteryChrgTxt = NULL;
+gslc_tsElemRef* m_pBLEselectButtonTxt = NULL;
+gslc_tsElemRef* m_pElemBtn10 = NULL;
 gslc_tsElemRef* m_pElemListbox_IR = NULL;
-gslc_tsElemRef* m_pElemListbox_SubGHz= NULL;
-gslc_tsElemRef* m_pElemListbox_WiFi= NULL;
-gslc_tsElemRef* m_pElemOutTxt1    = NULL;
-gslc_tsElemRef* m_pIRselectButtonTxt= NULL;
-gslc_tsElemRef* m_pListSlider_IR  = NULL;
-gslc_tsElemRef* m_pListSlider_SubGHz= NULL;
-gslc_tsElemRef* m_pListSlider_WiFi= NULL;
-gslc_tsElemRef* m_pSettingsVibroButtonTxt= NULL;
-gslc_tsElemRef* m_pSubGHzJammingButton= NULL;
-gslc_tsElemRef* m_pWiFiDeauthButtonTxt= NULL;
-gslc_tsElemRef* m_pWiFiDeauthButtonTxt16_18= NULL;
+gslc_tsElemRef* m_pElemListbox_SubGHz = NULL;
+gslc_tsElemRef* m_pElemListbox_WiFi = NULL;
+gslc_tsElemRef* m_pElemOutTxt1 = NULL;
+gslc_tsElemRef* m_pIRselectButtonTxt = NULL;
+gslc_tsElemRef* m_pListSlider_IR = NULL;
+gslc_tsElemRef* m_pListSlider_SubGHz = NULL;
+gslc_tsElemRef* m_pListSlider_WiFi = NULL;
+gslc_tsElemRef* m_pSettingsVibroButtonTxt = NULL;
+gslc_tsElemRef* m_pSubGHzJammingButton = NULL;
+gslc_tsElemRef* m_pWiFiDeauthButtonTxt = NULL;
+gslc_tsElemRef* m_pWiFiDeauthButtonTxt16_18 = NULL;
 //<Save_References !End!>
 
 // Define debug message function
@@ -125,7 +126,7 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
     if (eTouch == GSLC_TOUCH_UP_IN) {
         // From the element's ID we can determine which button was pressed.
         switch (pElem->nId) {
-//<Button Enums !Start!>
+                //<Button Enums !Start!>
             case Base_Button_home:
                 gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "Main Menu");
                 gslc_SetPageCur(&m_gui, E_PG_MAIN);
@@ -136,6 +137,7 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
                 gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "Settings");
                 gslc_SetPageCur(&m_gui, E_PG_Settings);
                 currentPage = settingsMenu;
+                resetToMainMenu();
                 break;
             case Main_Button_RFID:
                 gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "RFID");
@@ -172,17 +174,7 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
                 gslc_SetPageCur(&m_gui, E_PG_IR);
                 currentPage = irMenu;
                 irTools->init(SD);
-                // Get the device types and update the listbox
-                gslc_ElemXListboxReset(&m_gui, m_pElemListbox_IR);
-                irDeviceTypes = irTools->getDeviceTypes();
-                numberOfIRDeviceTypes = irDeviceTypes.size();
-                for (int i = 0; i < numberOfIRDeviceTypes; i++) {
-                    char irDeviceType[34];  // Increase size to 65 to accommodate longer SSIDs
-                    strncpy(irDeviceType, (const char*)irDeviceTypes[i].c_str(), 33);
-                    irDeviceType[33] = '\0';  // Ensure null termination
-                    gslc_ElemXListboxAddItem(&m_gui, m_pElemListbox_IR, irDeviceType);
-                    memset(irDeviceType, 0, sizeof(irDeviceType));
-                }
+                IRMenuListDeviceTypes();
                 break;
             case Settings_Button_calibrateTouch:
                 break;
@@ -305,8 +297,45 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
                 }
                 break;
             case IR_Button_Select:
+                // Get the current level of the IR menu and perform actions based on it
+                if (currentIRMenuLevel == irDeviceTypesList) {
+                    IRMenuListDeviceBrands();
+                    currentIRMenuLevel = irDeviceBrandsList;
+                } else if (currentIRMenuLevel == irDeviceBrandsList) {
+                    IRMenuListBrandModels();
+                    currentIRMenuLevel = irDevicesList;
+                } else if (currentIRMenuLevel == irDevicesList) {
+                    IRMenuListDeviceCommands();
+                    currentIRMenuLevel = irDeviceCommandsList;
+                } else if (currentIRMenuLevel == irDeviceCommandsList) {
+                    // Get the selected command from the listbox
+                    IRselectedIndex = gslc_ElemXListboxGetSel(&m_gui, m_pElemListbox_IR);
+                    // Check if a command is selected
+                    if (IRselectedIndex != XLISTBOX_SEL_NONE) {
+                        // Get the selected command
+                        selectedCommand = irDeviceCommands[IRselectedIndex];
+                        // Send the IR command
+                        irTools->sendIRCommand(selectedCommand);
+                        successVibration();
+                    }
+                }
                 break;
             case IR_Button_Back:
+                // Go back to the previous level of the IR menu
+                if (currentIRMenuLevel == irDeviceTypesList) {
+                    gslc_SetPageCur(&m_gui, E_PG_MAIN);
+                    currentPage = mainMenu;
+                    resetToMainMenu();
+                } else if (currentIRMenuLevel == irDeviceBrandsList) {
+                    IRMenuListDeviceTypes();
+                    currentIRMenuLevel = irDeviceTypesList;
+                } else if (currentIRMenuLevel == irDevicesList) {
+                    IRMenuListDeviceBrands();
+                    currentIRMenuLevel = irDeviceBrandsList;
+                } else if (currentIRMenuLevel == irDeviceCommandsList) {
+                    IRMenuListBrandModels();
+                    currentIRMenuLevel = irDevicesList;
+                }
                 break;
             case IR_Button_Capture:
                 break;
@@ -321,13 +350,14 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
             case HandshakeCapture_Button_exit:
                 gslc_PopupHide(&m_gui);
                 break;
-//<Button Enums !End!>
+                //<Button Enums !End!>
             default:
                 break;
         }
     }
     return true;
 }
+
 //<Checkbox Callback !Start!>
 //<Checkbox Callback !End!>
 //<Keypad Callback !Start!>
@@ -346,7 +376,7 @@ bool CbListbox(void* pvGui, void* pvElemRef, int16_t nSelId) {
 
     // From the element's ID we can determine which listbox was active.
     switch (pElem->nId) {
-//<Listbox Enums !Start!>
+            //<Listbox Enums !Start!>
 
         case WiFi_Listbox_networks:
             if (nSelId != XLISTBOX_SEL_NONE) {
@@ -363,7 +393,7 @@ bool CbListbox(void* pvGui, void* pvElemRef, int16_t nSelId) {
                 gslc_ElemXListboxGetItem(&m_gui, pElemRef, nSelId, acTxt, MAX_STR);
             }
             break;
-//<Listbox Enums !End!>
+            //<Listbox Enums !End!>
         default:
             break;
     }
@@ -381,21 +411,26 @@ bool CbSlidePos(void* pvGui, void* pvElemRef, int16_t nPos) {
 
     // From the element's ID we can determine which slider was updated.
     switch (pElem->nId) {
-//<Slider Enums !Start!>
-
+            //<Slider Enums !Start!>
         case WiFi_Listscroll_networks:
             // Fetch the slider position
             nVal = gslc_ElemXSliderGetPos(pGui, m_pListSlider_WiFi);
+            // Update the textbox scroll position
+            gslc_ElemXListboxSetScrollPos(pGui, m_pElemListbox_WiFi, nVal);
             break;
         case SubGHz_Listscroll_signals:
             // Fetch the slider position
             nVal = gslc_ElemXSliderGetPos(pGui, m_pListSlider_SubGHz);
+            // Update the textbox scroll position
+            gslc_ElemXListboxSetScrollPos(pGui, m_pElemListbox_SubGHz, nVal);
             break;
         case IR_Listscroll_stored:
             // Fetch the slider position
             nVal = gslc_ElemXSliderGetPos(pGui, m_pListSlider_IR);
+            // Update the textbox scroll position
+            gslc_ElemXListboxSetScrollPos(pGui, m_pElemListbox_IR, nVal);
             break;
-//<Slider Enums !End!>
+            //<Slider Enums !End!>
         default:
             break;
     }
@@ -437,6 +472,91 @@ void resetToMainMenu() {
         bleKeyboard.end();
         bleKeyboardConnected = false;
         bleMenuUpdated = false;
+    } else if (currentPage == irMenu) {
+        currentIRMenuLevel = irDeviceTypesList;
+        gslc_ElemXListboxReset(&m_gui, m_pElemListbox_IR);
+        gslc_ElemXListboxSetSel(&m_gui, m_pElemListbox_IR, XLISTBOX_SEL_NONE);
+    } else if (currentPage == subGHzMenu) {
+        currentSubGHzAppMode = SubGHz_IDLE;
+    } else if (currentPage == wifiMenu) {
+        deauthStatus = 0;
+    }
+}
+
+void IRMenuListDeviceTypes() {
+    // Get the device types and update the listbox
+    gslc_ElemXListboxReset(&m_gui, m_pElemListbox_IR);
+    irDeviceTypes = irTools->getDeviceTypes();
+    numberOfIRDeviceTypes = irDeviceTypes.size();
+    for (int i = 0; i < numberOfIRDeviceTypes; i++) {
+        char irDeviceType[34];
+        strncpy(irDeviceType, (const char*)irDeviceTypes[i].c_str(), 33);
+        irDeviceType[33] = '\0';  // Ensure null termination
+        gslc_ElemXListboxAddItem(&m_gui, m_pElemListbox_IR, irDeviceType);
+        memset(irDeviceType, 0, sizeof(irDeviceType));
+    }
+}
+
+void IRMenuListDeviceBrands() {
+    // Get the selected device type from the listbox
+    IRselectedIndex = gslc_ElemXListboxGetSel(&m_gui, m_pElemListbox_IR);
+    // Check if a device type is selected
+    if (IRselectedIndex != XLISTBOX_SEL_NONE) {
+        // Get the selected device type
+        irTools->findDeviceBrands(IRselectedIndex);
+        // Update the listbox with the brands for the selected device type
+        gslc_ElemXListboxReset(&m_gui, m_pElemListbox_IR);
+        irDeviceBrands = irTools->getDeviceBrands();
+        numberOfIRDeviceBrands = irDeviceBrands.size();
+        for (int i = 0; i < numberOfIRDeviceBrands; i++) {
+            char irDeviceBrand[34];
+            strncpy(irDeviceBrand, (const char*)irDeviceBrands[i].c_str(), 33);
+            irDeviceBrand[33] = '\0';  // Ensure null termination
+            gslc_ElemXListboxAddItem(&m_gui, m_pElemListbox_IR, irDeviceBrand);
+            memset(irDeviceBrand, 0, sizeof(irDeviceBrand));
+        }
+    }
+}
+
+void IRMenuListBrandModels() {
+    // Get the selected brand from the listbox
+    IRselectedIndex = gslc_ElemXListboxGetSel(&m_gui, m_pElemListbox_IR);
+    // Check if a brand is selected
+    if (IRselectedIndex != XLISTBOX_SEL_NONE) {
+        // Get the selected brand
+        irTools->findDevices(IRselectedIndex);
+        // Update the listbox with the devices for the selected brand
+        gslc_ElemXListboxReset(&m_gui, m_pElemListbox_IR);
+        irDevices = irTools->getDevices();
+        numberOfIRDevices = irDevices.size();
+        for (int i = 0; i < numberOfIRDevices; i++) {
+            char irDevice[34];
+            strncpy(irDevice, (const char*)irDevices[i].c_str(), 33);
+            irDevice[33] = '\0';  // Ensure null termination
+            gslc_ElemXListboxAddItem(&m_gui, m_pElemListbox_IR, irDevice);
+            memset(irDevice, 0, sizeof(irDevice));
+        }
+    }
+}
+
+void IRMenuListDeviceCommands() {
+    // Get the selected device from the listbox
+    IRselectedIndex = gslc_ElemXListboxGetSel(&m_gui, m_pElemListbox_IR);
+    // Check if a device is selected
+    if (IRselectedIndex != XLISTBOX_SEL_NONE) {
+        // Get the selected device
+        irTools->findDeviceCommands(IRselectedIndex);
+        // Update the listbox with the commands for the selected device
+        gslc_ElemXListboxReset(&m_gui, m_pElemListbox_IR);
+        irDeviceCommands = irTools->getDeviceCommands();
+        numberOfIRDeviceCommands = irDeviceCommands.size();
+        for (int i = 0; i < numberOfIRDeviceCommands; i++) {
+            char irCommand[34];
+            strncpy(irCommand, (const char*)irDeviceCommands[i].commandName.c_str(), 33);
+            irCommand[33] = '\0';  // Ensure null termination
+            gslc_ElemXListboxAddItem(&m_gui, m_pElemListbox_IR, irCommand);
+            memset(irCommand, 0, sizeof(irCommand));
+        }
     }
 }
 
