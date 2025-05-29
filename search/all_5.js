@@ -6,5 +6,6 @@ var searchData=
   ['getdevicecommands_3',['getdevicecommands',['../classIRTools.html#a8e6db99af3f1c33c7081546b017f1389',1,'IRTools::getDeviceCommands()'],['../classIRTools.html#a8e6db99af3f1c33c7081546b017f1389',1,'IRTools::getDeviceCommands()']]],
   ['getdevices_4',['getdevices',['../classIRTools.html#aa362f0ddef59adf3fd544f2d0e5eb306',1,'IRTools::getDevices()'],['../classIRTools.html#aa362f0ddef59adf3fd544f2d0e5eb306',1,'IRTools::getDevices()']]],
   ['getdevicetypes_5',['getdevicetypes',['../classIRTools.html#a0cbc8ee3ab47c617beb756f56feb281c',1,'IRTools::getDeviceTypes()'],['../classIRTools.html#a0cbc8ee3ab47c617beb756f56feb281c',1,'IRTools::getDeviceTypes()']]],
-  ['getselectedmodule_6',['getselectedmodule',['../classSubGHzTools.html#adf94fbcd396aaa39d76943eedf433cd6',1,'SubGHzTools::getSelectedModule()'],['../classSubGHzTools.html#adf94fbcd396aaa39d76943eedf433cd6',1,'SubGHzTools::getSelectedModule()']]]
+  ['getselectedmodule_6',['getselectedmodule',['../classSubGHzTools.html#adf94fbcd396aaa39d76943eedf433cd6',1,'SubGHzTools::getSelectedModule()'],['../classSubGHzTools.html#adf94fbcd396aaa39d76943eedf433cd6',1,'SubGHzTools::getSelectedModule()']]],
+  ['gui_5fgslc_2eh_7',['GUI_GSLC.h',['../GUI__GSLC_8h.html',1,'']]]
 ];

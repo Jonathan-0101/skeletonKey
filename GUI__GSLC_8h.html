@@ -1,0 +1,558 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <meta name="generator" content="Doxygen 1.9.8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- BEGIN opengraph metadata -->
+    <meta property="og:title" content="Pentestingdevice" />
+    <meta property="og:description"
+        content="BEng Dissertation; Penetration-testing device to highlight security system vulnerabilities." />
+    <meta property="og:url" content="https://jonathan-0101.github.io/PenTestingDevice" />
+    <!-- END opengraph metadata -->
+    <title>skeletonKey: GUI/GUI_GSLC.h File Reference</title>
+    <link href="tabs.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="dynsections.js"></script>
+    <script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+    <script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+    <script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+    <script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+    <script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+    <script type="text/javascript" src="toggle-alternative-theme.js"></script>
+    <script type="text/javascript">
+        DoxygenAwesomeFragmentCopyButton.init()
+        DoxygenAwesomeDarkModeToggle.init()
+        DoxygenAwesomeParagraphLink.init()
+        DoxygenAwesomeInteractiveToc.init()
+        DoxygenAwesomeTabs.init()
+    </script>
+    <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+    <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+    <link href="doxygen.css" rel="stylesheet" type="text/css" />
+    <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom-alternative.css" rel="stylesheet" type="text/css"/>
+    <link rel="icon" type="image/x-icon" href="logo.ico" />
+</head>
+<body>
+    <!-- https://tholman.com/github-corners/ -->
+    <a href="https://github.com/Jonathan-0101/PenTestingDevice" class="github-corner" title="View source on GitHub"
+        target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 250 250" width="40" height="40"
+            style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+            <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+            <path
+                d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+                fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+            <path
+                d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+                fill="currentColor" class="octo-body"></path>
+        </svg></a>
+    <style>
+        .github-corner:hover .octo-arm {
+            animation: octocat-wave 560ms ease-in-out
+        }
+        @keyframes octocat-wave {
+            0%,
+            100% {
+                transform: rotate(0)
+            }
+            20%,
+            60% {
+                transform: rotate(-25deg)
+            }
+            40%,
+            80% {
+                transform: rotate(10deg)
+            }
+        }
+        @media (max-width:500px) {
+            .github-corner:hover .octo-arm {
+                animation: none
+            }
+            .github-corner .octo-arm {
+                animation: octocat-wave 560ms ease-in-out
+            }
+        }
+    </style>
+    <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+        <div id="titlearea">
+            <table cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr style="height: 56px;">
+                        <td id="projectlogo"><img alt="Logo" src="logo.ico" /></td>
+                        <td id="projectalign" style="padding-left: 0.5em;">
+                            <div id="projectname">skeletonKey
+                            </div>
+                            <div id="projectbrief">BEng Dissertation; Pen-testing device</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- end header part --><!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('GUI__GSLC_8h.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Macros</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">GUI_GSLC.h File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>GUIslice generated GUI framework header file.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &quot;GUIslice.h&quot;</code><br />
+<code>#include &quot;GUIslice_drv.h&quot;</code><br />
+<code>#include &quot;elem/XListbox.h&quot;</code><br />
+<code>#include &quot;elem/XSlider.h&quot;</code><br />
+<code>#include &lt;TFT_eSPI.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for GUI_GSLC.h:</div>
+<div class="dyncontent">
+<div class="center"><!-- SVG 0 --></div>
+</div>
+</div>
+<p><a href="GUI__GSLC_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a7aa401b7cb66018ebb4d6fc22aa80563" id="r_a7aa401b7cb66018ebb4d6fc22aa80563"><td class="memItemLeft" align="right" valign="top"><a id="a7aa401b7cb66018ebb4d6fc22aa80563" name="a7aa401b7cb66018ebb4d6fc22aa80563"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_PAGE</b>&#160;&#160;&#160;11</td></tr>
+<tr class="separator:a7aa401b7cb66018ebb4d6fc22aa80563"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9470f41113d9e127a93496ddf964471" id="r_ad9470f41113d9e127a93496ddf964471"><td class="memItemLeft" align="right" valign="top"><a id="ad9470f41113d9e127a93496ddf964471" name="ad9470f41113d9e127a93496ddf964471"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_ELEM_PG_BASE</b>&#160;&#160;&#160;5</td></tr>
+<tr class="separator:ad9470f41113d9e127a93496ddf964471"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a263c962b244e9c4edb57f818230fe265" id="r_a263c962b244e9c4edb57f818230fe265"><td class="memItemLeft" align="right" valign="top"><a id="a263c962b244e9c4edb57f818230fe265" name="a263c962b244e9c4edb57f818230fe265"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_ELEM_PG_BASE_RAM</b>&#160;&#160;&#160;MAX_ELEM_PG_BASE</td></tr>
+<tr class="separator:a263c962b244e9c4edb57f818230fe265"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada92d9e2d0de00876f50b3ae19379011" id="r_ada92d9e2d0de00876f50b3ae19379011"><td class="memItemLeft" align="right" valign="top"><a id="ada92d9e2d0de00876f50b3ae19379011" name="ada92d9e2d0de00876f50b3ae19379011"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_ELEM_PG_MAIN</b>&#160;&#160;&#160;6</td></tr>
+<tr class="separator:ada92d9e2d0de00876f50b3ae19379011"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab41413488f6d947ba173931c4f97cd49" id="r_ab41413488f6d947ba173931c4f97cd49"><td class="memItemLeft" align="right" valign="top"><a id="ab41413488f6d947ba173931c4f97cd49" name="ab41413488f6d947ba173931c4f97cd49"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_ELEM_PG_MAIN_RAM</b>&#160;&#160;&#160;MAX_ELEM_PG_MAIN</td></tr>
+<tr class="separator:ab41413488f6d947ba173931c4f97cd49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85f1b75e1da81826051386edc5422c6b" id="r_a85f1b75e1da81826051386edc5422c6b"><td class="memItemLeft" align="right" valign="top"><a id="a85f1b75e1da81826051386edc5422c6b" name="a85f1b75e1da81826051386edc5422c6b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_ELEM_PG_Settings</b>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:a85f1b75e1da81826051386edc5422c6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa91d1130ac93c66f1dd0aa5d0dcd39b4" id="r_aa91d1130ac93c66f1dd0aa5d0dcd39b4"><td class="memItemLeft" align="right" valign="top"><a id="aa91d1130ac93c66f1dd0aa5d0dcd39b4" name="aa91d1130ac93c66f1dd0aa5d0dcd39b4"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_ELEM_PG_Settings_RAM</b>&#160;&#160;&#160;MAX_ELEM_PG_Settings</td></tr>
+<tr class="separator:aa91d1130ac93c66f1dd0aa5d0dcd39b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b54455382ef159de028961a4cf016a1" id="r_a0b54455382ef159de028961a4cf016a1"><td class="memItemLeft" align="right" valign="top"><a id="a0b54455382ef159de028961a4cf016a1" name="a0b54455382ef159de028961a4cf016a1"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_ELEM_PG_RFID</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a0b54455382ef159de028961a4cf016a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b12f23aab999c2393ebe47e09aab195" id="r_a5b12f23aab999c2393ebe47e09aab195"><td class="memItemLeft" align="right" valign="top"><a id="a5b12f23aab999c2393ebe47e09aab195" name="a5b12f23aab999c2393ebe47e09aab195"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_ELEM_PG_RFID_RAM</b>&#160;&#160;&#160;MAX_ELEM_PG_RFID</td></tr>
+<tr class="separator:a5b12f23aab999c2393ebe47e09aab195"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f072afbdc2a8469a60bbea17f664bbc" id="r_a4f072afbdc2a8469a60bbea17f664bbc"><td class="memItemLeft" align="right" valign="top"><a id="a4f072afbdc2a8469a60bbea17f664bbc" name="a4f072afbdc2a8469a60bbea17f664bbc"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_ELEM_PG_SubGHz</b>&#160;&#160;&#160;7</td></tr>
+<tr class="separator:a4f072afbdc2a8469a60bbea17f664bbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6461f2562dd388f15db733d601cd9c7b" id="r_a6461f2562dd388f15db733d601cd9c7b"><td class="memItemLeft" align="right" valign="top"><a id="a6461f2562dd388f15db733d601cd9c7b" name="a6461f2562dd388f15db733d601cd9c7b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_ELEM_PG_SubGHz_RAM</b>&#160;&#160;&#160;MAX_ELEM_PG_SubGHz</td></tr>
+<tr class="separator:a6461f2562dd388f15db733d601cd9c7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af591139bceb0679853437249d8859c4b" id="r_af591139bceb0679853437249d8859c4b"><td class="memItemLeft" align="right" valign="top"><a id="af591139bceb0679853437249d8859c4b" name="af591139bceb0679853437249d8859c4b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_ELEM_PG_WIFI</b>&#160;&#160;&#160;7</td></tr>
+<tr class="separator:af591139bceb0679853437249d8859c4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90463f60491aaf40990b917a01592f7d" id="r_a90463f60491aaf40990b917a01592f7d"><td class="memItemLeft" align="right" valign="top"><a id="a90463f60491aaf40990b917a01592f7d" name="a90463f60491aaf40990b917a01592f7d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_ELEM_PG_WIFI_RAM</b>&#160;&#160;&#160;MAX_ELEM_PG_WIFI</td></tr>
+<tr class="separator:a90463f60491aaf40990b917a01592f7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6d41c98c93ec82dddccaa8c0b6ee345" id="r_ae6d41c98c93ec82dddccaa8c0b6ee345"><td class="memItemLeft" align="right" valign="top"><a id="ae6d41c98c93ec82dddccaa8c0b6ee345" name="ae6d41c98c93ec82dddccaa8c0b6ee345"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_ELEM_PG_USB</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:ae6d41c98c93ec82dddccaa8c0b6ee345"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a613c0fc79498238d95a3f40dc82f0519" id="r_a613c0fc79498238d95a3f40dc82f0519"><td class="memItemLeft" align="right" valign="top"><a id="a613c0fc79498238d95a3f40dc82f0519" name="a613c0fc79498238d95a3f40dc82f0519"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_ELEM_PG_USB_RAM</b>&#160;&#160;&#160;MAX_ELEM_PG_USB</td></tr>
+<tr class="separator:a613c0fc79498238d95a3f40dc82f0519"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c2de5c8789c2d7b57d3ffdfc428dedf" id="r_a3c2de5c8789c2d7b57d3ffdfc428dedf"><td class="memItemLeft" align="right" valign="top"><a id="a3c2de5c8789c2d7b57d3ffdfc428dedf" name="a3c2de5c8789c2d7b57d3ffdfc428dedf"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_ELEM_PG_BLE</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a3c2de5c8789c2d7b57d3ffdfc428dedf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a357c9dfd4b7e026a5c80731bfa726cde" id="r_a357c9dfd4b7e026a5c80731bfa726cde"><td class="memItemLeft" align="right" valign="top"><a id="a357c9dfd4b7e026a5c80731bfa726cde" name="a357c9dfd4b7e026a5c80731bfa726cde"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_ELEM_PG_BLE_RAM</b>&#160;&#160;&#160;MAX_ELEM_PG_BLE</td></tr>
+<tr class="separator:a357c9dfd4b7e026a5c80731bfa726cde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2943843559a6f707e173c055c51ea9fa" id="r_a2943843559a6f707e173c055c51ea9fa"><td class="memItemLeft" align="right" valign="top"><a id="a2943843559a6f707e173c055c51ea9fa" name="a2943843559a6f707e173c055c51ea9fa"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_ELEM_PG_IR</b>&#160;&#160;&#160;7</td></tr>
+<tr class="separator:a2943843559a6f707e173c055c51ea9fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adce53ff4972b1f9357ece9767d616f6e" id="r_adce53ff4972b1f9357ece9767d616f6e"><td class="memItemLeft" align="right" valign="top"><a id="adce53ff4972b1f9357ece9767d616f6e" name="adce53ff4972b1f9357ece9767d616f6e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_ELEM_PG_IR_RAM</b>&#160;&#160;&#160;MAX_ELEM_PG_IR</td></tr>
+<tr class="separator:adce53ff4972b1f9357ece9767d616f6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdbe4e4e169c4eb62b9d0c36d8345a56" id="r_afdbe4e4e169c4eb62b9d0c36d8345a56"><td class="memItemLeft" align="right" valign="top"><a id="afdbe4e4e169c4eb62b9d0c36d8345a56" name="afdbe4e4e169c4eb62b9d0c36d8345a56"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_ELEM_Popup_Boot</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:afdbe4e4e169c4eb62b9d0c36d8345a56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a414313a3365c809848b3334eb9c359b2" id="r_a414313a3365c809848b3334eb9c359b2"><td class="memItemLeft" align="right" valign="top"><a id="a414313a3365c809848b3334eb9c359b2" name="a414313a3365c809848b3334eb9c359b2"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_ELEM_Popup_Boot_RAM</b>&#160;&#160;&#160;MAX_ELEM_Popup_Boot</td></tr>
+<tr class="separator:a414313a3365c809848b3334eb9c359b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b5e09bc9be2d298d92f949fcf2f38ba" id="r_a4b5e09bc9be2d298d92f949fcf2f38ba"><td class="memItemLeft" align="right" valign="top"><a id="a4b5e09bc9be2d298d92f949fcf2f38ba" name="a4b5e09bc9be2d298d92f949fcf2f38ba"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_ELEM_Popup_HandshakeCapture</b>&#160;&#160;&#160;5</td></tr>
+<tr class="separator:a4b5e09bc9be2d298d92f949fcf2f38ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ea9165843757671a78afa9bdfb5065c" id="r_a4ea9165843757671a78afa9bdfb5065c"><td class="memItemLeft" align="right" valign="top"><a id="a4ea9165843757671a78afa9bdfb5065c" name="a4ea9165843757671a78afa9bdfb5065c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_ELEM_Popup_HandshakeCapture_RAM</b>&#160;&#160;&#160;MAX_ELEM_Popup_HandshakeCapture</td></tr>
+<tr class="separator:a4ea9165843757671a78afa9bdfb5065c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b6d77865140befe3a9bc16132d2e696" id="r_a8b6d77865140befe3a9bc16132d2e696"><td class="memItemLeft" align="right" valign="top"><a id="a8b6d77865140befe3a9bc16132d2e696" name="a8b6d77865140befe3a9bc16132d2e696"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_STR</b>&#160;&#160;&#160;200</td></tr>
+<tr class="separator:a8b6d77865140befe3a9bc16132d2e696"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a06fc87d81c62e9abb8790b6e5713c55b" id="r_a06fc87d81c62e9abb8790b6e5713c55b"><td class="memItemLeft" align="right" valign="top"><a id="a06fc87d81c62e9abb8790b6e5713c55b" name="a06fc87d81c62e9abb8790b6e5713c55b"></a>enum &#160;</td><td class="memItemRight" valign="bottom">{ <br />
+&#160;&#160;<b>E_PG_BASE</b>
+, <b>E_PG_MAIN</b>
+, <b>E_PG_Settings</b>
+, <b>E_PG_RFID</b>
+, <br />
+&#160;&#160;<b>E_PG_SubGHz</b>
+, <b>E_PG_WIFI</b>
+, <b>E_PG_USB</b>
+, <b>E_PG_BLE</b>
+, <br />
+&#160;&#160;<b>E_PG_IR</b>
+, <b>E_Popup_Boot</b>
+, <b>E_Popup_HandshakeCapture</b>
+<br />
+ }</td></tr>
+<tr class="separator:a06fc87d81c62e9abb8790b6e5713c55b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf764cbdea00d65edcd07bb9953ad2b7" id="r_adf764cbdea00d65edcd07bb9953ad2b7"><td class="memItemLeft" align="right" valign="top"><a id="adf764cbdea00d65edcd07bb9953ad2b7" name="adf764cbdea00d65edcd07bb9953ad2b7"></a>enum &#160;</td><td class="memItemRight" valign="bottom">{ <br />
+&#160;&#160;<b>BLE_Button_Send</b>
+, <b>Base_Button_home</b>
+, <b>Base_Button_settings</b>
+, <b>Base_Line_topBar</b>
+, <br />
+&#160;&#160;<b>Base_Text_Bat</b>
+, <b>Base_Text_PageLabel</b>
+, <b>Boot_Image_logo</b>
+, <b>HandshakeCapture_Box_background</b>
+, <br />
+&#160;&#160;<b>HandshakeCapture_Button_active</b>
+, <b>HandshakeCapture_Button_exit</b>
+, <b>HandshakeCapture_Button_passive</b>
+, <b>HandshakeCapture_Text_title</b>
+, <br />
+&#160;&#160;<b>IR_Button_Back</b>
+, <b>IR_Button_Capture</b>
+, <b>IR_Button_Jam</b>
+, <b>IR_Button_Select</b>
+, <br />
+&#160;&#160;<b>IR_Listbox_stored</b>
+, <b>IR_Listscroll_stored</b>
+, <b>Main_Button_BLE</b>
+, <b>Main_Button_BadUSB</b>
+, <br />
+&#160;&#160;<b>Main_Button_IR</b>
+, <b>Main_Button_RFID</b>
+, <b>Main_Button_SubGHz</b>
+, <b>Main_Button_WIFI</b>
+, <br />
+&#160;&#160;<b>Settings_Button_calibrateTouch</b>
+, <b>Settings_Button_vibrationToggle</b>
+, <b>SubGHz_Button_capture</b>
+, <b>SubGHz_Button_frequency</b>
+, <br />
+&#160;&#160;<b>SubGHz_Button_jaming</b>
+, <b>SubGHz_Button_transmit</b>
+, <b>SubGHz_Listbox_signals</b>
+, <b>SubGHz_Listscroll_signals</b>
+, <br />
+&#160;&#160;<b>WiFi_Button_deauth</b>
+, <b>WiFi_Button_handshake</b>
+, <b>WiFi_Button_rickRollBeacon</b>
+, <b>WiFi_Button_scanNetworks</b>
+, <br />
+&#160;&#160;<b>WiFi_Listbox_networks</b>
+, <b>WiFi_Listscroll_networks</b>
+<br />
+ }</td></tr>
+<tr class="separator:adf764cbdea00d65edcd07bb9953ad2b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99fb83031ce9923c84392b4e92f956b5" id="r_a99fb83031ce9923c84392b4e92f956b5"><td class="memItemLeft" align="right" valign="top"><a id="a99fb83031ce9923c84392b4e92f956b5" name="a99fb83031ce9923c84392b4e92f956b5"></a>enum &#160;</td><td class="memItemRight" valign="bottom">{ <b>E_BUILTIN10X16</b>
+, <b>E_BUILTIN5X8</b>
+, <b>MAX_FONT</b>
+ }</td></tr>
+<tr class="separator:a99fb83031ce9923c84392b4e92f956b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad835ab936f226b374355b29b2bdbb1ac" id="r_ad835ab936f226b374355b29b2bdbb1ac"><td class="memItemLeft" align="right" valign="top"><a id="ad835ab936f226b374355b29b2bdbb1ac" name="ad835ab936f226b374355b29b2bdbb1ac"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>pageOptions</b> { <br />
+&#160;&#160;<b>mainMenu</b>
+, <b>settingsMenu</b>
+, <b>rfidMenu</b>
+, <b>subGHzMenu</b>
+, <br />
+&#160;&#160;<b>wifiMenu</b>
+, <b>bleMenu</b>
+, <b>usbMenu</b>
+, <b>irMenu</b>
+<br />
+ }</td></tr>
+<tr class="separator:ad835ab936f226b374355b29b2bdbb1ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1911a9cab359c0bf6d08213f7de3bc11" id="r_a1911a9cab359c0bf6d08213f7de3bc11"><td class="memItemLeft" align="right" valign="top"><a id="a1911a9cab359c0bf6d08213f7de3bc11" name="a1911a9cab359c0bf6d08213f7de3bc11"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>irMenuLevels</b> { <b>irDeviceTypesList</b>
+, <b>irDeviceBrandsList</b>
+, <b>irDevicesList</b>
+, <b>irDeviceCommandsList</b>
+ }</td></tr>
+<tr class="separator:a1911a9cab359c0bf6d08213f7de3bc11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a06ece25a30954ed2a0f718477ce1381c" id="r_a06ece25a30954ed2a0f718477ce1381c"><td class="memItemLeft" align="right" valign="top"><a id="a06ece25a30954ed2a0f718477ce1381c" name="a06ece25a30954ed2a0f718477ce1381c"></a>
+static int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>DebugOut</b> (char ch)</td></tr>
+<tr class="separator:a06ece25a30954ed2a0f718477ce1381c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a4c9f37ff19e0aff6b1fd79a6daf63b" id="r_a2a4c9f37ff19e0aff6b1fd79a6daf63b"><td class="memItemLeft" align="right" valign="top"><a id="a2a4c9f37ff19e0aff6b1fd79a6daf63b" name="a2a4c9f37ff19e0aff6b1fd79a6daf63b"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>CbBtnCommon</b> (void *pvGui, void *pvElemRef, gslc_teTouch eTouch, int16_t nX, int16_t nY)</td></tr>
+<tr class="separator:a2a4c9f37ff19e0aff6b1fd79a6daf63b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fb1f24cf51664b5e398d1c1e5db0ac5" id="r_a6fb1f24cf51664b5e398d1c1e5db0ac5"><td class="memItemLeft" align="right" valign="top"><a id="a6fb1f24cf51664b5e398d1c1e5db0ac5" name="a6fb1f24cf51664b5e398d1c1e5db0ac5"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>CbCheckbox</b> (void *pvGui, void *pvElemRef, int16_t nSelId, bool bState)</td></tr>
+<tr class="separator:a6fb1f24cf51664b5e398d1c1e5db0ac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeec046223e03b7564fdc08f142fff93f" id="r_aeec046223e03b7564fdc08f142fff93f"><td class="memItemLeft" align="right" valign="top"><a id="aeec046223e03b7564fdc08f142fff93f" name="aeec046223e03b7564fdc08f142fff93f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>CbDrawScanner</b> (void *pvGui, void *pvElemRef, gslc_teRedrawType eRedraw)</td></tr>
+<tr class="separator:aeec046223e03b7564fdc08f142fff93f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cde3e3dc7f48324c51584b0af9af281" id="r_a4cde3e3dc7f48324c51584b0af9af281"><td class="memItemLeft" align="right" valign="top"><a id="a4cde3e3dc7f48324c51584b0af9af281" name="a4cde3e3dc7f48324c51584b0af9af281"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>CbKeypad</b> (void *pvGui, void *pvElemRef, int16_t nState, void *pvData)</td></tr>
+<tr class="separator:a4cde3e3dc7f48324c51584b0af9af281"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2b8e6e75218e184d4109a49d6efa6cf" id="r_ad2b8e6e75218e184d4109a49d6efa6cf"><td class="memItemLeft" align="right" valign="top"><a id="ad2b8e6e75218e184d4109a49d6efa6cf" name="ad2b8e6e75218e184d4109a49d6efa6cf"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>CbListbox</b> (void *pvGui, void *pvElemRef, int16_t nSelId)</td></tr>
+<tr class="separator:ad2b8e6e75218e184d4109a49d6efa6cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63a1b2d39616b880e8a4273c8e629dee" id="r_a63a1b2d39616b880e8a4273c8e629dee"><td class="memItemLeft" align="right" valign="top"><a id="a63a1b2d39616b880e8a4273c8e629dee" name="a63a1b2d39616b880e8a4273c8e629dee"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>CbSlidePos</b> (void *pvGui, void *pvElemRef, int16_t nPos)</td></tr>
+<tr class="separator:a63a1b2d39616b880e8a4273c8e629dee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e7ad091f410227a48742dd83481cf2a" id="r_a3e7ad091f410227a48742dd83481cf2a"><td class="memItemLeft" align="right" valign="top"><a id="a3e7ad091f410227a48742dd83481cf2a" name="a3e7ad091f410227a48742dd83481cf2a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>CbSpinner</b> (void *pvGui, void *pvElemRef, int16_t nState, void *pvData)</td></tr>
+<tr class="separator:a3e7ad091f410227a48742dd83481cf2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c8b186b20d5c3a19bab1733a84b3f2f" id="r_a3c8b186b20d5c3a19bab1733a84b3f2f"><td class="memItemLeft" align="right" valign="top"><a id="a3c8b186b20d5c3a19bab1733a84b3f2f" name="a3c8b186b20d5c3a19bab1733a84b3f2f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>CbTickScanner</b> (void *pvGui, void *pvScope)</td></tr>
+<tr class="separator:a3c8b186b20d5c3a19bab1733a84b3f2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa920efc424a9d09a03518d41ee72ce39" id="r_aa920efc424a9d09a03518d41ee72ce39"><td class="memItemLeft" align="right" valign="top"><a id="aa920efc424a9d09a03518d41ee72ce39" name="aa920efc424a9d09a03518d41ee72ce39"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>InitGUIslice_gen</b> ()</td></tr>
+<tr class="separator:aa920efc424a9d09a03518d41ee72ce39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ac84de838a8dabf1d12d434a8c5452c82" id="r_ac84de838a8dabf1d12d434a8c5452c82"><td class="memItemLeft" align="right" valign="top"><a id="ac84de838a8dabf1d12d434a8c5452c82" name="ac84de838a8dabf1d12d434a8c5452c82"></a>
+const unsigned short bootLogo[]&#160;</td><td class="memItemRight" valign="bottom"><b>PROGMEM</b></td></tr>
+<tr class="separator:ac84de838a8dabf1d12d434a8c5452c82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a812cd2ef1afe972599a6f6da3d8017a8" id="r_a812cd2ef1afe972599a6f6da3d8017a8"><td class="memItemLeft" align="right" valign="top"><a id="a812cd2ef1afe972599a6f6da3d8017a8" name="a812cd2ef1afe972599a6f6da3d8017a8"></a>
+gslc_tsGui&#160;</td><td class="memItemRight" valign="bottom"><b>m_gui</b></td></tr>
+<tr class="separator:a812cd2ef1afe972599a6f6da3d8017a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1a32c4076ffb71b7c91c2b73fd6ac56" id="r_ab1a32c4076ffb71b7c91c2b73fd6ac56"><td class="memItemLeft" align="right" valign="top"><a id="ab1a32c4076ffb71b7c91c2b73fd6ac56" name="ab1a32c4076ffb71b7c91c2b73fd6ac56"></a>
+gslc_tsDriver&#160;</td><td class="memItemRight" valign="bottom"><b>m_drv</b></td></tr>
+<tr class="separator:ab1a32c4076ffb71b7c91c2b73fd6ac56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3257af4b97fdb9791ddf460e930901e" id="r_aa3257af4b97fdb9791ddf460e930901e"><td class="memItemLeft" align="right" valign="top"><a id="aa3257af4b97fdb9791ddf460e930901e" name="aa3257af4b97fdb9791ddf460e930901e"></a>
+gslc_tsFont&#160;</td><td class="memItemRight" valign="bottom"><b>m_asFont</b> [MAX_FONT]</td></tr>
+<tr class="separator:aa3257af4b97fdb9791ddf460e930901e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e8ea497f31ed05193f2460902206295" id="r_a3e8ea497f31ed05193f2460902206295"><td class="memItemLeft" align="right" valign="top"><a id="a3e8ea497f31ed05193f2460902206295" name="a3e8ea497f31ed05193f2460902206295"></a>
+gslc_tsPage&#160;</td><td class="memItemRight" valign="bottom"><b>m_asPage</b> [MAX_PAGE]</td></tr>
+<tr class="separator:a3e8ea497f31ed05193f2460902206295"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4b524fa9611038085f7315453fc8ff1" id="r_af4b524fa9611038085f7315453fc8ff1"><td class="memItemLeft" align="right" valign="top"><a id="af4b524fa9611038085f7315453fc8ff1" name="af4b524fa9611038085f7315453fc8ff1"></a>
+gslc_tsElem&#160;</td><td class="memItemRight" valign="bottom"><b>m_asBasePage1Elem</b> [MAX_ELEM_PG_BASE_RAM]</td></tr>
+<tr class="separator:af4b524fa9611038085f7315453fc8ff1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0695e59cce150b39dc59cd74a7fb5686" id="r_a0695e59cce150b39dc59cd74a7fb5686"><td class="memItemLeft" align="right" valign="top"><a id="a0695e59cce150b39dc59cd74a7fb5686" name="a0695e59cce150b39dc59cd74a7fb5686"></a>
+gslc_tsElemRef&#160;</td><td class="memItemRight" valign="bottom"><b>m_asBasePage1ElemRef</b> [MAX_ELEM_PG_BASE]</td></tr>
+<tr class="separator:a0695e59cce150b39dc59cd74a7fb5686"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8a6d7718b905262790bb14d313582e1" id="r_ae8a6d7718b905262790bb14d313582e1"><td class="memItemLeft" align="right" valign="top"><a id="ae8a6d7718b905262790bb14d313582e1" name="ae8a6d7718b905262790bb14d313582e1"></a>
+gslc_tsElem&#160;</td><td class="memItemRight" valign="bottom"><b>m_asPage1Elem</b> [MAX_ELEM_PG_MAIN_RAM]</td></tr>
+<tr class="separator:ae8a6d7718b905262790bb14d313582e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed950c720753aafee7ac0dffa8ddcbc7" id="r_aed950c720753aafee7ac0dffa8ddcbc7"><td class="memItemLeft" align="right" valign="top"><a id="aed950c720753aafee7ac0dffa8ddcbc7" name="aed950c720753aafee7ac0dffa8ddcbc7"></a>
+gslc_tsElemRef&#160;</td><td class="memItemRight" valign="bottom"><b>m_asPage1ElemRef</b> [MAX_ELEM_PG_MAIN]</td></tr>
+<tr class="separator:aed950c720753aafee7ac0dffa8ddcbc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a933e7179369ec4c5764dae1d477878a0" id="r_a933e7179369ec4c5764dae1d477878a0"><td class="memItemLeft" align="right" valign="top"><a id="a933e7179369ec4c5764dae1d477878a0" name="a933e7179369ec4c5764dae1d477878a0"></a>
+gslc_tsElem&#160;</td><td class="memItemRight" valign="bottom"><b>m_asPage3Elem</b> [MAX_ELEM_PG_Settings_RAM]</td></tr>
+<tr class="separator:a933e7179369ec4c5764dae1d477878a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89722e1bc538d1327008ccd09697b476" id="r_a89722e1bc538d1327008ccd09697b476"><td class="memItemLeft" align="right" valign="top"><a id="a89722e1bc538d1327008ccd09697b476" name="a89722e1bc538d1327008ccd09697b476"></a>
+gslc_tsElemRef&#160;</td><td class="memItemRight" valign="bottom"><b>m_asPage3ElemRef</b> [MAX_ELEM_PG_Settings]</td></tr>
+<tr class="separator:a89722e1bc538d1327008ccd09697b476"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0716e65ab709ae5654cd3d7dc98d05a" id="r_af0716e65ab709ae5654cd3d7dc98d05a"><td class="memItemLeft" align="right" valign="top"><a id="af0716e65ab709ae5654cd3d7dc98d05a" name="af0716e65ab709ae5654cd3d7dc98d05a"></a>
+gslc_tsElem&#160;</td><td class="memItemRight" valign="bottom"><b>m_asPage4Elem</b> [MAX_ELEM_PG_RFID_RAM]</td></tr>
+<tr class="separator:af0716e65ab709ae5654cd3d7dc98d05a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c2baf7da7e4c47e5e759ebf730327c0" id="r_a1c2baf7da7e4c47e5e759ebf730327c0"><td class="memItemLeft" align="right" valign="top"><a id="a1c2baf7da7e4c47e5e759ebf730327c0" name="a1c2baf7da7e4c47e5e759ebf730327c0"></a>
+gslc_tsElemRef&#160;</td><td class="memItemRight" valign="bottom"><b>m_asPage4ElemRef</b> [MAX_ELEM_PG_RFID]</td></tr>
+<tr class="separator:a1c2baf7da7e4c47e5e759ebf730327c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a297726b03de5d52d63a23f321fc43c67" id="r_a297726b03de5d52d63a23f321fc43c67"><td class="memItemLeft" align="right" valign="top"><a id="a297726b03de5d52d63a23f321fc43c67" name="a297726b03de5d52d63a23f321fc43c67"></a>
+gslc_tsElem&#160;</td><td class="memItemRight" valign="bottom"><b>m_asPage5Elem</b> [MAX_ELEM_PG_SubGHz_RAM]</td></tr>
+<tr class="separator:a297726b03de5d52d63a23f321fc43c67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4b8197f2cc8d6221c7433a671e95143" id="r_aa4b8197f2cc8d6221c7433a671e95143"><td class="memItemLeft" align="right" valign="top"><a id="aa4b8197f2cc8d6221c7433a671e95143" name="aa4b8197f2cc8d6221c7433a671e95143"></a>
+gslc_tsElemRef&#160;</td><td class="memItemRight" valign="bottom"><b>m_asPage5ElemRef</b> [MAX_ELEM_PG_SubGHz]</td></tr>
+<tr class="separator:aa4b8197f2cc8d6221c7433a671e95143"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d4c35ec00a09cfe4a273c70351f7f0f" id="r_a4d4c35ec00a09cfe4a273c70351f7f0f"><td class="memItemLeft" align="right" valign="top"><a id="a4d4c35ec00a09cfe4a273c70351f7f0f" name="a4d4c35ec00a09cfe4a273c70351f7f0f"></a>
+gslc_tsElem&#160;</td><td class="memItemRight" valign="bottom"><b>m_asPage6Elem</b> [MAX_ELEM_PG_WIFI_RAM]</td></tr>
+<tr class="separator:a4d4c35ec00a09cfe4a273c70351f7f0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30748043d223173f3a505f569e3b3d80" id="r_a30748043d223173f3a505f569e3b3d80"><td class="memItemLeft" align="right" valign="top"><a id="a30748043d223173f3a505f569e3b3d80" name="a30748043d223173f3a505f569e3b3d80"></a>
+gslc_tsElemRef&#160;</td><td class="memItemRight" valign="bottom"><b>m_asPage6ElemRef</b> [MAX_ELEM_PG_WIFI]</td></tr>
+<tr class="separator:a30748043d223173f3a505f569e3b3d80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c71d468e8572e338367265e0f70fdac" id="r_a3c71d468e8572e338367265e0f70fdac"><td class="memItemLeft" align="right" valign="top"><a id="a3c71d468e8572e338367265e0f70fdac" name="a3c71d468e8572e338367265e0f70fdac"></a>
+gslc_tsElem&#160;</td><td class="memItemRight" valign="bottom"><b>m_asPage7Elem</b> [MAX_ELEM_PG_USB_RAM]</td></tr>
+<tr class="separator:a3c71d468e8572e338367265e0f70fdac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b8603710995dc2f0fb9a6a347643aaf" id="r_a4b8603710995dc2f0fb9a6a347643aaf"><td class="memItemLeft" align="right" valign="top"><a id="a4b8603710995dc2f0fb9a6a347643aaf" name="a4b8603710995dc2f0fb9a6a347643aaf"></a>
+gslc_tsElemRef&#160;</td><td class="memItemRight" valign="bottom"><b>m_asPage7ElemRef</b> [MAX_ELEM_PG_USB]</td></tr>
+<tr class="separator:a4b8603710995dc2f0fb9a6a347643aaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2bd8be7275decf5ac78c1c1b6baeb08" id="r_ab2bd8be7275decf5ac78c1c1b6baeb08"><td class="memItemLeft" align="right" valign="top"><a id="ab2bd8be7275decf5ac78c1c1b6baeb08" name="ab2bd8be7275decf5ac78c1c1b6baeb08"></a>
+gslc_tsElem&#160;</td><td class="memItemRight" valign="bottom"><b>m_asPage8Elem</b> [MAX_ELEM_PG_BLE_RAM]</td></tr>
+<tr class="separator:ab2bd8be7275decf5ac78c1c1b6baeb08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada014a35d0d043657ee08eab7523aa9f" id="r_ada014a35d0d043657ee08eab7523aa9f"><td class="memItemLeft" align="right" valign="top"><a id="ada014a35d0d043657ee08eab7523aa9f" name="ada014a35d0d043657ee08eab7523aa9f"></a>
+gslc_tsElemRef&#160;</td><td class="memItemRight" valign="bottom"><b>m_asPage8ElemRef</b> [MAX_ELEM_PG_BLE]</td></tr>
+<tr class="separator:ada014a35d0d043657ee08eab7523aa9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d9805e25d4d27271e8cfc956457eeba" id="r_a8d9805e25d4d27271e8cfc956457eeba"><td class="memItemLeft" align="right" valign="top"><a id="a8d9805e25d4d27271e8cfc956457eeba" name="a8d9805e25d4d27271e8cfc956457eeba"></a>
+gslc_tsElem&#160;</td><td class="memItemRight" valign="bottom"><b>m_asPage9Elem</b> [MAX_ELEM_PG_IR_RAM]</td></tr>
+<tr class="separator:a8d9805e25d4d27271e8cfc956457eeba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1732ca33941497e577afb77f4efcd07" id="r_ad1732ca33941497e577afb77f4efcd07"><td class="memItemLeft" align="right" valign="top"><a id="ad1732ca33941497e577afb77f4efcd07" name="ad1732ca33941497e577afb77f4efcd07"></a>
+gslc_tsElemRef&#160;</td><td class="memItemRight" valign="bottom"><b>m_asPage9ElemRef</b> [MAX_ELEM_PG_IR]</td></tr>
+<tr class="separator:ad1732ca33941497e577afb77f4efcd07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adafbb6ede2efdd84dc7ff34b78b9345a" id="r_adafbb6ede2efdd84dc7ff34b78b9345a"><td class="memItemLeft" align="right" valign="top"><a id="adafbb6ede2efdd84dc7ff34b78b9345a" name="adafbb6ede2efdd84dc7ff34b78b9345a"></a>
+gslc_tsElem&#160;</td><td class="memItemRight" valign="bottom"><b>m_asPopup1Elem</b> [MAX_ELEM_Popup_Boot_RAM]</td></tr>
+<tr class="separator:adafbb6ede2efdd84dc7ff34b78b9345a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4954059f971389c79c7c4e33dfd1174b" id="r_a4954059f971389c79c7c4e33dfd1174b"><td class="memItemLeft" align="right" valign="top"><a id="a4954059f971389c79c7c4e33dfd1174b" name="a4954059f971389c79c7c4e33dfd1174b"></a>
+gslc_tsElemRef&#160;</td><td class="memItemRight" valign="bottom"><b>m_asPopup1ElemRef</b> [MAX_ELEM_Popup_Boot]</td></tr>
+<tr class="separator:a4954059f971389c79c7c4e33dfd1174b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac82595972fd0acf2a40c76dd74e957d7" id="r_ac82595972fd0acf2a40c76dd74e957d7"><td class="memItemLeft" align="right" valign="top"><a id="ac82595972fd0acf2a40c76dd74e957d7" name="ac82595972fd0acf2a40c76dd74e957d7"></a>
+gslc_tsElem&#160;</td><td class="memItemRight" valign="bottom"><b>m_asPopup2Elem</b> [MAX_ELEM_Popup_HandshakeCapture_RAM]</td></tr>
+<tr class="separator:ac82595972fd0acf2a40c76dd74e957d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a413c3ea763c0a43c6fc035d2af61d0e6" id="r_a413c3ea763c0a43c6fc035d2af61d0e6"><td class="memItemLeft" align="right" valign="top"><a id="a413c3ea763c0a43c6fc035d2af61d0e6" name="a413c3ea763c0a43c6fc035d2af61d0e6"></a>
+gslc_tsElemRef&#160;</td><td class="memItemRight" valign="bottom"><b>m_asPopup2ElemRef</b> [MAX_ELEM_Popup_HandshakeCapture]</td></tr>
+<tr class="separator:a413c3ea763c0a43c6fc035d2af61d0e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab32e602394104835ed60156e53e4c404" id="r_ab32e602394104835ed60156e53e4c404"><td class="memItemLeft" align="right" valign="top"><a id="ab32e602394104835ed60156e53e4c404" name="ab32e602394104835ed60156e53e4c404"></a>
+gslc_tsXListbox&#160;</td><td class="memItemRight" valign="bottom"><b>m_sListbox2</b></td></tr>
+<tr class="separator:ab32e602394104835ed60156e53e4c404"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1b44dd4be3a24cb0192ec5768c69f5d" id="r_ac1b44dd4be3a24cb0192ec5768c69f5d"><td class="memItemLeft" align="right" valign="top"><a id="ac1b44dd4be3a24cb0192ec5768c69f5d" name="ac1b44dd4be3a24cb0192ec5768c69f5d"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>m_acListboxBuf2</b> [50+XLISTBOX_BUF_OH_R]</td></tr>
+<tr class="separator:ac1b44dd4be3a24cb0192ec5768c69f5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f5294ca68c36f5369c51abeb904ac6f" id="r_a1f5294ca68c36f5369c51abeb904ac6f"><td class="memItemLeft" align="right" valign="top"><a id="a1f5294ca68c36f5369c51abeb904ac6f" name="a1f5294ca68c36f5369c51abeb904ac6f"></a>
+gslc_tsXSlider&#160;</td><td class="memItemRight" valign="bottom"><b>m_sListScroll2</b></td></tr>
+<tr class="separator:a1f5294ca68c36f5369c51abeb904ac6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55398653293be42062671649078f710d" id="r_a55398653293be42062671649078f710d"><td class="memItemLeft" align="right" valign="top"><a id="a55398653293be42062671649078f710d" name="a55398653293be42062671649078f710d"></a>
+gslc_tsXListbox&#160;</td><td class="memItemRight" valign="bottom"><b>m_sListbox1</b></td></tr>
+<tr class="separator:a55398653293be42062671649078f710d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3949fd5a283c5d1fb6674f9ce00c016d" id="r_a3949fd5a283c5d1fb6674f9ce00c016d"><td class="memItemLeft" align="right" valign="top"><a id="a3949fd5a283c5d1fb6674f9ce00c016d" name="a3949fd5a283c5d1fb6674f9ce00c016d"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>m_acListboxBuf1</b> [50+XLISTBOX_BUF_OH_R]</td></tr>
+<tr class="separator:a3949fd5a283c5d1fb6674f9ce00c016d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08f3fea6d4770584ca96ac74e86badf2" id="r_a08f3fea6d4770584ca96ac74e86badf2"><td class="memItemLeft" align="right" valign="top"><a id="a08f3fea6d4770584ca96ac74e86badf2" name="a08f3fea6d4770584ca96ac74e86badf2"></a>
+gslc_tsXSlider&#160;</td><td class="memItemRight" valign="bottom"><b>m_sListScroll1</b></td></tr>
+<tr class="separator:a08f3fea6d4770584ca96ac74e86badf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af23386ff1225aa065f42a780effd230b" id="r_af23386ff1225aa065f42a780effd230b"><td class="memItemLeft" align="right" valign="top"><a id="af23386ff1225aa065f42a780effd230b" name="af23386ff1225aa065f42a780effd230b"></a>
+gslc_tsXListbox&#160;</td><td class="memItemRight" valign="bottom"><b>m_sListbox3</b></td></tr>
+<tr class="separator:af23386ff1225aa065f42a780effd230b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc0b26e9dec5158060dae97e6a2192dd" id="r_abc0b26e9dec5158060dae97e6a2192dd"><td class="memItemLeft" align="right" valign="top"><a id="abc0b26e9dec5158060dae97e6a2192dd" name="abc0b26e9dec5158060dae97e6a2192dd"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>m_acListboxBuf3</b> [500+XLISTBOX_BUF_OH_R]</td></tr>
+<tr class="separator:abc0b26e9dec5158060dae97e6a2192dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a347fea6c79e36e69c098a1ea8126ef44" id="r_a347fea6c79e36e69c098a1ea8126ef44"><td class="memItemLeft" align="right" valign="top"><a id="a347fea6c79e36e69c098a1ea8126ef44" name="a347fea6c79e36e69c098a1ea8126ef44"></a>
+gslc_tsXSlider&#160;</td><td class="memItemRight" valign="bottom"><b>m_sListScroll3</b></td></tr>
+<tr class="separator:a347fea6c79e36e69c098a1ea8126ef44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7a74ded17d0c5eeea1183afabc9f4f0" id="r_ab7a74ded17d0c5eeea1183afabc9f4f0"><td class="memItemLeft" align="right" valign="top"><a id="ab7a74ded17d0c5eeea1183afabc9f4f0" name="ab7a74ded17d0c5eeea1183afabc9f4f0"></a>
+gslc_tsElemRef *&#160;</td><td class="memItemRight" valign="bottom"><b>batteryChrgTxt</b></td></tr>
+<tr class="separator:ab7a74ded17d0c5eeea1183afabc9f4f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab18aea25b7e798cd7c96a8dca8c9be1e" id="r_ab18aea25b7e798cd7c96a8dca8c9be1e"><td class="memItemLeft" align="right" valign="top"><a id="ab18aea25b7e798cd7c96a8dca8c9be1e" name="ab18aea25b7e798cd7c96a8dca8c9be1e"></a>
+gslc_tsElemRef *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pBLEselectButtonTxt</b></td></tr>
+<tr class="separator:ab18aea25b7e798cd7c96a8dca8c9be1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59789803251e244422709372595d97a0" id="r_a59789803251e244422709372595d97a0"><td class="memItemLeft" align="right" valign="top"><a id="a59789803251e244422709372595d97a0" name="a59789803251e244422709372595d97a0"></a>
+gslc_tsElemRef *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pElemBtn10</b></td></tr>
+<tr class="separator:a59789803251e244422709372595d97a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9a2fdf6bc4342b97270efe420b8c7c7" id="r_ab9a2fdf6bc4342b97270efe420b8c7c7"><td class="memItemLeft" align="right" valign="top"><a id="ab9a2fdf6bc4342b97270efe420b8c7c7" name="ab9a2fdf6bc4342b97270efe420b8c7c7"></a>
+gslc_tsElemRef *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pElemListbox_IR</b></td></tr>
+<tr class="separator:ab9a2fdf6bc4342b97270efe420b8c7c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09fd3dd75db43908c2ab913f8587792a" id="r_a09fd3dd75db43908c2ab913f8587792a"><td class="memItemLeft" align="right" valign="top"><a id="a09fd3dd75db43908c2ab913f8587792a" name="a09fd3dd75db43908c2ab913f8587792a"></a>
+gslc_tsElemRef *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pElemListbox_SubGHz</b></td></tr>
+<tr class="separator:a09fd3dd75db43908c2ab913f8587792a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66d048a4b936c2ba0992ff3878ad960c" id="r_a66d048a4b936c2ba0992ff3878ad960c"><td class="memItemLeft" align="right" valign="top"><a id="a66d048a4b936c2ba0992ff3878ad960c" name="a66d048a4b936c2ba0992ff3878ad960c"></a>
+gslc_tsElemRef *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pElemListbox_WiFi</b></td></tr>
+<tr class="separator:a66d048a4b936c2ba0992ff3878ad960c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a208d775a42c13ee68b03de06b24a6c89" id="r_a208d775a42c13ee68b03de06b24a6c89"><td class="memItemLeft" align="right" valign="top"><a id="a208d775a42c13ee68b03de06b24a6c89" name="a208d775a42c13ee68b03de06b24a6c89"></a>
+gslc_tsElemRef *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pElemOutTxt1</b></td></tr>
+<tr class="separator:a208d775a42c13ee68b03de06b24a6c89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa743a9a4b3d5f25f395f27bc9d4a14e" id="r_afa743a9a4b3d5f25f395f27bc9d4a14e"><td class="memItemLeft" align="right" valign="top"><a id="afa743a9a4b3d5f25f395f27bc9d4a14e" name="afa743a9a4b3d5f25f395f27bc9d4a14e"></a>
+gslc_tsElemRef *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pIRselectButtonTxt</b></td></tr>
+<tr class="separator:afa743a9a4b3d5f25f395f27bc9d4a14e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5925e5445cbcd39a72ad44e5af380f5c" id="r_a5925e5445cbcd39a72ad44e5af380f5c"><td class="memItemLeft" align="right" valign="top"><a id="a5925e5445cbcd39a72ad44e5af380f5c" name="a5925e5445cbcd39a72ad44e5af380f5c"></a>
+gslc_tsElemRef *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pListSlider_IR</b></td></tr>
+<tr class="separator:a5925e5445cbcd39a72ad44e5af380f5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9585dd9d076defdf5bca753d69ef53c" id="r_ab9585dd9d076defdf5bca753d69ef53c"><td class="memItemLeft" align="right" valign="top"><a id="ab9585dd9d076defdf5bca753d69ef53c" name="ab9585dd9d076defdf5bca753d69ef53c"></a>
+gslc_tsElemRef *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pListSlider_SubGHz</b></td></tr>
+<tr class="separator:ab9585dd9d076defdf5bca753d69ef53c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3094963f86566e77fe6d6c71b73c878" id="r_ab3094963f86566e77fe6d6c71b73c878"><td class="memItemLeft" align="right" valign="top"><a id="ab3094963f86566e77fe6d6c71b73c878" name="ab3094963f86566e77fe6d6c71b73c878"></a>
+gslc_tsElemRef *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pListSlider_WiFi</b></td></tr>
+<tr class="separator:ab3094963f86566e77fe6d6c71b73c878"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a6a70524f374cad90907cbf57197462" id="r_a5a6a70524f374cad90907cbf57197462"><td class="memItemLeft" align="right" valign="top"><a id="a5a6a70524f374cad90907cbf57197462" name="a5a6a70524f374cad90907cbf57197462"></a>
+gslc_tsElemRef *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pSettingsVibroButtonTxt</b></td></tr>
+<tr class="separator:a5a6a70524f374cad90907cbf57197462"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a155b3097e2f3e1f97248924d70368bbc" id="r_a155b3097e2f3e1f97248924d70368bbc"><td class="memItemLeft" align="right" valign="top"><a id="a155b3097e2f3e1f97248924d70368bbc" name="a155b3097e2f3e1f97248924d70368bbc"></a>
+gslc_tsElemRef *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pSubGHzJammingButton</b></td></tr>
+<tr class="separator:a155b3097e2f3e1f97248924d70368bbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a479a19ad225b3e71bfd5305677146709" id="r_a479a19ad225b3e71bfd5305677146709"><td class="memItemLeft" align="right" valign="top"><a id="a479a19ad225b3e71bfd5305677146709" name="a479a19ad225b3e71bfd5305677146709"></a>
+gslc_tsElemRef *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pWiFiDeauthButtonTxt</b></td></tr>
+<tr class="separator:a479a19ad225b3e71bfd5305677146709"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2014705f8c80b72e0fff9ab31f8ad400" id="r_a2014705f8c80b72e0fff9ab31f8ad400"><td class="memItemLeft" align="right" valign="top"><a id="a2014705f8c80b72e0fff9ab31f8ad400" name="a2014705f8c80b72e0fff9ab31f8ad400"></a>
+gslc_tsElemRef *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pWiFiDeauthButtonTxt16_18</b></td></tr>
+<tr class="separator:a2014705f8c80b72e0fff9ab31f8ad400"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>GUIslice generated GUI framework header file. </p>
+<dl class="section author"><dt>Author</dt><dd>Jonathan Woolf </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2025-04-19</dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2025 </dd></dl>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_171b764decf33d63a7df2fab4f4bc6d8.html">GUI</a></li><li class="navelem"><a class="el" href="GUI__GSLC_8h.html">GUI_GSLC.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>
