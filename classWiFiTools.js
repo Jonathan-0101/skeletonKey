@@ -36,10 +36,12 @@ var classWiFiTools =
     [ "runAction", "classWiFiTools.html#af801cc7f0aa2befb11f24b256770f291", null ],
     [ "scanWiFiNetworks", "classWiFiTools.html#a434b1b80009f52dd46bb9f26c7b17488", null ],
     [ "scanWiFiNetworks", "classWiFiTools.html#a434b1b80009f52dd46bb9f26c7b17488", null ],
+    [ "sendBeaconPacket", "classWiFiTools.html#a99fcc69f2d6a6c1da9682a09b1e71dfd", null ],
     [ "sendDeauthPacket", "classWiFiTools.html#a4496beddfc24492abda018e82a581dac", null ],
     [ "sendDeauthPacket", "classWiFiTools.html#a4496beddfc24492abda018e82a581dac", null ],
     [ "startNetworkDeauth", "classWiFiTools.html#ad15e5367f821426c5ada363545eb3543", null ],
     [ "startNetworkDeauth", "classWiFiTools.html#ad15e5367f821426c5ada363545eb3543", null ],
     [ "stopNetworkDeauth", "classWiFiTools.html#a2071261ff843af8aab39b620aa49550d", null ],
-    [ "stopNetworkDeauth", "classWiFiTools.html#a2071261ff843af8aab39b620aa49550d", null ]
+    [ "stopNetworkDeauth", "classWiFiTools.html#a2071261ff843af8aab39b620aa49550d", null ],
+    [ "toggleRickRollBeaconSpam", "classWiFiTools.html#ab137a1f3a6dbb26db9d81927dc2e6cd3", null ]
 ];

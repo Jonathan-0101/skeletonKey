@@ -220,6 +220,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>stopNetworkDeauth</b>
 <tr class="memitem:ac394356bb88c2da425909c388588982e" id="r_ac394356bb88c2da425909c388588982e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWiFiTools.html#ac394356bb88c2da425909c388588982e">findClients</a> (uint8_t *networkBSSID, uint8_t channel, int availableNetworkIndex, int captureTime)</td></tr>
 <tr class="memdesc:ac394356bb88c2da425909c388588982e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to identify clients connected to a network.  <br /></td></tr>
 <tr class="separator:ac394356bb88c2da425909c388588982e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab137a1f3a6dbb26db9d81927dc2e6cd3" id="r_ab137a1f3a6dbb26db9d81927dc2e6cd3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWiFiTools.html#ab137a1f3a6dbb26db9d81927dc2e6cd3">toggleRickRollBeaconSpam</a> (bool enable)</td></tr>
+<tr class="memdesc:ab137a1f3a6dbb26db9d81927dc2e6cd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to toggle the Rick Roll beacon spam attack.  <br /></td></tr>
+<tr class="separator:ab137a1f3a6dbb26db9d81927dc2e6cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d8e5877a35094fa55d8b4a3ebab2259" id="r_a1d8e5877a35094fa55d8b4a3ebab2259"><td class="memItemLeft" align="right" valign="top"><a id="a1d8e5877a35094fa55d8b4a3ebab2259" name="a1d8e5877a35094fa55d8b4a3ebab2259"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>WiFiTools</b> ()</td></tr>
 <tr class="memdesc:a1d8e5877a35094fa55d8b4a3ebab2259"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Wi-Fi Tools object. <br /></td></tr>
@@ -279,6 +282,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>beaconSpamSetup</b> (
 void&#160;</td><td class="memItemRight" valign="bottom"><b>generateRandomMac</b> ()</td></tr>
 <tr class="memdesc:ae689371b5f6cd8d4a600b9aa4f142882"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to generate a random MAC address. <br /></td></tr>
 <tr class="separator:ae689371b5f6cd8d4a600b9aa4f142882"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99fcc69f2d6a6c1da9682a09b1e71dfd" id="r_a99fcc69f2d6a6c1da9682a09b1e71dfd"><td class="memItemLeft" align="right" valign="top"><a id="a99fcc69f2d6a6c1da9682a09b1e71dfd" name="a99fcc69f2d6a6c1da9682a09b1e71dfd"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>sendBeaconPacket</b> ()</td></tr>
+<tr class="memdesc:a99fcc69f2d6a6c1da9682a09b1e71dfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to send a single beacon packet. <br /></td></tr>
+<tr class="separator:a99fcc69f2d6a6c1da9682a09b1e71dfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4496beddfc24492abda018e82a581dac" id="r_a4496beddfc24492abda018e82a581dac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWiFiTools.html#a4496beddfc24492abda018e82a581dac">sendDeauthPacket</a> (uint8_t *apMac, uint8_t *stMac, uint8_t channel, uint8_t reasonCode)</td></tr>
 <tr class="memdesc:a4496beddfc24492abda018e82a581dac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to transmit a deatuthentication packet.  <br /></td></tr>
 <tr class="separator:a4496beddfc24492abda018e82a581dac"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -380,6 +387,12 @@ long&#160;</td><td class="memItemRight" valign="bottom"><b>lastDeauthTime</b> = 
 <tr class="memitem:a7c3d34ccf2a08aca1567dde874eb17cd" id="r_a7c3d34ccf2a08aca1567dde874eb17cd"><td class="memItemLeft" align="right" valign="top"><a id="a7c3d34ccf2a08aca1567dde874eb17cd" name="a7c3d34ccf2a08aca1567dde874eb17cd"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>lastBeconIndex</b> = 0</td></tr>
 <tr class="separator:a7c3d34ccf2a08aca1567dde874eb17cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a225e3dbef3eb758b5850bf65e7400338" id="r_a225e3dbef3eb758b5850bf65e7400338"><td class="memItemLeft" align="right" valign="top"><a id="a225e3dbef3eb758b5850bf65e7400338" name="a225e3dbef3eb758b5850bf65e7400338"></a>
+long&#160;</td><td class="memItemRight" valign="bottom"><b>lastBeaconTime</b> = 0</td></tr>
+<tr class="separator:a225e3dbef3eb758b5850bf65e7400338"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac627d0a2a2dee0495e6f4b129d583944" id="r_ac627d0a2a2dee0495e6f4b129d583944"><td class="memItemLeft" align="right" valign="top"><a id="ac627d0a2a2dee0495e6f4b129d583944" name="ac627d0a2a2dee0495e6f4b129d583944"></a>
+long&#160;</td><td class="memItemRight" valign="bottom"><b>beaconPaketDelayMs</b> = 10</td></tr>
+<tr class="separator:ac627d0a2a2dee0495e6f4b129d583944"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2edb2556058df5c3e37fd8d9d510da1" id="r_ae2edb2556058df5c3e37fd8d9d510da1"><td class="memItemLeft" align="right" valign="top"><a id="ae2edb2556058df5c3e37fd8d9d510da1" name="ae2edb2556058df5c3e37fd8d9d510da1"></a>
 wifi_init_config_t&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b> = WIFI_INIT_CONFIG_DEFAULT()</td></tr>
 <tr class="separator:ae2edb2556058df5c3e37fd8d9d510da1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1676,6 +1689,34 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>beaconPacket</b> [
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ab137a1f3a6dbb26db9d81927dc2e6cd3" name="ab137a1f3a6dbb26db9d81927dc2e6cd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab137a1f3a6dbb26db9d81927dc2e6cd3">&#9670;&#160;</a></span>toggleRickRollBeaconSpam()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WiFiTools::toggleRickRollBeaconSpam </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to toggle the Rick Roll beacon spam attack. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">enable</td><td>True to enable the attack, false to disable it </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">References <a class="el" href="classWiFiTools.html#a1bb65b4835a3c0d70dbc8a1aa6320a6b">beaconSpamSetup()</a>.</p>
 
 </div>
 </div>
