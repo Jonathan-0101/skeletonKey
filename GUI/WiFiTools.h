@@ -122,6 +122,8 @@ class WiFiTools {
     deauthPacket_t setDeauthPacket;
     long lastDeauthTime = 0;
     int lastBeconIndex = 0;
+    long lastBeaconTime = 0;
+    long beaconPaketDelayMs = 10;
 
     wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
     std::vector<uint8_t*> detectedClients;
@@ -139,6 +141,12 @@ class WiFiTools {
      *
      */
     void generateRandomMac();
+
+    /**
+     * @brief Function to send a single beacon packet
+     *
+     */
+    void sendBeaconPacket();
 
     /**
      * @brief Function to transmit a deatuthentication packet
@@ -364,6 +372,13 @@ class WiFiTools {
      * @param captureTime Duration to scan for clients
      */
     void findClients(uint8_t* networkBSSID, uint8_t channel, int availableNetworkIndex, int captureTime);
+
+    /**
+     * @brief Function to toggle the Rick Roll beacon spam attack
+     *
+     * @param enable True to enable the attack, false to disable it
+     */
+    void toggleRickRollBeaconSpam(bool enable);
 };
 
 // Declare the global instance

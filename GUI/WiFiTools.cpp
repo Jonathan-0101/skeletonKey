@@ -170,6 +170,81 @@ void WiFiTools::rickRollBeaconSpam(int duration = 15000) {
     Serial.println("WiFi stopped");
 }
 
+void WiFiTools::toggleRickRollBeaconSpam(bool enable) {
+    if (enable) {
+        beaconSpamSetup();
+        WiFi.disconnect();
+        Serial.println("Starting rickRollBeaconSpam");
+        attackMode = BEACON_SPAM;
+    } else {
+        Serial.println("Stopping rickRollBeaconSpam");
+        WiFi.mode(WIFI_OFF);
+        attackMode = WiFi_IDLE;
+    }
+}
+
+void WiFiTools::sendBeaconPacket() {
+    // create empty SSID
+    for (int i = 0; i < 32; i++)
+        emptySSID[i] = ' ';
+
+    // set packetSize
+    packetSize = sizeof(beaconPacket);
+
+    if (wpa2) {
+        beaconPacket[34] = 0x31;
+    } else {
+        beaconPacket[34] = 0x21;
+        packetSize -= 26;
+    }
+
+    // change WiFi mode to AP mode
+    WiFi.mode(WIFI_AP);
+
+    // set channel
+    esp_err_t err = esp_wifi_set_channel(1, WIFI_SECOND_CHAN_NONE);
+    if (err != ESP_OK) {
+        Serial.printf("Error: %s\n", esp_err_to_name(err));
+        return;
+    }
+
+    // generate random MAC address
+    generateRandomMac();
+
+    // set MAC address in beacon packet
+    memcpy(&beaconPacket[10], randomMacAddr, 6);
+    memcpy(&beaconPacket[16], randomMacAddr, 6);
+
+    // reset SSID
+    memcpy(&beaconPacket[38], emptySSID, 32);
+
+    // get length of SSID
+    uint8_t ssidLength = strlen_P(rickRollSSIDs[lastBeconIndex]);
+
+    // write new SSID into beacon frame
+    memcpy_P(&beaconPacket[38], (const char*)pgm_read_ptr(&rickRollSSIDs[lastBeconIndex]), ssidLength);
+
+    // set channel for beacon frame
+    beaconPacket[82] = channelIndex;
+
+    for (int j = 0; j < 100; j++) {
+        // send beacon frame
+        err = esp_wifi_80211_tx(WIFI_IF_AP, beaconPacket, packetSize, false);
+        if (err != ESP_OK) {
+            // Serial.printf("Failed to send beacon: %s\n", esp_err_to_name(err));
+        }
+        delay(1);
+    }
+
+    nextChannel();
+
+    if (lastBeconIndex < 7) {
+        lastBeconIndex++;
+    } else {
+        lastBeconIndex = 0;
+    }
+}
+
 void WiFiTools::scanWiFiNetworks() {
     // Clear the foundWiFiNetworks vector
     foundWiFiNetworks.clear();
@@ -612,6 +687,12 @@ void WiFiTools::runAction() {
             lastDeauthTime = currentTime;
             // Send the deauth packet
             sendDeauthPacket(setDeauthPacket.apMac, setDeauthPacket.staMac, setDeauthPacket.channel, setDeauthPacket.reasonCode);
+        }
+    } else if (attackMode == BEACON_SPAM) {
+        long currentTime = millis();
+        if (currentTime - lastBeaconTime > beaconPaketDelayMs) {
+            lastBeaconTime = currentTime;
+            sendBeaconPacket();
         }
     }
 }

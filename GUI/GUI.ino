@@ -38,6 +38,7 @@ bool bootScreen = true;
 bool vibrationEnabled;
 bool batteryConnected = true;
 int deauthStatus = 0;
+bool beaconSpamEnabled = false;
 long bootScreenDelay = 1500;
 long bootScreenStart;
 const int motorPin = 18;
@@ -241,8 +242,23 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
                 subGHzTools.transmitRaw(1);
                 break;
             case WiFi_Button_rickRollBeacon:
-                // Start the Rick Roll beacon attack
-                wifiTools.rickRollBeaconSpam(15000);  // 15 seconds duration
+                if (beaconSpamEnabled == false) {
+                    // Set the button text to "Beacon Spam Enabled"
+                    gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt16_18, "Beacon Spam Enabled");
+                    // Set the button color to green
+                    gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt16_18, GSLC_COL_BLUE_DK2, GSLC_COL_GREEN_DK3, GSLC_COL_BLUE_DK1);
+                    // Start the beacon spam attack
+                    wifiTools.toggleRickRollBeaconSpam(true);
+                    beaconSpamEnabled = true;
+                } else {
+                    // Set the button text to "Beacon Spam Disabled"
+                    gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt16_18, "Beacon Spam Disabled");
+                    // Set the button color to red
+                    gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt16_18, GSLC_COL_BLUE_DK2, GSLC_COL_RED_DK2, GSLC_COL_BLUE_DK1);
+                    // Stop the beacon spam attack
+                    wifiTools.toggleRickRollBeaconSpam(false);
+                    beaconSpamEnabled = false;
+                }
                 break;
             case WiFi_Button_scanNetworks:
                 // Start the WiFi network scan
@@ -266,22 +282,14 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
                     gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt, "Deauthentication Enabled");
                     // Set the button color to green
                     gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_GREEN_DK3, GSLC_COL_BLUE_DK1);
-                    // Get the selected network from the listbox
-                    int selectedNetworkIndex = gslc_ElemXListboxGetSel(&m_gui, m_pElemListbox_WiFi);
-                    // Check if a network is selected
-                    if (selectedNetworkIndex != XLISTBOX_SEL_NONE) {
-                        // Perform the deauthentication attack on the selected network index
-                        wifiTools.startNetworkDeauth(NULL, NULL, NULL, selectedNetworkIndex, NULL, 5, 2);
-                    }
                 } else {
                     deauthStatus = 0;
                     // Set the button text to "Deauthentication Disabled"
                     gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt, "Deauthentication Disabled");
                     // Set the button color to red
                     gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_RED_DK2, GSLC_COL_BLUE_DK1);
-                    // Stop the deauthentication attack
-                    wifiTools.stopNetworkDeauth();
                 }
+
                 break;
             case WiFi_Button_handshake:
                 gslc_PopupShow(&m_gui, E_Popup_HandshakeCapture, true);
