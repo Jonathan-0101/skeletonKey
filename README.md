@@ -5,4 +5,6 @@
 
 Final year BEng Project, creating a Penetration Testing Device based on an ESP32 microcontroller, to highlight common and prevelent security vulnerabilities in devices and networks.
 
-![image](Resources/Images/coverPhoto.png)
+![image](Resources/Images/explodedViewAnnotated.png)
+
+![image](Resources/Images/schematic.png)

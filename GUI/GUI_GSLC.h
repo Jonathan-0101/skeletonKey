@@ -203,6 +203,7 @@ extern gslc_tsElemRef* m_pSettingsVibroButtonTxt;
 extern gslc_tsElemRef* m_pSubGHzJammingButton;
 extern gslc_tsElemRef* m_pWiFiDeauthButtonTxt;
 extern gslc_tsElemRef* m_pWiFiDeauthButtonTxt16_18;
+extern gslc_tsElemRef* m_pWiFiRickButtonTxt;
 //<Extern_References !End!>
 
 // Define debug message function
@@ -420,12 +421,15 @@ void InitGUIslice_gen() {
   // PAGE: E_PG_WIFI
   
   
-  // create WiFi_Button_rickRollBeacon button with text label
+  // Create WiFi_Button_rickRollBeacon button with modifiable text label
+  static char m_strbtn8[27] = "Rick Roll Beacon Spam";
   pElemRef = gslc_ElemCreateBtnTxt(&m_gui,WiFi_Button_rickRollBeacon,E_PG_WIFI,
-    (gslc_tsRect){40,64,240,32},(char*)"Rick Roll Beacon Spam",0,E_BUILTIN5X8,&CbBtnCommon);
+    (gslc_tsRect){40,64,240,32},
+    (char*)m_strbtn8,27,E_BUILTIN5X8,&CbBtnCommon);
   gslc_ElemSetCol(&m_gui,pElemRef,GSLC_COL_BLUE_DK2,GSLC_COL_RED_DK2,GSLC_COL_BLUE_DK1);
   gslc_ElemSetRoundEn(&m_gui, pElemRef, true);
   gslc_ElemSetFrameEn(&m_gui,pElemRef,false);
+  m_pWiFiRickButtonTxt = pElemRef;
   
   // create WiFi_Button_scanNetworks button with text label
   pElemRef = gslc_ElemCreateBtnTxt(&m_gui,WiFi_Button_scanNetworks,E_PG_WIFI,

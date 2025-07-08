@@ -88,21 +88,22 @@ void resetToMainMenu();
 
 // Save some element references for direct access
 //<Save_References !Start!>
-gslc_tsElemRef* batteryChrgTxt = NULL;
-gslc_tsElemRef* m_pBLEselectButtonTxt = NULL;
-gslc_tsElemRef* m_pElemBtn10 = NULL;
+gslc_tsElemRef* batteryChrgTxt    = NULL;
+gslc_tsElemRef* m_pBLEselectButtonTxt= NULL;
+gslc_tsElemRef* m_pElemBtn10      = NULL;
 gslc_tsElemRef* m_pElemListbox_IR = NULL;
-gslc_tsElemRef* m_pElemListbox_SubGHz = NULL;
-gslc_tsElemRef* m_pElemListbox_WiFi = NULL;
-gslc_tsElemRef* m_pElemOutTxt1 = NULL;
-gslc_tsElemRef* m_pIRselectButtonTxt = NULL;
-gslc_tsElemRef* m_pListSlider_IR = NULL;
-gslc_tsElemRef* m_pListSlider_SubGHz = NULL;
-gslc_tsElemRef* m_pListSlider_WiFi = NULL;
-gslc_tsElemRef* m_pSettingsVibroButtonTxt = NULL;
-gslc_tsElemRef* m_pSubGHzJammingButton = NULL;
-gslc_tsElemRef* m_pWiFiDeauthButtonTxt = NULL;
-gslc_tsElemRef* m_pWiFiDeauthButtonTxt16_18 = NULL;
+gslc_tsElemRef* m_pElemListbox_SubGHz= NULL;
+gslc_tsElemRef* m_pElemListbox_WiFi= NULL;
+gslc_tsElemRef* m_pElemOutTxt1    = NULL;
+gslc_tsElemRef* m_pIRselectButtonTxt= NULL;
+gslc_tsElemRef* m_pListSlider_IR  = NULL;
+gslc_tsElemRef* m_pListSlider_SubGHz= NULL;
+gslc_tsElemRef* m_pListSlider_WiFi= NULL;
+gslc_tsElemRef* m_pSettingsVibroButtonTxt= NULL;
+gslc_tsElemRef* m_pSubGHzJammingButton= NULL;
+gslc_tsElemRef* m_pWiFiDeauthButtonTxt= NULL;
+gslc_tsElemRef* m_pWiFiDeauthButtonTxt16_18= NULL;
+gslc_tsElemRef* m_pWiFiRickButtonTxt= NULL;
 //<Save_References !End!>
 
 // Define debug message function
@@ -127,7 +128,7 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
     if (eTouch == GSLC_TOUCH_UP_IN) {
         // From the element's ID we can determine which button was pressed.
         switch (pElem->nId) {
-                //<Button Enums !Start!>
+//<Button Enums !Start!>
             case Base_Button_home:
                 gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "Main Menu");
                 gslc_SetPageCur(&m_gui, E_PG_MAIN);
@@ -244,17 +245,17 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
             case WiFi_Button_rickRollBeacon:
                 if (beaconSpamEnabled == false) {
                     // Set the button text to "Beacon Spam Enabled"
-                    gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt16_18, "Beacon Spam Enabled");
+                    gslc_ElemSetTxtStr(&m_gui, m_pWiFiRickButtonTxt, "Beacon Spam Enabled");
                     // Set the button color to green
-                    gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt16_18, GSLC_COL_BLUE_DK2, GSLC_COL_GREEN_DK3, GSLC_COL_BLUE_DK1);
+                    gslc_ElemSetCol(&m_gui, m_pWiFiRickButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_GREEN_DK3, GSLC_COL_BLUE_DK1);
                     // Start the beacon spam attack
                     wifiTools.toggleRickRollBeaconSpam(true);
                     beaconSpamEnabled = true;
                 } else {
                     // Set the button text to "Beacon Spam Disabled"
-                    gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt16_18, "Beacon Spam Disabled");
+                    gslc_ElemSetTxtStr(&m_gui, m_pWiFiRickButtonTxt, "Beacon Spam Disabled");
                     // Set the button color to red
-                    gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt16_18, GSLC_COL_BLUE_DK2, GSLC_COL_RED_DK2, GSLC_COL_BLUE_DK1);
+                    gslc_ElemSetCol(&m_gui, m_pWiFiRickButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_RED_DK2, GSLC_COL_BLUE_DK1);
                     // Stop the beacon spam attack
                     wifiTools.toggleRickRollBeaconSpam(false);
                     beaconSpamEnabled = false;
@@ -278,18 +279,23 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
             case WiFi_Button_deauth:
                 if (deauthStatus == 0) {
                     deauthStatus = 1;
-                    // Set the button text to "Deauthentication Enabled"
+                    // Set the button text to "Deauthentication Enabed"
                     gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt, "Deauthentication Enabled");
                     // Set the button color to green
                     gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_GREEN_DK3, GSLC_COL_BLUE_DK1);
+                    // Get the selected element index
+                    int16_t nSelId = gslc_ElemXListboxGetSel(&m_gui, m_pElemListbox_WiFi);
+                    int networkIndex = nSelId;
+                    // Start the deauth attack
+                    wifiTools.startNetworkDeauth(NULL, NULL, NULL, networkIndex, NULL, 100, 2);
                 } else {
                     deauthStatus = 0;
                     // Set the button text to "Deauthentication Disabled"
                     gslc_ElemSetTxtStr(&m_gui, m_pWiFiDeauthButtonTxt, "Deauthentication Disabled");
                     // Set the button color to red
                     gslc_ElemSetCol(&m_gui, m_pWiFiDeauthButtonTxt, GSLC_COL_BLUE_DK2, GSLC_COL_RED_DK2, GSLC_COL_BLUE_DK1);
+                    wifiTools.stopNetworkDeauth();
                 }
-
                 break;
             case WiFi_Button_handshake:
                 gslc_PopupShow(&m_gui, E_Popup_HandshakeCapture, true);
@@ -358,7 +364,7 @@ bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, 
             case HandshakeCapture_Button_exit:
                 gslc_PopupHide(&m_gui);
                 break;
-                //<Button Enums !End!>
+//<Button Enums !End!>
             default:
                 break;
         }
@@ -384,7 +390,7 @@ bool CbListbox(void* pvGui, void* pvElemRef, int16_t nSelId) {
 
     // From the element's ID we can determine which listbox was active.
     switch (pElem->nId) {
-            //<Listbox Enums !Start!>
+//<Listbox Enums !Start!>
 
         case WiFi_Listbox_networks:
             if (nSelId != XLISTBOX_SEL_NONE) {
@@ -401,7 +407,7 @@ bool CbListbox(void* pvGui, void* pvElemRef, int16_t nSelId) {
                 gslc_ElemXListboxGetItem(&m_gui, pElemRef, nSelId, acTxt, MAX_STR);
             }
             break;
-            //<Listbox Enums !End!>
+//<Listbox Enums !End!>
         default:
             break;
     }
@@ -419,7 +425,7 @@ bool CbSlidePos(void* pvGui, void* pvElemRef, int16_t nPos) {
 
     // From the element's ID we can determine which slider was updated.
     switch (pElem->nId) {
-            //<Slider Enums !Start!>
+//<Slider Enums !Start!>
         case WiFi_Listscroll_networks:
             // Fetch the slider position
             nVal = gslc_ElemXSliderGetPos(pGui, m_pListSlider_WiFi);
@@ -438,7 +444,7 @@ bool CbSlidePos(void* pvGui, void* pvElemRef, int16_t nPos) {
             // Update the textbox scroll position
             gslc_ElemXListboxSetScrollPos(pGui, m_pElemListbox_IR, nVal);
             break;
-            //<Slider Enums !End!>
+//<Slider Enums !End!>
         default:
             break;
     }
@@ -631,7 +637,7 @@ void setup() {
         float range = maxVoltage - minVoltage;
         // DEBUG_SERIAL.printf("Battery voltage range: %f\n", range);
 
-        if (range > 0.25) {
+        if (range > 0.125) {
             // Set the batteryConnected to false
             batteryConnected = false;
             // Set the lable to "XX%"
@@ -644,7 +650,7 @@ void setup() {
     digitalWrite(42, HIGH);
 
     int sdInitAttempts = 0;
-    const int maxSdInitAttempts = 5;
+    const int maxSdInitAttempts = 1;
     bool sdInitialized = false;
 
     while (sdInitAttempts < maxSdInitAttempts && !sdInitialized) {

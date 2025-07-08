@@ -626,7 +626,7 @@ void WiFiTools::findClients(uint8_t* networkBSSID = NULL, uint8_t channel = NULL
     Serial.println("Client detection complete");
 }
 
-void WiFiTools::startNetworkDeauth(uint8_t* networkSSID = NULL, uint8_t* networkBSSID = NULL, uint8_t channel = NULL, int availableNetworkIndex = -1, uint8_t* targetMacAddr = NULL, int delayMs = 100, uint8_t reasonCode = 2) {
+void WiFiTools::startNetworkDeauth(uint8_t* networkSSID = NULL, uint8_t* networkBSSID = NULL, uint8_t channel = NULL, int availableNetworkIndex = -1, uint8_t* targetMacAddr = NULL, int delayMs = 50, uint8_t reasonCode = 2) {
     uint8_t apMac[6];
     uint8_t stMac[6];
     uint8_t targetMac[6];
