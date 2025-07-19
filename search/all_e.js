@@ -1,10 +1,5 @@
 var searchData=
 [
-  ['wifi_2eino_0',['WiFi.ino',['../WiFi_8ino.html',1,'']]],
-  ['wifi_5fattack_5fmode_1',['wifi_attack_mode',['../GUI_2WiFiTools_8h.html#a3ca18307b99cb5f3054525633e21aef9',1,'wifi_attack_mode:&#160;WiFiTools.h'],['../WiFi_2WiFiTools_8h.html#a3ca18307b99cb5f3054525633e21aef9',1,'wifi_attack_mode:&#160;WiFiTools.h']]],
-  ['wifi_5fieee80211_5fmac_5fhdr_5ft_2',['wifi_ieee80211_mac_hdr_t',['../structwifi__ieee80211__mac__hdr__t.html',1,'']]],
-  ['wifi_5fieee80211_5fpacket_5ft_3',['wifi_ieee80211_packet_t',['../structwifi__ieee80211__packet__t.html',1,'']]],
-  ['wifi_5fpacket_5fflag_4',['wifi_packet_flag',['../GUI_2WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801',1,'wifi_packet_flag:&#160;WiFiTools.h'],['../WiFi_2WiFiTools_8h.html#a92ab780568552ff29e7ced01cb6f3801',1,'wifi_packet_flag:&#160;WiFiTools.h']]],
-  ['wifitools_5',['wifitools',['../classWiFiTools.html',1,'WiFiTools'],['../classWiFiTools.html#a1d8e5877a35094fa55d8b4a3ebab2259',1,'WiFiTools::WiFiTools()'],['../classWiFiTools.html#a1d8e5877a35094fa55d8b4a3ebab2259',1,'WiFiTools::WiFiTools()']]],
-  ['wifitools_2eh_6',['wifitools.h',['../GUI_2WiFiTools_8h.html',1,'(Global Namespace)'],['../WiFi_2WiFiTools_8h.html',1,'(Global Namespace)']]]
+  ['togglerickrollbeaconspam_0',['toggleRickRollBeaconSpam',['../classWiFiTools.html#ab137a1f3a6dbb26db9d81927dc2e6cd3',1,'WiFiTools']]],
+  ['transmitraw_1',['transmitraw',['../classSubGHzTools.html#a103eb93c5326b395aded3fa8cf686b34',1,'SubGHzTools::transmitRaw(int sampleInterval)'],['../classSubGHzTools.html#a103eb93c5326b395aded3fa8cf686b34',1,'SubGHzTools::transmitRaw(int sampleInterval)']]]
 ];

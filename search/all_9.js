@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['nextchannel_0',['nextchannel',['../classWiFiTools.html#a6834bf8cebae5f22ff21b0ccd3360d92',1,'WiFiTools::nextChannel()'],['../classWiFiTools.html#a6834bf8cebae5f22ff21b0ccd3360d92',1,'WiFiTools::nextChannel()']]]
+  ['key_0',['Skeleton Key',['../md_README.html',1,'']]]
 ];
