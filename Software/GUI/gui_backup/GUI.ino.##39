@@ -1,0 +1,222 @@
+//<App !Start!>
+// FILE: [GUI.ino]
+// Created by GUIslice Builder version: [0.17.b40]
+//
+// GUIslice Builder Generated File
+//
+// For the latest guides, updates and support view:
+// https://github.com/ImpulseAdventure/GUIslice
+//
+//<App !End!>
+
+// ------------------------------------------------
+// Headers to include
+// ------------------------------------------------
+#include <Arduino.h>
+#include <FS.h>
+#include <SD.h>
+#include <SPI.h>
+
+#include "GUI_GSLC.h"
+#include "TFT_eSPI.h"
+
+// ------------------------------------------------
+// Program Globals
+// ------------------------------------------------
+
+// Save some element references for direct access
+//<Save_References !Start!>
+gslc_tsElemRef* m_pElemListbox1   = NULL;
+gslc_tsElemRef* m_pElemOutTxt1    = NULL;
+gslc_tsElemRef* m_pElemOutTxt2    = NULL;
+gslc_tsElemRef* m_pListSlider1    = NULL;
+//<Save_References !End!>
+
+// Define debug message function
+static int16_t DebugOut(char ch) {
+    if (ch == (char)'\n')
+        Serial.println("");
+    else
+        Serial.write(ch);
+    return 0;
+}
+
+// ------------------------------------------------
+// Callback Methods
+// ------------------------------------------------
+// Common Button callback
+bool CbBtnCommon(void* pvGui, void* pvElemRef, gslc_teTouch eTouch, int16_t nX, int16_t nY) {
+    // Typecast the parameters to match the GUI and element types
+    gslc_tsGui* pGui = (gslc_tsGui*)(pvGui);
+    gslc_tsElemRef* pElemRef = (gslc_tsElemRef*)(pvElemRef);
+    gslc_tsElem* pElem = gslc_GetElemFromRef(pGui, pElemRef);
+
+    if (eTouch == GSLC_TOUCH_UP_IN) {
+        // From the element's ID we can determine which button was pressed.
+        switch (pElem->nId) {
+//<Button Enums !Start!>
+            case E_ELEM_Base_Button_Home:
+                gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "Main Menu");
+                delay(5);
+                gslc_SetPageCur(&m_gui, E_PG_MAIN);
+                break;
+            case E_ELEM_Base_Button_Settings:
+                gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "Settings");
+                delay(5);
+                gslc_SetPageCur(&m_gui, E_PG_Settings);
+                break;
+            case E_ELEM_Main_Button_RFID:
+                gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "RFID");
+                delay(5);
+                gslc_SetPageCur(&m_gui, E_PG_RFID);
+                break;
+            case E_ELEM_Main_Button_SubGHz:
+                gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "Sub-GHz");
+                delay(5);
+                gslc_SetPageCur(&m_gui, E_PG_SubGHz);
+                break;
+            case E_ELEM_Main_Button_WIFI:
+                gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "WiFi");
+                delay(5);
+                gslc_SetPageCur(&m_gui, E_PG_WIFI);
+                break;
+            case E_ELEM_Main_Button_USB:
+                gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "Bad USB");
+                delay(5);
+                gslc_SetPageCur(&m_gui, E_PG_USB);
+                break;
+            case E_ELEM_Main_Button_BLE:
+                gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "Bluetooth");
+                delay(5);
+                gslc_SetPageCur(&m_gui, E_PG_BLE);
+                break;
+            case E_ELEM_Main_Button_IR:
+                gslc_ElemSetTxtStr(&m_gui, m_pElemOutTxt1, "IR");
+                delay(5);
+                gslc_SetPageCur(&m_gui, E_PG_IR);
+                break;
+      case E_ELEM_WiFi_Button_rickRollBeacon:
+        break;
+      case E_ELEM_WiFi_Button_scanNetworks:
+        break;
+      case E_ELEM_WiFi_Button_deauth:
+        break;
+      case E_ELEM_BTN10:
+        break;
+//<Button Enums !End!>
+            default:
+                break;
+        }
+    }
+    return true;
+}
+//<Checkbox Callback !Start!>
+//<Checkbox Callback !End!>
+//<Keypad Callback !Start!>
+//<Keypad Callback !End!>
+//<Spinner Callback !Start!>
+//<Spinner Callback !End!>
+bool CbListbox(void* pvGui, void* pvElemRef, int16_t nSelId)
+{
+  gslc_tsGui*     pGui     = (gslc_tsGui*)(pvGui);
+  gslc_tsElemRef* pElemRef = (gslc_tsElemRef*)(pvElemRef);
+  gslc_tsElem*    pElem    = gslc_GetElemFromRef(pGui, pElemRef);
+  char            acTxt[MAX_STR + 1];
+  
+  if (pElemRef == NULL) {
+    return false;
+  }
+
+  // From the element's ID we can determine which listbox was active.
+  switch (pElem->nId) {
+//<Listbox Enums !Start!>
+    case E_ELEM_LISTBOX1:
+      if (nSelId != XLISTBOX_SEL_NONE) {
+        gslc_ElemXListboxGetItem(&m_gui, pElemRef, nSelId, acTxt, MAX_STR);
+      }
+      break;
+
+//<Listbox Enums !End!>
+    default:
+      break;
+  }
+  return true;
+}
+//<Draw Callback !Start!>
+//<Draw Callback !End!>
+
+// Callback function for when a slider's position has been updated
+bool CbSlidePos(void* pvGui,void* pvElemRef,int16_t nPos)
+{
+  gslc_tsGui*     pGui     = (gslc_tsGui*)(pvGui);
+  gslc_tsElemRef* pElemRef = (gslc_tsElemRef*)(pvElemRef);
+  gslc_tsElem*    pElem    = gslc_GetElemFromRef(pGui,pElemRef);
+  int16_t         nVal;
+
+  // From the element's ID we can determine which slider was updated.
+  switch (pElem->nId) {
+//<Slider Enums !Start!>
+    case E_LISTSCROLL1:
+      // Fetch the slider position
+      nVal = gslc_ElemXSliderGetPos(pGui,m_pListSlider1);
+      break;
+
+//<Slider Enums !End!>
+    default:
+      break;
+  }
+
+  return true;
+}
+//<Tick Callback !Start!>
+//<Tick Callback !End!>
+
+void setup() {
+    // ------------------------------------------------
+    // Initialize
+    // ------------------------------------------------
+    delay(250);
+
+    Serial.begin(115200);
+
+    delay(250);
+
+    gslc_InitDebug(&DebugOut);
+
+    // delay(250);
+
+    // SPI.begin(39, 41, 40, 42);
+    // if (!SD.begin(42)) {
+    //     Serial.println("Card Mount Failed");
+    //     return;
+    // } else {
+    //     Serial.println("Card Mount Worked");
+    // }
+
+    delay(250);
+
+    // ------------------------------------------------
+    // Create graphic elements
+    // ------------------------------------------------
+    InitGUIslice_gen();
+
+    // delay(250);
+}
+
+// -----------------------------------
+// Main event loop
+// -----------------------------------
+void loop() {
+    // ------------------------------------------------
+    // Update GUI Elements
+    // ------------------------------------------------
+
+    // TODO - Add update code for any text, gauges, or sliders
+    // delayMicroseconds(1);
+
+    // ------------------------------------------------
+    // Periodically call GUIslice update function
+    // ------------------------------------------------
+    gslc_Update(&m_gui);
+
+}
