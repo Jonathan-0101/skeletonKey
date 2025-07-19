@@ -25,7 +25,7 @@
 var NAVTREE =
 [
   [ "skeletonKey", "index.html", [
-    [ "Skeleton Key", "index.html", null ],
+    [ "Project Hardware", "index.html", null ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Structure Index", "classes.html", null ],

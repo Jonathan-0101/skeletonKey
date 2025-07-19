@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['key_0',['Skeleton Key',['../index.html',1,'']]]
+  ['hardware_0',['Project Hardware',['../index.html',1,'']]]
 ];
