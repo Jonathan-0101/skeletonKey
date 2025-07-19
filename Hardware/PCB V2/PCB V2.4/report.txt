@@ -1,0 +1,27 @@
+Info: Output directory 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber' created.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-F_Cu.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-In1_Cu.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-In2_Cu.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-B_Cu.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-F_Paste.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-B_Paste.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-F_Silkscreen.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-B_Silkscreen.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-F_Mask.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-B_Mask.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-Edge_Cuts.gbr'.
+Created Gerber job file 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-job.gbrjob'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-F_Cu.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-In1_Cu.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-In2_Cu.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-B_Cu.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-F_Paste.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-B_Paste.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-F_Silkscreen.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-B_Silkscreen.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-F_Mask.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-B_Mask.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-Edge_Cuts.gbr'.
+Created Gerber job file 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V2\PCB V2.4\Gerber\PCB V2.4-job.gbrjob'.
+Info: Done.
+Info: Done.

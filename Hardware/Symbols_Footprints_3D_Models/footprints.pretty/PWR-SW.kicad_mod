@@ -1,0 +1,246 @@
+(footprint "PWR-SW"
+	(version 20240108)
+	(generator "pcbnew")
+	(generator_version "8.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 -0.5 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "f36b1ba5-3310-47bd-93a8-e8dba4789e9e")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "PWR-SW"
+		(at 0 1 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "1f675c40-946c-409f-9fdc-078b1f2d7346")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Footprint" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "ff7a45a7-de02-41b5-9d8a-0a0009c1e459")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "c89c9d51-280a-486e-b926-ce62fa402faf")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "41d17314-8cb9-47f4-acf0-7dfac1ff9f33")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Mouser Price/Stock" ""
+		(at 7.366 4.826 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "187b4d2e-0bb2-462a-b160-6d34ed271223")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer_Part_Number" "734-7296"
+		(at 0.254 6.35 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "3dec6855-368d-4295-82fd-fa911298d237")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Arrow Part Number" ""
+		(at 7.366 4.826 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "6a7a5d30-5586-481f-a8a4-73eeb452db70")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Mouser Part Number" ""
+		(at 7.366 4.826 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e5169de6-c06c-4dfd-b4e4-82271989b785")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Arrow Price/Stock" ""
+		(at 7.366 4.826 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "c3a660a2-e3ea-4a9e-af8e-8004b0690989")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Height" "6.6"
+		(at 7.366 4.826 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e6158078-6024-4a47-87d1-601a53932d98")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer_Name" "RS Components"
+		(at 0 4.572 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "d1d5a3ba-4456-4461-8269-d5beb0bc43a6")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_line
+		(start -3.664 -6.224)
+		(end 3.206 -6.224)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "2c49f20e-9675-4bc4-8276-36da3a337c53")
+	)
+	(fp_line
+		(start -3.664 6.476)
+		(end -3.664 -6.224)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "8673fcad-2e17-4a6b-9384-d44240b80c9f")
+	)
+	(fp_line
+		(start 3.206 -6.224)
+		(end 3.206 6.476)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "98f55760-1cd3-44e2-aced-044f2dece188")
+	)
+	(fp_line
+		(start 3.206 6.476)
+		(end -3.664 6.476)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "6ec2eed6-a6e2-4d0d-a3b6-853e1ef95043")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 2.5 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "071e58d3-ac18-4009-bc2d-9515a7b31e71")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole rect
+		(at 7.366 4.826)
+		(size 2.775 2.775)
+		(drill 1.85)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "69ecb159-af50-4880-8b6c-a7b476a4b035")
+	)
+	(pad "2" thru_hole circle
+		(at 7.366 0.126)
+		(size 2.775 2.775)
+		(drill 1.85)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "1d0ab2ad-6349-43de-b89d-8a61ef5a26cd")
+	)
+	(pad "3" thru_hole circle
+		(at 7.366 -4.574)
+		(size 2.775 2.775)
+		(drill 1.85)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "24374634-a634-4492-a855-e1869df55bef")
+	)
+	(pad "MH1" thru_hole circle
+		(at -2.164 6.731)
+		(size 2.775 2.775)
+		(drill 1.85)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "20133539-c93c-4d3d-b249-29a91a564c32")
+	)
+	(pad "MH2" thru_hole circle
+		(at -2.164 -6.479)
+		(size 2.775 2.775)
+		(drill 1.85)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "d4820ffe-51f8-4318-be9c-c02e74d065e9")
+	)
+)

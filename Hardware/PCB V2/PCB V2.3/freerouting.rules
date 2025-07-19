@@ -1,0 +1,161 @@
+
+(rules PCB freerouting.dsn
+  (snap_angle 
+    fortyfive_degree
+  )
+  (autoroute_settings
+    (fanout off)
+    (autoroute on)
+    (postroute off)
+    (vias on)
+    (via_costs 50)
+    (plane_via_costs 5)
+    (start_ripup_costs 100)
+    (start_pass_no 1)
+    (layer_rule F.Cu
+      (active on)
+      (preferred_direction vertical)
+      (preferred_direction_trace_costs 1.6)
+      (against_preferred_direction_trace_costs 5.1)
+    )
+    (layer_rule In1.Cu
+      (active off)
+      (preferred_direction vertical)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 4.5)
+    )
+    (layer_rule In2.Cu
+      (active on)
+      (preferred_direction horizontal)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 3.0)
+    )
+    (layer_rule B.Cu
+      (active on)
+      (preferred_direction vertical)
+      (preferred_direction_trace_costs 1.6)
+      (against_preferred_direction_trace_costs 5.1)
+    )
+  )
+  (rule
+    (width 150.0)
+    (clearance 200.0)
+    (clearance 75.0 (type smd_to_turn_gap))
+    (clearance 50.0 (type smd))
+    (clearance 200.0 (type "kicad_default"))
+    (clearance 200.0 (type "ANT_SW"))
+    (clearance 200.0 (type Tight))
+  )
+  (padstack "Via[0-3]_600:300_um"
+    (shape
+      (circle F.Cu 600.0 0.0 0.0)
+    )
+    (shape
+      (circle In1.Cu 600.0 0.0 0.0)
+    )
+    (shape
+      (circle In2.Cu 600.0 0.0 0.0)
+    )
+    (shape
+      (circle B.Cu 600.0 0.0 0.0)
+    )
+    (attach off)
+  )
+  (via 
+    "Via[0-3]_600:300_um" "Via[0-3]_600:300_um" default
+  )
+  (via 
+    "Via[0-3]_600:300_um-kicad_default" "Via[0-3]_600:300_um" "kicad_default"
+  )
+  (via 
+    "Via[0-3]_600:300_um-ANT_SW" "Via[0-3]_600:300_um" "ANT_SW"
+  )
+  (via 
+    "Via[0-3]_600:300_um-Tight" "Via[0-3]_600:300_um" Tight
+  )
+  (via_rule
+    default "Via[0-3]_600:300_um"
+  )
+  (via_rule
+    "kicad_default" "Via[0-3]_600:300_um-kicad_default"
+  )
+  (via_rule
+    "ANT_SW" "Via[0-3]_600:300_um-ANT_SW"
+  )
+  (via_rule
+    Tight "Via[0-3]_600:300_um-Tight"
+  )
+  (class default
+    (clearance_class default)
+    (via_rule default)
+    (rule
+      (width 150.0)
+    )
+    (circuit 
+      (use_layer F.Cu In2.Cu B.Cu)
+    )
+  )
+  (class "kicad_default"
+    GND +3V3 "Net-(AE1-A)" "Net-(AE2-A)" "Net-(AE3-A)" "Net-(AE4-A)" "Net-(AE5-A)" "Net-(AE6-A)"
+    +5V "Net-(U6-REGIN)" "+V_BAT" +3.3VA /IO0 /EN{slash}RESET "Net-(U10-XC1)" "Net-(U10-XC2)"
+    "Net-(U10-DVDD)" "/NRF24_VDD_PA" "Net-(J7-In)" "Net-(PWR_SW1-OUT)" "+V_BAT_5V" "Net-(FL1-BAL_1)" "Net-(FL1-BAL_2)" "Net-(C82-Pad1)"
+    "Net-(FL2-BAL_1)" "Net-(FL2-BAL_2)" "Net-(IC7-NO_(SOURCE1))" "Net-(D7-K)" "+V_USB" "Net-(D1-K)" "Net-(D2-K)" "Net-(D4-K)"
+    "Net-(D5-K)" "Net-(D6-A)" "Net-(D6-K)" "Net-(F1-Pad1)" "Net-(FL1-UNBAL)" "unconnected-(FL1-DNC-Pad5)" "unconnected-(FL1-NC-Pad6)" "unconnected-(FL2-NC-Pad6)"
+    "unconnected-(FL2-DNC-Pad5)" "Net-(FL2-UNBAL)" "/PN532_RSTPD_N" "/PN532_AUX2" "/PN532_P33" "/PN532_AUX1" "/PN532_P30_UART_RX" "/PN532_P32"
+    "/PN532_P31_UART_TX" "/GPIO48_PN532_CS" "/PN532_SIGOUT" "/PN532_SIGIN" "/PN532_IRQ" "/PN532_RSTOUT_N" "/PN532_P35" "/GPIO40_HSPI_MOSI"
+    "/GPIO41_HSPI_MISO" "/GPIO39_HSPI_SCK" "/PN532_P34_SIC_CLK" "/GPIO8_CC1101A_CS" "/GPIO17_VSPI_SCK" "/GPIO15_VSPI_MISO" "/GPIO16_VSPI_MOSI" "/GPIO3_CC1101B_CS"
+    "/RDM630_SIN" "/GPIO21_RDM630_RX" "/GPIO14_RDM630_TX" "/GPIO13_RDM630_CTRL" "Net-(IC7-COM)" "/GPIO18_VIBRO" "/GPIO4_ADC1_3_BAT%" "/GPIO5_NRF24_CE"
+    "/GPIO11_CC1101B_GD0" "/GPIO10_CC1101A_CTRL" "/GPIO12_CC1101B_CTRL" "/GPIO6_NRF24_CSN" "/GPIO9_CC1101A_GD0" "/GPIO7_NRF24_IRQ" "/GPIO1_SCREEN_CS" "/GPIO35_SCREEN_T_IRQ"
+    "/GPIO47_RDM630_EMULATION" "/GPIO42_SD_CARD_CS" "/GPIO36_SCREEN_T_CS" "/GPIO2_SCREEN_D{slash}C" "/GPIO38_IR_LED" "/GPIO37_IR_RECEIVER" "Net-(U10-ANT1)" "Net-(U13-RF2)"
+    "Net-(U13-RF1)" "unconnected-(PWR_SW1-NC-Pad1)" /RTS /DTR "Net-(Q5-B)" "Net-(Q7-B)" "Net-(U1-PROG)" "Net-(USB_OTG1-CC2)"
+    "Net-(USB_UART1-CC2)" "Net-(USB_OTG1-CC1)" "Net-(USB_UART1-CC1)" "Net-(U1-STAT)" "Net-(U6-~{RST})" /RX "Net-(U6-TXD)" /TX
+    "Net-(U6-RXD)" "Net-(U10-IREF)" "Net-(U13-RFIN)" "unconnected-(SCREEN1-SDO(MISO)-Pad9)" "Net-(U6-D+)" "Net-(U6-D-)" "Net-(U2-I{slash}O2-Pad3)" "Net-(U2-I{slash}O1-Pad1)"
+    /D+ "/D-" "Net-(U6-VPP)" "unconnected-(U6-NC-Pad10)" "unconnected-(U6-~{DCD}-Pad24)" "unconnected-(U6-RS485{slash}GPIO.2-Pad12)" "unconnected-(U6-TXT{slash}GPIO.0-Pad14)" "unconnected-(U6-~{CTS}-Pad18)"
+    "unconnected-(U6-~{RI}-Pad1)" "unconnected-(U6-~{SUSPEND}-Pad15)" "unconnected-(U6-SUSPEND-Pad17)" "unconnected-(U6-~{DSR}-Pad22)" "unconnected-(U6-GPIO.3-Pad11)" "unconnected-(U6-RXT{slash}GPIO.1-Pad13)" "unconnected-(USB_OTG1-SBU2-PadB8)" "unconnected-(USB_OTG1-SBU1-PadA8)"
+    "unconnected-(USB_UART1-SBU1-PadA8)" "unconnected-(USB_UART1-SBU2-PadB8)" "Net-(AE7-A)" "Net-(AE8-A)" "Net-(IC1-VIN)" "Net-(IC2-DCOUPL)" "Net-(IC2-XOSC_Q1)" "Net-(IC2-XOSC_Q2)"
+    "Net-(C28-Pad1)" "Net-(C29-Pad2)" "Net-(C33-Pad2)" "Net-(C34-Pad1)" "Net-(C45-Pad1)" "Net-(C46-Pad1)" "Net-(U12-TXRX)" "Net-(C49-Pad1)"
+    "Net-(IC3-TVDD)" "Net-(IC3-AVDD)" "Net-(C53-Pad1)" "Net-(C57-Pad1)" "Net-(IC3-RX)" "Net-(IC3-VMID)" "Net-(IC2-RF_P)" "Net-(IC2-RF_N)"
+    "Net-(U12-ANT)" "Net-(C71-Pad1)" "Net-(IC3-OSCIN)" "Net-(IC3-SVDD)" "Net-(IC3-OSCOUT)" "Net-(C77-Pad1)" "Net-(C78-Pad1)" "Net-(IC6-DCOUPL)"
+    "Net-(IC6-XOSC_Q1)" "Net-(IC6-XOSC_Q2)" "Net-(Q5-C)" "Net-(IC5-NC_(SOURCE2))" "Net-(C96-Pad1)" "Net-(IC6-RF_P)" "Net-(IC6-RF_N)" "Net-(C113-Pad1)"
+    "Net-(D1-A)" "Net-(D3-K)" "Net-(D5-A)" "Net-(IC1-FB)" "Net-(IC1-EN)" "Net-(IC1-SW)" "unconnected-(IC2-GDO2-Pad3)" "Net-(IC2-RBIAS)"
+    "Net-(IC2-GDO0_(ATEST))" "Net-(IC3-TX2)" "unconnected-(IC3-N.C._1-Pad20)" "unconnected-(IC3-N.C._2-Pad21)" "Net-(IC3-TX1)" "unconnected-(IC3-N.C._3-Pad22)" "unconnected-(IC3-LOADMOD-Pad2)" "unconnected-(IC4-P1.6-Pad7)"
+    "Net-(IC4-P0.0)" "unconnected-(IC4-P1.7-Pad6)" "unconnected-(IC4-P1.3-Pad10)" "unconnected-(IC4-P1.4-Pad9)" "Net-(IC4-P1.2)" "unconnected-(IC4-P0.7-Pad14)" "unconnected-(IC4-P0.3-Pad18)" "unconnected-(IC4-P0.2-Pad19)"
+    "unconnected-(IC4-P0.6-Pad15)" "unconnected-(IC4-P2.0{slash}C2D-Pad5)" "unconnected-(IC4-{slash}RST{slash}C2CK-Pad4)" "unconnected-(IC4-P1.5-Pad8)" "unconnected-(IC4-P1.0-Pad13)" "unconnected-(IC4-P1.1-Pad12)" "Net-(IC5-NO_(SOURCE1))" "Net-(IC5-COM)"
+    "Net-(IC6-RBIAS)" "Net-(IC6-GDO0_(ATEST))" "unconnected-(IC6-GDO2-Pad3)" "Net-(J3-CLK)" "unconnected-(J3-DAT2-Pad1)" "Net-(J3-CMD)" "unconnected-(J3-CD1-Pad9)" "Net-(J3-CD{slash}DAT3)"
+    "unconnected-(J3-DAT1-Pad8)" "unconnected-(J3-CD2-Pad10)" "Net-(J5-In)" "Net-(J5-Ext)" "Net-(L2-Pad1)" "Net-(U11-RF2)" "Net-(U11-RF1)" "Net-(U14-RF2)"
+    "Net-(U14-RF1)" "Net-(Q2-G)" "Net-(Q4-B)" "Net-(Q4-C-Pad2)" "Net-(U3-EN)" "Net-(U12-TXEN)" "Net-(U12-RXEN)" "Net-(U11-RFIN)"
+    "Net-(U14-RFIN)" "unconnected-(U3-NC-Pad4)" "unconnected-(U7-NC-Pad6)" "unconnected-(U7-Pad5)" "unconnected-(U8-Pad15)" "unconnected-(U8-Pad12)" "unconnected-(U12-DNC-Pad13)" "unconnected-(U12-NC-Pad12)"
+    "unconnected-(U12-NC-Pad7)" "unconnected-(U12-NC-Pad15)" "unconnected-(U12-NC-Pad1)" "unconnected-(ANT_SW1-NC-Pad1)" "/NRF24_ANT_OUT" "/CC1101A_ANT_OUT" "Net-(C97-Pad1)" "Net-(C100-Pad1)"
+    "Net-(U16-RF1)" "Net-(C116-Pad1)" "Net-(U16-RFIN)" "Net-(C120-Pad2)" "Net-(C120-Pad1)" "Net-(C121-Pad1)" "/CC1101B_ANT_OUT" "Net-(U16-RF2)"
+    "Net-(U19A--)" "Net-(U19B-+)" "Net-(U19B--)" "/ESP32_PIN16_DNC" "/ESP32_PIN26_DNC" "Net-(D9-K)"
+    (clearance_class "kicad_default")
+    (via_rule "kicad_default")
+    (rule
+      (width 150.0)
+    )
+    (circuit 
+      (use_layer F.Cu In2.Cu B.Cu)
+    )
+  )
+  (class "ANT_SW"
+    "/ANT_SWITCH_OUT"
+    (clearance_class "ANT_SW")
+    (via_rule "ANT_SW")
+    (rule
+      (width 101.6)
+    )
+    (circuit 
+      (use_layer F.Cu In2.Cu B.Cu)
+    )
+  )
+  (class Tight
+    (clearance_class Tight)
+    (via_rule Tight)
+    (rule
+      (width 150.0)
+    )
+    (circuit 
+      (use_layer F.Cu In2.Cu B.Cu)
+    )
+  )
+)

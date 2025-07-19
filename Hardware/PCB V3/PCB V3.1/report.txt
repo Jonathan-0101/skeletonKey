@@ -1,0 +1,13 @@
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V3\PCB V3.1\Jonathan_Woolf_PCB_V3_Gerber\PCB V3.1-F_Cu.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V3\PCB V3.1\Jonathan_Woolf_PCB_V3_Gerber\PCB V3.1-In1_Cu.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V3\PCB V3.1\Jonathan_Woolf_PCB_V3_Gerber\PCB V3.1-In2_Cu.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V3\PCB V3.1\Jonathan_Woolf_PCB_V3_Gerber\PCB V3.1-B_Cu.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V3\PCB V3.1\Jonathan_Woolf_PCB_V3_Gerber\PCB V3.1-F_Paste.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V3\PCB V3.1\Jonathan_Woolf_PCB_V3_Gerber\PCB V3.1-B_Paste.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V3\PCB V3.1\Jonathan_Woolf_PCB_V3_Gerber\PCB V3.1-F_Silkscreen.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V3\PCB V3.1\Jonathan_Woolf_PCB_V3_Gerber\PCB V3.1-B_Silkscreen.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V3\PCB V3.1\Jonathan_Woolf_PCB_V3_Gerber\PCB V3.1-F_Mask.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V3\PCB V3.1\Jonathan_Woolf_PCB_V3_Gerber\PCB V3.1-B_Mask.gbr'.
+Plotted to 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V3\PCB V3.1\Jonathan_Woolf_PCB_V3_Gerber\PCB V3.1-Edge_Cuts.gbr'.
+Created Gerber job file 'C:\Users\Jonathan Woolf\OneDrive - The University of Nottingham\Documents\0 Project\1_PCB\PCB V3\PCB V3.1\Jonathan_Woolf_PCB_V3_Gerber\PCB V3.1-job.gbrjob'.
+Info: Done.
